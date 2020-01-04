@@ -28,7 +28,7 @@ public class ManagerController {
         return  roomService.RewriteRoom(Sellerid,Roomid,json);
     }
     @CrossOrigin(origins="*")
-    @DeleteMapping("manager/manageroom/{Sellerid}/{Rooomid}")
+    @DeleteMapping("manager/manageroom/{Sellerid}/{Roomid}")
     public String delete(@PathVariable("Sellerid")int Sellerid, @PathVariable("Roomid")Long Roomid){
         roomService.DeleteRoom(Roomid);
         return "success";
