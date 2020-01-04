@@ -3,7 +3,9 @@ package com.example.demo.service;
 
 import com.example.demo.dto.FavoriteDto;
 import com.example.demo.model.Favorite;
+import com.example.demo.model.Room;
 import com.example.demo.repository.FavoriteRepository;
+import com.example.demo.repository.RoomRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -27,27 +29,23 @@ import java.util.Optional;
 
 public class FavoriteService {
     private FavoriteRepository favoriteRepository;
+    private RoomRepository roomRepository;
 
     /**
      *  회원의 찜 목록 출력
      */
     @Transactional
-    public List<FavoriteDto> getFavoriteList(String userid) {
+    public List<Room> getFavoriteList(String userid) {
         List<Favorite> boardEntities = favoriteRepository.findAllByUserId(userid);
-        List<FavoriteDto> boardDtoList = new ArrayList<>();
-
+        List<Room> roomList = new ArrayList<>();
         for ( Favorite boardEntity : boardEntities) {
-            FavoriteDto boardDTO = FavoriteDto.builder()
-                    .id(boardEntity.getId())
-                    .userId(boardEntity.getUserId())
-                    .univid(boardEntity.getUnivid())
-                    .roomid(boardEntity.getRoomid())
-                    .build();
+                Optional<Room> room = roomRepository.findById((long)boardEntity.getRoomid());
+                Room target = room.get();
+                roomList.add(target);
 
-            boardDtoList.add(boardDTO);
         }
 
-        return boardDtoList;
+        return roomList;
     }
 
     /**
@@ -55,10 +53,9 @@ public class FavoriteService {
      *   입력해야될 데이터 : writter (작성자), body(내용)
      */
     @Transactional
-    public long SaveFavorite(int univid, int roomid, String userid,String json) throws JsonProcessingException {
+    public long SaveFavorite(int univid, int roomid, String userid) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        FavoriteDto favoriteDto;
-        favoriteDto = objectMapper.readValue(json, FavoriteDto.class);
+        FavoriteDto favoriteDto = new FavoriteDto();
         favoriteDto.setUnivid(univid);
         favoriteDto.setRoomid(roomid);
         favoriteDto.setUserId(userid);

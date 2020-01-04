@@ -1,7 +1,10 @@
 
 package com.example.demo.controller;
 
+import com.example.demo.dto.BoardlistDto;
 import com.example.demo.dto.UserDto;
+import com.example.demo.model.Community;
+import com.example.demo.service.CommunityService;
 import com.example.demo.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
@@ -19,6 +22,7 @@ public class UserController {
 
 
     private UserService userService;
+    private CommunityService communityService;
 
 
     /**
@@ -65,5 +69,12 @@ public class UserController {
         userService.deleteUser(id);
         return "success";
     }
-
+    /**
+     *  내가 쓴 게시글 목록
+     */
+    @CrossOrigin(origins = "*")
+    @GetMapping("userinfo/posts/{userid}")
+    public List<BoardlistDto> myPosts(@PathVariable("userid")String userid){
+        return communityService.getMyPosts(userid);
+    }
 }

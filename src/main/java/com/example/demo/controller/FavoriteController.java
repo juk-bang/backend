@@ -2,6 +2,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.FavoriteDto;
+import com.example.demo.model.Room;
 import com.example.demo.service.FavoriteService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class FavoriteController {
     @CrossOrigin(origins = "*")
     @GetMapping("userinfo/favorites/{userid}")
     public List Post(@PathVariable("userid")String userid){
-        List<FavoriteDto> postdata = favoriteService.getFavoriteList(userid);
+        List<Room> postdata = favoriteService.getFavoriteList(userid);
         return postdata;
     }
 
@@ -37,8 +38,8 @@ public class FavoriteController {
      */
     @CrossOrigin(origins = "*")
     @PostMapping("userinfo/favorites/{univid}/{roomid}/{userid}")
-    public long write(@PathVariable("univid")int univid,@PathVariable("roomid")int roomid,@PathVariable("userid")String userid,@RequestBody String json) throws JsonProcessingException {
-        return favoriteService.SaveFavorite(univid,roomid,userid,json);
+    public long write(@PathVariable("univid")int univid,@PathVariable("roomid")int roomid,@PathVariable("userid")String userid) throws JsonProcessingException {
+        return favoriteService.SaveFavorite(univid,roomid,userid);
 
     }
 

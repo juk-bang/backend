@@ -46,7 +46,26 @@ public class CommunityService {
 
         return boardDtoList;
     }
+    @Transactional
+    public List<BoardlistDto> getMyPosts(String userid){
+        List<Community> boardEntities = communityRepository.findAllByWriter(userid);
+        List<BoardlistDto> boardDtoList = new ArrayList<>();
 
+        for ( Community boardEntity : boardEntities) {
+            BoardlistDto boardDTO = BoardlistDto.builder()
+                    .id(boardEntity.getId())
+                    .title(boardEntity.getTitle())
+                    .writer(boardEntity.getWriter())
+                    .modifiedDate(boardEntity.getCreatedDate())
+                    .comments(boardEntity.getComments())
+                    .univid(boardEntity.getUnivid())
+                    .views(boardEntity.getViews())
+                    .build();
+
+            boardDtoList.add(boardDTO);
+        }
+        return boardDtoList;
+    }
     @Transactional
     public Long SavePost(int Univid,String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();

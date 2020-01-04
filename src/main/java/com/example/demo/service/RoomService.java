@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class RoomService {
     @Transactional
     public RoomlistWrapper getRoomlist(long Univid){
         RoomlistWrapper roomlistWrapper = new RoomlistWrapper();
-        List<Room> RoomEntities = roomRepository.findAllByUnivid(Univid);
+        List<Room> RoomEntities = roomRepository.findAllByUnividAndPermission(Univid,1);
         List<RoomDto> RoomDtoList = new ArrayList<>();
 
         for ( Room RoomEntity : RoomEntities) {
@@ -78,6 +79,20 @@ public class RoomService {
         return roomlistWrapper;
     }
     @Transactional
+    public List<Room> SellerRoomlist(long sellerid){
+        List<Room> RoomEntities = new ArrayList<>();
+        List<RoomDetail> RoomDetailEntities = roomDetailRepository.findAllBySellerid(sellerid);
+        for ( RoomDetail RoomDetailEntity : RoomDetailEntities) {
+
+            Optional<Room> room = roomRepository.findById(RoomDetailEntity.getId());
+            RoomEntities.add(room.get());
+        }
+
+
+        return RoomEntities;
+
+    }
+    @Transactional
     public RoomDetailWrapper getRoomDetail(long Roomid){
 
         Optional<Room> roomWrap = roomRepository.findById(Roomid);
@@ -115,7 +130,7 @@ public class RoomService {
     }
 
     @Transactional
-    public Long SaveRoom(long sellerid,String json) throws JsonProcessingException {
+    public Long SaveRoom(String sellerid,String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
 
        GetRoomDetailWrapper getRoomDetailWrapper = new GetRoomDetailWrapper();
@@ -134,6 +149,7 @@ public class RoomService {
                 .lat(getRoomDetailWrapper.getLocation().getLat())
                 .lng(getRoomDetailWrapper.getLocation().getLng())
                 .univid(getRoomDetailWrapper.getUnivid())
+                .permission(0)
                 .build();
 
 
@@ -164,7 +180,7 @@ public class RoomService {
 
 
     @Transactional
-    public Long RewriteRoom(long Roomid,long Sellerid,String json) throws JsonProcessingException {
+    public Long RewriteRoom(String Sellerid,long Roomid,String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         GetRoomDetailWrapper getRoomDetailWrapper;
@@ -207,6 +223,27 @@ public class RoomService {
         return roomDetailRepository.save(roomDetailDto.toEntity()).getId();
     }
 
+    @Transactional
+    public List<Room> wantpermit(long Univid){
+        return roomRepository.findAllByUnividAndPermission(Univid,0);
+
+    }
+
+    @Transactional
+    public void permit(long Univid, long id){
+        Optional<Room> room = roomRepository.findById(id);
+        Room target = room.get();
+        target.setPermission(1);
+        roomRepository.save(target);
+    }
+
+    @Transactional
+    public void dontpermit(long Univid, long id){
+        Optional<Room> room = roomRepository.findById(id);
+        Room target = room.get();
+        target.setPermission(2);
+        roomRepository.save(target);
+    }
 
     @Transactional
     public void DeleteRoom(Long Roomid) {

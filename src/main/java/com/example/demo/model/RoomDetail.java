@@ -19,8 +19,8 @@ public class RoomDetail {
     private long id;
     @Column(nullable=false)
     private int pictureCount;
-    @Column(nullable=false)
-    private long sellerid;
+    @Column(length = 100, nullable =false)
+    private String sellerid;
     @Column(length = 100, nullable =false)
     private String address;
     @Column(nullable=false)
@@ -46,7 +46,7 @@ public class RoomDetail {
     @Column(columnDefinition = "TEXT",nullable = false)
     private String description;
     @Builder
-    public RoomDetail(long id, int pictureCount, long sellerid, String address, boolean elevator, boolean park, boolean cctv, boolean autoDoor, boolean washingMachine, boolean gasrange, boolean refrigerator, boolean airconditioner, boolean busStation, boolean subwayStation, String description){
+    public RoomDetail(long id, int pictureCount, String sellerid, String address, boolean elevator, boolean park, boolean cctv, boolean autoDoor, boolean washingMachine, boolean gasrange, boolean refrigerator, boolean airconditioner, boolean busStation, boolean subwayStation, String description){
         this.id = id;
         this.pictureCount =pictureCount;
         this.sellerid = sellerid;
