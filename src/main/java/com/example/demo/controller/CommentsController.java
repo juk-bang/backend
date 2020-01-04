@@ -38,7 +38,7 @@ public class CommentsController {
      *
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("community/comments/{Univid}/{Postid}")
+    @GetMapping("Community/{Univid}/{Postid}/Comments")
     public List Post(@PathVariable("Univid")int Univid, @PathVariable("Postid") int Postid){
         List<CommentsDto> postdata = CommentsService.getCommentsList(Univid, Postid);
         return postdata;
@@ -49,7 +49,7 @@ public class CommentsController {
      *  댓글 쓰기 기능
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("community/comments/{Univid}/{Postid}")
+    @PostMapping("Community/{Univid}/{Postid}/Comments")
     public long write(@PathVariable("Univid") int Univid,@PathVariable("Postid") int Postid, @RequestBody String json) throws JsonProcessingException {
         return CommentsService.SaveComment(Univid,Postid,json);
 
@@ -62,7 +62,7 @@ public class CommentsController {
      *  (univid, postid 상관없이)
      */
     @CrossOrigin(origins = "*")
-    @PutMapping("community/comments/{univid}/{postid}/{id}")
+    @PutMapping("Community/{univid}/{postid}/Comments/{id}")
     public long update(@PathVariable("univid")int univid,@PathVariable("postid")int postid,@PathVariable("id")long id, @RequestBody String json) throws JsonProcessingException {
         return  CommentsService.rewriteComment(univid,postid,id,json);
     }
@@ -74,7 +74,7 @@ public class CommentsController {
      *  (univid, postid 상관없이)
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("community/comments/{id}")
+    @DeleteMapping("Community/Comments/{id}")
     public String delete(@PathVariable("id")long id){
         CommentsService.deleteComment(id);
         return "success";
