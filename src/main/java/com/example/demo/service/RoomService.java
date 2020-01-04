@@ -51,13 +51,15 @@ public class RoomService {
 
             RoomDtoList.add(roomDTO);
         }
+        Optional<RecommandFilter> recommand = recommandFilterRepository.findByUnivid(Univid);
+        RecommandFilter filter = recommand.get();
         RecommandFilterDto recommandFilterDto1 = RecommandFilterDto.builder()
-                .price(1)
-                .scale(1)
-                .structure(1)
-                .floor(1)
-                .distance(1)
-                .grade(1)
+                .price(filter.getPrice())
+                .scale(filter.getScale())
+                .structure(filter.getStructure())
+                .floor(filter.getFloor())
+                .distance(filter.getDistance())
+                .grade(filter.getGrade())
                 .build();
         recommandFilterRepository.save(recommandFilterDto1.toEntity());
         Optional<RecommandFilter> recommandFilterWrapper = recommandFilterRepository.findById(Univid);
@@ -133,27 +135,23 @@ public class RoomService {
     public Long SaveRoom(String sellerid,String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
 
-       GetRoomDetailWrapper getRoomDetailWrapper = new GetRoomDetailWrapper();
-       getRoomDetailWrapper = objectMapper.readValue(json, GetRoomDetailWrapper.class);
-
-
-     RoomDto roomDTO = RoomDto.builder()
-             .structure(getRoomDetailWrapper.getRoomInformation().getStructure())
-               .month(getRoomDetailWrapper.getRoomInformation().getPrice().getMonth())
-               .adminExpenses(getRoomDetailWrapper.getRoomInformation().getPrice().getAdminExpenses())
-                .deposit(getRoomDetailWrapper.getRoomInformation().getPrice().getDeposit())
-                .floor(getRoomDetailWrapper.getRoomInformation().getFloor())
-                .scale(getRoomDetailWrapper.getRoomInformation().getScale())
-                .grade(2.5)
-                .distance(distance(getRoomDetailWrapper.getLocation().getLat(),getRoomDetailWrapper.getLocation().getLng(),37.496281, 126.957358))
-                .lat(getRoomDetailWrapper.getLocation().getLat())
-                .lng(getRoomDetailWrapper.getLocation().getLng())
-                .univid(getRoomDetailWrapper.getUnivid())
-                .permission(0)
-                .build();
-
-
-
+        GetRoomDetailWrapper getRoomDetailWrapper = new GetRoomDetailWrapper();
+        getRoomDetailWrapper = objectMapper.readValue(json, GetRoomDetailWrapper.class);
+        double grade;
+         RoomDto roomDTO = RoomDto.builder()
+                 .structure(getRoomDetailWrapper.getRoomInformation().getStructure())
+                   .month(getRoomDetailWrapper.getRoomInformation().getPrice().getMonth())
+                   .adminExpenses(getRoomDetailWrapper.getRoomInformation().getPrice().getAdminExpenses())
+                    .deposit(getRoomDetailWrapper.getRoomInformation().getPrice().getDeposit())
+                    .floor(getRoomDetailWrapper.getRoomInformation().getFloor())
+                    .scale(getRoomDetailWrapper.getRoomInformation().getScale())
+                    .grade(2.5)
+                    .distance(distance(getRoomDetailWrapper.getLocation().getLat(),getRoomDetailWrapper.getLocation().getLng(),37.496281, 126.957358))
+                    .lat(getRoomDetailWrapper.getLocation().getLat())
+                    .lng(getRoomDetailWrapper.getLocation().getLng())
+                    .univid(getRoomDetailWrapper.getUnivid())
+                    .permission(0)
+                    .build();
 
         RoomDetailDto roomDetailDto = RoomDetailDto.builder()
                 .pictureCount(getRoomDetailWrapper.getPictureCount())
@@ -172,6 +170,31 @@ public class RoomService {
                 .description(getRoomDetailWrapper.getDescription())
                 .build();
 
+        RecommandFilter filter;
+        if(!recommandFilterRepository.findByUnivid(getRoomDetailWrapper.getUnivid()).isPresent()){
+            filter = new RecommandFilter();
+            filter.setPrice(getRoomDetailWrapper.getRoomInformation().getPrice().getMonth());
+            filter.setScale(getRoomDetailWrapper.getRoomInformation().getScale());
+            filter.setStructure(1);
+            filter.setFloor(getRoomDetailWrapper.getRoomInformation().getFloor());
+            filter.setDistance(roomDTO.getDistance());
+            filter.setGrade(roomDTO.getGrade());
+            filter.setUnivid(roomDTO.getUnivid());
+        }
+        else{
+            Optional<RecommandFilter> recommandFilter = recommandFilterRepository.findByUnivid(getRoomDetailWrapper.getUnivid());
+            filter = recommandFilter.get();
+            List<Room> RoomEntities = roomRepository.findAllByUnivid(getRoomDetailWrapper.getUnivid());
+            int n = RoomEntities.size();
+            filter.setPrice((filter.getPrice()*n+ roomDTO.getMonth())/(n+1));
+            filter.setScale((filter.getScale()*n+roomDTO.getScale())/(n+1));
+            filter.setStructure(1);
+            filter.setFloor((filter.getFloor()*n+roomDTO.getFloor())/(n+1));
+            filter.setDistance((filter.getDistance()*n+roomDTO.getDistance())/(n+1));
+            filter.setGrade((filter.getGrade()*n+roomDTO.getGrade())/(n+1));
+        }
+
+        recommandFilterRepository.save(filter).getId();
         roomRepository.save(roomDTO.toEntity()).getId();
         return roomDetailRepository.save(roomDetailDto.toEntity()).getId();
 

@@ -25,7 +25,7 @@ public class RoomController {
         return roomlist;
     }
     @CrossOrigin(origins="*")
-    @GetMapping("roomlist/{Univid}/{Roomid}")
+    @GetMapping("roomdetail/{Univid}/{Roomid}")
     public RoomDetailWrapper list(@PathVariable("Univid")long Univid, @PathVariable("Roomid")long Roomid){
         RoomDetailWrapper  roomDetail= roomService.getRoomDetail(Roomid);
         return roomDetail;

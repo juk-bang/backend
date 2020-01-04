@@ -1,7 +1,12 @@
 package com.example.demo.service;
 
 
+import com.example.demo.dto.BoardlistDto;
+import com.example.demo.dto.ReportDetailWrapper;
 import com.example.demo.dto.ReportDto;
+import com.example.demo.dto.ReportListWrapper;
+import com.example.demo.model.Community;
+import com.example.demo.model.Report;
 import com.example.demo.repository.ReportRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,6 +21,9 @@ import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @AllArgsConstructor
@@ -41,6 +49,44 @@ public class ReportService {
 
 
         return reportRepository.save(reportDto.toEntity()).getId();
+    }
+    @Transactional
+    public List<ReportListWrapper> reportList(int univid) throws JsonProcessingException {
+
+        List<Report> reportEntities = reportRepository.findAllByUnivid(univid);
+        List<ReportListWrapper> reportList1 = new ArrayList<>();
+
+        for ( Report reportEntity : reportEntities) {
+            ReportListWrapper reoprtDTO = ReportListWrapper.builder()
+                    .id(reportEntity.getId())
+                    .title(reportEntity.getTitle())
+                    .writer(reportEntity.getUserid())
+                    .modifiedDate(reportEntity.getCreatedDate())
+                    .roomid(reportEntity.getRoomid())
+                    .build();
+
+            reportList1.add(reoprtDTO);
+        }
+        return reportList1;
+
+    }
+
+    @Transactional
+    public ReportDetailWrapper reportDetail(long Univid, long Roomid, long Reportid){
+        Optional<Report> report = reportRepository.findById(Reportid);
+        Report reports =  report.get();
+        ReportDetailWrapper reportdetail = ReportDetailWrapper.builder()
+                .writer(reports.getUserid())
+                .title(reports.getTitle())
+                .body(reports.getBody())
+                .modifiedDate(reports.getModifiedDate())
+                .build();
+        return reportdetail;
+    }
+
+    @Transactional
+    public void deleteReport(long Reportid){
+        reportRepository.deleteById(Reportid);
     }
 
 

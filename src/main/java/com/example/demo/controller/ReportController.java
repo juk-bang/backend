@@ -1,6 +1,8 @@
 
 package com.example.demo.controller;
 
+import com.example.demo.dto.ReportDetailWrapper;
+import com.example.demo.dto.ReportListWrapper;
 import com.example.demo.service.ReportService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
@@ -25,9 +27,33 @@ public class ReportController {
      */
     @CrossOrigin(origins = "*")
     @PostMapping("report/{univid}/{roomid}/{userid}")
-    public long write(@PathVariable("univid") int univid,@PathVariable("roomid") int roomid,@PathVariable("userid") String userid, @RequestBody String json) throws JsonProcessingException {
+    public long writereport(@PathVariable("univid") int univid,@PathVariable("roomid") int roomid,@PathVariable("userid") String userid, @RequestBody String json) throws JsonProcessingException {
         return reportService.SaveReport(univid,roomid,userid,json);
 
+    }
+    /**
+     *  신고 리스트 출력
+     */
+    @CrossOrigin(origins = "*")
+    @GetMapping("admin/report/{Univid}")
+    public List<ReportListWrapper> reportlist(@PathVariable("Univid") int univid) throws JsonProcessingException {
+        return reportService.reportList(univid);
+    }
+    /**
+     *  신고 상세 받기
+     */
+    @CrossOrigin(origins = "*")
+    @GetMapping("admin/report/{Univid}/{Roomid}/{Reportid}")
+    public ReportDetailWrapper reportdetail(@PathVariable("Univid") long univid,@PathVariable("Roomid") long Roomid,@PathVariable("Reportid") long reportid) throws JsonProcessingException {
+        return reportService.reportDetail(univid,Roomid,reportid);
+    }
+    /**
+     *  신고 내용 삭제
+     */
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("admin/report/{Univid}/{Roomid}/{Reportid}")
+    public void deletereport(@PathVariable("Univid") long univid,@PathVariable("Roomid") long Roomid,@PathVariable("Reportid") long reportid) throws JsonProcessingException {
+        reportService.deleteReport(reportid);
     }
 
 
