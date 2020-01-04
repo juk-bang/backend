@@ -38,11 +38,9 @@ public class Room {
     private long univid;
     @Column(nullable=false)
     private double grade;
-    @Column(nullable=false)
-    private int permission;
 
     @Builder
-    public Room(long id, int structure, double month, double adminExpenses, double deposit, double floor, double scale, double distance, double lat, double lng,long univid,double grade,int permission){
+    public Room(long id, int structure, double month, double adminExpenses, double deposit, double floor, double scale, double distance, double lat, double lng,long univid,double grade){
         this.id = id;
         this.structure = structure;
         this.month = month;
@@ -55,6 +53,5 @@ public class Room {
         this.lat=lat;
         this.lng=lng;
         this.univid =univid;
-        this.permission = permission;
     }
 }

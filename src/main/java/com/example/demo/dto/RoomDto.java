@@ -22,7 +22,6 @@ public class RoomDto {
     private double lat;
     private double lng;
     private long univid;
-    private int permission;
 
     public Room toEntity(){
         Room build = Room.builder()
@@ -38,13 +37,12 @@ public class RoomDto {
                 .lat(lat)
                 .lng(lng)
                 .univid(univid)
-                .permission(permission)
                 .build();
         return build;
     }
 
     @Builder
-    public RoomDto(long id, int structure, double month, double adminExpenses, double deposit, double floor, double scale,double grade, double distance, double lat, double lng,long univid, int permission){
+    public RoomDto(long id, int structure, double month, double adminExpenses, double deposit, double floor, double scale,double grade, double distance, double lat, double lng,long univid){
         this.id = id;
         this.structure = structure;
         this.month = month;
@@ -57,6 +55,5 @@ public class RoomDto {
         this.lat=lat;
         this.lng=lng;
         this.univid = univid;
-        this.permission = permission;
     }
 }

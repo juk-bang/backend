@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.example.demo.model.Room;
-import com.example.demo.service.ImagePathService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,24 +30,38 @@ public class FileController {
     private FileUploadDownloadService service;
 
     @PostMapping("/manager/manageroom/uploadimg/{Univid}/{roomid}/{no}")
-    public String uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("Univid") int Univid,@PathVariable("roomid") int roomid, @PathVariable("no") int no) {
-        String filename = "image"+Univid+ "-"+roomid + "-" + no;
-
+    public FileUploadResponse uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("roomid") int roomid, @PathVariable("no") int no) {
+        String filename = "image"+ roomid + "-" + no;
         String fileName = service.storeFile(file,filename);
         StringTokenizer tockens = new StringTokenizer(fileName);
         tockens.nextToken(".");
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/roomimg/"+Univid)
-                .path("/"+roomid + "/"+no+"."+tockens.nextToken("."))
+                .path("/image/"+roomid)
+                .path("/"+no + "."+tockens.nextToken("."))
                 .toUriString();
-        FileUploadResponse a = new FileUploadResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
-        return "/ext/"+Univid+"/"+roomid+"/"+no+"/"+fileName;
+
+        return new FileUploadResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+    }
+
+    @PutMapping("/manager/manageroom/uploadimg/{Univid}/{roomid}/{no}")
+    public FileUploadResponse changeFile(@RequestParam("file") MultipartFile file, @PathVariable("roomid") int roomid, @PathVariable("no") int no) {
+        String filename = "image"+ roomid + "-" + no;
+        String fileName = service.storeFile(file,filename);
+        StringTokenizer tockens = new StringTokenizer(fileName);
+        tockens.nextToken(".");
+        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/image/"+roomid)
+                .path("/"+no + "."+tockens.nextToken("."))
+                .toUriString();
+
+        return new FileUploadResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
     }
 
 
-    @GetMapping("/ext/{filename}")
-    public ResponseEntity<Resource> downloadFile( @PathVariable("filename")String  fileName, HttpServletRequest request){
+    @GetMapping("/roomimg/{Univid}/{roomid}/{id}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable("Univid")int Univid , @PathVariable("roomid")int roomid, @PathVariable("id")String  no, HttpServletRequest request){
         // Load file as Resource
+        String fileName = "image"+Univid+"-"+roomid +"-"+ no;
         Resource resource = service.loadFileAsResource(fileName);
 
         // Try to determine file's content type
