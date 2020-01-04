@@ -1,9 +1,9 @@
 spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Seoul&characterEncoding=utf8
-        username: root
-        password: H3q1249*^^*
+        url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul&characterEncoding=utf8
+        username: daehwan
+        password: 159663
     devtools:
         livereload:
             enabled: true
@@ -23,7 +23,7 @@ spring:
             max-request-size: 215MB
 
 file:
-    upload-dir: /home/sangil/jukbang/file/UPLOAD_FILES
+    upload-dir: /home/sangil/juktest/file/UPLOAD_FILES
 
 logging:
     level:
