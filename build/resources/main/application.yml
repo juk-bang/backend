@@ -23,7 +23,7 @@ spring:
             max-request-size: 215MB
 
 file:
-    upload-dir: /home/sangil/juktest/file/UPLOAD_FILES
+    upload-dir: /home/sangil/jukbang/file/UPLOAD_FILES
 
 logging:
     level:

@@ -19,30 +19,30 @@ public class CommunityController {
 
     private CommunityService communityService;
     @CrossOrigin(origins="*")
-    @GetMapping("Community/{Univid}")
+    @GetMapping("community/{Univid}")
     public List list(Model model){
         List<BoardlistDto>boardList = communityService.getCommunitylist();
         return boardList;
     }
     @CrossOrigin(origins="*")
-    @GetMapping("Community/{Univid}/{Postid}")
+    @GetMapping("community/{Univid}/{Postid}")
     public CommunityDto Post(@PathVariable("Univid")int Univid, @PathVariable("Postid") Long Postid){
         CommunityDto postdata = communityService.getPost(Univid, Postid);
         return postdata;
     }
     @CrossOrigin(origins="*")
-    @PostMapping("Community/{Univid}")
+    @PostMapping("community/{Univid}")
     public Long write(@PathVariable("Univid") int Univid, @RequestBody String json) throws JsonProcessingException {
         return communityService.SavePost(Univid, json);
 
     }
     @CrossOrigin(origins="*")
-    @PutMapping("Community/{Univid}/{Postid}")
+    @PutMapping("community/{Univid}/{Postid}")
     public Long update(@PathVariable("Univid")int Univid, @PathVariable("Postid")Long Postid, @RequestBody String json) throws JsonProcessingException {
         return  communityService.rewritePost(Univid,Postid,json);
     }
     @CrossOrigin(origins="*")
-    @DeleteMapping("Community/{Univid}/{Postid}")
+    @DeleteMapping("community/{Univid}/{Postid}")
     public String delete(@PathVariable("Univid")int Univid, @PathVariable("Postid")Long Postid){
         communityService.deletePost(Postid);
         return "success";
