@@ -54,7 +54,7 @@ public class FileController {
 
 
 
-    @GetMapping("/image/{roomid}/{id}")
+    @GetMapping("/zimage/{roomid}/{id}")
     public ResponseEntity<Resource> downloadFile(@PathVariable("roomid")int roomid, @PathVariable("id")String  no, HttpServletRequest request){
         // Load file as Resource
         String fileName = "image"+roomid +"-"+ no;
