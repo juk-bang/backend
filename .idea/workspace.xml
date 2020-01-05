@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a42f0545-17a4-4ecc-abb5-6ffb5e6a31b3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/dto/ReportDetailWrapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/dto/ReportListWrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/fileContent/fileContent.lock" afterDir="false" />
@@ -13,26 +11,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.0.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.0.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/controller/FileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/controller/FileController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/controller/ManagerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/controller/ManagerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/controller/NoextController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/controller/NoextController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/controller/RoomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/controller/RoomController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/controller/adminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/controller/adminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/dto/RoomDetailDto$RoomDetailDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/dto/RoomDetailDto$RoomDetailDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/dto/RoomDetailDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/dto/RoomDetailDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/dto/RoomDetailWrapper$RoomDetailWrapperBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/dto/RoomDetailWrapper$RoomDetailWrapperBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/dto/RoomDetailWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/dto/RoomDetailWrapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/model/RoomDetail$RoomDetailBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/model/RoomDetail$RoomDetailBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/model/RoomDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/model/RoomDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/repository/CommunityRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/repository/CommunityRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/service/CommunityService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/service/CommunityService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/service/RoomService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/demo/service/RoomService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/ReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/RoomController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/ReportRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/repository/ReportRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/ReportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/ReportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/UPLOAD_FILES/image1-1-1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/file/UPLOAD_FILES/image1-1-1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/UPLOAD_FILES/image1-3-1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/file/UPLOAD_FILES/image1-3-1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file/UPLOAD_FILES/image1-5-1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/file/UPLOAD_FILES/image1-5-1.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/RoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/RoomService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,22 +116,22 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="726" y="299" width="524" height="507" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1578124360412" />
-    <state width="1799" height="275" key="GridCell.Tab.0.bottom" timestamp="1578173161456">
+    <state width="1799" height="541" key="GridCell.Tab.0.bottom" timestamp="1578184957324">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1799" height="275" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1578173161456" />
-    <state width="1799" height="275" key="GridCell.Tab.0.center" timestamp="1578173161456">
+    <state width="1799" height="541" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1578184957324" />
+    <state width="1799" height="541" key="GridCell.Tab.0.center" timestamp="1578184957323">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1799" height="275" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1578173161456" />
-    <state width="1799" height="275" key="GridCell.Tab.0.left" timestamp="1578173161456">
+    <state width="1799" height="541" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1578184957323" />
+    <state width="1799" height="541" key="GridCell.Tab.0.left" timestamp="1578184957323">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1799" height="275" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1578173161456" />
-    <state width="1799" height="275" key="GridCell.Tab.0.right" timestamp="1578173161456">
+    <state width="1799" height="541" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1578184957323" />
+    <state width="1799" height="541" key="GridCell.Tab.0.right" timestamp="1578184957324">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="1799" height="275" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1578173161456" />
+    <state width="1799" height="541" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1578184957324" />
     <state width="1799" height="339" key="GridCell.Tab.1.bottom" timestamp="1578127240670">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

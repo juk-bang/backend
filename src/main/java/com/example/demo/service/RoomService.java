@@ -137,7 +137,17 @@ public class RoomService {
 
         GetRoomDetailWrapper getRoomDetailWrapper = new GetRoomDetailWrapper();
         getRoomDetailWrapper = objectMapper.readValue(json, GetRoomDetailWrapper.class);
-        double grade;
+        double grade,reversegrade;
+        reversegrade = getRoomDetailWrapper.getRoomInformation().getPrice().getMonth()/40.0+getRoomDetailWrapper.getRoomInformation().getPrice().getAdminExpenses()/5.0+getRoomDetailWrapper.getRoomInformation().getPrice().getDeposit()/700.0;
+        if(!getRoomDetailWrapper.getExtraOption().isAirconditioner())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isAutoDoor())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isCctv())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isElevator())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isGasrange())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isPark())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isRefrigerator())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isWashingMachine())reversegrade+=0.3;
+        grade = 10.0-reversegrade;
          RoomDto roomDTO = RoomDto.builder()
                  .structure(getRoomDetailWrapper.getRoomInformation().getStructure())
                    .month(getRoomDetailWrapper.getRoomInformation().getPrice().getMonth())
@@ -145,7 +155,7 @@ public class RoomService {
                     .deposit(getRoomDetailWrapper.getRoomInformation().getPrice().getDeposit())
                     .floor(getRoomDetailWrapper.getRoomInformation().getFloor())
                     .scale(getRoomDetailWrapper.getRoomInformation().getScale())
-                    .grade(2.5)
+                    .grade(reversegrade)
                     .distance(distance(getRoomDetailWrapper.getLocation().getLat(),getRoomDetailWrapper.getLocation().getLng(),37.496281, 126.957358))
                     .lat(getRoomDetailWrapper.getLocation().getLat())
                     .lng(getRoomDetailWrapper.getLocation().getLng())
@@ -208,6 +218,17 @@ public class RoomService {
 
         GetRoomDetailWrapper getRoomDetailWrapper;
         getRoomDetailWrapper = objectMapper.readValue(json, GetRoomDetailWrapper.class);
+        double grade,reversegrade;
+        reversegrade = getRoomDetailWrapper.getRoomInformation().getPrice().getMonth()/40.0+getRoomDetailWrapper.getRoomInformation().getPrice().getAdminExpenses()/5.0+getRoomDetailWrapper.getRoomInformation().getPrice().getDeposit()/700.0;
+        if(!getRoomDetailWrapper.getExtraOption().isAirconditioner())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isAutoDoor())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isCctv())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isElevator())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isGasrange())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isPark())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isRefrigerator())reversegrade+=0.3;
+        if(!getRoomDetailWrapper.getExtraOption().isWashingMachine())reversegrade+=0.3;
+        grade = 10.0-reversegrade;
 
         RoomDto roomDTO = RoomDto.builder()
                 .id(Roomid)
@@ -218,7 +239,7 @@ public class RoomService {
                 .floor(getRoomDetailWrapper.getRoomInformation().getFloor())
                 .scale(getRoomDetailWrapper.getRoomInformation().getScale())
                 .distance(distance(getRoomDetailWrapper.getLocation().getLat(),getRoomDetailWrapper.getLocation().getLng(),37.496281, 126.957358))
-                .grade(2.5)
+                .grade(grade)
                 .lat(getRoomDetailWrapper.getLocation().getLat())
                 .lng(getRoomDetailWrapper.getLocation().getLng())
                 .univid(getRoomDetailWrapper.getUnivid())
