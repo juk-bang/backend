@@ -1,0 +1,32 @@
+spring:
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      format_sql: true
+      ddl-auto: create-drop
+  jackson:
+    deserialization:
+      fail-on-unknown-properties : true
+    servlet:
+      multipart:
+        enabled: true
+        max-file-size: 200MB
+        max-request-size: 215MB
+    devtools:
+      livereload:
+        enabled: true
+    freemarker:
+      cache: false
+file:
+  upload-dir: ./file/UPLOAD_FILES
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
