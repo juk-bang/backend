@@ -4,7 +4,7 @@ spring:
     show-sql: true
     hibernate:
       format_sql: true
-      ddl-auto: create-drop
+      ddl-auto: create
   jackson:
     deserialization:
       fail-on-unknown-properties : true
@@ -18,8 +18,18 @@ spring:
         enabled: true
     freemarker:
       cache: false
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 file:
   upload-dir: ./file/UPLOAD_FILES
+
+
+
+jwt:
+  secretKey: "This Data Must Be Managed By Secret NOT HERE THIS IS JUST EXAMPLE"
 
 logging:
   level:
