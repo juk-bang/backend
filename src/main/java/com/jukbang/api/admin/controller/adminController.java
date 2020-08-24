@@ -9,24 +9,51 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("admin/permissionroom/{Univid}")
 public class adminController {
     private RoomService roomService;
 
+    /**
+     * 대학별 방 전체 List GET
+     *
+     * @param univid
+     * @return (List) roomList
+     */
     @CrossOrigin(origins = "*")
-    @GetMapping("admin/permissionroom/{Univid}")
-    public List<Room> list(@PathVariable("Univid") long Univid) {
-        return roomService.wantpermit(Univid);
+    @GetMapping("")
+    public List<Room> getRoomList(
+            @PathVariable("univid") long univid
+    ) {
+        return roomService.wantpermit(univid);
     }
 
+    /**
+     * 방 게시 permit
+     *
+     * @param univid
+     * @param no
+     */
     @CrossOrigin(origins = "*")
-    @PostMapping("admin/permissionroom/{Univid}/{no}")
-    public void permit(@PathVariable("Univid") long Univid, @PathVariable("no") long no) {
-        roomService.permit(Univid, no);
+    @PostMapping("/{yes}")
+    public void permit(
+            @PathVariable("univid") long univid,
+            @PathVariable("no") long no
+    ) {
+        roomService.permit(univid, no);
     }
 
+    /**
+     * 방 게시 not permit
+     *
+     * @param Univid
+     * @param no
+     */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("admin/permissionroom/{Univid}/{no}")
-    public void notpermit(@PathVariable("Univid") long Univid, @PathVariable("no") long no) {
-        roomService.dontpermit(Univid, no);
+    @DeleteMapping("/{no}")
+    public void notPermit(
+            @PathVariable("Univid") long univid,
+            @PathVariable("no") long no
+    ) {
+        roomService.dontpermit(univid, no);
     }
 }

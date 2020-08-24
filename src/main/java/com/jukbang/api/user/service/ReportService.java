@@ -35,7 +35,7 @@ public class ReportService {
      * 입력해야될 데이터 :
      */
     @Transactional
-    public long SaveReport(int univid, int roomid, String userid, String json) throws JsonProcessingException {
+    public long createReport(int univid, int roomid, String userid, String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         ReportDto reportDto;
         reportDto = objectMapper.readValue(json, ReportDto.class);

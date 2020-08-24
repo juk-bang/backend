@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("userinfo/favorites/{userid}")
 public class FavoriteController {
 
 
@@ -24,34 +25,57 @@ public class FavoriteController {
 
 
     /**
-     * 찜 조회
+     * favorite list 조회 GET
+     *
+     * @param userid
+     * @return (List) favoriteList
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("userinfo/favorites/{userid}")
-    public List Post(@PathVariable("userid") String userid) {
-        List<Room> postdata = favoriteService.getFavoriteList(userid);
-        return postdata;
+    @GetMapping("")
+    public List getFavoriteList(
+            @PathVariable("userid") String userid
+    ) {
+        List<Room> favoriteList = favoriteService.getFavoriteList(userid);
+        return favoriteList;
     }
 
 
     /**
-     * 회원의 찜 목록 추가
+     *  찜 목록 추가 CREATE
+     *
+     * @param univid
+     * @param roomid
+     * @param userid
+     * @return (long) id
+     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("userinfo/favorites/{univid}/{roomid}/{userid}")
-    public long write(@PathVariable("univid") int univid, @PathVariable("roomid") int roomid, @PathVariable("userid") String userid) throws JsonProcessingException {
+    @PostMapping("/{roomid}/{userid}")
+    public long createFavorite(
+            @PathVariable("univid") int univid,
+            @PathVariable("roomid") int roomid,
+            @PathVariable("userid") String userid
+    ) throws JsonProcessingException {
         return favoriteService.SaveFavorite(univid, roomid, userid);
 
     }
 
 
     /**
-     * 찜 삭제 기능
-     * 찜의 univid, roomid에 접근하여 삭제
+     * 찜 삭제 DELETE
+     *
+     * @param univid
+     * @param roomid
+     * @param userid
+     * @return (String) success
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("userinfo/favorites/{univid}/{roomid}/{userid}")
-    public String delete(@PathVariable("univid") int univid, @PathVariable("roomid") int roomid, @PathVariable("userid") String userid) {
+    @DeleteMapping("/{roomid}/{userid}")
+    public String deleteFavorite(
+            @PathVariable("univid") int univid,
+            @PathVariable("roomid") int roomid,
+            @PathVariable("userid") String userid
+    ) {
         favoriteService.DeleteFavorite(univid, roomid, userid);
         return "success";
     }

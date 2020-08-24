@@ -66,11 +66,16 @@ public class CommunityService {
     }
 
     @Transactional
-    public Long SavePost(int Univid, String json) throws JsonProcessingException {
+    public Long SavePost(
+            int univid,
+            String json
+    )  throws JsonProcessingException {
+
         ObjectMapper objectMapper = new ObjectMapper();
         CommunityDto communityDto;
         communityDto = objectMapper.readValue(json, CommunityDto.class);
-        communityDto.setUnivid(Univid);
+        communityDto.setUnivid(univid);
+
         return communityRepository.save(communityDto.toEntity()).getId();
     }
 
@@ -116,18 +121,18 @@ public class CommunityService {
     }
 
     @Transactional
-    public Long rewritePost(int Univid, Long Postid, String json) throws JsonProcessingException {
+    public Long rewritePost(int univid, Long postid, String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         CommunityDto communityDto;
         communityDto = objectMapper.readValue(json, CommunityDto.class);
-        communityDto.setUnivid(Univid);
-        communityDto.setId(Postid);
+        communityDto.setUnivid(univid);
+        communityDto.setId(postid);
         return communityRepository.save(communityDto.toEntity()).getId();
     }
 
     @Transactional
-    public void deletePost(Long Postid) {
-        communityRepository.deleteById(Postid);
+    public void deletePost(Long postid) {
+        communityRepository.deleteById(postid);
     }
 
 }

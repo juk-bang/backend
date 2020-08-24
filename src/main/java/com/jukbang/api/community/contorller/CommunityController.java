@@ -1,6 +1,7 @@
 package com.jukbang.api.community.contorller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jukbang.api.community.response.GetPostResponse;
 import com.jukbang.api.room.dto.BoardlistDto;
 import com.jukbang.api.community.dto.CommunityDto;
 import com.jukbang.api.community.service.CommunityService;
@@ -12,42 +13,103 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping(value= "community/{univid}")
 public class CommunityController {
 
 
     private CommunityService communityService;
 
+    /**
+     *  대학별 전체 게시글 리스트 GET
+     *  불러오기
+     *
+     * @param model
+     * @return boardList
+     *
+     *
+     */
     @CrossOrigin(origins = "*")
-    @GetMapping("community/{Univid}")
-    public List list(Model model) {
+    @GetMapping("")
+    public List getPostList(Model model) {
         List<BoardlistDto> boardList = communityService.getCommunitylist();
         return boardList;
     }
 
+
+    /**
+     *  각 게시글 GET
+     *  불러오기
+     *
+     * @param univid
+     * @param postid
+     * @return new GetPostResponse()
+     *
+     */
     @CrossOrigin(origins = "*")
-    @GetMapping("community/{Univid}/{Postid}")
-    public CommunityDto Post(@PathVariable("Univid") int Univid, @PathVariable("Postid") Long Postid) {
-        CommunityDto postdata = communityService.getPost(Univid, Postid);
-        return postdata;
+    @GetMapping("/{postid}")
+    public GetPostResponse getPost (
+            @PathVariable("univid") int univid,
+            @PathVariable("postid") Long postid
+    ) {
+        return new GetPostResponse();
     }
 
+
+    /**
+     *  게시글 CREATE
+     *  생성하기
+     *
+     * @param univid
+     * @param json
+     * @return (Long) id
+     * @throws JsonProcessingException
+     */
     @CrossOrigin(origins = "*")
-    @PostMapping("community/{Univid}")
-    public Long write(@PathVariable("Univid") int Univid, @RequestBody String json) throws JsonProcessingException {
-        return communityService.SavePost(Univid, json);
+    @PostMapping("")
+    public Long createPost(
+            @PathVariable("univid") int univid,
+            @RequestBody String json
+    ) throws JsonProcessingException {
+
+        return communityService.SavePost(univid, json);
 
     }
 
+    /**
+     *  게시글 UPDATE
+     *  수정하기
+     *
+     * @param univid
+     * @param postid
+     * @param json
+     * @return (Long) id
+     * @throws JsonProcessingException
+     */
     @CrossOrigin(origins = "*")
-    @PutMapping("community/{Univid}/{Postid}")
-    public Long update(@PathVariable("Univid") int Univid, @PathVariable("Postid") Long Postid, @RequestBody String json) throws JsonProcessingException {
-        return communityService.rewritePost(Univid, Postid, json);
+    @PutMapping("/{postid}")
+    public Long updatePost(
+            @PathVariable("univid") int univid,
+            @PathVariable("postid") Long postid,
+            @RequestBody String json
+    ) throws JsonProcessingException {
+        return communityService.rewritePost(univid, postid, json);
     }
 
+
+    /**
+     * 게시글 DELETE
+     *
+     * @param univid
+     * @param postid
+     * @return (String) success
+     */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("community/{Univid}/{Postid}")
-    public String delete(@PathVariable("Univid") int Univid, @PathVariable("Postid") Long Postid) {
-        communityService.deletePost(Postid);
+    @DeleteMapping("/{postid}")
+    public String deletePost(
+            @PathVariable("univid") int univid,
+            @PathVariable("postid") Long postid
+    ) {
+        communityService.deletePost(postid);
         return "success";
     }
 

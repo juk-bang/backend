@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("review/{Univid}")
 public class ReviewController {
 
 
@@ -24,56 +25,77 @@ public class ReviewController {
 
 
     /**
-     * 한 방정보에 여러 리뷰를 한번에 표현
-     * <p>
-     * ex)
-     * 방정보 1)
-     * 리뷰 1
-     * 리뷰 2
-     * ...
-     * <p>
-     * <p>
-     * list 에 표시되야할 리뷰 정보 : writter (작성자), body(내용),title(제목), score(점수)
+     * 각 방의 리뷰 GET
+     *
+     * @param univid
+     * @param roomid
+     * @return (List) reviewList
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("review/{Univid}/{Roomid}")
-    public List Post(@PathVariable("Univid") int univid, @PathVariable("Roomid") int roomid) {
-        List<ReviewDto> postdata = ReviewService.getReviewList(univid, roomid);
-        return postdata;
+    @GetMapping("/{Roomid}")
+    public List getReviewList(
+            @PathVariable("Univid") int univid,
+            @PathVariable("Roomid") int roomid
+    ) {
+        List<ReviewDto> reviewList = ReviewService.getReviewList(univid, roomid);
+        return reviewList;
     }
 
 
     /**
-     * 리뷰 쓰기 기능
+     * 각 방 리뷰 CREATE
+     *
+     * @param Univid
+     * @param Roomid
+     * @param json
+     * @return (long) id
+     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("review/{Univid}/{Roomid}")
-    public long write(@PathVariable("Univid") int Univid, @PathVariable("Roomid") int Roomid, @RequestBody String json) throws JsonProcessingException {
-        return ReviewService.SaveReview(Univid, Roomid, json);
+    @PostMapping("/{Roomid}")
+    public long createReview(
+            @PathVariable("Univid") int univid,
+            @PathVariable("Roomid") int roomid,
+            @RequestBody String json
+    ) throws JsonProcessingException {
+        return ReviewService.SaveReview(univid, roomid, json);
 
     }
 
 
     /**
-     * 리뷰 수정 기능
-     * 리뷰의 고유번호 (id) 에 접근하여 수정
-     * (univid, roomid 상관없이)
+     * 각 리뷰 UPDATE
+     *
+     * @param univid
+     * @param roomid
+     * @param id
+     * @param json
+     * @return (long) id
+     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PutMapping("review/{Univid}/{Roomid}/{id}")
-    public long update(@PathVariable("Univid") int univid, @PathVariable("Roomid") int roomid, @PathVariable("id") long id, @RequestBody String json) throws JsonProcessingException {
+    @PutMapping("/{Roomid}/{id}")
+    public long updateReview(
+            @PathVariable("Univid") int univid,
+            @PathVariable("Roomid") int roomid,
+            @PathVariable("id") long id,
+            @RequestBody String json
+    ) throws JsonProcessingException {
         return ReviewService.rewriteReview(univid, roomid, id, json);
     }
 
 
     /**
-     * 댓글 삭제 기능
-     * 댓글의 고유번호 (id) 에 접근하여 삭제
-     * (univid, postid 상관없이)
+     * 리뷰 DELETE
+     *
+     * @param id
+     * @return (String) success
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("review/{Univid}/{Roomid}/{id}")
-    public String delete(@PathVariable("id") long id) {
+    @DeleteMapping("/{Roomid}/{id}")
+    public String deleteReview(
+            @PathVariable("id") long id
+    ) {
         ReviewService.deleteComment(id);
         return "success";
     }

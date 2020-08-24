@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("userinfo")
 public class UserController {
 
 
@@ -27,56 +28,83 @@ public class UserController {
 
 
     /**
-     * 회원 정보 조회
+     * 회원정보 조회 GET
+     *
+     * @param userid
+     * @return (List) userDataList
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("userinfo/{userid}")
-    public List Post(@PathVariable("userid") String userid) {
-        List<UserDto> postdata = userService.getUserList(userid);
-        return postdata;
+    @GetMapping("/{userid}")
+    public List getUserDataList(
+            @PathVariable("userid") String userid
+    ) {
+        List<UserDto> userDataList = userService.getUserList(userid);
+        return userDataList;
     }
 
 
     /**
-     * 회원정보 임의 입력
+     * 회원 정보 입력 CREATE
+     *
+     * @param json
+     * @return
+     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("userinfo/input")
-    public long write(@RequestBody String json) throws JsonProcessingException {
+    @PostMapping("/input")
+    public long createUser(
+            @RequestBody String json
+    ) throws JsonProcessingException {
         return userService.SaveUser(json);
 
     }
 
 
     /**
-     * 회원정보 수정 기능
-     * 회원의 고유번호 (id) 에 접근하여 수정
+     * 유저 정보 수정 UPDATE
+     *
+     * @param id
+     * @param json
+     * @return (String) success
+     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PutMapping("userinfo/{id}")
-    public String update(@PathVariable("id") long id, @RequestBody String json) throws JsonProcessingException {
+    @PutMapping("/{id}")
+    public String updateUser(
+            @PathVariable("id") long id,
+            @RequestBody String json
+    ) throws JsonProcessingException {
         userService.rewriteUser(id, json);
         return "success";
     }
 
 
     /**
-     * 회원 삭제 기능
-     * 댓글의 고유번호 (id) 에 접근하여 삭제
+     * 유저 삭제 DELETE
+     *
+     * @param id
+     * @return (String) success
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("userinfo/{id}")
-    public String delete(@PathVariable("id") long id) {
+    @DeleteMapping("/{id}")
+    public String deleteUser(
+            @PathVariable("id") long id
+    ) {
         userService.deleteUser(id);
         return "success";
     }
 
     /**
      * 내가 쓴 게시글 목록
+     *
+     * @param userid
+     * @return (List) getMyPosts
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("userinfo/posts/{userid}")
-    public List<BoardlistDto> myPosts(@PathVariable("userid") String userid) {
+    @GetMapping("/posts/{userid}")
+    public List<BoardlistDto> myPosts(
+            @PathVariable("userid") String userid
+    ) {
         return communityService.getMyPosts(userid);
     }
 }

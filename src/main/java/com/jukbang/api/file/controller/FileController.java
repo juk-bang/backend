@@ -24,6 +24,7 @@ public class FileController {
     @Autowired
     private FileUploadDownloadService service;
 
+
     @CrossOrigin(origins = "*")
     @PostMapping("/manager/manageroom/uploadimg/{Univid}/{roomid}/{no}")
     public String uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("Univid") int Univid, @PathVariable("roomid") int roomid, @PathVariable("no") int no) {

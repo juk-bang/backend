@@ -33,13 +33,15 @@ CommentsService {
     private CommunityRepository communityRepository; // 댓글수 추가용
 
     /**
-     * list 에 표시되야할 댓글 정보 : writter (작성자), body(내용) , date(작성 날짜)
-     * <p>
-     * 19.12.27 : univid별, postid별 나누어서 데이터 호출
+     * 댓글 리스트 (data) to List (Object)
+     *
+     * @param univid
+     * @param postid
+     * @return (List) boardDtoList
      */
     @Transactional
-    public List<CommentsDto> getCommentsList(int Univid, int Postid) {
-        List<Comments> boardEntities = commentsRepository.findAllByUnividAndPostid(Univid, Postid);
+    public List<CommentsDto> getCommentsList(int univid, int postid) {
+        List<Comments> boardEntities = commentsRepository.findAllByUnividAndPostid(univid, postid);
         List<CommentsDto> boardDtoList = new ArrayList<>();
 
         for (Comments boardEntity : boardEntities) {

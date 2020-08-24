@@ -133,7 +133,7 @@ public class RoomService {
     }
 
     @Transactional
-    public Long SaveRoom(String sellerid, String json) throws JsonProcessingException {
+    public Long createRoom(String sellerid, String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         GetRoomDetailWrapper getRoomDetailWrapper = new GetRoomDetailWrapper();
@@ -213,7 +213,7 @@ public class RoomService {
 
 
     @Transactional
-    public Long RewriteRoom(String Sellerid, long Roomid, String json) throws JsonProcessingException {
+    public Long updateRoom(String Sellerid, long Roomid, String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         GetRoomDetailWrapper getRoomDetailWrapper;
@@ -290,7 +290,7 @@ public class RoomService {
     }
 
     @Transactional
-    public void DeleteRoom(Long Roomid) {
+    public void deleteRoom(Long Roomid) {
         roomRepository.deleteById(Roomid);
         roomDetailRepository.deleteById(Roomid);
     }
