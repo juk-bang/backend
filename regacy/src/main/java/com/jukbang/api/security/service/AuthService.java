@@ -1,7 +1,7 @@
 package com.jukbang.api.security.service;
 
-import com.jukbang.api.user.entity.User;
-import com.jukbang.api.user.repository.UserRepository;
+import com.jukbang.api.model.User;
+import com.jukbang.api.repository.UserRepository;
 import com.jukbang.api.security.JwtTokenProvider;
 import com.jukbang.api.security.exception.CantSignInException;
 import com.jukbang.api.security.exception.IdAlreadyExistsException;

@@ -72,6 +72,10 @@ task copyRestDocs(type: Copy) {
     dependsOn asciidoctor
     from "${asciidoctor.outputDir}/html5"
     into "${sourceSets.main.output.resourcesDir}/static/docs"
+}
+
+task copyRepoDocs(type: Copy) {
+    dependsOn copyRestDocs
     from "${asciidoctor.outputDir}/html5"
     into "${docsDir}"
     rename{
