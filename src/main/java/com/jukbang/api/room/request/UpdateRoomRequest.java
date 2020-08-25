@@ -4,7 +4,9 @@ import com.jukbang.api.room.dto.ExtraOption;
 import com.jukbang.api.room.dto.Facilities;
 import com.jukbang.api.room.dto.Location;
 import com.jukbang.api.room.dto.RoomInformation;
+import lombok.Getter;
 
+@Getter
 public class UpdateRoomRequest {
     long Univid;
     int pictureCount;

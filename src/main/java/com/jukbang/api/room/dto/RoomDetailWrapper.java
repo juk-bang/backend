@@ -10,7 +10,7 @@ import lombok.*;
 public class RoomDetailWrapper {
     private long id;
     private int pictureCount;
-    private String sellerid;
+    private String sellerId;
     private String address;
     private int structure;
     private double scale;
@@ -36,11 +36,11 @@ public class RoomDetailWrapper {
 
 
     @Builder
-    public RoomDetailWrapper(long id, int pictureCount, String sellerid, String address, int structure, double scale, double floor, double distance, double month, double adminExpenses, double deposit, double grade, boolean elevator, boolean park, boolean cctv, boolean autoDoor, boolean washingMachine, boolean gasrange, boolean refrigerator, boolean airconditioner, String description, double lat, double lng, boolean busStation, boolean subwayStation) {
+    public RoomDetailWrapper(long id, int pictureCount, String sellerId, String address, int structure, double scale, double floor, double distance, double month, double adminExpenses, double deposit, double grade, boolean elevator, boolean park, boolean cctv, boolean autoDoor, boolean washingMachine, boolean gasrange, boolean refrigerator, boolean airconditioner, String description, double lat, double lng, boolean busStation, boolean subwayStation) {
 
         this.id = id;
         this.pictureCount = pictureCount;
-        this.sellerid = sellerid;
+        this.sellerId = sellerId;
         this.address = address;
         this.structure = structure;
         this.scale = scale;

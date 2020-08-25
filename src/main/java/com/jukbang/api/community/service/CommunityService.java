@@ -2,11 +2,12 @@ package com.jukbang.api.community.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jukbang.api.room.dto.BoardlistDto;
 import com.jukbang.api.community.dto.CommunityDto;
 import com.jukbang.api.community.entity.Community;
 import com.jukbang.api.community.repository.CommunityRepository;
-import lombok.AllArgsConstructor;
+import com.jukbang.api.community.request.CreatePostRequest;
+import com.jukbang.api.room.dto.BoardlistDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,13 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class CommunityService {
 
-
-    private CommunityRepository communityRepository;
-
+    private final CommunityRepository communityRepository;
 
     @Transactional
     public List<BoardlistDto> getCommunitylist() {
@@ -34,7 +33,7 @@ public class CommunityService {
                     .writer(boardEntity.getWriter())
                     .modifiedDate(boardEntity.getCreatedDate())
                     .comments(boardEntity.getComments())
-                    .univid(boardEntity.getUnivid())
+                    .univid(boardEntity.getUnivId())
                     .views(boardEntity.getViews())
                     .build();
 
@@ -56,7 +55,7 @@ public class CommunityService {
                     .writer(boardEntity.getWriter())
                     .modifiedDate(boardEntity.getCreatedDate())
                     .comments(boardEntity.getComments())
-                    .univid(boardEntity.getUnivid())
+                    .univid(boardEntity.getUnivId())
                     .views(boardEntity.getViews())
                     .build();
 
@@ -67,20 +66,23 @@ public class CommunityService {
 
     @Transactional
     public Long SavePost(
-            int univid,
-            String json
-    )  throws JsonProcessingException {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        CommunityDto communityDto;
-        communityDto = objectMapper.readValue(json, CommunityDto.class);
-        communityDto.setUnivid(univid);
-
-        return communityRepository.save(communityDto.toEntity()).getId();
+            int univId,
+            CreatePostRequest createPostRequest
+    ) {
+        return communityRepository.save(
+                new Community(
+                        createPostRequest.getId(),
+                        createPostRequest.getTitle(),
+                        createPostRequest.getWriter(),
+                        createPostRequest.getBody(),
+                        univId,
+                        0,
+                        0
+                )).getId();
     }
 
     @Transactional
-    public CommunityDto getPost(int Univid, Long Postid) {
+    public CommunityDto getPost(int univId, Long Postid) {
         List<BoardlistDto> list = getCommunitylist();
         long priv = 0, next = 0, tmp = 0;
         for (int i = 0; i < list.size() - 1; i++) {
@@ -112,7 +114,7 @@ public class CommunityService {
                 .writer(community.getWriter())
                 .modifiedDate(community.getCreatedDate())
                 .comments(community.getComments())
-                .univid(community.getUnivid())
+                .univId(community.getUnivId())
                 .views(community.getViews() + 1)
                 .build();
         communityRepository.save(communityDTO.toEntity()).getId();
@@ -121,12 +123,12 @@ public class CommunityService {
     }
 
     @Transactional
-    public Long rewritePost(int univid, Long postid, String json) throws JsonProcessingException {
+    public Long rewritePost(int univId, Long postId, String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         CommunityDto communityDto;
         communityDto = objectMapper.readValue(json, CommunityDto.class);
-        communityDto.setUnivid(univid);
-        communityDto.setId(postid);
+        communityDto.setUnivId(univId);
+        communityDto.setId(postId);
         return communityRepository.save(communityDto.toEntity()).getId();
     }
 
@@ -134,5 +136,4 @@ public class CommunityService {
     public void deletePost(Long postid) {
         communityRepository.deleteById(postid);
     }
-
 }

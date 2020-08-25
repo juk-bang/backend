@@ -2,58 +2,59 @@ package com.jukbang.api.admin.controller;
 
 import com.jukbang.api.room.entity.Room;
 import com.jukbang.api.room.service.RoomService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
-@RequestMapping("admin/permissionroom/{Univid}")
+@RequiredArgsConstructor
+@RequestMapping("/admin/permissionroom/{univId}")
 public class adminController {
-    private RoomService roomService;
+
+    private final RoomService roomService;
 
     /**
      * 대학별 방 전체 List GET
      *
-     * @param univid
+     * @param univId 대학가 지역 ID
      * @return (List) roomList
      */
     @CrossOrigin(origins = "*")
     @GetMapping("")
     public List<Room> getRoomList(
-            @PathVariable("univid") long univid
+            @PathVariable("univId") long univId
     ) {
-        return roomService.wantpermit(univid);
+        return roomService.wantpermit(univId);
     }
 
     /**
      * 방 게시 permit
      *
-     * @param univid
-     * @param no
+     * @param univId 대학가 지역 ID
+     * @param roomId 승인할 방 번호
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("/{yes}")
+    @PostMapping("/{roomId}")
     public void permit(
-            @PathVariable("univid") long univid,
-            @PathVariable("no") long no
+            @PathVariable("univId") long univId,
+            @PathVariable("roomId") long roomId
     ) {
-        roomService.permit(univid, no);
+        roomService.permit(univId, roomId);
     }
 
     /**
-     * 방 게시 not permit
+     * 방 게시 roomIdt permit
      *
-     * @param Univid
-     * @param no
+     * @param univId 대학가 지역 ID
+     * @param roomId 승인할 방 번호
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("/{no}")
-    public void notPermit(
-            @PathVariable("Univid") long univid,
-            @PathVariable("no") long no
+    @DeleteMapping("/{roomId}")
+    public void roomIdtPermit(
+            @PathVariable("univId") long univId,
+            @PathVariable("roomId") long roomId
     ) {
-        roomService.dontpermit(univid, no);
+        roomService.dontpermit(univId, roomId);
     }
 }

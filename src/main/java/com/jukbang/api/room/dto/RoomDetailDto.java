@@ -11,7 +11,7 @@ import lombok.*;
 public class RoomDetailDto {
     long id;
     int pictureCount;
-    String sellerid;
+    String sellerId;
     String address;
     boolean elevator;
     boolean park;
@@ -29,7 +29,7 @@ public class RoomDetailDto {
         RoomDetail build = RoomDetail.builder()
                 .id(id)
                 .pictureCount(pictureCount)
-                .sellerid(sellerid)
+                .sellerId(sellerId)
                 .address(address)
                 .elevator(elevator)
                 .park(park)
@@ -47,10 +47,10 @@ public class RoomDetailDto {
     }
 
     @Builder
-    public RoomDetailDto(long id, int pictureCount, String sellerid, String address, boolean elevator, boolean park, boolean cctv, boolean autoDoor, boolean washingMachine, boolean gasrange, boolean refrigerator, boolean airconditioner, boolean busStation, boolean subwayStation, String description) {
+    public RoomDetailDto(long id, int pictureCount, String sellerId, String address, boolean elevator, boolean park, boolean cctv, boolean autoDoor, boolean washingMachine, boolean gasrange, boolean refrigerator, boolean airconditioner, boolean busStation, boolean subwayStation, String description) {
         this.id = id;
         this.pictureCount = pictureCount;
-        this.sellerid = sellerid;
+        this.sellerId = sellerId;
         this.address = address;
         this.elevator = elevator;
         this.park = park;

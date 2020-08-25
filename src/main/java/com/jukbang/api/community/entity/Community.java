@@ -27,19 +27,19 @@ public class Community extends Time {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String body;
     @Column(nullable = false)
-    private int univid;
+    private int univId;
     @Column(nullable = false)
     private int views;
     @Column(nullable = false)
     private int comments;
 
     @Builder
-    public Community(long id, String title, String writer, String body, int univid, int views, int comments) {
+    public Community(long id, String title, String writer, String body, int univId, int views, int comments) {
         this.id = id;
         this.title = title;
         this.writer = writer;
         this.body = body;
-        this.univid = univid;
+        this.univId = univId;
         this.views = views;
         this.comments = comments;
     }

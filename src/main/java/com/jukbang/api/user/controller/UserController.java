@@ -1,83 +1,67 @@
-
 package com.jukbang.api.user.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jukbang.api.room.dto.BoardlistDto;
-import com.jukbang.api.user.dto.UserDto;
 import com.jukbang.api.community.service.CommunityService;
+import com.jukbang.api.room.dto.BoardlistDto;
+import com.jukbang.api.user.request.CreateUserRequest;
+import com.jukbang.api.user.request.UpdateUserRequest;
 import com.jukbang.api.user.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * import com.example.demo.repository.CommentsRepository;
- * import org.springframework.ui.Model;
- **/
-
-
 @RestController
-@AllArgsConstructor
-@RequestMapping("userinfo")
+@RequiredArgsConstructor
+@RequestMapping("/userinfo")
 public class UserController {
 
-
-    private UserService userService;
-    private CommunityService communityService;
-
+    private final UserService userService;
+    private final CommunityService communityService;
 
     /**
      * 회원정보 조회 GET
      *
-     * @param userid
+     * @param userId
      * @return (List) userDataList
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("/{userid}")
+    @GetMapping("/{userId}")
     public List getUserDataList(
-            @PathVariable("userid") String userid
+            @PathVariable("userId") String userId
     ) {
-        List<UserDto> userDataList = userService.getUserList(userid);
-        return userDataList;
+        return userService.getUserList(userId);
     }
-
 
     /**
      * 회원 정보 입력 CREATE
      *
-     * @param json
+     * @param createUserRequest
      * @return
-     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
     @PostMapping("/input")
     public long createUser(
-            @RequestBody String json
-    ) throws JsonProcessingException {
-        return userService.SaveUser(json);
-
+            @RequestBody CreateUserRequest createUserRequest
+    ) {
+        return userService.SaveUser(createUserRequest);
     }
-
 
     /**
      * 유저 정보 수정 UPDATE
      *
      * @param id
-     * @param json
+     * @param updateUserRequest
      * @return (String) success
-     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
     @PutMapping("/{id}")
     public String updateUser(
             @PathVariable("id") long id,
-            @RequestBody String json
-    ) throws JsonProcessingException {
-        userService.rewriteUser(id, json);
+            @RequestBody UpdateUserRequest updateUserRequest
+    ) {
+        userService.rewriteUser(id, updateUserRequest);
         return "success";
     }
-
 
     /**
      * 유저 삭제 DELETE
@@ -97,14 +81,14 @@ public class UserController {
     /**
      * 내가 쓴 게시글 목록
      *
-     * @param userid
+     * @param userId
      * @return (List) getMyPosts
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("/posts/{userid}")
+    @GetMapping("/posts/{userId}")
     public List<BoardlistDto> myPosts(
-            @PathVariable("userid") String userid
+            @PathVariable("userId") String userId
     ) {
-        return communityService.getMyPosts(userid);
+        return communityService.getMyPosts(userId);
     }
 }

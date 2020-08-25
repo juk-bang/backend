@@ -1,102 +1,86 @@
-
 package com.jukbang.api.user.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jukbang.api.user.dto.ReportDetailWrapper;
 import com.jukbang.api.user.dto.ReportListWrapper;
+import com.jukbang.api.user.request.CreateReportRequest;
 import com.jukbang.api.user.service.ReportService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * import com.example.demo.repository.CommentsRepository;
- * import org.springframework.ui.Model;
- **/
-
-
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ReportController {
 
-
-    private ReportService reportService;
-
+    private final ReportService reportService;
 
     /**
      * 신고 작성하기 CREATE
      *
-     * @param univid
-     * @param roomid
-     * @param userid
-     * @param json
+     * @param univId
+     * @param roomId
+     * @param userId
+     * @param createReportRequest
      * @return (long) id
-     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("report/{univid}/{roomid}/{userid}")
+    @PostMapping("report/{univId}/{roomId}/{userId}")
     public long createReport(
-            @PathVariable("univid") int univid,
-            @PathVariable("roomid") int roomid,
-            @PathVariable("userid") String userid,
-            @RequestBody String json
-    ) throws JsonProcessingException {
-        return reportService.createReport(univid, roomid, userid, json);
-
+            @PathVariable("univId") int univId,
+            @PathVariable("roomId") int roomId,
+            @PathVariable("userId") String userId,
+            @RequestBody CreateReportRequest createReportRequest
+    ) {
+        return reportService.createReport(univId, roomId, userId, createReportRequest);
     }
 
     /**
      * 신고 list 출력 GET
      *
-     * @param univid
+     * @param univId
      * @return (List) reportList
-     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("admin/report/{Univid}")
+    @GetMapping("admin/report/{univId}")
     public List<ReportListWrapper> reportList(
-            @PathVariable("Univid") int univid
-    ) throws JsonProcessingException {
-        return reportService.reportList(univid);
+            @PathVariable("univId") int univId
+    ) {
+        return reportService.reportList(univId);
     }
 
     /**
      * 신고 정보 상세보기 GET
      *
-     * @param univid
-     * @param Roomid
-     * @param reportid
+     * @param univId
+     * @param roomId
+     * @param reportId
      * @return (ReportDetailWrapper) reportDetail
-     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("admin/report/{Univid}/{Roomid}/{Reportid}")
-    public ReportDetailWrapper reportdetail(
-            @PathVariable("Univid") long univid,
-            @PathVariable("Roomid") long Roomid,
-            @PathVariable("Reportid") long reportid
-    ) throws JsonProcessingException {
-        return reportService.reportDetail(univid, Roomid, reportid);
+    @GetMapping("admin/report/{univId}/{roomId}/{reportId}")
+    public ReportDetailWrapper reportDetail(
+            @PathVariable("univId") long univId,
+            @PathVariable("roomId") long roomId,
+            @PathVariable("reportId") long reportId
+    ) {
+        return reportService.reportDetail(univId, roomId, reportId);
     }
 
     /**
      * 신고내용삭제 DELETE
      *
-     * @param univid
-     * @param Roomid
-     * @param reportid
-     * @throws JsonProcessingException
+     * @param univId
+     * @param roomId
+     * @param reportId
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("admin/report/{Univid}/{Roomid}/{Reportid}")
+    @DeleteMapping("admin/report/{univId}/{roomId}/{reportId}")
     public void deleteReport(
-            @PathVariable("Univid") long univid,
-            @PathVariable("Roomid") long Roomid,
-            @PathVariable("Reportid") long reportid
-    ) throws JsonProcessingException {
-        reportService.deleteReport(reportid);
+            @PathVariable("univId") long univId,
+            @PathVariable("roomId") long roomId,
+            @PathVariable("reportId") long reportId
+    ) {
+        reportService.deleteReport(reportId);
     }
-
-
 }

@@ -40,22 +40,22 @@ public class Comments extends Time {
      * 대학 번호
      */
     @Column(nullable = false)
-    private int univid;
+    private int univId;
 
     /**
      * 게시글 번호
      */
     @Column(nullable = false)
-    private int postid;
+    private int postId;
 
 
     @Builder
-    public Comments(long id, String writer, String body, int univid, int postid) {
+    public Comments(long id, String writer, String body, int univId, int postId) {
         this.id = id;
         this.writer = writer;
         this.body = body;
-        this.univid = univid;
-        this.postid = postid;
+        this.univId = univId;
+        this.postId = postId;
 
     }
 }

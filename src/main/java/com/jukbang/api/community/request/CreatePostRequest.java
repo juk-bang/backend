@@ -1,7 +1,10 @@
 package com.jukbang.api.community.request;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
+@Getter
 public class CreatePostRequest {
     private long id;
     private long previd;

@@ -1,15 +1,15 @@
 package com.jukbang.api.room.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jukbang.api.room.dto.*;
 import com.jukbang.api.room.entity.RecommandFilter;
 import com.jukbang.api.room.entity.Room;
 import com.jukbang.api.room.entity.RoomDetail;
-import com.jukbang.api.room.dto.*;
 import com.jukbang.api.room.repository.RecommandFilterRepository;
 import com.jukbang.api.room.repository.RoomDetailRepository;
 import com.jukbang.api.room.repository.RoomRepository;
-import lombok.AllArgsConstructor;
+import com.jukbang.api.room.request.CreateRoomRequest;
+import com.jukbang.api.room.request.UpdateRoomRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,13 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class RoomService {
 
-    private RecommandFilterRepository recommandFilterRepository;
-    private RoomDetailRepository roomDetailRepository;
-    private RoomRepository roomRepository;
+    private final RecommandFilterRepository recommandFilterRepository;
+    private final RoomDetailRepository roomDetailRepository;
+    private final RoomRepository roomRepository;
 
     @Transactional
     public RoomlistWrapper getRoomlist(long Univid) {
@@ -81,9 +81,9 @@ public class RoomService {
     }
 
     @Transactional
-    public List<Room> SellerRoomlist(long sellerid) {
+    public List<Room> SellerRoomlist(long sellerId) {
         List<Room> RoomEntities = new ArrayList<>();
-        List<RoomDetail> RoomDetailEntities = roomDetailRepository.findAllBySellerid(sellerid);
+        List<RoomDetail> RoomDetailEntities = roomDetailRepository.findAllBySellerId(sellerId);
         for (RoomDetail RoomDetailEntity : RoomDetailEntities) {
 
             Optional<Room> room = roomRepository.findById(RoomDetailEntity.getId());
@@ -96,16 +96,16 @@ public class RoomService {
     }
 
     @Transactional
-    public RoomDetailWrapper getRoomDetail(long Roomid) {
+    public RoomDetailWrapper getRoomDetail(long roomId) {
 
-        Optional<Room> roomWrap = roomRepository.findById(Roomid);
+        Optional<Room> roomWrap = roomRepository.findById(roomId);
         Room room = roomWrap.get();
-        Optional<RoomDetail> roomDetailWrap = roomDetailRepository.findById(Roomid);
+        Optional<RoomDetail> roomDetailWrap = roomDetailRepository.findById(roomId);
         RoomDetail roomDetail = roomDetailWrap.get();
         RoomDetailWrapper roomDetailWrapper = RoomDetailWrapper.builder()
                 .id(room.getId())
                 .pictureCount(roomDetail.getPictureCount())
-                .sellerid(roomDetail.getSellerid())
+                .sellerId(roomDetail.getSellerId())
                 .address(roomDetail.getAddress())
                 .structure(room.getStructure())
                 .scale(room.getScale())
@@ -133,68 +133,64 @@ public class RoomService {
     }
 
     @Transactional
-    public Long createRoom(String sellerid, String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        GetRoomDetailWrapper getRoomDetailWrapper = new GetRoomDetailWrapper();
-        getRoomDetailWrapper = objectMapper.readValue(json, GetRoomDetailWrapper.class);
+    public Long createRoom(String sellerId, CreateRoomRequest createRoomRequest) {
         double grade, reversegrade;
-        reversegrade = getRoomDetailWrapper.getRoomInformation().getPrice().getMonth() / 40.0 + getRoomDetailWrapper.getRoomInformation().getPrice().getAdminExpenses() / 5.0 + getRoomDetailWrapper.getRoomInformation().getPrice().getDeposit() / 700.0;
-        if (!getRoomDetailWrapper.getExtraOption().isAirconditioner()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isAutoDoor()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isCctv()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isElevator()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isGasrange()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isPark()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isRefrigerator()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isWashingMachine()) reversegrade += 0.3;
+        reversegrade = createRoomRequest.getRoomInformation().getPrice().getMonth() / 40.0 + createRoomRequest.getRoomInformation().getPrice().getAdminExpenses() / 5.0 + createRoomRequest.getRoomInformation().getPrice().getDeposit() / 700.0;
+        if (!createRoomRequest.getExtraOption().isAirconditioner()) reversegrade += 0.3;
+        if (!createRoomRequest.getExtraOption().isAutoDoor()) reversegrade += 0.3;
+        if (!createRoomRequest.getExtraOption().isCctv()) reversegrade += 0.3;
+        if (!createRoomRequest.getExtraOption().isElevator()) reversegrade += 0.3;
+        if (!createRoomRequest.getExtraOption().isGasrange()) reversegrade += 0.3;
+        if (!createRoomRequest.getExtraOption().isPark()) reversegrade += 0.3;
+        if (!createRoomRequest.getExtraOption().isRefrigerator()) reversegrade += 0.3;
+        if (!createRoomRequest.getExtraOption().isWashingMachine()) reversegrade += 0.3;
         grade = 10.0 - reversegrade;
         RoomDto roomDTO = RoomDto.builder()
-                .structure(getRoomDetailWrapper.getRoomInformation().getStructure())
-                .month(getRoomDetailWrapper.getRoomInformation().getPrice().getMonth())
-                .adminExpenses(getRoomDetailWrapper.getRoomInformation().getPrice().getAdminExpenses())
-                .deposit(getRoomDetailWrapper.getRoomInformation().getPrice().getDeposit())
-                .floor(getRoomDetailWrapper.getRoomInformation().getFloor())
-                .scale(getRoomDetailWrapper.getRoomInformation().getScale())
+                .structure(createRoomRequest.getRoomInformation().getStructure())
+                .month(createRoomRequest.getRoomInformation().getPrice().getMonth())
+                .adminExpenses(createRoomRequest.getRoomInformation().getPrice().getAdminExpenses())
+                .deposit(createRoomRequest.getRoomInformation().getPrice().getDeposit())
+                .floor(createRoomRequest.getRoomInformation().getFloor())
+                .scale(createRoomRequest.getRoomInformation().getScale())
                 .grade(reversegrade)
-                .distance(distance(getRoomDetailWrapper.getLocation().getLat(), getRoomDetailWrapper.getLocation().getLng(), 37.496281, 126.957358))
-                .lat(getRoomDetailWrapper.getLocation().getLat())
-                .lng(getRoomDetailWrapper.getLocation().getLng())
-                .univid(getRoomDetailWrapper.getUnivid())
+                .distance(distance(createRoomRequest.getLocation().getLat(), createRoomRequest.getLocation().getLng(), 37.496281, 126.957358))
+                .lat(createRoomRequest.getLocation().getLat())
+                .lng(createRoomRequest.getLocation().getLng())
+                .univid(createRoomRequest.getUnivid())
                 .permission(0)
                 .build();
 
         RoomDetailDto roomDetailDto = RoomDetailDto.builder()
-                .pictureCount(getRoomDetailWrapper.getPictureCount())
-                .sellerid(sellerid)
-                .address(getRoomDetailWrapper.getRoomInformation().getAddress())
-                .elevator(getRoomDetailWrapper.getExtraOption().isElevator())
-                .park(getRoomDetailWrapper.getExtraOption().isPark())
-                .cctv(getRoomDetailWrapper.getExtraOption().isCctv())
-                .autoDoor(getRoomDetailWrapper.getExtraOption().isAutoDoor())
-                .washingMachine(getRoomDetailWrapper.getExtraOption().isWashingMachine())
-                .gasrange(getRoomDetailWrapper.getExtraOption().isGasrange())
-                .refrigerator(getRoomDetailWrapper.getExtraOption().isRefrigerator())
-                .airconditioner(getRoomDetailWrapper.getExtraOption().isAirconditioner())
-                .busStation(getRoomDetailWrapper.getFacilities().isBusStation())
-                .subwayStation(getRoomDetailWrapper.getFacilities().isSubwayStation())
-                .description(getRoomDetailWrapper.getDescription())
+                .pictureCount(createRoomRequest.getPictureCount())
+                .sellerId(sellerId)
+                .address(createRoomRequest.getRoomInformation().getAddress())
+                .elevator(createRoomRequest.getExtraOption().isElevator())
+                .park(createRoomRequest.getExtraOption().isPark())
+                .cctv(createRoomRequest.getExtraOption().isCctv())
+                .autoDoor(createRoomRequest.getExtraOption().isAutoDoor())
+                .washingMachine(createRoomRequest.getExtraOption().isWashingMachine())
+                .gasrange(createRoomRequest.getExtraOption().isGasrange())
+                .refrigerator(createRoomRequest.getExtraOption().isRefrigerator())
+                .airconditioner(createRoomRequest.getExtraOption().isAirconditioner())
+                .busStation(createRoomRequest.getFacilities().isBusStation())
+                .subwayStation(createRoomRequest.getFacilities().isSubwayStation())
+                .description(createRoomRequest.getDescription())
                 .build();
 
         RecommandFilter filter;
-        if (!recommandFilterRepository.findByUnivid(getRoomDetailWrapper.getUnivid()).isPresent()) {
+        if (!recommandFilterRepository.findByUnivid(createRoomRequest.getUnivid()).isPresent()) {
             filter = new RecommandFilter();
-            filter.setPrice(getRoomDetailWrapper.getRoomInformation().getPrice().getMonth());
-            filter.setScale(getRoomDetailWrapper.getRoomInformation().getScale());
+            filter.setPrice(createRoomRequest.getRoomInformation().getPrice().getMonth());
+            filter.setScale(createRoomRequest.getRoomInformation().getScale());
             filter.setStructure(1);
-            filter.setFloor(getRoomDetailWrapper.getRoomInformation().getFloor());
+            filter.setFloor(createRoomRequest.getRoomInformation().getFloor());
             filter.setDistance(roomDTO.getDistance());
             filter.setGrade(roomDTO.getGrade());
             filter.setUnivid(roomDTO.getUnivid());
         } else {
-            Optional<RecommandFilter> recommandFilter = recommandFilterRepository.findByUnivid(getRoomDetailWrapper.getUnivid());
+            Optional<RecommandFilter> recommandFilter = recommandFilterRepository.findByUnivid(createRoomRequest.getUnivid());
             filter = recommandFilter.get();
-            List<Room> RoomEntities = roomRepository.findAllByUnivid(getRoomDetailWrapper.getUnivid());
+            List<Room> RoomEntities = roomRepository.findAllByUnivid(createRoomRequest.getUnivid());
             int n = RoomEntities.size();
             filter.setPrice((filter.getPrice() * n + roomDTO.getMonth()) / (n + 1));
             filter.setScale((filter.getScale() * n + roomDTO.getScale()) / (n + 1));
@@ -207,63 +203,58 @@ public class RoomService {
         recommandFilterRepository.save(filter).getId();
         roomRepository.save(roomDTO.toEntity()).getId();
         return roomDetailRepository.save(roomDetailDto.toEntity()).getId();
-
-
     }
 
 
     @Transactional
-    public Long updateRoom(String Sellerid, long Roomid, String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-
-        GetRoomDetailWrapper getRoomDetailWrapper;
-        getRoomDetailWrapper = objectMapper.readValue(json, GetRoomDetailWrapper.class);
+    public Long updateRoom(String sellerId, long roomId, UpdateRoomRequest updateRoomRequest) {
         double grade, reversegrade;
-        reversegrade = getRoomDetailWrapper.getRoomInformation().getPrice().getMonth() / 40.0 + getRoomDetailWrapper.getRoomInformation().getPrice().getAdminExpenses() / 5.0 + getRoomDetailWrapper.getRoomInformation().getPrice().getDeposit() / 700.0;
-        if (!getRoomDetailWrapper.getExtraOption().isAirconditioner()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isAutoDoor()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isCctv()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isElevator()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isGasrange()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isPark()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isRefrigerator()) reversegrade += 0.3;
-        if (!getRoomDetailWrapper.getExtraOption().isWashingMachine()) reversegrade += 0.3;
+
+        reversegrade = updateRoomRequest.getRoomInformation().getPrice().getMonth() / 40.0 + updateRoomRequest.getRoomInformation().getPrice().getAdminExpenses() / 5.0 + updateRoomRequest.getRoomInformation().getPrice().getDeposit() / 700.0;
+        if (!updateRoomRequest.getExtraOption().isAirconditioner()) reversegrade += 0.3;
+        if (!updateRoomRequest.getExtraOption().isAutoDoor()) reversegrade += 0.3;
+        if (!updateRoomRequest.getExtraOption().isCctv()) reversegrade += 0.3;
+        if (!updateRoomRequest.getExtraOption().isElevator()) reversegrade += 0.3;
+        if (!updateRoomRequest.getExtraOption().isGasrange()) reversegrade += 0.3;
+        if (!updateRoomRequest.getExtraOption().isPark()) reversegrade += 0.3;
+        if (!updateRoomRequest.getExtraOption().isRefrigerator()) reversegrade += 0.3;
+        if (!updateRoomRequest.getExtraOption().isWashingMachine()) reversegrade += 0.3;
         grade = 10.0 - reversegrade;
 
         RoomDto roomDTO = RoomDto.builder()
-                .id(Roomid)
-                .structure(getRoomDetailWrapper.getRoomInformation().getStructure())
-                .month(getRoomDetailWrapper.getRoomInformation().getPrice().getMonth())
-                .adminExpenses(getRoomDetailWrapper.getRoomInformation().getPrice().getAdminExpenses())
-                .deposit(getRoomDetailWrapper.getRoomInformation().getPrice().getDeposit())
-                .floor(getRoomDetailWrapper.getRoomInformation().getFloor())
-                .scale(getRoomDetailWrapper.getRoomInformation().getScale())
-                .distance(distance(getRoomDetailWrapper.getLocation().getLat(), getRoomDetailWrapper.getLocation().getLng(), 37.496281, 126.957358))
+                .id(roomId)
+                .structure(updateRoomRequest.getRoomInformation().getStructure())
+                .month(updateRoomRequest.getRoomInformation().getPrice().getMonth())
+                .adminExpenses(updateRoomRequest.getRoomInformation().getPrice().getAdminExpenses())
+                .deposit(updateRoomRequest.getRoomInformation().getPrice().getDeposit())
+                .floor(updateRoomRequest.getRoomInformation().getFloor())
+                .scale(updateRoomRequest.getRoomInformation().getScale())
+                .distance(distance(updateRoomRequest.getLocation().getLat(), updateRoomRequest.getLocation().getLng(), 37.496281, 126.957358))
                 .grade(grade)
-                .lat(getRoomDetailWrapper.getLocation().getLat())
-                .lng(getRoomDetailWrapper.getLocation().getLng())
-                .univid(getRoomDetailWrapper.getUnivid())
+                .lat(updateRoomRequest.getLocation().getLat())
+                .lng(updateRoomRequest.getLocation().getLng())
+                .univid(updateRoomRequest.getUnivid())
                 .build();
 
 
         RoomDetailDto roomDetailDto = RoomDetailDto.builder()
-                .id(Roomid)
-                .pictureCount(getRoomDetailWrapper.getPictureCount())
-                .sellerid(Sellerid)
-                .address(getRoomDetailWrapper.getRoomInformation().getAddress())
-                .elevator(getRoomDetailWrapper.getExtraOption().isElevator())
-                .park(getRoomDetailWrapper.getExtraOption().isPark())
-                .cctv(getRoomDetailWrapper.getExtraOption().isCctv())
-                .autoDoor(getRoomDetailWrapper.getExtraOption().isAutoDoor())
-                .washingMachine(getRoomDetailWrapper.getExtraOption().isWashingMachine())
-                .gasrange(getRoomDetailWrapper.getExtraOption().isGasrange())
-                .refrigerator(getRoomDetailWrapper.getExtraOption().isRefrigerator())
-                .airconditioner(getRoomDetailWrapper.getExtraOption().isAirconditioner())
-                .busStation(getRoomDetailWrapper.getFacilities().isBusStation())
-                .subwayStation(getRoomDetailWrapper.getFacilities().isSubwayStation())
-                .description(getRoomDetailWrapper.getDescription())
+                .id(roomId)
+                .pictureCount(updateRoomRequest.getPictureCount())
+                .sellerId(sellerId)
+                .address(updateRoomRequest.getRoomInformation().getAddress())
+                .elevator(updateRoomRequest.getExtraOption().isElevator())
+                .park(updateRoomRequest.getExtraOption().isPark())
+                .cctv(updateRoomRequest.getExtraOption().isCctv())
+                .autoDoor(updateRoomRequest.getExtraOption().isAutoDoor())
+                .washingMachine(updateRoomRequest.getExtraOption().isWashingMachine())
+                .gasrange(updateRoomRequest.getExtraOption().isGasrange())
+                .refrigerator(updateRoomRequest.getExtraOption().isRefrigerator())
+                .airconditioner(updateRoomRequest.getExtraOption().isAirconditioner())
+                .busStation(updateRoomRequest.getFacilities().isBusStation())
+                .subwayStation(updateRoomRequest.getFacilities().isSubwayStation())
+                .description(updateRoomRequest.getDescription())
                 .build();
-        roomRepository.save(roomDTO.toEntity()).getId();
+        roomRepository.save(roomDTO.toEntity());
         return roomDetailRepository.save(roomDetailDto.toEntity()).getId();
     }
 
@@ -290,9 +281,9 @@ public class RoomService {
     }
 
     @Transactional
-    public void deleteRoom(Long Roomid) {
-        roomRepository.deleteById(Roomid);
-        roomDetailRepository.deleteById(Roomid);
+    public void deleteRoom(Long roomId) {
+        roomRepository.deleteById(roomId);
+        roomDetailRepository.deleteById(roomId);
     }
 
 

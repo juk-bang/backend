@@ -1,15 +1,14 @@
 package com.jukbang.api.community.service;
 
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jukbang.api.community.dto.CommentsDto;
 import com.jukbang.api.community.dto.CommunityDto;
 import com.jukbang.api.community.entity.Comments;
 import com.jukbang.api.community.entity.Community;
 import com.jukbang.api.community.repository.CommentsRepository;
 import com.jukbang.api.community.repository.CommunityRepository;
-import lombok.AllArgsConstructor;
+import com.jukbang.api.community.request.CreateCommentRequest;
+import com.jukbang.api.community.request.UpdateCommentRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -17,41 +16,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * import org.springframework.web.bind.annotation.PathVariable;
- * import org.hibernate.criterion.Example;
- * import java.util.Optional;
- **/
-
-
-@AllArgsConstructor
 @Service
+@RequiredArgsConstructor
+public class CommentsService {
 
-public class
-CommentsService {
-    private CommentsRepository commentsRepository;
-    private CommunityRepository communityRepository; // 댓글수 추가용
+    private final CommentsRepository commentsRepository;
+    private final CommunityRepository communityRepository; // 댓글수 추가용
 
     /**
      * 댓글 리스트 (data) to List (Object)
      *
-     * @param univid
-     * @param postid
+     * @param univId
+     * @param postId
      * @return (List) boardDtoList
      */
     @Transactional
-    public List<CommentsDto> getCommentsList(int univid, int postid) {
-        List<Comments> boardEntities = commentsRepository.findAllByUnividAndPostid(univid, postid);
+    public List<CommentsDto> getCommentsList(int univId, int postId) {
+        List<Comments> boardEntities = commentsRepository.findAllByUnivIdAndPostId(univId, postId);
         List<CommentsDto> boardDtoList = new ArrayList<>();
 
         for (Comments boardEntity : boardEntities) {
             CommentsDto boardDTO = CommentsDto.builder()
                     .id(boardEntity.getId())
-                    .postid(boardEntity.getPostid())
+                    .postId(boardEntity.getPostId())
                     .writer(boardEntity.getWriter())
                     .modifiedDate(boardEntity.getModifiedDate())
                     .body(boardEntity.getBody())
-                    .univid(boardEntity.getUnivid())
+                    .univId(boardEntity.getUnivId())
                     .build();
 
             boardDtoList.add(boardDTO);
@@ -65,14 +56,9 @@ CommentsService {
      * 입력해야될 데이터 : writter (작성자), body(내용)
      */
     @Transactional
-    public long SaveComment(int Univid, int Postid, String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        CommentsDto commentsDto;
-        commentsDto = objectMapper.readValue(json, CommentsDto.class);
-        commentsDto.setUnivid(Univid);
-        commentsDto.setPostid(Postid);
+    public long SaveComment(int univId, int postId, CreateCommentRequest createCommentRequest) {
 
-        Optional<Community> communityWrapper = communityRepository.findById((long) Postid);
+        Optional<Community> communityWrapper = communityRepository.findById((long) postId);
         Community community = communityWrapper.get();
 
         CommunityDto communityDTO = CommunityDto.builder()
@@ -82,13 +68,19 @@ CommentsService {
                 .writer(community.getWriter())
                 .modifiedDate(community.getCreatedDate())
                 .comments(community.getComments() + 1)
-                .univid(community.getUnivid())
+                .univId(community.getUnivId())
                 .views(community.getViews())
                 .build();
-        communityRepository.save(communityDTO.toEntity()).getId();
+        communityRepository.save(communityDTO.toEntity());
 
-
-        return commentsRepository.save(commentsDto.toEntity()).getId(); // 잘모르겠음
+        return commentsRepository.save(
+                new Comments(
+                        createCommentRequest.getId(),
+                        createCommentRequest.getWriter(),
+                        createCommentRequest.getBody(),
+                        univId,
+                        postId
+                )).getId(); // 잘모르겠음
     }
 
 
@@ -97,14 +89,15 @@ CommentsService {
      * 댓글의 고유번호 (id) 에 접근하여 수정
      */
     @Transactional
-    public long rewriteComment(int univid, int postid, long id, String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        CommentsDto commentsDto;
-        commentsDto = objectMapper.readValue(json, CommentsDto.class);
-        commentsDto.setUnivid(univid);
-        commentsDto.setPostid(postid);
-        commentsDto.setId(id);
-        return commentsRepository.save(commentsDto.toEntity()).getId();
+    public long updateComment(int univId, int postId, long id, UpdateCommentRequest updateCommentRequest) {
+        return commentsRepository.save(
+                new Comments(
+                        id,
+                        updateCommentRequest.getWriter(),
+                        updateCommentRequest.getBody(),
+                        univId,
+                        postId
+                )).getId();
     }
 
     /**
@@ -112,9 +105,9 @@ CommentsService {
      * 댓글의 고유번호 (id) 에 접근하여 삭제
      */
     @Transactional
-    public void deleteComment(long id, long Postid) {
+    public void deleteComment(long id, long postId) {
 
-        Optional<Community> communityWrapper = communityRepository.findById((long) Postid);
+        Optional<Community> communityWrapper = communityRepository.findById((long) postId);
         Community community = communityWrapper.get();
 
         CommunityDto communityDTO = CommunityDto.builder()
@@ -124,7 +117,7 @@ CommentsService {
                 .writer(community.getWriter())
                 .modifiedDate(community.getCreatedDate())
                 .comments(community.getComments() - 1)
-                .univid(community.getUnivid())
+                .univId(community.getUnivId())
                 .views(community.getViews())
                 .build();
         communityRepository.save(communityDTO.toEntity()).getId();

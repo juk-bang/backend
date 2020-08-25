@@ -1,7 +1,10 @@
 package com.jukbang.api.community.request;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
+@Getter
 public class CreateCommentRequest {
     private long id;
     private String writer;

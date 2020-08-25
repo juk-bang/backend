@@ -1,44 +1,36 @@
 package com.jukbang.api.user.service;
 
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jukbang.api.user.dto.UserDto;
 import com.jukbang.api.user.entity.User;
 import com.jukbang.api.user.repository.UserRepository;
-import lombok.AllArgsConstructor;
+import com.jukbang.api.user.request.CreateUserRequest;
+import com.jukbang.api.user.request.UpdateUserRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * import org.springframework.web.bind.annotation.PathVariable;
- * import org.hibernate.criterion.Example;
- * import java.util.Optional;
- **/
-
-
-@AllArgsConstructor
 @Service
-
+@RequiredArgsConstructor
 public class UserService {
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     /**
      * user정보 출력
      */
     @Transactional
-    public List<UserDto> getUserList(String userid) {
-        List<User> boardEntities = userRepository.findAllByUserId(userid);
+    public List<UserDto> getUserList(String userId) {
+        List<User> boardEntities = userRepository.findAllByUserId(userId);
         List<UserDto> boardDtoList = new ArrayList<>();
 
         for (User boardEntity : boardEntities) {
             UserDto boardDTO = UserDto.builder()
                     .id(boardEntity.getId())
                     .userId(boardEntity.getUserId())
-                    .univid(boardEntity.getUnivid())
+                    .univId(boardEntity.getUnivId())
                     .build();
 
             boardDtoList.add(boardDTO);
@@ -52,18 +44,17 @@ public class UserService {
      * 입력해야될 데이터 : writter (작성자), body(내용)
      */
     @Transactional
-    public long SaveUser(String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        UserDto userDto;
-        userDto = objectMapper.readValue(json, UserDto.class);
+    public long SaveUser(CreateUserRequest createUserRequest) {
 
-
-        UserDto userDTO = UserDto.builder()
-                .userId(userDto.getUserId())
-                .univid(userDto.getUnivid())
-                .build();
-
-        return userRepository.save(userDTO.toEntity()).getId(); // 잘모르겠음
+        return userRepository.save(
+                new User(
+                        createUserRequest.getId(),
+                        createUserRequest.getUserId(),
+                        null,
+                        createUserRequest.getUnivid(),
+                        null,
+                        null
+                )).getId(); // 잘모르겠음
     }
 
 
@@ -72,12 +63,16 @@ public class UserService {
      * 댓글의 고유번호 (id) 에 접근하여 수정
      */
     @Transactional
-    public void rewriteUser(long id, String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        UserDto userDto;
-        userDto = objectMapper.readValue(json, UserDto.class);
-        userDto.setId(id);
-        userRepository.save(userDto.toEntity()).getId();
+    public void rewriteUser(long id, UpdateUserRequest updateUserRequest) {
+        userRepository.save(
+                new User(
+                        id,
+                        updateUserRequest.getUserId(),
+                        null,
+                        updateUserRequest.getUnivid(),
+                        null,
+                        null
+                )); // 잘모르겠음
     }
 
     /**

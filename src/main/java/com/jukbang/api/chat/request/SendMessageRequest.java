@@ -1,8 +1,11 @@
 package com.jukbang.api.chat.request;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
-public class UpdateChatRoomRequest {
+@Getter
+public class SendMessageRequest {
     private long id;
     private String sender;
     private String receiver;

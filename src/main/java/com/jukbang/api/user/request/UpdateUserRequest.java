@@ -1,6 +1,9 @@
 package com.jukbang.api.user.request;
 
-public class UpdateUserDateRequest {
+import lombok.Getter;
+
+@Getter
+public class UpdateUserRequest {
     private long id;
     private String userId;
     private int univid;

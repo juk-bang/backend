@@ -1,17 +1,18 @@
 package com.jukbang.api.room.request;
 
+import com.jukbang.api.room.dto.ExtraOption;
+import com.jukbang.api.room.dto.Facilities;
+import com.jukbang.api.room.dto.Location;
+import com.jukbang.api.room.dto.RoomInformation;
+import lombok.Getter;
+
+@Getter
 public class CreateRoomRequest {
-    private long id;
-    private int structure;
-    private double month;
-    private double adminExpenses;
-    private double deposit;
-    private double floor;
-    private double scale;
-    private double grade;
-    private double distance;
-    private double lat;
-    private double lng;
-    private long univid;
-    private int permission;
+    long Univid;
+    int pictureCount;
+    RoomInformation roomInformation;
+    ExtraOption extraOption;
+    String description;
+    Location location;
+    Facilities facilities;
 }

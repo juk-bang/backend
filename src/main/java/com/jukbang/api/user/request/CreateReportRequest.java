@@ -1,7 +1,10 @@
 package com.jukbang.api.user.request;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
+@Getter
 public class CreateReportRequest {
     private long id;
     private String userid;

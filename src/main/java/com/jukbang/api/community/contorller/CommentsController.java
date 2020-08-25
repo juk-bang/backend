@@ -1,104 +1,93 @@
-
 package com.jukbang.api.community.contorller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jukbang.api.community.dto.CommentsDto;
-import lombok.AllArgsConstructor;
+import com.jukbang.api.community.request.CreateCommentRequest;
+import com.jukbang.api.community.request.UpdateCommentRequest;
+import com.jukbang.api.community.service.CommentsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * import com.example.demo.repository.CommentsRepository;
- * import org.springframework.ui.Model;
- **/
-
-
 @RestController
-@AllArgsConstructor
-@RequestMapping("community/comments/{univid}")
+@RequiredArgsConstructor
+@RequestMapping("/community/comments/{univId}")
 public class CommentsController {
 
-
-    private com.jukbang.api.community.service.CommentsService CommentsService;
-
+    private final CommentsService commentsService;
 
     /**
      * 게시글 별 전체 댓글 리스트 GET
      *
-     * @param univid
-     * @param postid
+     * @param univId
+     * @param postId
      * @return
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("/{postid}")
+    @GetMapping("/{postId}")
     public List getCommentsList(
-            @PathVariable("univid") int univid,
-            @PathVariable("postid") int postid
+            @PathVariable("univId") int univId,
+            @PathVariable("postId") int postId
     ) {
-        List<CommentsDto> commentsList = CommentsService.getCommentsList(univid, postid);
+        List<CommentsDto> commentsList = commentsService.getCommentsList(univId, postId);
         return commentsList;
     }
-
 
     /**
      * 댓글 CREATE
      *
-     * @param univid
-     * @param postid
-     * @param json
+     * @param univId
+     * @param postId
+     * @param createCommentRequest
      * @return (long) id
-     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("/{postid}")
+    @PostMapping("/{postId}")
     public long createComment(
-            @PathVariable("univid") int univid,
-            @PathVariable("postid") int postid,
-            @RequestBody String json
-    ) throws JsonProcessingException {
-        return CommentsService.SaveComment(univid, postid, json);
+            @PathVariable("univId") int univId,
+            @PathVariable("postId") int postId,
+            @RequestBody CreateCommentRequest createCommentRequest
+    ) {
+        return commentsService.SaveComment(univId, postId, createCommentRequest);
 
     }
-
 
     /**
      * 댓글 UPDATE
      *
-     * @param univid
-     * @param postid
+     * @param univId
+     * @param postId
      * @param id
-     * @param json
+     * @param updateCommentRequest
      * @return (long) id
      * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PutMapping("/{postid}/{id}")
+    @PutMapping("/{postId}/{id}")
     public long updateComment(
-            @PathVariable("univid") int univid,
-            @PathVariable("postid") int postid,
+            @PathVariable("univId") int univId,
+            @PathVariable("postId") int postId,
             @PathVariable("id") long id,
-            @RequestBody String json
-    ) throws JsonProcessingException {
-        return CommentsService.rewriteComment(univid, postid, id, json);
+            @RequestBody UpdateCommentRequest updateCommentRequest
+    ) {
+        return commentsService.updateComment(univId, postId, id, updateCommentRequest);
     }
-
 
     /**
      * 댓글 DELETE
      *
      * @param id
-     * @param Postid
+     * @param postId
      * @return (String) success
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("{postid}/{id}")
+    @DeleteMapping("{postId}/{id}")
     public String deleteComment(
             @PathVariable("id") long id,
-            @PathVariable("postid") long Postid
+            @PathVariable("postId") long postId
     ) {
-        CommentsService.deleteComment(id, Postid);
+        commentsService.deleteComment(id, postId);
         return "success";
     }
-
 }

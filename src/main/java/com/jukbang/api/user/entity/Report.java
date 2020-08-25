@@ -27,20 +27,20 @@ public class Report extends Time {
      * 신고자 id
      */
     @Column(length = 30, nullable = false)
-    private String userid;
+    private String userId;
 
 
     /**
-     * 해당 신고글 의 univid
+     * 해당 신고글 의 univId
      */
     @Column(nullable = false)
-    private int univid;
+    private int univId;
 
     /**
-     * 해당 신고글 의 roomid
+     * 해당 신고글 의 roomId
      */
     @Column(nullable = false)
-    private int roomid;
+    private int roomId;
 
     /**
      * 신고글 입력
@@ -56,11 +56,11 @@ public class Report extends Time {
 
 
     @Builder
-    public Report(long id, String userid, int univid, int roomid, String body, String title) {
+    public Report(long id, String userId, int univId, int roomId, String body, String title) {
         this.id = id;
-        this.userid = userid;
-        this.univid = univid;
-        this.roomid = roomid;
+        this.userId = userId;
+        this.univId = univId;
+        this.roomId = roomId;
         this.body = body;
         this.title = title;
     }

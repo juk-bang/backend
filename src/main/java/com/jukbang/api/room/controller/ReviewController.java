@@ -1,103 +1,87 @@
-
 package com.jukbang.api.room.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jukbang.api.room.dto.ReviewDto;
+import com.jukbang.api.room.request.CreateReviewRequest;
+import com.jukbang.api.room.request.UpdateReviewRequest;
 import com.jukbang.api.room.service.ReviewService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * import com.example.demo.repository.CommentsRepository;
- * import org.springframework.ui.Model;
- **/
-
-
 @RestController
-@AllArgsConstructor
-@RequestMapping("review/{Univid}")
+@RequiredArgsConstructor
+@RequestMapping("/review/{univId}")
 public class ReviewController {
 
-
-    private ReviewService ReviewService;
-
+    private final ReviewService ReviewService;
 
     /**
      * 각 방의 리뷰 GET
      *
-     * @param univid
-     * @param roomid
+     * @param univId
+     * @param roomId
      * @return (List) reviewList
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("/{Roomid}")
+    @GetMapping("/{roomId}")
     public List getReviewList(
-            @PathVariable("Univid") int univid,
-            @PathVariable("Roomid") int roomid
+            @PathVariable("univId") int univId,
+            @PathVariable("roomId") int roomId
     ) {
-        List<ReviewDto> reviewList = ReviewService.getReviewList(univid, roomid);
-        return reviewList;
+        return ReviewService.getReviewList(univId, roomId);
     }
-
 
     /**
      * 각 방 리뷰 CREATE
      *
-     * @param Univid
-     * @param Roomid
-     * @param json
+     * @param univId
+     * @param roomId
+     * @param createReviewRequest
      * @return (long) id
-     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("/{Roomid}")
+    @PostMapping("/{roomId}")
     public long createReview(
-            @PathVariable("Univid") int univid,
-            @PathVariable("Roomid") int roomid,
-            @RequestBody String json
-    ) throws JsonProcessingException {
-        return ReviewService.SaveReview(univid, roomid, json);
-
+            @PathVariable("univId") int univId,
+            @PathVariable("roomId") int roomId,
+            @RequestBody CreateReviewRequest createReviewRequest
+    ) {
+        return ReviewService.SaveReview(univId, roomId, createReviewRequest);
     }
-
 
     /**
      * 각 리뷰 UPDATE
      *
-     * @param univid
-     * @param roomid
-     * @param id
-     * @param json
+     * @param univId
+     * @param roomId
+     * @param reviewId
+     * @param updateReviewRequest
      * @return (long) id
-     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PutMapping("/{Roomid}/{id}")
+    @PutMapping("/{roomId}/{reviewId}")
     public long updateReview(
-            @PathVariable("Univid") int univid,
-            @PathVariable("Roomid") int roomid,
-            @PathVariable("id") long id,
-            @RequestBody String json
-    ) throws JsonProcessingException {
-        return ReviewService.rewriteReview(univid, roomid, id, json);
+            @PathVariable("univId") int univId,
+            @PathVariable("roomId") int roomId,
+            @PathVariable("reviewId") long reviewId,
+            @RequestBody UpdateReviewRequest updateReviewRequest
+    ) {
+        return ReviewService.rewriteReview(univId, roomId, reviewId, updateReviewRequest);
     }
-
 
     /**
      * 리뷰 DELETE
      *
-     * @param id
+     * @param reviewId
      * @return (String) success
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("/{Roomid}/{id}")
+    @DeleteMapping("/{roomId}/{reviewId}")
     public String deleteReview(
-            @PathVariable("id") long id
+            @PathVariable("roomId") long roomId,
+            @PathVariable("reviewId") long reviewId
     ) {
-        ReviewService.deleteComment(id);
+        ReviewService.deleteComment(reviewId);
         return "success";
     }
-
 }

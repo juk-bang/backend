@@ -1,14 +1,11 @@
 package com.jukbang.api.user.service;
 
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jukbang.api.room.dto.FavoriteDto;
-import com.jukbang.api.user.entity.Favorite;
 import com.jukbang.api.room.entity.Room;
-import com.jukbang.api.user.repository.FavoriteRepository;
 import com.jukbang.api.room.repository.RoomRepository;
-import lombok.AllArgsConstructor;
+import com.jukbang.api.user.entity.Favorite;
+import com.jukbang.api.user.repository.FavoriteRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,19 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * import org.springframework.web.bind.annotation.PathVariable;
- * import org.hibernate.criterion.Example;
- * import java.util.Optional;
- **/
-
-
-@AllArgsConstructor
 @Service
-
+@RequiredArgsConstructor
 public class FavoriteService {
-    private FavoriteRepository favoriteRepository;
-    private RoomRepository roomRepository;
+    private final FavoriteRepository favoriteRepository;
+    private final RoomRepository roomRepository;
 
     /**
      * 회원의 찜 목록 출력
@@ -52,13 +41,11 @@ public class FavoriteService {
      * 입력해야될 데이터 : writter (작성자), body(내용)
      */
     @Transactional
-    public long SaveFavorite(int univid, int roomid, String userid) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public long SaveFavorite(int univid, int roomid, String userid) {
         FavoriteDto favoriteDto = new FavoriteDto();
         favoriteDto.setUnivid(univid);
         favoriteDto.setRoomid(roomid);
         favoriteDto.setUserId(userid);
-
 
         FavoriteDto favoriteDTO = FavoriteDto.builder()
                 .id(favoriteDto.getId())
@@ -69,7 +56,6 @@ public class FavoriteService {
 
         return favoriteRepository.save(favoriteDto.toEntity()).getId(); // 잘모르겠음
     }
-
 
     /**
      * 찜 삭제하기

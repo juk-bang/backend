@@ -13,7 +13,7 @@ import lombok.*;
 public class UserDto {
     private long id;
     private String userId;
-    private int univid;
+    private int univId;
 
     /**
      * class -> Entity
@@ -23,7 +23,7 @@ public class UserDto {
         User build = User.builder()
                 .id(id)
                 .userId(userId)
-                .univid(univid)
+                .univId(univId)
                 .build();
         return build;
     }
@@ -33,9 +33,9 @@ public class UserDto {
      */
 
     @Builder
-    public UserDto(long id, String userId, int univid) {
+    public UserDto(long id, String userId, int univId) {
         this.id = id;
         this.userId = userId;
-        this.univid = univid;
+        this.univId = univId;
     }
 }
