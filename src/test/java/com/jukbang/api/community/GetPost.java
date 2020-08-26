@@ -27,9 +27,9 @@ public class GetPost extends BaseControllerTest {
                 .body("body body")
                 .build();
 
-        communityService.SavePost(1,createPostRequest);
+        Long postId = communityService.SavePost(1,createPostRequest);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{univId}/{postId}",1,1))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{univId}/{postId}",1,postId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("GetPost"))

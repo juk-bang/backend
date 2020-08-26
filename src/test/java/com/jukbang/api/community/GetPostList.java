@@ -31,7 +31,7 @@ public class GetPostList extends BaseControllerTest {
 
         communityService.SavePost(1,createPostRequest);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("community/{univId}",1))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{univId}",1))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("GetPostList"))

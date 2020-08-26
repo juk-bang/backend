@@ -19,7 +19,7 @@ public class getFavoriteList extends BaseControllerTest {
     @Test
     @DisplayName("내 찜 목록 조회하기(성공)")
     void getFavoriteListSuccess() throws Exception {
-        userFactory.generateUser(1);
+        userFactory.signUpUser(1);
         Long roomId = roomFactory.generateRoom("Seller1");
         favoriteService.SaveFavorite(1, Math.toIntExact(roomId),"TestUser1");
         mockMvc.perform(RestDocumentationRequestBuilders.get("/userinfo/favorites/{userId}", "TestUser1"))

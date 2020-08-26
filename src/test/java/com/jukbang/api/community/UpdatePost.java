@@ -30,16 +30,17 @@ public class UpdatePost  extends BaseControllerTest {
                 .body("body body")
                 .build();
 
-        communityService.SavePost(1,createPostRequest);
+        Long postId = communityService.SavePost(1,createPostRequest);
 
         UpdatePostRequest updatePostRequest = UpdatePostRequest.builder()
                 .id(1)
                 .title("post2")
                 .writer("writer1")
                 .body("body * 2")
+                .univid(1)
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/{univId}/{postId}",1,1)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/community/{univId}/{postId}",1,postId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updatePostRequest))
         )

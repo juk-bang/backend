@@ -1,10 +1,8 @@
 package com.jukbang.api.user.profile;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.user.service.ReportService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.test.context.support.WithMockUser;
 
@@ -18,9 +16,9 @@ public class deleteUserTest extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("유저 삭제하기하기(성공)")
     void deleteUserSuccess() throws Exception {
-        userFactory.generateUser(1);
+        Long id = userFactory.generateUser(1);
 
-        mockMvc.perform(RestDocumentationRequestBuilders.delete("/userinfo/{id}", "1"))
+        mockMvc.perform(RestDocumentationRequestBuilders.delete("/userinfo/{id}", id))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("deleteUser"))

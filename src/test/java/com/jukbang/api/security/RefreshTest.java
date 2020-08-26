@@ -20,7 +20,7 @@ class RefreshTest extends BaseControllerTest {
     @Test
     @DisplayName("토큰 재발급 받기(성공)")
     void refreshTokenSuccess() throws Exception {
-        SignInResponse signInResponse = userFactory.generateUser(1);
+        SignInResponse signInResponse = userFactory.signUpUser(1);
         RefreshRequest refreshRequest = RefreshRequest.builder()
                 .refreshToken(signInResponse.getRefreshToken())
                 .build();
@@ -36,7 +36,7 @@ class RefreshTest extends BaseControllerTest {
     @Disabled       // Admin Api 개발 이후 활성화
     @DisplayName("토큰 재발급 받기(계정이 제제당했을 때)")
     void refreshTokenFailBecauseDifferentUserToken() throws Exception {
-        SignInResponse signInResponse1 = userFactory.generateUser(1);
+        SignInResponse signInResponse1 = userFactory.signUpUser(1);
         RefreshRequest refreshRequest = RefreshRequest.builder()
                 .refreshToken(signInResponse1.getRefreshToken())
                 .build();
@@ -53,7 +53,7 @@ class RefreshTest extends BaseControllerTest {
     @Test
     @DisplayName("토큰 재발급 받기(서명값이 다를 때 실패)")
     void refreshTokenFailBecauseSignature() throws Exception {
-        SignInResponse signInResponse = userFactory.generateUser(1);
+        SignInResponse signInResponse = userFactory.signUpUser(1);
         RefreshRequest refreshRequest = RefreshRequest.builder()
                 .refreshToken(signInResponse.getRefreshToken() + "e")
                 .build();
@@ -70,7 +70,7 @@ class RefreshTest extends BaseControllerTest {
     @Test
     @DisplayName("토큰 재발급 받기(토큰이 깨졌을 때 실패)")
     void refreshTokenFailBecauseMalFormed() throws Exception {
-        SignInResponse signInResponse = userFactory.generateUser(1);
+        SignInResponse signInResponse = userFactory.signUpUser(1);
         RefreshRequest refreshRequest = RefreshRequest.builder()
                 .refreshToken("2" + signInResponse.getRefreshToken())
                 .build();

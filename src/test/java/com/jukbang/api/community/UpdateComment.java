@@ -2,6 +2,7 @@ package com.jukbang.api.community;
 
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.community.request.CreateCommentRequest;
+import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.request.UpdateCommentRequest;
 import com.jukbang.api.community.service.CommentsService;
 import com.jukbang.api.community.service.CommunityService;
@@ -20,18 +21,28 @@ public class UpdateComment extends BaseControllerTest {
 
     @Autowired
     private CommentsService commentsService;
+    @Autowired
+    private CommunityService communityService;
 
     @Test
     @WithMockUser("TestUser1")
     @DisplayName("게시글 수정하기 (성공)")
     void UpdateCommentSuccess() throws Exception {
+        CreatePostRequest createPostRequest = CreatePostRequest.builder()
+                .writer("TestUser1")
+                .title("게시글 제목")
+                .body("게시글 본문")
+                .id(1)
+                .build();
+
+        Long postId = communityService.SavePost(1,createPostRequest);
         CreateCommentRequest createCommentRequest = CreateCommentRequest.builder()
                 .id(1)
                 .writer("writer")
                 .body("body")
                 .build();
 
-        commentsService.SaveComment(1,1,createCommentRequest);
+        Long commentId= commentsService.SaveComment(1, Math.toIntExact(postId),createCommentRequest);
 
         UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .id(1)
@@ -39,7 +50,7 @@ public class UpdateComment extends BaseControllerTest {
                 .body("body body")
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/comments/{univId}/{postId}/{id}",1,1,1)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/community/comments/{univId}/{postId}/{id}",1,postId,commentId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest))
         )

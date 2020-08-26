@@ -1,11 +1,9 @@
 package com.jukbang.api.community.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jukbang.api.community.dto.CommunityDto;
 import com.jukbang.api.community.entity.Community;
 import com.jukbang.api.community.repository.CommunityRepository;
 import com.jukbang.api.community.request.CreatePostRequest;
+import com.jukbang.api.community.request.UpdatePostRequest;
 import com.jukbang.api.community.response.GetPostResponse;
 import com.jukbang.api.room.dto.BoardlistDto;
 import lombok.RequiredArgsConstructor;
@@ -106,7 +104,7 @@ public class CommunityService {
         Optional<Community> communityWrapper = communityRepository.findById(Postid);
         Community community = communityWrapper.get();
 
-        community.setViews(community.getViews()+1);
+        community.setViews(community.getViews() + 1);
         communityRepository.save(community);
 
         return GetPostResponse.builder()
@@ -124,13 +122,17 @@ public class CommunityService {
     }
 
     @Transactional
-    public Long rewritePost(int univId, Long postId, String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        CommunityDto communityDto;
-        communityDto = objectMapper.readValue(json, CommunityDto.class);
-        communityDto.setUnivId(univId);
-        communityDto.setId(postId);
-        return communityRepository.save(communityDto.toEntity()).getId();
+    public Long rewritePost(int univId, Long postId, UpdatePostRequest updatePostRequest) {
+        return communityRepository.save(
+                new Community(
+                        postId,
+                        updatePostRequest.getTitle(),
+                        updatePostRequest.getWriter(),
+                        updatePostRequest.getBody(),
+                        univId,
+                        0,
+                        0
+                )).getId();
     }
 
     @Transactional

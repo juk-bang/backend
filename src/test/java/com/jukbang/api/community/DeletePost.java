@@ -29,9 +29,9 @@ public class DeletePost extends BaseControllerTest {
                 .body("body")
                 .build();
 
-        communityService.SavePost(1,createPostRequest);
+        Long postId= communityService.SavePost(1,createPostRequest);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/community/{univId}/{postid}",1,1))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/community/{univId}/{postid}",1,postId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("DeletePost"))
