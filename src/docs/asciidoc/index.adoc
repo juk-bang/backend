@@ -7,7 +7,7 @@ Always0ne;
 :toclevels: 4
 :sectlinks:
 :operation-curl-request-title: Example request
-:operation-http-response-title: Example response
+:operation-response-body-title: Example response
 
 [[overview]]
 = 개요
@@ -98,27 +98,104 @@ operation::0006[snippets='response-body']
 [[signin]]
 ==== 인증하기
 
-operation::signin[snippets='http-request,http-response']
+operation::signin[snippets='http-request,response-body']
 
 [[signup]]
 ==== 회원가입하기
 
-operation::signup[snippets='http-request,http-response']
+operation::signup[snippets='http-request,response-body']
 
 [[checkid]]
 ==== 아이디 중복 확인하기
 
-operation::idcheck[snippets='http-request,http-response']
+operation::idcheck[snippets='http-request,response-body']
 
 [[refreshToken]]
 ==== 토큰 재발급 받기
 
-operation::refresh[snippets='http-request,http-response']
+operation::refresh[snippets='http-request,response-body']
 
 [[AdminApi]]
 === 관리자 API
 
 [[suouldPermitRooms]]
-=== 승인받아야 할 방 리스트 조회
+==== 승인받아야 할 방 리스트 조회
 
-operation::shouldPermitRooms[snippets='http-request,http-response']
+operation::shouldPermitRooms[snippets='http-request,response-body']
+
+[[permitRoom]]
+==== 방 승인하기
+
+operation::permitRoom[snippets='http-request,response-body']
+
+[[rejectRoom]]
+==== 방 거절하기
+
+operation::rejectRoom[snippets='http-request,response-body']
+
+[[UserApi]]
+=== 사용자 API
+
+[[Favorite]]
+==== 찜 서비스
+
+[[getFavoriteList]]
+===== 사용자의 찜 목록 가져오기
+
+operation::getFavoriteList[snippets='http-request,response-body']
+
+[[crateFavorite]]
+===== 방 찜하기
+
+operation::createFavorite[snippets='http-request,response-body']
+
+[[deleteFavorite]]
+===== 찜 취소하기
+
+operation::deleteFavorite[snippets='http-request,response-body']
+
+[[Report]]
+==== 신고 서비스
+
+[[createReport]]
+===== 신고하기
+
+operation::createReport[snippets='http-request,response-body']
+
+[[getReports]]
+===== 신고 리스트 조회하기
+
+operation::getReports[snippets='http-request,response-body']
+
+[[getReport]]
+===== 신고 조회하기
+
+operation::getReport[snippets='http-request,response-body']
+
+[[deleteReport]]
+===== 신고 삭제하기
+
+operation::deleteReport[snippets='http-request,response-body']
+
+[[Profile]]
+==== 프로필 서비스
+
+[[getUser]]
+===== 유저 정보 조회하기
+
+operation::getUser[snippets='http-request,response-body']
+
+[[updateUser]]
+===== 유저 정보 수정하기
+
+operation::updateUser[snippets='http-request,response-body']
+
+[[deleteUser]]
+===== 유저 삭제하기
+
+operation::deleteUser[snippets='http-request,response-body']
+
+[[getMyPosts]]
+===== 내가 쓴 게시글들 보기
+
+operation::getMyPosts[snippets='http-request,response-body']

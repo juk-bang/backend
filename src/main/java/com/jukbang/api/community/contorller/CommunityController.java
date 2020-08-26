@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "community/{univId}")
+@RequestMapping(value = "/community/{univId}")
 public class CommunityController {
 
     private final CommunityService communityService;
@@ -43,7 +43,7 @@ public class CommunityController {
             @PathVariable("univId") int univId,
             @PathVariable("postId") Long postId
     ) {
-        return new GetPostResponse();
+        return communityService.getPost(univId,postId);
     }
 
 

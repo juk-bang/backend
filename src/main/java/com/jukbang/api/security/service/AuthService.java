@@ -61,12 +61,13 @@ public class AuthService {
      * @return accessToken
      */
     @Transactional
-    public SignInResponse signUp(String id, String password) {
+    public SignInResponse signUp(String id, String password, int univId) {
         User user = this.userRepository.save(User.builder()
                 .userId(id)
                 .password(passwordEncoder.encode(password))
                 .roles(Collections.singletonList("ROLE_USER"))
                 .refreshToken(jwtTokenProvider.createRefreshToken(id, Collections.singletonList("ROLE_USER")))
+                .univId(univId)
                 .build());
 
         return SignInResponse.builder()

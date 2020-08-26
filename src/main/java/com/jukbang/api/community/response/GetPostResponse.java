@@ -1,7 +1,12 @@
 package com.jukbang.api.community.response;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 import java.time.LocalDateTime;
 
+@Builder
+@AllArgsConstructor
 public class GetPostResponse {
     private long id;
     private long previd;

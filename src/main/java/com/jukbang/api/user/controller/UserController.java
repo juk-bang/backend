@@ -33,20 +33,6 @@ public class UserController {
     }
 
     /**
-     * 회원 정보 입력 CREATE
-     *
-     * @param createUserRequest
-     * @return
-     */
-    @CrossOrigin(origins = "*")
-    @PostMapping("/input")
-    public long createUser(
-            @RequestBody CreateUserRequest createUserRequest
-    ) {
-        return userService.SaveUser(createUserRequest);
-    }
-
-    /**
      * 유저 정보 수정 UPDATE
      *
      * @param id

@@ -16,7 +16,8 @@ public class UserFactory {
     public SignInResponse generateUser(int i) {
          return authService.signUp(
                  "TestUser" + i,
-                "password"
+                "password",
+                 1
         );
     }
 }

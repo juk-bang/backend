@@ -451,32 +451,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#E0001">Error0001</a>
 <ul class="sectlevel4">
-<li><a href="#E0001_response_body">Response body</a></li>
+<li><a href="#E0001_response_body">Example response</a></li>
 </ul>
 </li>
 <li><a href="#E0002">Error0002</a>
 <ul class="sectlevel4">
-<li><a href="#E0002_response_body">Response body</a></li>
+<li><a href="#E0002_response_body">Example response</a></li>
 </ul>
 </li>
 <li><a href="#E0003">Error0003</a>
 <ul class="sectlevel4">
-<li><a href="#E0003_response_body">Response body</a></li>
+<li><a href="#E0003_response_body">Example response</a></li>
 </ul>
 </li>
 <li><a href="#E0004">Error0004</a>
 <ul class="sectlevel4">
-<li><a href="#E0004_response_body">Response body</a></li>
+<li><a href="#E0004_response_body">Example response</a></li>
 </ul>
 </li>
 <li><a href="#E0005">Error0005</a>
 <ul class="sectlevel4">
-<li><a href="#E0005_response_body">Response body</a></li>
+<li><a href="#E0005_response_body">Example response</a></li>
 </ul>
 </li>
 <li><a href="#E0006">Error0006</a>
 <ul class="sectlevel4">
-<li><a href="#E0006_response_body">Response body</a></li>
+<li><a href="#E0006_response_body">Example response</a></li>
 </ul>
 </li>
 </ul>
@@ -490,34 +490,76 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#signin">인증하기</a>
 <ul class="sectlevel4">
 <li><a href="#signin_http_request">HTTP request</a></li>
-<li><a href="#signin_http_response">Example response</a></li>
+<li><a href="#signin_response_body">Example response</a></li>
 </ul>
 </li>
 <li><a href="#signup">회원가입하기</a>
 <ul class="sectlevel4">
 <li><a href="#signup_http_request">HTTP request</a></li>
-<li><a href="#signup_http_response">Example response</a></li>
+<li><a href="#signup_response_body">Example response</a></li>
 </ul>
 </li>
 <li><a href="#checkid">아이디 중복 확인하기</a>
 <ul class="sectlevel4">
 <li><a href="#checkid_http_request">HTTP request</a></li>
-<li><a href="#checkid_http_response">Example response</a></li>
+<li><a href="#checkid_response_body">Example response</a></li>
 </ul>
 </li>
 <li><a href="#refreshToken">토큰 재발급 받기</a>
 <ul class="sectlevel4">
 <li><a href="#refreshToken_http_request">HTTP request</a></li>
-<li><a href="#refreshToken_http_response">Example response</a></li>
+<li><a href="#refreshToken_response_body">Example response</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#AdminApi">관리자 API</a></li>
-<li><a href="#suouldPermitRooms">승인받아야 할 방 리스트 조회</a>
+<li><a href="#AdminApi">관리자 API</a>
 <ul class="sectlevel3">
+<li><a href="#suouldPermitRooms">승인받아야 할 방 리스트 조회</a>
+<ul class="sectlevel4">
 <li><a href="#suouldPermitRooms_http_request">HTTP request</a></li>
-<li><a href="#suouldPermitRooms_http_response">Example response</a></li>
+<li><a href="#suouldPermitRooms_response_body">Example response</a></li>
+</ul>
+</li>
+<li><a href="#permitRoom">방 승인하기</a>
+<ul class="sectlevel4">
+<li><a href="#permitRoom_http_request">HTTP request</a></li>
+<li><a href="#permitRoom_response_body">Example response</a></li>
+</ul>
+</li>
+<li><a href="#rejectRoom">방 거절하기</a>
+<ul class="sectlevel4">
+<li><a href="#rejectRoom_http_request">HTTP request</a></li>
+<li><a href="#rejectRoom_response_body">Example response</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#UserApi">사용자 API</a>
+<ul class="sectlevel3">
+<li><a href="#Favorite">찜 서비스</a>
+<ul class="sectlevel4">
+<li><a href="#getFavoriteList">사용자의 찜 목록 가져오기</a></li>
+<li><a href="#crateFavorite">방 찜하기</a></li>
+<li><a href="#deleteFavorite">찜 취소하기</a></li>
+</ul>
+</li>
+<li><a href="#Report">신고 서비스</a>
+<ul class="sectlevel4">
+<li><a href="#createReport">신고하기</a></li>
+<li><a href="#getReports">신고 리스트 조회하기</a></li>
+<li><a href="#getReport">신고 조회하기</a></li>
+<li><a href="#deleteReport">신고 삭제하기</a></li>
+</ul>
+</li>
+<li><a href="#Profile">프로필 서비스</a>
+<ul class="sectlevel4">
+<li><a href="#getUser">유저 정보 조회하기</a></li>
+<li><a href="#updateUser">유저 정보 수정하기</a></li>
+<li><a href="#deleteUser">유저 삭제하기</a></li>
+<li><a href="#getMyPosts">내가 쓴 게시글들 보기</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -624,11 +666,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="E0001"><a class="link" href="#E0001">Error0001</a></h4>
 <div class="sect4">
-<h5 id="E0001_response_body"><a class="link" href="#E0001_response_body">Response body</a></h5>
+<h5 id="E0001_response_body"><a class="link" href="#E0001_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T12:52:21.0711784",
+  "timestamp" : "2020-08-26T15:22:25.3971245",
   "status" : 202,
   "error" : "0001",
   "message" : "ID: TestUser1 이미 사용중인 아이디입니다."
@@ -640,11 +682,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="E0002"><a class="link" href="#E0002">Error0002</a></h4>
 <div class="sect4">
-<h5 id="E0002_response_body"><a class="link" href="#E0002_response_body">Response body</a></h5>
+<h5 id="E0002_response_body"><a class="link" href="#E0002_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T12:52:19.185502",
+  "timestamp" : "2020-08-26T15:22:23.2672855",
   "status" : 403,
   "error" : "0002",
   "message" : "ID: TestUser1 회원가입이 되어있지 않거나 잠긴 계정입니다."
@@ -656,11 +698,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="E0003"><a class="link" href="#E0003">Error0003</a></h4>
 <div class="sect4">
-<h5 id="E0003_response_body"><a class="link" href="#E0003_response_body">Response body</a></h5>
+<h5 id="E0003_response_body"><a class="link" href="#E0003_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T12:52:17.0404216",
+  "timestamp" : "2020-08-26T15:22:20.9204858",
   "status" : 403,
   "error" : "0003",
   "message" : "유효하지 않은 토큰입니다."
@@ -672,11 +714,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="E0004"><a class="link" href="#E0004">Error0004</a></h4>
 <div class="sect4">
-<h5 id="E0004_response_body"><a class="link" href="#E0004_response_body">Response body</a></h5>
+<h5 id="E0004_response_body"><a class="link" href="#E0004_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T12:52:17.1491309",
+  "timestamp" : "2020-08-26T15:22:21.0426714",
   "status" : 403,
   "error" : "0004",
   "message" : "손상된 토큰입니다."
@@ -688,11 +730,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="E0005"><a class="link" href="#E0005">Error0005</a></h4>
 <div class="sect4">
-<h5 id="E0005_response_body"><a class="link" href="#E0005_response_body">Response body</a></h5>
+<h5 id="E0005_response_body"><a class="link" href="#E0005_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T12:52:14.4403228",
+  "timestamp" : "2020-08-26T15:22:18.5059317",
   "status" : 403,
   "error" : "0005",
   "message" : "잘못된 인증입니다."
@@ -704,11 +746,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect3">
 <h4 id="E0006"><a class="link" href="#E0006">Error0006</a></h4>
 <div class="sect4">
-<h5 id="E0006_response_body"><a class="link" href="#E0006_response_body">Response body</a></h5>
+<h5 id="E0006_response_body"><a class="link" href="#E0006_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T12:52:14.5889284",
+  "timestamp" : "2020-08-26T15:22:18.5946935",
   "status" : 403,
   "error" : "0006",
   "message" : "만료된 토큰입니다."
@@ -749,23 +791,12 @@ Host: jukbang.com
 </div>
 </div>
 <div class="sect4">
-<h5 id="signin_http_response"><a class="link" href="#signin_http_response">Example response</a></h5>
+<h5 id="signin_response_body"><a class="link" href="#signin_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
-Content-Type: application/hal+json;charset=UTF-8
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-Strict-Transport-Security: max-age=31536000 ; includeSubDomains
-X-Frame-Options: DENY
-Content-Length: 380
-
-{
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDEzOTM5LCJleHAiOjE1OTg0MTQ1Mzl9.t5EhD28bKbf8KoSM4SmlJa3lV1LjVxvNgvXCq-q0L7w",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDEzOTM5LCJleHAiOjE1OTkwMTg3Mzl9.YNEMj4AtwRCZv1RC6B-zZGO9W-q8PDDQrNxdxS_xGHg"
+<pre class="highlightjs highlight nowrap"><code>{
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDIyOTQzLCJleHAiOjE1OTg0MjM1NDN9.p9NbgNoH8ww85xpA6Dh_E66A_8PxyJUNns_IolRIHnA",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDIyOTQzLCJleHAiOjE1OTkwMjc3NDN9.BzwbPRaJbC37962O5fJ7Gf6KpERMVrQ8PaX14_Uhm_M"
 }</code></pre>
 </div>
 </div>
@@ -779,34 +810,24 @@ Content-Length: 380
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /auth/signup HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 54
+Content-Length: 71
 Host: jukbang.com
 
 {
   "id" : "TestUser1",
-  "password" : "Password"
+  "password" : "Password",
+  "univId" : 0
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="signup_http_response"><a class="link" href="#signup_http_response">Example response</a></h5>
+<h5 id="signup_response_body"><a class="link" href="#signup_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
-Content-Type: application/hal+json;charset=UTF-8
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-Strict-Transport-Security: max-age=31536000 ; includeSubDomains
-X-Frame-Options: DENY
-Content-Length: 380
-
-{
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDEzOTQwLCJleHAiOjE1OTg0MTQ1NDB9.ZwacST0OlcMfSsKb27_fzOKa1bhDSH71WNi1Mx5k35k",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDEzOTQwLCJleHAiOjE1OTkwMTg3NDB9.tmYeY0Uk9HBiMpfkmedWhhA0gkwhcXFTmAP3sJ_SZzI"
+<pre class="highlightjs highlight nowrap"><code>{
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDIyOTQ1LCJleHAiOjE1OTg0MjM1NDV9.HaxQVH-cF7zF2ZrcyPgYmmn1EWaFl-vRE4S8vcOnSlE",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDIyOTQ1LCJleHAiOjE1OTkwMjc3NDV9.oG_c5IjZ9f0ARHQtDUj1El2yeVHE2rc0Bjqe94m6ptc"
 }</code></pre>
 </div>
 </div>
@@ -824,21 +845,10 @@ Host: jukbang.com</code></pre>
 </div>
 </div>
 <div class="sect4">
-<h5 id="checkid_http_response"><a class="link" href="#checkid_http_response">Example response</a></h5>
+<h5 id="checkid_response_body"><a class="link" href="#checkid_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
-Content-Type: application/hal+json;charset=UTF-8
-Content-Length: 35
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-Strict-Transport-Security: max-age=31536000 ; includeSubDomains
-X-Frame-Options: DENY
-
-사용가능한 아이디입니다.</code></pre>
+<pre class="highlightjs highlight nowrap"><code>사용가능한 아이디입니다.</code></pre>
 </div>
 </div>
 </div>
@@ -855,28 +865,17 @@ Content-Length: 192
 Host: jukbang.com
 
 {
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDEzOTM2LCJleHAiOjE1OTkwMTg3MzZ9.VjtYN_aF_SgkiM5VQzbS9y15Qh4KCPiyb32BYeoikvE"
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDIyOTQwLCJleHAiOjE1OTkwMjc3NDB9.ir3KL-6QslxfPTu3VnlYZ2WAJsZ68h2OWo23AK_Xsqk"
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="refreshToken_http_response"><a class="link" href="#refreshToken_http_response">Example response</a></h5>
+<h5 id="refreshToken_response_body"><a class="link" href="#refreshToken_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
-Content-Type: application/hal+json;charset=UTF-8
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-Strict-Transport-Security: max-age=31536000 ; includeSubDomains
-X-Frame-Options: DENY
-Content-Length: 191
-
-{
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDEzOTM2LCJleHAiOjE1OTg0MTQ1MzZ9.ETcndMhFvKqFlv0TQhIUnvVecvy_cXfQZKUjMOKrc2g"
+<pre class="highlightjs highlight nowrap"><code>{
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDIyOTQwLCJleHAiOjE1OTg0MjM1NDB9.c2QMtG8TsgCjdLqgEhRwLT6wXm4eHoxZ3TXRPkj_bbQ"
 }</code></pre>
 </div>
 </div>
@@ -885,12 +884,10 @@ Content-Length: 191
 </div>
 <div class="sect2">
 <h3 id="AdminApi"><a class="link" href="#AdminApi">관리자 API</a></h3>
-
-</div>
-<div class="sect2">
-<h3 id="suouldPermitRooms"><a class="link" href="#suouldPermitRooms">승인받아야 할 방 리스트 조회</a></h3>
 <div class="sect3">
-<h4 id="suouldPermitRooms_http_request"><a class="link" href="#suouldPermitRooms_http_request">HTTP request</a></h4>
+<h4 id="suouldPermitRooms"><a class="link" href="#suouldPermitRooms">승인받아야 할 방 리스트 조회</a></h4>
+<div class="sect4">
+<h5 id="suouldPermitRooms_http_request"><a class="link" href="#suouldPermitRooms_http_request">HTTP request</a></h5>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /admin/permissionroom/1 HTTP/1.1
@@ -898,26 +895,12 @@ Host: jukbang.com</code></pre>
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="suouldPermitRooms_http_response"><a class="link" href="#suouldPermitRooms_http_response">Example response</a></h4>
+<div class="sect4">
+<h5 id="suouldPermitRooms_response_body"><a class="link" href="#suouldPermitRooms_response_body">Example response</a></h5>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
-Vary: Origin
-Vary: Access-Control-Request-Method
-Vary: Access-Control-Request-Headers
-Content-Type: application/json;charset=UTF-8
-X-Content-Type-Options: nosniff
-X-XSS-Protection: 1; mode=block
-Cache-Control: no-cache, no-store, max-age=0, must-revalidate
-Pragma: no-cache
-Expires: 0
-Strict-Transport-Security: max-age=31536000 ; includeSubDomains
-X-Frame-Options: DENY
-Content-Length: 283
-
-[ {
-  "id" : 1,
+<pre class="highlightjs highlight nowrap"><code>[ {
+  "id" : 3,
   "structure" : 1,
   "month" : 1.0,
   "adminExpenses" : 1.0,
@@ -935,12 +918,342 @@ Content-Length: 283
 </div>
 </div>
 </div>
+<div class="sect3">
+<h4 id="permitRoom"><a class="link" href="#permitRoom">방 승인하기</a></h4>
+<div class="sect4">
+<h5 id="permitRoom_http_request"><a class="link" href="#permitRoom_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /admin/permissionroom/1/1 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="permitRoom_response_body"><a class="link" href="#permitRoom_response_body">Example response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="rejectRoom"><a class="link" href="#rejectRoom">방 거절하기</a></h4>
+<div class="sect4">
+<h5 id="rejectRoom_http_request"><a class="link" href="#rejectRoom_http_request">HTTP request</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /admin/permissionroom/1/2 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="rejectRoom_response_body"><a class="link" href="#rejectRoom_response_body">Example response</a></h5>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="UserApi"><a class="link" href="#UserApi">사용자 API</a></h3>
+<div class="sect3">
+<h4 id="Favorite"><a class="link" href="#Favorite">찜 서비스</a></h4>
+<div class="sect4">
+<h5 id="getFavoriteList"><a class="link" href="#getFavoriteList">사용자의 찜 목록 가져오기</a></h5>
+<div class="sect5">
+<h6 id="getFavoriteList_http_request"><a class="link" href="#getFavoriteList_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /userinfo/favorites/TestUser1 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="getFavoriteList_response_body"><a class="link" href="#getFavoriteList_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>[ {
+  "id" : 3,
+  "structure" : 1,
+  "month" : 1.0,
+  "adminExpenses" : 1.0,
+  "deposit" : 1.0,
+  "floor" : 1.0,
+  "scale" : 1.0,
+  "distance" : 7396826.822260252,
+  "lat" : 123.0,
+  "lng" : 412.0,
+  "univid" : 1,
+  "grade" : 0.22642857142857142,
+  "permission" : 0
+} ]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="crateFavorite"><a class="link" href="#crateFavorite">방 찜하기</a></h5>
+<div class="sect5">
+<h6 id="crateFavorite_http_request"><a class="link" href="#crateFavorite_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /userinfo/favorites/1/1/TestUser1 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="crateFavorite_response_body"><a class="link" href="#crateFavorite_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>1</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="deleteFavorite"><a class="link" href="#deleteFavorite">찜 취소하기</a></h5>
+<div class="sect5">
+<h6 id="deleteFavorite_http_request"><a class="link" href="#deleteFavorite_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /userinfo/favorites/1/2/TestUser1 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="deleteFavorite_response_body"><a class="link" href="#deleteFavorite_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>success</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Report"><a class="link" href="#Report">신고 서비스</a></h4>
+<div class="sect4">
+<h5 id="createReport"><a class="link" href="#createReport">신고하기</a></h5>
+<div class="sect5">
+<h6 id="createReport_http_request"><a class="link" href="#createReport_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /report/1/4/TestUser1 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 163
+Host: jukbang.com
+
+{
+  "id" : 1,
+  "userid" : "TestUser1",
+  "body" : "응 너 신고",
+  "title" : "신고합니다.",
+  "univid" : 1,
+  "roomid" : 1,
+  "creatDate" : null
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="createReport_response_body"><a class="link" href="#createReport_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>1</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="getReports"><a class="link" href="#getReports">신고 리스트 조회하기</a></h5>
+<div class="sect5">
+<h6 id="getReports_http_request"><a class="link" href="#getReports_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /admin/report/1 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="getReports_response_body"><a class="link" href="#getReports_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>[ {
+  "id" : 3,
+  "roomId" : 1,
+  "writer" : "TestUser1",
+  "title" : "신고합니다.",
+  "modifiedDate" : "2020-08-26T15:22:26.2239126"
+} ]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="getReport"><a class="link" href="#getReport">신고 조회하기</a></h5>
+<div class="sect5">
+<h6 id="getReport_http_request"><a class="link" href="#getReport_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /admin/report/1/6/4 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="getReport_response_body"><a class="link" href="#getReport_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "writer" : "TestUser1",
+  "title" : "신고합니다.",
+  "body" : "응 너 신고",
+  "modifiedDate" : "2020-08-26T15:22:26.2797631"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="deleteReport"><a class="link" href="#deleteReport">신고 삭제하기</a></h5>
+<div class="sect5">
+<h6 id="deleteReport_http_request"><a class="link" href="#deleteReport_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /admin/report/1/5/2 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="deleteReport_response_body"><a class="link" href="#deleteReport_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="Profile"><a class="link" href="#Profile">프로필 서비스</a></h4>
+<div class="sect4">
+<h5 id="getUser"><a class="link" href="#getUser">유저 정보 조회하기</a></h5>
+<div class="sect5">
+<h6 id="getUser_http_request"><a class="link" href="#getUser_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /userinfo/TestUser1 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="getUser_response_body"><a class="link" href="#getUser_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>[ {
+  "id" : 10,
+  "userId" : "TestUser1",
+  "univId" : 1
+} ]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="updateUser"><a class="link" href="#updateUser">유저 정보 수정하기</a></h5>
+<div class="sect5">
+<h6 id="updateUser_http_request"><a class="link" href="#updateUser_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /userinfo/1 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 60
+Host: jukbang.com
+
+{
+  "id" : 1,
+  "userId" : "testuser2",
+  "univid" : 1
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="updateUser_response_body"><a class="link" href="#updateUser_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>success</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="deleteUser"><a class="link" href="#deleteUser">유저 삭제하기</a></h5>
+<div class="sect5">
+<h6 id="deleteUser_http_request"><a class="link" href="#deleteUser_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /userinfo/1 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="deleteUser_response_body"><a class="link" href="#deleteUser_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>success</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="getMyPosts"><a class="link" href="#getMyPosts">내가 쓴 게시글들 보기</a></h5>
+<div class="sect5">
+<h6 id="getMyPosts_http_request"><a class="link" href="#getMyPosts_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /userinfo/posts/TestUser1 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="getMyPosts_response_body"><a class="link" href="#getMyPosts_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>[ {
+  "id" : 1,
+  "title" : "게시글 제목",
+  "writer" : "TestUser1",
+  "univid" : 1,
+  "views" : 0,
+  "comments" : 0,
+  "modifiedDate" : "2020-08-26T15:22:25.8349532"
+} ]</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-26 12:51:33 +0900
+Last updated 2020-08-26 15:24:05 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">
