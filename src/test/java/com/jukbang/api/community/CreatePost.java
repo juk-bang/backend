@@ -37,7 +37,7 @@ public class CreatePost extends BaseControllerTest {
 
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("GetPostList"))
+                .andDo(document("createPost"))
         ;
     }
 }
