@@ -17,7 +17,7 @@ public class CommunityDto {
     private String title;
     private String writer;
     private String body;
-    private int univid;
+    private int univId;
     private int views;
     private int comments;
     private LocalDateTime modifiedDate;
@@ -28,7 +28,7 @@ public class CommunityDto {
                 .title(title)
                 .writer(writer)
                 .body(body)
-                .univid(univid)
+                .univId(univId)
                 .views(views)
                 .comments(comments)
                 .build();
@@ -55,14 +55,14 @@ public class CommunityDto {
     }
 
     @Builder
-    public CommunityDto(long id, long previd, long nextid, String title, String writer, String body, int univid, int views, int comments, LocalDateTime modifiedDate) {
+    public CommunityDto(long id, long previd, long nextid, String title, String writer, String body, int univId, int views, int comments, LocalDateTime modifiedDate) {
         this.id = id;
         this.previd = previd;
         this.nextid = nextid;
         this.title = title;
         this.writer = writer;
         this.body = body;
-        this.univid = univid;
+        this.univId = univId;
         this.views = views;
         this.comments = comments;
         this.modifiedDate = modifiedDate;

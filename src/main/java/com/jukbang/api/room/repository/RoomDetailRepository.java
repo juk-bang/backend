@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface RoomDetailRepository extends JpaRepository<RoomDetail, Long> {
 
-    List<RoomDetail> findAllBySellerid(Long sellerid);
+    List<RoomDetail> findAllBySellerId(Long sellerId);
 }

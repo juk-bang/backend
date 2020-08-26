@@ -1,59 +1,65 @@
-
 package com.jukbang.api.user.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jukbang.api.room.entity.Room;
 import com.jukbang.api.user.service.FavoriteService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * import com.example.demo.repository.CommentsRepository;
- * import org.springframework.ui.Model;
- **/
-
-
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FavoriteController {
 
-
-    private FavoriteService favoriteService;
-
+    private final FavoriteService favoriteService;
 
     /**
-     * 찜 조회
+     * favorite list 조회 GET
+     *
+     * @param userId
+     * @return (List) favoriteList
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("userinfo/favorites/{userid}")
-    public List Post(@PathVariable("userid") String userid) {
-        List<Room> postdata = favoriteService.getFavoriteList(userid);
-        return postdata;
+    @GetMapping("/userinfo/favorites/{userId}")
+    public List getFavoriteList(
+            @PathVariable("userId") String userId
+    ) {
+        return favoriteService.getFavoriteList(userId);
     }
 
-
     /**
-     * 회원의 찜 목록 추가
+     * 찜 목록 추가 CREATE
+     *
+     * @param univId
+     * @param roomId
+     * @param userId
+     * @return (long) id
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("userinfo/favorites/{univid}/{roomid}/{userid}")
-    public long write(@PathVariable("univid") int univid, @PathVariable("roomid") int roomid, @PathVariable("userid") String userid) throws JsonProcessingException {
-        return favoriteService.SaveFavorite(univid, roomid, userid);
-
+    @PostMapping("userinfo/favorites/{univId}/{roomId}/{userId}")
+    public long createFavorite(
+            @PathVariable("univId") int univId,
+            @PathVariable("roomId") int roomId,
+            @PathVariable("userId") String userId
+    ) {
+        return favoriteService.SaveFavorite(univId, roomId, userId);
     }
 
-
     /**
-     * 찜 삭제 기능
-     * 찜의 univid, roomid에 접근하여 삭제
+     * 찜 삭제 DELETE
+     *
+     * @param univId
+     * @param roomId
+     * @param userId
+     * @return (String) success
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("userinfo/favorites/{univid}/{roomid}/{userid}")
-    public String delete(@PathVariable("univid") int univid, @PathVariable("roomid") int roomid, @PathVariable("userid") String userid) {
-        favoriteService.DeleteFavorite(univid, roomid, userid);
+    @DeleteMapping("userinfo/favorites/{univId}/{roomId}/{userId}")
+    public String deleteFavorite(
+            @PathVariable("univId") int univId,
+            @PathVariable("roomId") int roomId,
+            @PathVariable("userId") String userId
+    ) {
+        favoriteService.DeleteFavorite(univId, roomId, userId);
         return "success";
     }
-
 }

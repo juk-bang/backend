@@ -20,7 +20,7 @@ public class RoomDetail {
     @Column(nullable = false)
     private int pictureCount;
     @Column(length = 100, nullable = false)
-    private String sellerid;
+    private String sellerId;
     @Column(length = 100, nullable = false)
     private String address;
     @Column(nullable = false)
@@ -47,10 +47,10 @@ public class RoomDetail {
     private String description;
 
     @Builder
-    public RoomDetail(long id, int pictureCount, String sellerid, String address, boolean elevator, boolean park, boolean cctv, boolean autoDoor, boolean washingMachine, boolean gasrange, boolean refrigerator, boolean airconditioner, boolean busStation, boolean subwayStation, String description) {
+    public RoomDetail(long id, int pictureCount, String sellerId, String address, boolean elevator, boolean park, boolean cctv, boolean autoDoor, boolean washingMachine, boolean gasrange, boolean refrigerator, boolean airconditioner, boolean busStation, boolean subwayStation, String description) {
         this.id = id;
         this.pictureCount = pictureCount;
-        this.sellerid = sellerid;
+        this.sellerId = sellerId;
         this.address = address;
         this.elevator = elevator;
         this.park = park;

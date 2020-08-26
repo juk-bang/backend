@@ -46,13 +46,13 @@ public class Review extends Time {
      * 대학 번호
      */
     @Column(nullable = false)
-    private int univid;
+    private int univId;
 
     /**
      * 방 정보 번호
      */
     @Column(nullable = false)
-    private int roomid;
+    private int roomId;
 
     /**
      * 리뷰 평점
@@ -62,12 +62,12 @@ public class Review extends Time {
 
 
     @Builder
-    public Review(long id, String writer, String body, int univid, int roomid, int score, String title) {
+    public Review(long id, String writer, String body, int univId, int roomId, int score, String title) {
         this.id = id;
         this.writer = writer;
         this.body = body;
-        this.univid = univid;
-        this.roomid = roomid;
+        this.univId = univId;
+        this.roomId = roomId;
         this.score = score;
         this.title = title;
 

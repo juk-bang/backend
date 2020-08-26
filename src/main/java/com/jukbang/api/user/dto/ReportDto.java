@@ -17,8 +17,8 @@ public class ReportDto {
     private String userid;
     private String body;
     private String title;
-    private int univid;
-    private int roomid;
+    private int univId;
+    private int roomId;
     private LocalDateTime creatDate;
 
     /**
@@ -28,11 +28,11 @@ public class ReportDto {
     public Report toEntity() {
         Report build = Report.builder()
                 .id(id)
-                .userid(userid)
+                .userId(userid)
                 .body(body)
                 .title(title)
-                .univid(univid)
-                .roomid(roomid)
+                .univId(univId)
+                .roomId(roomId)
                 .build();
         return build;
     }
@@ -42,13 +42,13 @@ public class ReportDto {
      */
 
     @Builder
-    public ReportDto(long id, String userid, String body, String title, int univid, int roomid, LocalDateTime creatDate) {
+    public ReportDto(long id, String userid, String body, String title, int univId, int roomId, LocalDateTime creatDate) {
         this.id = id;
         this.userid = userid;
         this.body = body;
         this.title = title;
-        this.univid = univid;
-        this.roomid = roomid;
+        this.univId = univId;
+        this.roomId = roomId;
         this.creatDate = creatDate;
     }
 }

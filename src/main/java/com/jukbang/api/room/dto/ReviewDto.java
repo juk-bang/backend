@@ -31,8 +31,8 @@ public class ReviewDto {
                 .id(id)
                 .writer(writer)
                 .body(body)
-                .univid(univid)
-                .roomid(roomid)
+                .univId(univid)
+                .roomId(roomid)
                 .score(score)
                 .title(title)
                 .build();

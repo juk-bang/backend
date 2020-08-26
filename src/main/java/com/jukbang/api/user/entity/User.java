@@ -35,7 +35,7 @@ public class User extends Time {
      * 대학 번호
      */
     @Column(nullable = false)
-    private int univid;
+    private int univId;
 
     /**
      * 사용자 권한

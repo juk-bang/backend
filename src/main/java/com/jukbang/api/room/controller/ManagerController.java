@@ -1,42 +1,83 @@
 package com.jukbang.api.room.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jukbang.api.room.entity.Room;
+import com.jukbang.api.room.request.CreateRoomRequest;
+import com.jukbang.api.room.request.UpdateRoomRequest;
 import com.jukbang.api.room.service.RoomService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
+@RequestMapping("/manager/manageroom/{sellerId}")
 public class ManagerController {
-    private RoomService roomService;
 
+    private final RoomService roomService;
+
+    /**
+     * 판매자 방 list GET
+     *
+     * @param sellerId
+     * @return (List) SellerRoomList
+     */
     @CrossOrigin(origins = "*")
-    @GetMapping("manager/manageroom/{Sellerid}")
-    public List<Room> write(@PathVariable("Sellerid") long Sellerid) throws JsonProcessingException {
-        return roomService.SellerRoomlist(Sellerid);
-
+    @GetMapping("")
+    public List<Room> getSellerRoomList(
+            @PathVariable("sellerId") long sellerId
+    ) {
+        return roomService.SellerRoomlist(sellerId);
     }
 
+    /**
+     * 판매자 방 추가하기
+     *
+     * @param sellerId
+     * @param createRoomRequest
+     * @return (Long) id
+     */
     @CrossOrigin(origins = "*")
-    @PostMapping("manager/manageroom/{Sellerid}")
-    public Long write(@PathVariable("Sellerid") String Sellerid, @RequestBody String json) throws JsonProcessingException {
-        return roomService.SaveRoom(Sellerid, json);
-
+    @PostMapping("")
+    public Long createSellerRoom(
+            @PathVariable("sellerId") String sellerId,
+            @RequestBody CreateRoomRequest createRoomRequest
+    ) {
+        return roomService.createRoom(sellerId, createRoomRequest);
     }
 
+    /**
+     * 판매자 방 수정 UPDATE
+     *
+     * @param sellerId
+     * @param roomId
+     * @param updateRoomRequest
+     * @return (Long) id
+     */
     @CrossOrigin(origins = "*")
-    @PutMapping("manager/manageroom/{Sellerid}/{Roomid}")
-    public Long update(@PathVariable("Sellerid") String Sellerid, @PathVariable("Roomid") Long Roomid, @RequestBody String json) throws JsonProcessingException {
-        return roomService.RewriteRoom(Sellerid, Roomid, json);
+    @PutMapping("/{roomId}")
+    public Long updateRoom(
+            @PathVariable("sellerId") String sellerId,
+            @PathVariable("roomId") Long roomId,
+            @RequestBody UpdateRoomRequest updateRoomRequest
+    ) {
+        return roomService.updateRoom(sellerId, roomId, updateRoomRequest);
     }
 
+    /**
+     * 판매자 방 삭제 DELETE
+     *
+     * @param sellerId
+     * @param roomId
+     * @return (String) success
+     */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("manager/manageroom/{Sellerid}/{Roomid}")
-    public String delete(@PathVariable("Sellerid") int Sellerid, @PathVariable("Roomid") Long Roomid) {
-        roomService.DeleteRoom(Roomid);
+    @DeleteMapping("/{roomId}")
+    public String deleteRoom(
+            @PathVariable("sellerId") int sellerId,
+            @PathVariable("roomId") Long roomId
+    ) {
+        roomService.deleteRoom(roomId);
         return "success";
     }
 }

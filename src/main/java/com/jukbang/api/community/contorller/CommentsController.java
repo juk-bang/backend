@@ -1,83 +1,93 @@
-
 package com.jukbang.api.community.contorller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jukbang.api.community.dto.CommentsDto;
-import lombok.AllArgsConstructor;
+import com.jukbang.api.community.request.CreateCommentRequest;
+import com.jukbang.api.community.request.UpdateCommentRequest;
+import com.jukbang.api.community.service.CommentsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * import com.example.demo.repository.CommentsRepository;
- * import org.springframework.ui.Model;
- **/
-
-
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
+@RequestMapping("/community/comments/{univId}")
 public class CommentsController {
 
-
-    private com.jukbang.api.community.service.CommentsService CommentsService;
-
+    private final CommentsService commentsService;
 
     /**
-     * 한 게시글에 여러 댓글을 한번에 표현
-     * <p>
-     * ex)
-     * 게시글 1)
-     * 댓글 1
-     * 댓글 2
-     * ...
-     * <p>
-     * <p>
-     * list 에 표시되야할 댓글 정보 : writter (작성자), body(내용)
-     * <p>
-     * 19.12.27 : univid별, postid별 나누어서 데이터 호출
-     * 19.12.28 : date 호출 추가, delete에서 univid, postid 받아오기 기능 삭제
+     * 게시글 별 전체 댓글 리스트 GET
+     *
+     * @param univId
+     * @param postId
+     * @return
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("community/comments/{Univid}/{Postid}")
-    public List Post(@PathVariable("Univid") int Univid, @PathVariable("Postid") int Postid) {
-        List<CommentsDto> postdata = CommentsService.getCommentsList(Univid, Postid);
-        return postdata;
+    @GetMapping("/{postId}")
+    public List getCommentsList(
+            @PathVariable("univId") int univId,
+            @PathVariable("postId") int postId
+    ) {
+        List<CommentsDto> commentsList = commentsService.getCommentsList(univId, postId);
+        return commentsList;
     }
 
-
     /**
-     * 댓글 쓰기 기능
+     * 댓글 CREATE
+     *
+     * @param univId
+     * @param postId
+     * @param createCommentRequest
+     * @return (long) id
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("community/comments/{Univid}/{Postid}")
-    public long write(@PathVariable("Univid") int Univid, @PathVariable("Postid") int Postid, @RequestBody String json) throws JsonProcessingException {
-        return CommentsService.SaveComment(Univid, Postid, json);
+    @PostMapping("/{postId}")
+    public long createComment(
+            @PathVariable("univId") int univId,
+            @PathVariable("postId") int postId,
+            @RequestBody CreateCommentRequest createCommentRequest
+    ) {
+        return commentsService.SaveComment(univId, postId, createCommentRequest);
 
     }
 
-
     /**
-     * 댓글 수정 기능
-     * 댓글의 고유번호 (id) 에 접근하여 수정
-     * (univid, postid 상관없이)
+     * 댓글 UPDATE
+     *
+     * @param univId
+     * @param postId
+     * @param id
+     * @param updateCommentRequest
+     * @return (long) id
+     * @throws JsonProcessingException
      */
     @CrossOrigin(origins = "*")
-    @PutMapping("community/comments/{univid}/{postid}/{id}")
-    public long update(@PathVariable("univid") int univid, @PathVariable("postid") int postid, @PathVariable("id") long id, @RequestBody String json) throws JsonProcessingException {
-        return CommentsService.rewriteComment(univid, postid, id, json);
+    @PutMapping("/{postId}/{id}")
+    public long updateComment(
+            @PathVariable("univId") int univId,
+            @PathVariable("postId") int postId,
+            @PathVariable("id") long id,
+            @RequestBody UpdateCommentRequest updateCommentRequest
+    ) {
+        return commentsService.updateComment(univId, postId, id, updateCommentRequest);
     }
 
-
     /**
-     * 댓글 삭제 기능
-     * 댓글의 고유번호 (id) 에 접근하여 삭제
-     * (univid, postid 상관없이)
+     * 댓글 DELETE
+     *
+     * @param id
+     * @param postId
+     * @return (String) success
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("community/comments/{univid}/{postid}/{id}")
-    public String delete(@PathVariable("id") long id, @PathVariable("postid") long Postid) {
-        CommentsService.deleteComment(id, Postid);
+    @DeleteMapping("{postId}/{id}")
+    public String deleteComment(
+            @PathVariable("id") long id,
+            @PathVariable("postId") long postId
+    ) {
+        commentsService.deleteComment(id, postId);
         return "success";
     }
-
 }

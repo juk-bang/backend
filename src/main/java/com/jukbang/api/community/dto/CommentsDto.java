@@ -16,8 +16,8 @@ public class CommentsDto {
     private long id;
     private String writer;
     private String body;
-    private int univid;
-    private int postid;
+    private int univId;
+    private int postId;
     private LocalDateTime modifiedDate;
 
     /**
@@ -29,8 +29,8 @@ public class CommentsDto {
                 .id(id)
                 .writer(writer)
                 .body(body)
-                .univid(univid)
-                .postid(postid)
+                .univId(univId)
+                .postId(postId)
                 .build();
         return build;
     }
@@ -40,12 +40,12 @@ public class CommentsDto {
      */
 
     @Builder
-    public CommentsDto(long id, String writer, String body, int univid, int postid, LocalDateTime modifiedDate) {
+    public CommentsDto(long id, String writer, String body, int univId, int postId, LocalDateTime modifiedDate) {
         this.id = id;
         this.writer = writer;
         this.body = body;
-        this.univid = univid;
-        this.postid = postid;
+        this.univId = univId;
+        this.postId = postId;
         this.modifiedDate = modifiedDate;
     }
 }

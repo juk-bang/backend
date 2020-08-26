@@ -1,82 +1,83 @@
-
 package com.jukbang.api.chat.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jukbang.api.chat.dto.MessageDto;
+import com.jukbang.api.chat.request.CreateChatRoomRequest;
+import com.jukbang.api.chat.request.SendMessageRequest;
 import com.jukbang.api.chat.service.MessageService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * import com.example.demo.repository.CommentsRepository;
- * import org.springframework.ui.Model;
- **/
-
-
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
+@RequestMapping("/message/{userId}")
 public class MessageController {
 
-
-    private MessageService messageService;
-
+    private final MessageService messageService;
 
     /**
-     * 한 chatroom 에서의 메시지 리스트 출력
-     * <p>
-     * ex)
-     * chatroom1 1)
-     * user1이 보낸 메시지   (hi )
-     * user2가 보낸 메시지   (hello )
-     * user1이 보낸 메시지   (how are u? )
-     * ...
-     * <p>
-     * <p>
-     * list 에 표시되야할 정보 : sender (보낸이), body(내용), (제목), score(점수)
+     * message list GET
+     *
+     * @param userId     대학가 지역 ID
+     * @param chatRoomId
+     * @return (List) messageList
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("message/{userid}/{chatroom}")
-    public List Post(@PathVariable("userid") String userid, @PathVariable("chatroom") long chatroom) {
-        List<MessageDto> postdata = messageService.getMessageList(userid, chatroom);
-        return postdata;
-    }
-
-
-    /**
-     * 채팅방 만들기
-     * 입력되야할 정보 : user2 (받는이)
-     */
-    @CrossOrigin(origins = "*")
-    @PostMapping("message/{userid}")
-    public long write(@PathVariable("userid") String userid, @RequestBody String json) throws JsonProcessingException {
-        return messageService.MakeChatRoom(userid, json);
-
+    @GetMapping("/{chatRoomId}")
+    public List getMessageList(
+            @PathVariable("userId") String userId,
+            @PathVariable("chatRoomId") long chatRoomId
+    ) {
+        return messageService.getMessageList(userId, chatRoomId);
     }
 
     /**
-     * 쪽지 보내기
-     * 입력되야할 정보 : body (메시지 내용)
+     * chat room 만들기 CREATE
+     *
+     * @param userId                대학가 지역 ID
+     * @param createChatRoomRequest
+     * @return (List) chatRoomId
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("message/{userid}/{chatroom}")
-    public long Send(@PathVariable("userid") String userid, @PathVariable("chatroom") long chatroom, @RequestBody String json) throws JsonProcessingException {
-        return messageService.SendMessage(userid, chatroom, json);
-
+    @PostMapping("")
+    public long createMessage(
+            @PathVariable("userId") String userId,
+            @RequestBody CreateChatRoomRequest createChatRoomRequest
+    ) {
+        return messageService.MakeChatRoom(userId, createChatRoomRequest);
     }
 
-
     /**
-     * 댓글 삭제 기능
-     * 댓글의 고유번호 (id) 에 접근하여 삭제
-     * (univid, postid 상관없이)
+     * message 보내기  UPDATE
+     * (chatRoomId 수정하기)
+     *
+     * @param userId             대학가 지역 ID
+     * @param chatRoomId
+     * @param sendMessageRequest
+     * @return
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("message/{userid}/{id}")
-    public String delete(@PathVariable("id") long id) {
+    @PostMapping("/{chatRoomId}")
+    public long sendMessage(
+            @PathVariable("userId") String userId,
+            @PathVariable("chatRoomId") long chatRoomId,
+            @RequestBody SendMessageRequest sendMessageRequest
+    ) {
+        return messageService.SendMessage(userId, chatRoomId, sendMessageRequest);
+    }
+
+    /**
+     * 댓글 삭제 DELETE
+     *
+     * @param id
+     * @return (String) success
+     */
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/{id}")
+    public String delete(
+            @PathVariable("id") long id
+    ) {
         messageService.DeleteMessage(id);
         return "success";
     }
-
 }
