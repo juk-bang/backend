@@ -133,6 +133,62 @@ operation::permitRoom[snippets='http-request,response-body']
 
 operation::rejectRoom[snippets='http-request,response-body']
 
+
+[[Community]]
+=== 커뮤니티 API
+
+[[Post]]
+==== 게시글 서비스
+
+[[getPostList]]
+===== 게시글 목록 조회하기
+
+operation::getPostList[snippets='http-request,response-body']
+
+[[getPost]]
+===== 게시글 조회하기
+
+operation::getPost[snippets='http-request,response-body']
+
+[[createPost]]
+===== 게시글 생성하기
+
+operation::createPost[snippets='http-request,response-body']
+
+[[updatePost]]
+===== 게시글 수정하기
+
+operation::updatePost[snippets='http-request,response-body']
+
+[[deletePost]]
+===== 게시글 삭제하기
+
+operation::deletePost[snippets='http-request,response-body']
+
+[[Comment]]
+==== 댓글 서비스
+
+[[createComment]]
+===== 댓글 생성하기
+
+operation::createComment[snippets='http-request,response-body']
+
+[[getComment]]
+===== 댓글 조회하기
+
+operation::getCommentsList[snippets='http-request,response-body']
+
+[[updateComment]]
+===== 댓글 수정하기
+
+operation::updateComment[snippets='http-request,response-body']
+
+[[deleteComment]]
+===== 댓글 삭제하기
+
+operation::deleteComment[snippets='http-request,response-body']
+
+
 [[UserApi]]
 === 사용자 API
 
