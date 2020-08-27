@@ -30,6 +30,7 @@ public class AuthController {
      * @param signInRequest 사용자 ID, 비밀번호
      * @return accessToken
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/signin")
     @ResponseStatus(HttpStatus.OK)
     public SignInResponse signIn(
@@ -44,6 +45,7 @@ public class AuthController {
      * @param signUpRequest 사용자 ID, 비밀번호
      * @return accessToken
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.OK)
     public SignInResponse signUp(
@@ -58,6 +60,7 @@ public class AuthController {
      * @param userId 중복확인할  ID
      * @return 사용가능 여부
      */
+    @CrossOrigin(origins = "*")
     @GetMapping("/checkid/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public String idCheck(
@@ -73,6 +76,7 @@ public class AuthController {
      * @param refreshRequest 토큰 갱신 요청
      * @return AccessToken
      */
+    @CrossOrigin(origins = "*")
     @PostMapping("/refresh")
     @ResponseStatus(HttpStatus.OK)
     public RefreshResponse getNewAccessToken(
