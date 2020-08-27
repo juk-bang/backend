@@ -63,7 +63,7 @@ public class FavoriteService {
      */
     @Transactional
     public void DeleteFavorite(int univid, int roomid, String userid) {
-        Optional<Favorite> favoriteWrapper = favoriteRepository.findById((long) roomid);
+        Optional<Favorite> favoriteWrapper = favoriteRepository.findByRoomid(roomid);
         Favorite favorite = favoriteWrapper.get();
 
         FavoriteDto favoriteDTO = FavoriteDto.builder()
