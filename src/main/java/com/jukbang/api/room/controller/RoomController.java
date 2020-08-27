@@ -22,12 +22,11 @@ public class RoomController {
      * @return (RoomlistWrapper) roomList
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("roomlist/{univId}")
+    @GetMapping("/roomlist/{univId}")
     public RoomlistWrapper getRoomList(
             @PathVariable("univId") long univId
     ) {
-        RoomlistWrapper roomList = roomService.getRoomlist(univId);
-        return roomList;
+        return roomService.getRoomlist(univId);
     }
 
     /**
@@ -38,13 +37,12 @@ public class RoomController {
      * @return (RoomDetailWrapper) roomDetail
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("roomdetail/{univId}/{roomId}")
+    @GetMapping("/roomdetail/{univId}/{roomId}")
     public RoomDetailWrapper getRoomDetail(
             @PathVariable("univId") long univId,
             @PathVariable("roomId") long roomId
     ) {
-        RoomDetailWrapper roomDetail = roomService.getRoomDetail(roomId);
-        return roomDetail;
+        return roomService.getRoomDetail(roomId);
     }
 }
 

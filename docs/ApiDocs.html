@@ -556,6 +556,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
+<li><a href="#ChatApi">채팅 API</a>
+<ul class="sectlevel3">
+<li><a href="#Chat">채팅 서비스</a>
+<ul class="sectlevel4">
+<li><a href="#createMessage">채팅방 만들기</a></li>
+<li><a href="#sendMessage">메시지 보내기</a></li>
+<li><a href="#getMessageList">메시지 불러오기</a></li>
+<li><a href="#deleteMessage">메시지 삭제하기</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#UserApi">사용자 API</a>
 <ul class="sectlevel3">
 <li><a href="#Favorite">찜 서비스</a>
@@ -691,7 +703,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T16:46:18.5685605",
+  "timestamp" : "2020-08-27T22:25:57.4059347",
   "status" : 202,
   "error" : "0001",
   "message" : "ID: TestUser1 이미 사용중인 아이디입니다."
@@ -707,7 +719,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T16:46:16.117496",
+  "timestamp" : "2020-08-27T22:25:55.207292",
   "status" : 403,
   "error" : "0002",
   "message" : "ID: TestUser1 회원가입이 되어있지 않거나 잠긴 계정입니다."
@@ -723,7 +735,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T16:46:08.9517935",
+  "timestamp" : "2020-08-27T22:25:52.9193024",
   "status" : 403,
   "error" : "0003",
   "message" : "유효하지 않은 토큰입니다."
@@ -739,7 +751,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T16:46:09.0544979",
+  "timestamp" : "2020-08-27T22:25:53.0449643",
   "status" : 403,
   "error" : "0004",
   "message" : "손상된 토큰입니다."
@@ -755,7 +767,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T16:46:05.7000065",
+  "timestamp" : "2020-08-27T22:25:51.0113799",
   "status" : 403,
   "error" : "0005",
   "message" : "잘못된 인증입니다."
@@ -771,7 +783,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-26T16:46:05.8067217",
+  "timestamp" : "2020-08-27T22:25:51.0871785",
   "status" : 403,
   "error" : "0006",
   "message" : "만료된 토큰입니다."
@@ -816,8 +828,8 @@ Host: jukbang.com
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDI3OTc2LCJleHAiOjE1OTg0Mjg1NzZ9.RphqD34br1h7_a2Q6a2QhRDMRhTfx5IY2uGdt_OsZl8",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDI3OTc2LCJleHAiOjE1OTkwMzI3NzZ9.VlT1Gat3q933oxn1bMn3lsxtfEJDyHDnkg309VhpBh8"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NTM0NzU1LCJleHAiOjE1OTg1MzUzNTV9.a5Ou_bcjtmjfQw-_HMsNd2BxMj7oRCgEKC7Dq6aH9Ww",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NTM0NzU1LCJleHAiOjE1OTkxMzk1NTV9.gfRdSL78BN7-G5gGA_C-DTEIpU3EFw1sSO3geAh_vQM"
 }</code></pre>
 </div>
 </div>
@@ -847,8 +859,8 @@ Host: jukbang.com
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDI3OTc4LCJleHAiOjE1OTg0Mjg1Nzh9.LRiD9Fdd-jmIa4cnyJSc08lAGqsFYfOyeM5FC7b__Hw",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDI3OTc4LCJleHAiOjE1OTkwMzI3Nzh9.kUMxZli_5VjbhTw0O70yyVNl__RWHkFMixelO__xi0s"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NTM0NzU3LCJleHAiOjE1OTg1MzUzNTd9.LKYXOwscRlrKr9YfIJ7GH7SmgFsK0GBQSir4pJtDqIo",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NTM0NzU3LCJleHAiOjE1OTkxMzk1NTd9.oUVQa_5cF_LZNj0wuWcmerB9-K-tSxKdJVZ_wzREP0c"
 }</code></pre>
 </div>
 </div>
@@ -886,7 +898,7 @@ Content-Length: 192
 Host: jukbang.com
 
 {
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDI3OTY4LCJleHAiOjE1OTkwMzI3Njh9.ZZmN88gGAGxH6v5kwnbzwrvFvC22iYB9qZ0-y6JTVwE"
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NTM0NzUyLCJleHAiOjE1OTkxMzk1NTJ9.Sg2S7Kp1_OFjn1HmQKsObYPeqLk8sYEVVUaFBRxJhDk"
 }</code></pre>
 </div>
 </div>
@@ -896,7 +908,7 @@ Host: jukbang.com
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NDI3OTY4LCJleHAiOjE1OTg0Mjg1Njh9.aBiAxJMUdhn0yrjgWn5b71GGg3yJng46xaU1ZSMChOM"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNTk4NTM0NzUyLCJleHAiOjE1OTg1MzUzNTJ9.oeqFoXZG_-oE3N1hTXNc5hR6O9CJHiI4olW9TPNDuto"
 }</code></pre>
 </div>
 </div>
@@ -1006,7 +1018,7 @@ Host: jukbang.com</code></pre>
   "univid" : 1,
   "views" : 0,
   "comments" : 0,
-  "modifiedDate" : "2020-08-26T16:46:00.2579532"
+  "modifiedDate" : "2020-08-27T22:25:46.4393465"
 } ]</code></pre>
 </div>
 </div>
@@ -1037,7 +1049,7 @@ Host: jukbang.com</code></pre>
   "univid" : 1,
   "views" : 1,
   "comments" : 0,
-  "modifiedDate" : "2020-08-26T16:46:00.1961172"
+  "modifiedDate" : "2020-08-27T22:25:46.3944653"
 }</code></pre>
 </div>
 </div>
@@ -1188,7 +1200,7 @@ Host: jukbang.com</code></pre>
   "body" : "body body",
   "univId" : 1,
   "postId" : 5,
-  "modifiedDate" : "2020-08-26T16:46:00.1302948"
+  "modifiedDate" : "2020-08-27T22:25:46.3465934"
 } ]</code></pre>
 </div>
 </div>
@@ -1242,6 +1254,94 @@ Host: jukbang.com</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>success</code></pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="ChatApi"><a class="link" href="#ChatApi">채팅 API</a></h3>
+<div class="sect3">
+<h4 id="Chat"><a class="link" href="#Chat">채팅 서비스</a></h4>
+<div class="sect4">
+<h5 id="createMessage"><a class="link" href="#createMessage">채팅방 만들기</a></h5>
+<div class="sect5">
+<h6 id="createMessage_http_request"><a class="link" href="#createMessage_http_request">HTTP request</a></h6>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::createMessage</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="createMessage_response_body"><a class="link" href="#createMessage_response_body">Example response</a></h6>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::createMessage</p>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="sendMessage"><a class="link" href="#sendMessage">메시지 보내기</a></h5>
+<div class="sect5">
+<h6 id="sendMessage_http_request"><a class="link" href="#sendMessage_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /message/userId/1 HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Content-Length: 150
+Host: jukbang.com
+
+{
+  "id" : 1,
+  "sender" : "sender",
+  "receiver" : "receiver",
+  "body" : "body",
+  "chatRoom" : 1,
+  "isRead" : 1,
+  "modifiedDate" : null
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="sendMessage_response_body"><a class="link" href="#sendMessage_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>3</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="getMessageList"><a class="link" href="#getMessageList">메시지 불러오기</a></h5>
+<div class="sect5">
+<h6 id="getMessageList_http_request"><a class="link" href="#getMessageList_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /message/userId/3 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="getMessageList_response_body"><a class="link" href="#getMessageList_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>[ ]</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="deleteMessage"><a class="link" href="#deleteMessage">메시지 삭제하기</a></h5>
+<div class="sect5">
+<h6 id="deleteMessage_http_request"><a class="link" href="#deleteMessage_http_request">HTTP request</a></h6>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::deleteMessage</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="deleteMessage_response_body"><a class="link" href="#deleteMessage_response_body">Example response</a></h6>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::deleteMessage</p>
 </div>
 </div>
 </div>
@@ -1380,7 +1480,7 @@ Host: jukbang.com</code></pre>
   "roomId" : 1,
   "writer" : "TestUser1",
   "title" : "신고합니다.",
-  "modifiedDate" : "2020-08-26T16:46:19.6018046"
+  "modifiedDate" : "2020-08-27T22:25:58.2726406"
 } ]</code></pre>
 </div>
 </div>
@@ -1405,7 +1505,7 @@ Host: jukbang.com</code></pre>
   "writer" : "TestUser1",
   "title" : "신고합니다.",
   "body" : "응 너 신고",
-  "modifiedDate" : "2020-08-26T16:46:19.6766628"
+  "modifiedDate" : "2020-08-27T22:25:58.3135307"
 }</code></pre>
 </div>
 </div>
@@ -1528,7 +1628,7 @@ Host: jukbang.com</code></pre>
   "univid" : 1,
   "views" : 0,
   "comments" : 0,
-  "modifiedDate" : "2020-08-26T16:46:19.1938951"
+  "modifiedDate" : "2020-08-27T22:25:57.9574958"
 } ]</code></pre>
 </div>
 </div>
@@ -1541,7 +1641,7 @@ Host: jukbang.com</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-26 16:43:36 +0900
+Last updated 2020-08-27 20:13:14 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">

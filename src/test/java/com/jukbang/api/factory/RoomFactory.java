@@ -23,7 +23,7 @@ public class RoomFactory {
                 .location(new Location(123, 412))
                 .pictureCount(0)
                 .roomInformation(new RoomInformation("주소", 1, 1, 1, new Price(1, 1, 1)))
-                .Univid((long) 1)
+                .univId(1)
                 .build();
     }
 

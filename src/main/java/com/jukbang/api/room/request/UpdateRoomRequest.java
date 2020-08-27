@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class UpdateRoomRequest {
-    private long Univid;
+    private long univId;
     private int pictureCount;
     private RoomInformation roomInformation;
     private ExtraOption extraOption;

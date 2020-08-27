@@ -1,11 +1,7 @@
 package com.jukbang.api.room;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community.service.CommunityService;
-import com.jukbang.api.room.dto.ExtraOption;
-import com.jukbang.api.room.dto.Facilities;
-import com.jukbang.api.room.dto.Location;
-import com.jukbang.api.room.dto.RoomInformation;
+import com.jukbang.api.room.dto.*;
 import com.jukbang.api.room.request.CreateRoomRequest;
 import com.jukbang.api.room.service.RoomService;
 import org.junit.jupiter.api.DisplayName;
@@ -20,28 +16,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class CreateSellerRoom extends BaseControllerTest {
-    @Autowired
-    private RoomService roomService;
 
     @Test
     @WithMockUser("TestUser1")
     @DisplayName("판매자 방 생성하기 (성공)")
-    void createSellerRoomSuccess() throws Exception{
+    void createSellerRoomSuccess() throws Exception {
         CreateRoomRequest createRoomRequest = CreateRoomRequest.builder()
-                .Univid(1)
-                .pictureCount(1)
-                .roomInformation(new RoomInformation())
-                .extraOption(new ExtraOption())
+                .univId(1)
+                .pictureCount(0)
+                .roomInformation(new RoomInformation("addr",1,2,2,new Price(1,1,1)))
+                .extraOption(new ExtraOption(true,true,true,true,true,true,true,true))
                 .description("good")
-                .location(new Location())
-                .facilities(new Facilities())
+                .location(new Location(1, 1))
+                .facilities(new Facilities(true, true))
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/manager/manageroom/{sellerId}", "seller")
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/manager/manageroom/{sellerId}", "seller1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(createRoomRequest))
-        )
-
+                .content(this.objectMapper.writeValueAsString(createRoomRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("CreateSellerRoom"))

@@ -19,24 +19,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class GetSellerRoomList extends BaseControllerTest {
-    @Autowired
-    private RoomService roomService;
 
     @Test
     @WithMockUser("TestUser1")
     @DisplayName("판매자 방 리스트 가져오기 (성공)")
     void getSellerRoomListSuccess() throws Exception{
-        CreateRoomRequest createRoomRequest = CreateRoomRequest.builder()
-                .Univid(1)
-                .pictureCount(1)
-                .roomInformation(new RoomInformation())
-                .extraOption(new ExtraOption())
-                .description("good")
-                .location(new Location())
-                .facilities(new Facilities())
-                .build();
-
-        roomService.createRoom("seller",createRoomRequest);
+        roomFactory.generateRoom("seller");
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/manager/manageroom/{sellerId}","seller"))
                 .andExpect(status().isOk())

@@ -23,19 +23,9 @@ public class DeleteRoom extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("방 삭제하기 (성공)")
     void DeleteRoomSuccess() throws  Exception{
-        CreateRoomRequest createRoomRequest = CreateRoomRequest.builder()
-                .Univid(1)
-                .pictureCount(1)
-                .roomInformation(new RoomInformation("hi",1,1,1,new Price(1,1,1)))
-                .extraOption(new ExtraOption(true,true,true,true,true,true,true,true) )
-                .description("good")
-                .location(new Location(1.0 , 2.0))
-                .facilities(new Facilities(true,true))
-                .build();
+        long roomId =  roomFactory.generateRoom("seller");
 
-        long roomid =  roomService.createRoom("seller",createRoomRequest);
-
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/manager/manageroom/{sellerId}/{roomId}","seller",roomid))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/manager/manageroom/{sellerId}/{roomId}","seller",roomId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("DeleteRoom"))

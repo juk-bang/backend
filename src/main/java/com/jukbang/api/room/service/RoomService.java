@@ -53,6 +53,7 @@ public class RoomService {
         Optional<RecommandFilter> recommand = recommandFilterRepository.findByUnivid(Univid);
         RecommandFilter filter = recommand.get();
         RecommandFilterDto recommandFilterDto1 = RecommandFilterDto.builder()
+                .id(filter.getId())
                 .price(filter.getPrice())
                 .scale(filter.getScale())
                 .structure(filter.getStructure())
@@ -61,7 +62,7 @@ public class RoomService {
                 .grade(filter.getGrade())
                 .build();
         recommandFilterRepository.save(recommandFilterDto1.toEntity());
-        Optional<RecommandFilter> recommandFilterWrapper = recommandFilterRepository.findById(Univid);
+        Optional<RecommandFilter> recommandFilterWrapper = recommandFilterRepository.findById(filter.getId());
 
         RecommandFilter recommandFilter = recommandFilterWrapper.get();
 
@@ -81,7 +82,7 @@ public class RoomService {
     }
 
     @Transactional
-    public List<Room> SellerRoomlist(long sellerId) {
+    public List<Room> SellerRoomlist(String sellerId) {
         List<Room> RoomEntities = new ArrayList<>();
         List<RoomDetail> RoomDetailEntities = roomDetailRepository.findAllBySellerId(sellerId);
         for (RoomDetail RoomDetailEntity : RoomDetailEntities) {
@@ -156,7 +157,7 @@ public class RoomService {
                 .distance(distance(createRoomRequest.getLocation().getLat(), createRoomRequest.getLocation().getLng(), 37.496281, 126.957358))
                 .lat(createRoomRequest.getLocation().getLat())
                 .lng(createRoomRequest.getLocation().getLng())
-                .univid(createRoomRequest.getUnivid())
+                .univid(createRoomRequest.getUnivId())
                 .permission(0)
                 .build();
 
@@ -178,7 +179,7 @@ public class RoomService {
                 .build();
 
         RecommandFilter filter;
-        if (!recommandFilterRepository.findByUnivid(createRoomRequest.getUnivid()).isPresent()) {
+        if (!recommandFilterRepository.findByUnivid(createRoomRequest.getUnivId()).isPresent()) {
             filter = new RecommandFilter();
             filter.setPrice(createRoomRequest.getRoomInformation().getPrice().getMonth());
             filter.setScale(createRoomRequest.getRoomInformation().getScale());
@@ -188,9 +189,9 @@ public class RoomService {
             filter.setGrade(roomDTO.getGrade());
             filter.setUnivid(roomDTO.getUnivid());
         } else {
-            Optional<RecommandFilter> recommandFilter = recommandFilterRepository.findByUnivid(createRoomRequest.getUnivid());
+            Optional<RecommandFilter> recommandFilter = recommandFilterRepository.findByUnivid(createRoomRequest.getUnivId());
             filter = recommandFilter.get();
-            List<Room> RoomEntities = roomRepository.findAllByUnivid(createRoomRequest.getUnivid());
+            List<Room> RoomEntities = roomRepository.findAllByUnivid(createRoomRequest.getUnivId());
             int n = RoomEntities.size();
             filter.setPrice((filter.getPrice() * n + roomDTO.getMonth()) / (n + 1));
             filter.setScale((filter.getScale() * n + roomDTO.getScale()) / (n + 1));
@@ -233,7 +234,7 @@ public class RoomService {
                 .grade(grade)
                 .lat(updateRoomRequest.getLocation().getLat())
                 .lng(updateRoomRequest.getLocation().getLng())
-                .univid(updateRoomRequest.getUnivid())
+                .univid(updateRoomRequest.getUnivId())
                 .build();
 
 

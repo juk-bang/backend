@@ -1,19 +1,11 @@
 package com.jukbang.api.room;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.room.dto.ExtraOption;
-import com.jukbang.api.room.dto.Facilities;
-import com.jukbang.api.room.dto.Location;
-import com.jukbang.api.room.dto.RoomInformation;
 import com.jukbang.api.room.request.CreateReviewRequest;
-import com.jukbang.api.room.request.CreateRoomRequest;
-import com.jukbang.api.room.request.UpdateReviewRequest;
 import com.jukbang.api.room.service.ReviewService;
-import com.jukbang.api.room.service.RoomService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.test.context.support.WithMockUser;
 
@@ -24,35 +16,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class DeleteReview extends BaseControllerTest {
     @Autowired
     private ReviewService reviewService;
-    private RoomService roomService;
+
     @Test
     @WithMockUser("TestUser1")
     @DisplayName("리뷰 삭제하기(성공)")
-    void deleteReviewSuccess() throws Exception{
-
-        CreateRoomRequest createRoomRequest = CreateRoomRequest.builder()
-                .Univid(1)
-                .pictureCount(1)
-                .roomInformation(new RoomInformation())
-                .extraOption(new ExtraOption())
-                .description("good")
-                .location(new Location())
-                .facilities(new Facilities())
-                .build();
-
-        roomService.createRoom("seller",createRoomRequest);
+    void deleteReviewSuccess() throws Exception {
+        Long roomId = roomFactory.generateRoom("seller");
 
         CreateReviewRequest createReviewRequest = CreateReviewRequest.builder()
                 .id(1)
                 .writer("writer")
                 .body("good")
                 .score(10)
+                .title("title")
                 .build();
 
-        reviewService.SaveReview(1,1,createReviewRequest);
+        Long reviewId = reviewService.SaveReview(1, Math.toIntExact(roomId), createReviewRequest);
 
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/review/{univId}/{roomId}/{reviewId}", 1, 1,"userId")  )
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/review/{univId}/{roomId}/{reviewId}", 1, roomId, reviewId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("DeleteReview"))

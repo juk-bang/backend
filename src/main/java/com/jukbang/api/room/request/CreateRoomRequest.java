@@ -11,11 +11,10 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
-
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateRoomRequest {
-    long Univid;
+    long univId;
     int pictureCount;
     RoomInformation roomInformation;
     ExtraOption extraOption;

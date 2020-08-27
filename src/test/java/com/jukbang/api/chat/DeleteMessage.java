@@ -39,9 +39,9 @@ public class DeleteMessage extends BaseControllerTest {
                 .isRead(1)
                 .build();
 
-        messageService.SendMessage("userId",1,sendMessageRequest);
+        Long messageId = messageService.SendMessage("userId",chatRoom,sendMessageRequest);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/message/{userId}/{chatRoomId}","userId",chatRoom))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/message/{userId}/{chatRoomId}","userId",messageId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("DeleteChat"))

@@ -24,30 +24,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GetReviewList extends BaseControllerTest {
     @Autowired
     private ReviewService reviewService;
-    private RoomService roomService;
+
     @Test
     @WithMockUser("TestUser1")
     @DisplayName("리뷰 리스트 불러오기 (성공)")
     void getReviewListSuccess() throws Exception{
 
-        CreateRoomRequest createRoomRequest = CreateRoomRequest.builder()
-                .Univid(1)
-                .pictureCount(1)
-                .roomInformation(new RoomInformation())
-                .extraOption(new ExtraOption())
-                .description("good")
-                .location(new Location())
-                .facilities(new Facilities())
-                .build();
-
-        roomService.createRoom("seller",createRoomRequest);
-
+        roomFactory.generateRoom("sellerId");
 
         CreateReviewRequest createReviewRequest = CreateReviewRequest.builder()
                 .id(1)
                 .writer("writer")
                 .body("good")
                 .score(10)
+                .title("제목")
                 .build();
 
         reviewService.SaveReview(1,1,createReviewRequest);
