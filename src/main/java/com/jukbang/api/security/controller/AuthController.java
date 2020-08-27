@@ -49,7 +49,7 @@ public class AuthController {
     public SignInResponse signUp(
             @RequestBody SignUpRequest signUpRequest
     ) {
-        return this.authService.signUp(signUpRequest.getId(), signUpRequest.getPassword());
+        return this.authService.signUp(signUpRequest.getId(), signUpRequest.getPassword(), signUpRequest.getUnivId());
     }
 
     /**

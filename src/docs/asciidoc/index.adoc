@@ -7,7 +7,7 @@ Always0ne;
 :toclevels: 4
 :sectlinks:
 :operation-curl-request-title: Example request
-:operation-http-response-title: Example response
+:operation-response-body-title: Example response
 
 [[overview]]
 = 개요
@@ -93,22 +93,252 @@ operation::0006[snippets='response-body']
 응답은 http://stateless.co/hal_specification.html[Hypertext Application from resource to resource. Language (HAL)] 형식을 따른다.
 링크는 `_links`라는 키로 제공한다. 본 API의 사용자(클라이언트)는 URI를 직접 생성하지 않아야 하며, 리소스에서 제공하는 링크를 사용해야 한다.
 
+[[AuthApi]]
+=== 인증 API
 [[signin]]
-=== 인증하기
+==== 인증하기
 
-operation::signin[snippets='http-request,http-response']
+operation::signin[snippets='http-request,response-body']
 
 [[signup]]
-=== 회원가입하기
+==== 회원가입하기
 
-operation::signup[snippets='http-request,http-response']
+operation::signup[snippets='http-request,response-body']
 
 [[checkid]]
-=== 아이디 중복 확인하기
+==== 아이디 중복 확인하기
 
-operation::idcheck[snippets='http-request,http-response']
+operation::idcheck[snippets='http-request,response-body']
 
 [[refreshToken]]
-=== 토큰 재발급 받기
+==== 토큰 재발급 받기
 
-operation::refresh[snippets='http-request,http-response']
+operation::refresh[snippets='http-request,response-body']
+
+[[AdminApi]]
+=== 관리자 API
+
+[[suouldPermitRooms]]
+==== 승인받아야 할 방 리스트 조회
+
+operation::shouldPermitRooms[snippets='http-request,response-body']
+
+[[permitRoom]]
+==== 방 승인하기
+
+operation::permitRoom[snippets='http-request,response-body']
+
+[[rejectRoom]]
+==== 방 거절하기
+
+operation::rejectRoom[snippets='http-request,response-body']
+
+
+[[Community]]
+=== 커뮤니티 API
+
+[[Post]]
+==== 게시글 서비스
+
+[[getPostList]]
+===== 게시글 목록 조회하기
+
+operation::getPostList[snippets='http-request,response-body']
+
+[[getPost]]
+===== 게시글 조회하기
+
+operation::getPost[snippets='http-request,response-body']
+
+[[createPost]]
+===== 게시글 생성하기
+
+operation::createPost[snippets='http-request,response-body']
+
+[[updatePost]]
+===== 게시글 수정하기
+
+operation::updatePost[snippets='http-request,response-body']
+
+[[deletePost]]
+===== 게시글 삭제하기
+
+operation::deletePost[snippets='http-request,response-body']
+
+[[Comment]]
+==== 댓글 서비스
+
+[[createComment]]
+===== 댓글 생성하기
+
+operation::createComment[snippets='http-request,response-body']
+
+[[getComment]]
+===== 댓글 조회하기
+
+operation::getCommentsList[snippets='http-request,response-body']
+
+[[updateComment]]
+===== 댓글 수정하기
+
+operation::updateComment[snippets='http-request,response-body']
+
+[[deleteComment]]
+===== 댓글 삭제하기
+
+operation::deleteComment[snippets='http-request,response-body']
+
+[[ChatApi]]
+=== 채팅 API
+
+[[Chat]]
+==== 채팅 서비스
+
+[[createMessage]]
+===== 채팅방 만들기
+
+operation::createMessage[snippets='http-request,response-body']
+
+
+[[sendMessage]]
+===== 메시지 보내기
+
+operation::sendMessage[snippets='http-request,response-body']
+
+[[getMessageList]]
+===== 메시지 불러오기
+
+operation::getMessageList[snippets='http-request,response-body']
+
+[[deleteMessage]]
+===== 메시지 삭제하기
+
+operation::deleteMessage[snippets='http-request,response-body']
+
+[[RoomApi]]
+=== 방 API
+
+[[Room]]
+==== 방 서비스
+
+[[createRoom]]
+===== 판매자 방 게시하기
+
+operation::createSellerRoom[snippets='http-request,response-body']
+
+[[deleteRoom]]
+===== 판매자 방 삭제하기
+
+operation::deleteRoom[snippets='http-request,response-body']
+
+[[getRoomList]]
+===== 방 리스트 가져오기
+
+operation::getRoomList[snippets='http-request,response-body']
+
+[[getRoomDetail]]
+===== 방 상세정보 가져오기
+
+operation::getRoomDetail[snippets='http-request,response-body']
+
+[[getSellerRoomList]]
+===== 판매자 방 리스트 가져오기
+
+operation::getSellerRoomList[snippets='http-request,response-body']
+
+[[updateRoom]]
+===== 방 수정하기
+
+operation::updateRoom[snippets='http-request,response-body']
+
+[[Review]]
+==== 리뷰 서비스
+
+[[createReview]]
+===== 리뷰 작성하기
+
+operation::createReview[snippets='http-request,response-body']
+
+[[deleteReview]]
+===== 리뷰 삭제하기
+
+operation::deleteReview[snippets='http-request,response-body']
+
+[[getReviewList]]
+===== 리뷰 리스트 가져오기
+
+operation::getReviewList[snippets='http-request,response-body']
+
+[[updateReview]]
+===== 리뷰 수정하기
+
+operation::updateReview[snippets='http-request,response-body']
+
+
+
+[[UserApi]]
+=== 사용자 API
+
+[[Favorite]]
+==== 찜 서비스
+
+[[getFavoriteList]]
+===== 사용자의 찜 목록 가져오기
+
+operation::getFavoriteList[snippets='http-request,response-body']
+
+[[crateFavorite]]
+===== 방 찜하기
+
+operation::createFavorite[snippets='http-request,response-body']
+
+[[deleteFavorite]]
+===== 찜 취소하기
+
+operation::deleteFavorite[snippets='http-request,response-body']
+
+[[Report]]
+==== 신고 서비스
+
+[[createReport]]
+===== 신고하기
+
+operation::createReport[snippets='http-request,response-body']
+
+[[getReports]]
+===== 신고 리스트 조회하기
+
+operation::getReports[snippets='http-request,response-body']
+
+[[getReport]]
+===== 신고 조회하기
+
+operation::getReport[snippets='http-request,response-body']
+
+[[deleteReport]]
+===== 신고 삭제하기
+
+operation::deleteReport[snippets='http-request,response-body']
+
+[[Profile]]
+==== 프로필 서비스
+
+[[getUser]]
+===== 유저 정보 조회하기
+
+operation::getUser[snippets='http-request,response-body']
+
+[[updateUser]]
+===== 유저 정보 수정하기
+
+operation::updateUser[snippets='http-request,response-body']
+
+[[deleteUser]]
+===== 유저 삭제하기
+
+operation::deleteUser[snippets='http-request,response-body']
+
+[[getMyPosts]]
+===== 내가 쓴 게시글들 보기
+
+operation::getMyPosts[snippets='http-request,response-body']

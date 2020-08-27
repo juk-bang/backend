@@ -1,11 +1,10 @@
 package com.jukbang.api.community.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jukbang.api.community.dto.CommunityDto;
 import com.jukbang.api.community.entity.Community;
 import com.jukbang.api.community.repository.CommunityRepository;
 import com.jukbang.api.community.request.CreatePostRequest;
+import com.jukbang.api.community.request.UpdatePostRequest;
+import com.jukbang.api.community.response.GetPostResponse;
 import com.jukbang.api.room.dto.BoardlistDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -82,7 +81,7 @@ public class CommunityService {
     }
 
     @Transactional
-    public CommunityDto getPost(int univId, Long Postid) {
+    public GetPostResponse getPost(int univId, Long Postid) {
         List<BoardlistDto> list = getCommunitylist();
         long priv = 0, next = 0, tmp = 0;
         for (int i = 0; i < list.size() - 1; i++) {
@@ -105,7 +104,10 @@ public class CommunityService {
         Optional<Community> communityWrapper = communityRepository.findById(Postid);
         Community community = communityWrapper.get();
 
-        CommunityDto communityDTO = CommunityDto.builder()
+        community.setViews(community.getViews() + 1);
+        communityRepository.save(community);
+
+        return GetPostResponse.builder()
                 .id(community.getId())
                 .previd(priv)
                 .nextid(next)
@@ -114,22 +116,23 @@ public class CommunityService {
                 .writer(community.getWriter())
                 .modifiedDate(community.getCreatedDate())
                 .comments(community.getComments())
-                .univId(community.getUnivId())
-                .views(community.getViews() + 1)
+                .univid(community.getUnivId())
+                .views(community.getViews())
                 .build();
-        communityRepository.save(communityDTO.toEntity()).getId();
-
-        return communityDTO;
     }
 
     @Transactional
-    public Long rewritePost(int univId, Long postId, String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        CommunityDto communityDto;
-        communityDto = objectMapper.readValue(json, CommunityDto.class);
-        communityDto.setUnivId(univId);
-        communityDto.setId(postId);
-        return communityRepository.save(communityDto.toEntity()).getId();
+    public Long rewritePost(int univId, Long postId, UpdatePostRequest updatePostRequest) {
+        return communityRepository.save(
+                new Community(
+                        postId,
+                        updatePostRequest.getTitle(),
+                        updatePostRequest.getWriter(),
+                        updatePostRequest.getBody(),
+                        univId,
+                        0,
+                        0
+                )).getId();
     }
 
     @Transactional

@@ -1,6 +1,8 @@
 package com.jukbang.api.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jukbang.api.factory.ReportFactory;
+import com.jukbang.api.factory.RoomFactory;
 import com.jukbang.api.factory.UserFactory;
 import org.junit.jupiter.api.Disabled;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +31,10 @@ public class BaseControllerTest {
 
     @Autowired
     protected UserFactory userFactory;
+
+    @Autowired
+    protected RoomFactory roomFactory;
+
+    @Autowired
+    protected ReportFactory reportFactory;
 }

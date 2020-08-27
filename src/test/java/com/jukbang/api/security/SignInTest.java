@@ -18,7 +18,7 @@ class SignInTest extends BaseControllerTest {
     @Test
     @DisplayName("토큰 발급 받기(성공)")
     void signInSuccess() throws Exception {
-        this.userFactory.generateUser(1);
+        this.userFactory.signUpUser(1);
         SignInRequest signInRequest = SignInRequest.builder()
                 .id("TestUser1")
                 .password("password")

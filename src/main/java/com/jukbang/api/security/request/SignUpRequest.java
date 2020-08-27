@@ -24,4 +24,8 @@ public class SignUpRequest {
      * 사용자 비밀번호
      */
     private String password;
+    /**
+     * 사용자 대학 코드
+     */
+    private int univId;
 }

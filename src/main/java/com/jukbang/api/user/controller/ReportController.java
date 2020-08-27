@@ -25,7 +25,7 @@ public class ReportController {
      * @return (long) id
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("report/{univId}/{roomId}/{userId}")
+    @PostMapping("/report/{univId}/{roomId}/{userId}")
     public long createReport(
             @PathVariable("univId") int univId,
             @PathVariable("roomId") int roomId,
@@ -42,7 +42,7 @@ public class ReportController {
      * @return (List) reportList
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("admin/report/{univId}")
+    @GetMapping("/admin/report/{univId}")
     public List<ReportListWrapper> reportList(
             @PathVariable("univId") int univId
     ) {
@@ -58,7 +58,7 @@ public class ReportController {
      * @return (ReportDetailWrapper) reportDetail
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("admin/report/{univId}/{roomId}/{reportId}")
+    @GetMapping("/admin/report/{univId}/{roomId}/{reportId}")
     public ReportDetailWrapper reportDetail(
             @PathVariable("univId") long univId,
             @PathVariable("roomId") long roomId,
@@ -75,7 +75,7 @@ public class ReportController {
      * @param reportId
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("admin/report/{univId}/{roomId}/{reportId}")
+    @DeleteMapping("/admin/report/{univId}/{roomId}/{reportId}")
     public void deleteReport(
             @PathVariable("univId") long univId,
             @PathVariable("roomId") long roomId,

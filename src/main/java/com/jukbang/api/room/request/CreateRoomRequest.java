@@ -4,11 +4,17 @@ import com.jukbang.api.room.dto.ExtraOption;
 import com.jukbang.api.room.dto.Facilities;
 import com.jukbang.api.room.dto.Location;
 import com.jukbang.api.room.dto.RoomInformation;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CreateRoomRequest {
-    long Univid;
+    long univId;
     int pictureCount;
     RoomInformation roomInformation;
     ExtraOption extraOption;

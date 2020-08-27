@@ -35,7 +35,7 @@ public class FavoriteController {
      * @return (long) id
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("userinfo/favorites/{univId}/{roomId}/{userId}")
+    @PostMapping("/userinfo/favorites/{univId}/{roomId}/{userId}")
     public long createFavorite(
             @PathVariable("univId") int univId,
             @PathVariable("roomId") int roomId,
@@ -53,7 +53,7 @@ public class FavoriteController {
      * @return (String) success
      */
     @CrossOrigin(origins = "*")
-    @DeleteMapping("userinfo/favorites/{univId}/{roomId}/{userId}")
+    @DeleteMapping("/userinfo/favorites/{univId}/{roomId}/{userId}")
     public String deleteFavorite(
             @PathVariable("univId") int univId,
             @PathVariable("roomId") int roomId,

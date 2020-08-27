@@ -2,16 +2,18 @@ package com.jukbang.api.community.contorller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jukbang.api.community.request.CreatePostRequest;
+import com.jukbang.api.community.request.UpdatePostRequest;
 import com.jukbang.api.community.response.GetPostResponse;
 import com.jukbang.api.community.service.CommunityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "community/{univId}")
+@RequestMapping(value = "/community/{univId}")
 public class CommunityController {
 
     private final CommunityService communityService;
@@ -38,12 +40,13 @@ public class CommunityController {
      * @return new GetPostResponse()
      */
     @CrossOrigin(origins = "*")
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{postId}")
     public GetPostResponse getPost(
             @PathVariable("univId") int univId,
             @PathVariable("postId") Long postId
     ) {
-        return new GetPostResponse();
+        return communityService.getPost(univId, postId);
     }
 
 
@@ -72,7 +75,7 @@ public class CommunityController {
      *
      * @param univId
      * @param postId
-     * @param json
+     * @param updatePostRequest
      * @return (Long) id
      * @throws JsonProcessingException
      */
@@ -81,9 +84,9 @@ public class CommunityController {
     public Long updatePost(
             @PathVariable("univId") int univId,
             @PathVariable("postId") Long postId,
-            @RequestBody String json
-    ) throws JsonProcessingException {
-        return communityService.rewritePost(univId, postId, json);
+            @RequestBody UpdatePostRequest updatePostRequest
+    ) {
+        return communityService.rewritePost(univId, postId, updatePostRequest);
     }
 
     /**

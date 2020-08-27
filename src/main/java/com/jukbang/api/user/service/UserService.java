@@ -40,25 +40,6 @@ public class UserService {
     }
 
     /**
-     * 회원 정보 임의 입력
-     * 입력해야될 데이터 : writter (작성자), body(내용)
-     */
-    @Transactional
-    public long SaveUser(CreateUserRequest createUserRequest) {
-
-        return userRepository.save(
-                new User(
-                        createUserRequest.getId(),
-                        createUserRequest.getUserId(),
-                        null,
-                        createUserRequest.getUnivid(),
-                        null,
-                        null
-                )).getId(); // 잘모르겠음
-    }
-
-
-    /**
      * 회원 정보 수정 하기
      * 댓글의 고유번호 (id) 에 접근하여 수정
      */

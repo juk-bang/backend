@@ -23,9 +23,9 @@ public class ManagerController {
      * @return (List) SellerRoomList
      */
     @CrossOrigin(origins = "*")
-    @GetMapping("")
+    @GetMapping
     public List<Room> getSellerRoomList(
-            @PathVariable("sellerId") long sellerId
+            @PathVariable("sellerId") String sellerId
     ) {
         return roomService.SellerRoomlist(sellerId);
     }
@@ -38,7 +38,7 @@ public class ManagerController {
      * @return (Long) id
      */
     @CrossOrigin(origins = "*")
-    @PostMapping("")
+    @PostMapping
     public Long createSellerRoom(
             @PathVariable("sellerId") String sellerId,
             @RequestBody CreateRoomRequest createRoomRequest
@@ -74,7 +74,7 @@ public class ManagerController {
     @CrossOrigin(origins = "*")
     @DeleteMapping("/{roomId}")
     public String deleteRoom(
-            @PathVariable("sellerId") int sellerId,
+            @PathVariable("sellerId") String sellerId,
             @PathVariable("roomId") Long roomId
     ) {
         roomService.deleteRoom(roomId);
