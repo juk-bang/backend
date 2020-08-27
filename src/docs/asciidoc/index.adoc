@@ -215,6 +215,65 @@ operation::getMessageList[snippets='http-request,response-body']
 
 operation::deleteMessage[snippets='http-request,response-body']
 
+[[RoomApi]]
+=== 방 API
+
+[[Room]]
+==== 방 서비스
+
+[[createRoom]]
+===== 판매자 방 게시하기
+
+operation::createSellerRoom[snippets='http-request,response-body']
+
+[[deleteRoom]]
+===== 판매자 방 삭제하기
+
+operation::deleteRoom[snippets='http-request,response-body']
+
+[[getRoomList]]
+===== 방 리스트 가져오기
+
+operation::getRoomList[snippets='http-request,response-body']
+
+[[getRoomDetail]]
+===== 방 상세정보 가져오기
+
+operation::getRoomDetail[snippets='http-request,response-body']
+
+[[getSellerRoomList]]
+===== 판매자 방 리스트 가져오기
+
+operation::getSellerRoomList[snippets='http-request,response-body']
+
+[[updateRoom]]
+===== 방 수정하기
+
+operation::updateRoom[snippets='http-request,response-body']
+
+[[Review]]
+==== 리뷰 서비스
+
+[[createReview]]
+===== 리뷰 작성하기
+
+operation::createReview[snippets='http-request,response-body']
+
+[[deleteReview]]
+===== 리뷰 삭제하기
+
+operation::deleteReview[snippets='http-request,response-body']
+
+[[getReviewList]]
+===== 리뷰 리스트 가져오기
+
+operation::getReviewList[snippets='http-request,response-body']
+
+[[updateReview]]
+===== 리뷰 수정하기
+
+operation::updateReview[snippets='http-request,response-body']
+
 
 
 [[UserApi]]
