@@ -4,15 +4,23 @@ import com.jukbang.api.room.dto.ExtraOption;
 import com.jukbang.api.room.dto.Facilities;
 import com.jukbang.api.room.dto.Location;
 import com.jukbang.api.room.dto.RoomInformation;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class UpdateRoomRequest {
-    long Univid;
-    int pictureCount;
-    RoomInformation roomInformation;
-    ExtraOption extraOption;
-    String description;
-    Location location;
-    Facilities facilities;
+    private long Univid;
+    private int pictureCount;
+    private RoomInformation roomInformation;
+    private ExtraOption extraOption;
+    private String description;
+    private Location location;
+    private Facilities facilities;
 }

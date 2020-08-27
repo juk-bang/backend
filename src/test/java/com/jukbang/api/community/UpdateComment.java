@@ -36,6 +36,7 @@ public class UpdateComment extends BaseControllerTest {
                 .build();
 
         Long postId = communityService.SavePost(1,createPostRequest);
+
         CreateCommentRequest createCommentRequest = CreateCommentRequest.builder()
                 .id(1)
                 .writer("writer")

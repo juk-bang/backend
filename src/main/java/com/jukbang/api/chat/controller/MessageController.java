@@ -67,7 +67,7 @@ public class MessageController {
     }
 
     /**
-     * 댓글 삭제 DELETE
+     * 메시지 삭제 DELETE
      *
      * @param id
      * @return (String) success

@@ -188,6 +188,34 @@ operation::updateComment[snippets='http-request,response-body']
 
 operation::deleteComment[snippets='http-request,response-body']
 
+[[ChatApi]]
+=== 채팅 API
+
+[[Chat]]
+==== 채팅 서비스
+
+[[createMessage]]
+===== 채팅방 만들기
+
+operation::createMessage[snippets='http-request,response-body']
+
+
+[[sendMessage]]
+===== 메시지 보내기
+
+operation::sendMessage[snippets='http-request,response-body']
+
+[[getMessageList]]
+===== 메시지 불러오기
+
+operation::getMessageList[snippets='http-request,response-body']
+
+[[deleteMessage]]
+===== 메시지 삭제하기
+
+operation::deleteMessage[snippets='http-request,response-body']
+
+
 
 [[UserApi]]
 === 사용자 API
