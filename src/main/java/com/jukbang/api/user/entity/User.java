@@ -1,23 +1,26 @@
 package com.jukbang.api.user.entity;
 
-import com.jukbang.api.common.entity.Time;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class User extends Time {
+@NoArgsConstructor
+@Entity
+@Table
+public class User {
     @Id
     /**
      *  회원의 고유번호 (중복 불가)
      */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long accountId;
 
 
     /**
@@ -47,6 +50,9 @@ public class User extends Time {
      * Refresh Token
      */
     private String refreshToken;
+
+    @OneToMany(mappedBy = "User")
+    private List<Favorite> favorites;
 
 
     /**

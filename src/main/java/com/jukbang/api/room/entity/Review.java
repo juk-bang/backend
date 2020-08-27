@@ -1,33 +1,24 @@
 package com.jukbang.api.room.entity;
 
 import com.jukbang.api.common.entity.Time;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.jukbang.api.user.entity.User;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table
-
 public class Review extends Time {
     @Id
     /**
      *  각 리뷰의 고유번호 (중복 불가)
      */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-
-    /**
-     * 리뷰를 달 writer의 이름
-     */
-    @Column(length = 30, nullable = false)
-    private String writer;
+    private long reviewId;
 
     /**
      * 리뷰의 title이름
@@ -60,16 +51,7 @@ public class Review extends Time {
     @Column(nullable = false)
     private int score;
 
-
-    @Builder
-    public Review(long id, String writer, String body, int univId, int roomId, int score, String title) {
-        this.id = id;
-        this.writer = writer;
-        this.body = body;
-        this.univId = univId;
-        this.roomId = roomId;
-        this.score = score;
-        this.title = title;
-
-    }
+    @OneToOne
+    @JoinColumn(name = "writer_id")
+    private User writer;
 }

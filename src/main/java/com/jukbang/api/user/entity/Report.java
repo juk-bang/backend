@@ -1,40 +1,24 @@
 package com.jukbang.api.user.entity;
 
 import com.jukbang.api.common.entity.Time;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.jukbang.api.room.entity.Room;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table
-
 public class Report extends Time {
     @Id
     /**
      *  각 신고 글의 고유번호 (중복 불가)
      */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-
-    /**
-     * 신고자 id
-     */
-    @Column(length = 30, nullable = false)
-    private String userId;
-
-
-    /**
-     * 해당 신고글 의 univId
-     */
-    @Column(nullable = false)
-    private int univId;
+    private long reportId;
 
     /**
      * 해당 신고글 의 roomId
@@ -54,14 +38,8 @@ public class Report extends Time {
     @Column(length = 100, nullable = false)
     private String title;
 
+    @OneToOne
+    @JoinColumn(name = "reporter_id")
+    private User reporter;
 
-    @Builder
-    public Report(long id, String userId, int univId, int roomId, String body, String title) {
-        this.id = id;
-        this.userId = userId;
-        this.univId = univId;
-        this.roomId = roomId;
-        this.body = body;
-        this.title = title;
-    }
 }

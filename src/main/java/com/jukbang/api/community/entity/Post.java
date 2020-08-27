@@ -5,6 +5,7 @@ import com.jukbang.api.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Builder
@@ -12,20 +13,25 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table
-public class Comments extends Time {
+public class Post extends Time {
     @Id
-    /**
-     *  각 댓글의 고유번호 (중복 불가)
-     */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long commentId;
+    private long id;
 
-    /**
-     * 100자 이내의 댓글 입력
-     */
     @Column(length = 100, nullable = false)
-    private String body;
+    private String title;
 
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String body;
+    @Column(nullable = false)
+    private int univId;
+    @Column(nullable = false)
+    private int views;
+    @Column(nullable = false)
+    private int commentsNum;
+
+    @OneToMany(mappedBy = "comments")
+    private List<Comments> comments;
 
     @OneToOne
     @JoinColumn(name = "writer_id")
