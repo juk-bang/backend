@@ -50,7 +50,7 @@ public class ReviewService {
      * 입력해야될 데이터 : writter (작성자), body(내용), title(제목), score(점수)
      */
     @Transactional
-    public void SaveReview(int univId, int roomId, CreateReviewRequest createReviewRequest) {
+    public Long SaveReview(int univId, int roomId, CreateReviewRequest createReviewRequest) {
 /*
         return reviewRepository.save(
                 new Review(
@@ -62,6 +62,7 @@ public class ReviewService {
                         createReviewRequest.getScore(),
                         createReviewRequest.getTitle()
                 )).getId();*/
+        return (long)0;
     }
 
 

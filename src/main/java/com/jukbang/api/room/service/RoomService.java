@@ -129,7 +129,7 @@ public class RoomService {
     }
 
     @Transactional
-    public void createRoom(String sellerId, CreateRoomRequest createRoomRequest) {
+    public Long createRoom(String sellerId, CreateRoomRequest createRoomRequest) {
      /*   double grade, reversegrade;
         reversegrade = createRoomRequest.getRoomInformation().getPrice().getMonth() / 40.0 + createRoomRequest.getRoomInformation().getPrice().getAdminExpenses() / 5.0 + createRoomRequest.getRoomInformation().getPrice().getDeposit() / 700.0;
         if (!createRoomRequest.getExtraOption().isAirconditioner()) reversegrade += 0.3;
@@ -199,6 +199,7 @@ public class RoomService {
         recommandFilterRepository.save(filter).getId();
         roomRepository.save(roomDTO.toEntity()).getId();
         return roomDetailRepository.save(roomDetailDto.toEntity()).getId();*/
+        return (long)0;
     }
 
 

@@ -3,6 +3,7 @@ package com.jukbang.api.user.report;
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.user.request.CreateReportRequest;
 import com.jukbang.api.user.service.ReportService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Disabled
 public class deleteReportTest extends BaseControllerTest {
 
     @Test
