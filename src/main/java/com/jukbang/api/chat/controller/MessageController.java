@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/message/{userId}")
 public class MessageController {
@@ -22,7 +23,6 @@ public class MessageController {
      * @param chatRoomId
      * @return (List) messageList
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/{chatRoomId}")
     public List getMessageList(
             @PathVariable("userId") String userId,
@@ -38,7 +38,6 @@ public class MessageController {
      * @param createChatRoomRequest
      * @return (List) chatRoomId
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("")
     public long createMessage(
             @PathVariable("userId") String userId,
@@ -56,7 +55,6 @@ public class MessageController {
      * @param sendMessageRequest
      * @return
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/{chatRoomId}")
     public long sendMessage(
             @PathVariable("userId") String userId,
@@ -72,7 +70,6 @@ public class MessageController {
      * @param id
      * @return (String) success
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     public String delete(
             @PathVariable("id") long id

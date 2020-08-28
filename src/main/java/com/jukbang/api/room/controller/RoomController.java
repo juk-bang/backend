@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class RoomController {
 
@@ -21,7 +22,6 @@ public class RoomController {
      * @param univId
      * @return (RoomlistWrapper) roomList
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/roomlist/{univId}")
     public RoomlistWrapper getRoomList(
             @PathVariable("univId") long univId
@@ -36,7 +36,6 @@ public class RoomController {
      * @param roomId
      * @return (RoomDetailWrapper) roomDetail
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/roomdetail/{univId}/{roomId}")
     public RoomDetailWrapper getRoomDetail(
             @PathVariable("univId") long univId,

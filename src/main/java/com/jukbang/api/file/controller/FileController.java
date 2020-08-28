@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class FileController {
     private static final Logger logger = LoggerFactory.getLogger(FileController.class);
 
@@ -25,7 +26,6 @@ public class FileController {
     private FileUploadDownloadService service;
 
 
-    @CrossOrigin(origins = "*")
     @PostMapping("/manager/manageroom/uploadimg/{Univid}/{roomid}/{no}")
     public String uploadFile(@RequestParam("file") MultipartFile file, @PathVariable("Univid") int Univid, @PathVariable("roomid") int roomid, @PathVariable("no") int no) {
         String filename = "image" + Univid + "-" + roomid + "-" + no;
@@ -41,7 +41,6 @@ public class FileController {
         return "/ext/" + Univid + "/" + roomid + "/" + no + "/" + fileName;
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping("/ext/{filename}")
     public ResponseEntity<Resource> downloadFile(@PathVariable("filename") String fileName, HttpServletRequest request) {
         // Load file as Resource

@@ -64,27 +64,39 @@ Always0ne;
 == 오류
 
 에러 응답이 발생했을 때 (상태 코드 >= 400), 본문에 해당 문제를 기술한 JSON 객체가 담겨있다.
+
 [[AuthError]]
 === Auth Error
+
 [[E0001]]
 ==== Error0001
+
 operation::0001[snippets='response-body']
+
 [[E0002]]
 ==== Error0002
+
 operation::0002[snippets='response-body']
+
 [[E0003]]
 ==== Error0003
+
 operation::0003[snippets='response-body']
+
 [[E0004]]
 ==== Error0004
+
 operation::0004[snippets='response-body']
+
 [[E0005]]
 ==== Error0005
+
 operation::0005[snippets='response-body']
+
 [[E0006]]
 ==== Error0006
-operation::0006[snippets='response-body']
 
+operation::0006[snippets='response-body']
 
 [[overview-hypermedia]]
 == 하이퍼미디어
@@ -95,6 +107,7 @@ operation::0006[snippets='response-body']
 
 [[AuthApi]]
 === 인증 API
+
 [[signin]]
 ==== 인증하기
 
@@ -102,6 +115,8 @@ operation::signin[snippets='http-request,response-body']
 
 [[signup]]
 ==== 회원가입하기
+
+role은 세개가 존재한다. `ROLE_ADMIN`, `ROLE_STUDENT`, `ROLE_LANDLORD`
 
 operation::signup[snippets='http-request,response-body']
 
@@ -132,7 +147,6 @@ operation::permitRoom[snippets='http-request,response-body']
 ==== 방 거절하기
 
 operation::rejectRoom[snippets='http-request,response-body']
-
 
 [[Community]]
 === 커뮤니티 API
@@ -198,7 +212,6 @@ operation::deleteComment[snippets='http-request,response-body']
 ===== 채팅방 만들기
 
 operation::createMessage[snippets='http-request,response-body']
-
 
 [[sendMessage]]
 ===== 메시지 보내기
@@ -273,8 +286,6 @@ operation::getReviewList[snippets='http-request,response-body']
 ===== 리뷰 수정하기
 
 operation::updateReview[snippets='http-request,response-body']
-
-
 
 [[UserApi]]
 === 사용자 API

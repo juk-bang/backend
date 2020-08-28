@@ -1,6 +1,7 @@
 package com.jukbang.api.security;
 
 import com.jukbang.api.common.BaseControllerTest;
+import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ class JwtFilterTest extends BaseControllerTest {
     @Test
     @DisplayName("Bearer 방식의 인증이 아닐 때")
     void FailBecauseNotBearer() throws Exception {
-        String token = jwtTokenProvider.createAccessToken("TestUser1", Collections.singletonList("ROLE_USER"));
+        String token = jwtTokenProvider.createAccessToken("TestUser1", Collections.singletonList(UserRole.ROLE_STUDENT));
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/board/posts")
                 .header("Authorization", token))
                 .andExpect(status().isForbidden())
@@ -35,7 +36,7 @@ class JwtFilterTest extends BaseControllerTest {
     @Test
     @DisplayName("만료된 토큰 일 때")
     void FailBecauseExpired() throws Exception {
-        String token = jwtTokenProvider.generateToken("TestUser1", Collections.singletonList("ROLE_USER"), -10);
+        String token = jwtTokenProvider.generateToken("TestUser1", Collections.singletonList(UserRole.ROLE_STUDENT), -10);
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/board/posts")
                 .header("Authorization", "Bearer " + token))
                 .andExpect(status().isForbidden())

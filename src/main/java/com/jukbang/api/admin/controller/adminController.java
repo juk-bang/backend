@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/admin/permissionroom/{univId}")
 public class adminController {
@@ -20,8 +21,7 @@ public class adminController {
      * @param univId 대학가 지역 ID
      * @return (List) roomList
      */
-    @CrossOrigin(origins = "*")
-    @GetMapping("")
+    @GetMapping
     public List<Room> getRoomList(
             @PathVariable("univId") long univId
     ) {
@@ -34,7 +34,6 @@ public class adminController {
      * @param univId 대학가 지역 ID
      * @param roomId 승인할 방 번호
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/{roomId}")
     public void permit(
             @PathVariable("univId") long univId,
@@ -49,7 +48,6 @@ public class adminController {
      * @param univId 대학가 지역 ID
      * @param roomId 승인할 방 번호
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/{roomId}")
     public void roomIdtPermit(
             @PathVariable("univId") long univId,

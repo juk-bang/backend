@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.0
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping(value = "/auth", produces = MediaTypes.HAL_JSON_VALUE)
 public class AuthController {
@@ -30,7 +31,6 @@ public class AuthController {
      * @param signInRequest 사용자 ID, 비밀번호
      * @return accessToken
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/signin")
     @ResponseStatus(HttpStatus.OK)
     public SignInResponse signIn(
@@ -42,16 +42,15 @@ public class AuthController {
     /**
      * 회원 가입하기
      *
-     * @param signUpRequest 사용자 ID, 비밀번호
+     * @param signUpRequest 사용자 ID, 비밀번호, 사용자 유형
      * @return accessToken
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.OK)
     public SignInResponse signUp(
             @RequestBody SignUpRequest signUpRequest
     ) {
-        return this.authService.signUp(signUpRequest.getId(), signUpRequest.getPassword(), signUpRequest.getUnivId());
+        return this.authService.signUp(signUpRequest);
     }
 
     /**
@@ -60,7 +59,6 @@ public class AuthController {
      * @param userId 중복확인할  ID
      * @return 사용가능 여부
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/checkid/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public String idCheck(
@@ -76,7 +74,6 @@ public class AuthController {
      * @param refreshRequest 토큰 갱신 요청
      * @return AccessToken
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/refresh")
     @ResponseStatus(HttpStatus.OK)
     public RefreshResponse getNewAccessToken(

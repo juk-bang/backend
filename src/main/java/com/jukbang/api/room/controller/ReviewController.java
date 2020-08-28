@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/review/{univId}")
 public class ReviewController {
@@ -22,7 +23,6 @@ public class ReviewController {
      * @param roomId
      * @return (List) reviewList
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/{roomId}")
     public List getReviewList(
             @PathVariable("univId") int univId,
@@ -39,7 +39,6 @@ public class ReviewController {
      * @param createReviewRequest
      * @return (long) id
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/{roomId}")
     public void createReview(
             @PathVariable("univId") int univId,
@@ -58,7 +57,6 @@ public class ReviewController {
      * @param updateReviewRequest
      * @return (long) id
      */
-    @CrossOrigin(origins = "*")
     @PutMapping("/{roomId}/{reviewId}")
     public void updateReview(
             @PathVariable("univId") int univId,
@@ -75,7 +73,6 @@ public class ReviewController {
      * @param reviewId
      * @return (String) success
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/{roomId}/{reviewId}")
     public String deleteReview(
             @PathVariable("roomId") long roomId,

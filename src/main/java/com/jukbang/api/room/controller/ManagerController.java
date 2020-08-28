@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/manager/manageroom/{sellerId}")
 public class ManagerController {
@@ -22,7 +23,6 @@ public class ManagerController {
      * @param sellerId
      * @return (List) SellerRoomList
      */
-    @CrossOrigin(origins = "*")
     @GetMapping
     public List<Room> getSellerRoomList(
             @PathVariable("sellerId") String sellerId
@@ -37,7 +37,6 @@ public class ManagerController {
      * @param createRoomRequest
      * @return (Long) id
      */
-    @CrossOrigin(origins = "*")
     @PostMapping
     public void createSellerRoom(
             @PathVariable("sellerId") String sellerId,
@@ -54,7 +53,6 @@ public class ManagerController {
      * @param updateRoomRequest
      * @return (Long) id
      */
-    @CrossOrigin(origins = "*")
     @PutMapping("/{roomId}")
     public void updateRoom(
             @PathVariable("sellerId") String sellerId,
@@ -71,7 +69,6 @@ public class ManagerController {
      * @param roomId
      * @return (String) success
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/{roomId}")
     public String deleteRoom(
             @PathVariable("sellerId") String sellerId,
