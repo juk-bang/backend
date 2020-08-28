@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping(value = "/community/{univId}")
 public class CommunityController {
@@ -24,8 +25,7 @@ public class CommunityController {
      *
      * @return boardList
      */
-    @CrossOrigin(origins = "*")
-    @GetMapping()
+    @GetMapping
     public List getPostList() {
         return communityService.getCommunitylist();
     }
@@ -39,7 +39,6 @@ public class CommunityController {
      * @param postId
      * @return new GetPostResponse()
      */
-    @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{postId}")
     public GetPostResponse getPost(
@@ -58,7 +57,6 @@ public class CommunityController {
      * @param createPostRequest
      * @return (Long) id
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("")
     public Long createPost(
             @PathVariable("univId") int univId,
@@ -79,7 +77,6 @@ public class CommunityController {
      * @return (Long) id
      * @throws JsonProcessingException
      */
-    @CrossOrigin(origins = "*")
     @PutMapping("/{postId}")
     public Long updatePost(
             @PathVariable("univId") int univId,
@@ -96,7 +93,6 @@ public class CommunityController {
      * @param postId
      * @return (String) success
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/{postId}")
     public String deletePost(
             @PathVariable("univId") int univId,

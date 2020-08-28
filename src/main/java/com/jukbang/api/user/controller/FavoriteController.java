@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class FavoriteController {
 
@@ -18,7 +19,6 @@ public class FavoriteController {
      * @param userId
      * @return (List) favoriteList
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/userinfo/favorites/{userId}")
     public List getFavoriteList(
             @PathVariable("userId") String userId
@@ -34,7 +34,6 @@ public class FavoriteController {
      * @param userId
      * @return (long) id
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/userinfo/favorites/{univId}/{roomId}/{userId}")
     public long createFavorite(
             @PathVariable("univId") int univId,
@@ -52,7 +51,6 @@ public class FavoriteController {
      * @param userId
      * @return (String) success
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/userinfo/favorites/{univId}/{roomId}/{userId}")
     public String deleteFavorite(
             @PathVariable("univId") int univId,

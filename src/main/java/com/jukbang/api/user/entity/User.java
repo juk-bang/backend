@@ -1,5 +1,6 @@
 package com.jukbang.api.user.entity;
 
+import com.jukbang.api.user.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -44,7 +45,7 @@ public class User {
      * 사용자 권한
      */
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> roles;
+    private List<UserRole> roles;
 
     /**
      * Refresh Token

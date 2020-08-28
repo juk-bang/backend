@@ -1,5 +1,6 @@
 package com.jukbang.api.security.request;
 
+import com.jukbang.api.user.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,4 +29,8 @@ public class SignUpRequest {
      * 사용자 대학 코드
      */
     private int univId;
+    /**
+     * 사용자 유형
+     */
+    private UserRole role;
 }

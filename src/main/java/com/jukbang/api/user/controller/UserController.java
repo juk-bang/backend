@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/userinfo")
 public class UserController {
@@ -24,7 +25,6 @@ public class UserController {
      * @param userId
      * @return (List) userDataList
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/{userId}")
     public List getUserDataList(
             @PathVariable("userId") String userId
@@ -39,7 +39,6 @@ public class UserController {
      * @param updateUserRequest
      * @return (String) success
      */
-    @CrossOrigin(origins = "*")
     @PutMapping("/{id}")
     public String updateUser(
             @PathVariable("id") long id,
@@ -55,7 +54,6 @@ public class UserController {
      * @param id
      * @return (String) success
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/{id}")
     public String deleteUser(
             @PathVariable("id") long id
@@ -70,7 +68,6 @@ public class UserController {
      * @param userId
      * @return (List) getMyPosts
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/posts/{userId}")
     public List<BoardlistDto> myPosts(
             @PathVariable("userId") String userId

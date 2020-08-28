@@ -2,6 +2,7 @@ package com.jukbang.api.security;
 
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.security.request.SignUpRequest;
+import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -17,10 +18,7 @@ class SignUpTest extends BaseControllerTest {
     @Test
     @DisplayName("회원 가입하기(성공)")
     void signUpSuccess() throws Exception {
-        SignUpRequest signUpRequest = SignUpRequest.builder()
-                .id("TestUser1")
-                .password("Password")
-                .build();
+        SignUpRequest signUpRequest = userFactory.generateSignUpRequest(1,UserRole.ROLE_STUDENT);
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/auth/signup")
                 .contentType(MediaType.APPLICATION_JSON)

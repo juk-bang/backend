@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class ReportController {
 
@@ -24,7 +25,6 @@ public class ReportController {
      * @param createReportRequest
      * @return (long) id
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/report/{univId}/{roomId}/{userId}")
     public long createReport(
             @PathVariable("univId") int univId,
@@ -41,7 +41,6 @@ public class ReportController {
      * @param univId
      * @return (List) reportList
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/admin/report/{univId}")
     public List<ReportListWrapper> reportList(
             @PathVariable("univId") int univId
@@ -57,7 +56,6 @@ public class ReportController {
      * @param reportId
      * @return (ReportDetailWrapper) reportDetail
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/admin/report/{univId}/{roomId}/{reportId}")
     public ReportDetailWrapper reportDetail(
             @PathVariable("univId") long univId,
@@ -74,7 +72,6 @@ public class ReportController {
      * @param roomId
      * @param reportId
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("/admin/report/{univId}/{roomId}/{reportId}")
     public void deleteReport(
             @PathVariable("univId") long univId,

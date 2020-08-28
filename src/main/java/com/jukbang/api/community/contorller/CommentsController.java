@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping("/community/comments/{univId}")
 public class CommentsController {
@@ -24,7 +25,6 @@ public class CommentsController {
      * @param postId
      * @return
      */
-    @CrossOrigin(origins = "*")
     @GetMapping("/{postId}")
     public List getCommentsList(
             @PathVariable("univId") int univId,
@@ -42,7 +42,6 @@ public class CommentsController {
      * @param createCommentRequest
      * @return (long) id
      */
-    @CrossOrigin(origins = "*")
     @PostMapping("/{postId}")
     public long createComment(
             @PathVariable("univId") int univId,
@@ -63,7 +62,6 @@ public class CommentsController {
      * @return (long) id
      * @throws JsonProcessingException
      */
-    @CrossOrigin(origins = "*")
     @PutMapping("/{postId}/{id}")
     public long updateComment(
             @PathVariable("univId") int univId,
@@ -81,7 +79,6 @@ public class CommentsController {
      * @param postId
      * @return (String) success
      */
-    @CrossOrigin(origins = "*")
     @DeleteMapping("{postId}/{id}")
     public String deleteComment(
             @PathVariable("id") long id,

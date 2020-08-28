@@ -1,13 +1,14 @@
 package com.jukbang.api.security.service;
 
-import com.jukbang.api.user.entity.User;
-import com.jukbang.api.user.repository.UserRepository;
 import com.jukbang.api.security.JwtTokenProvider;
 import com.jukbang.api.security.exception.CantSignInException;
 import com.jukbang.api.security.exception.IdAlreadyExistsException;
 import com.jukbang.api.security.request.RefreshRequest;
+import com.jukbang.api.security.request.SignUpRequest;
 import com.jukbang.api.security.response.RefreshResponse;
 import com.jukbang.api.security.response.SignInResponse;
+import com.jukbang.api.user.entity.User;
+import com.jukbang.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -56,18 +57,17 @@ public class AuthService {
      * 회원 가입 하기
      * 회원가입과 동시에 인증토큰 발급
      *
-     * @param id       사용자 ID
-     * @param password 사용자 비밀번호
+     * @param signUpRequest 회원가입 요청
      * @return accessToken
      */
     @Transactional
-    public SignInResponse signUp(String id, String password, int univId) {
+    public SignInResponse signUp(SignUpRequest signUpRequest) {
         User user = this.userRepository.save(User.builder()
-                .userId(id)
-                .password(passwordEncoder.encode(password))
-                .roles(Collections.singletonList("ROLE_USER"))
-                .refreshToken(jwtTokenProvider.createRefreshToken(id, Collections.singletonList("ROLE_USER")))
-                .univId(univId)
+                .userId(signUpRequest.getId())
+                .password(passwordEncoder.encode(signUpRequest.getPassword()))
+                .roles(Collections.singletonList(signUpRequest.getRole()))
+                .refreshToken(jwtTokenProvider.createRefreshToken(signUpRequest.getId(), Collections.singletonList(signUpRequest.getRole())))
+                .univId(signUpRequest.getUnivId())
                 .build());
 
         return SignInResponse.builder()
