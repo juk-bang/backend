@@ -30,7 +30,7 @@ public class Post extends Time {
     @Column(nullable = false)
     private int commentsNum;
 
-    @OneToMany(mappedBy = "comments")
+    @OneToMany(mappedBy = "post")
     private List<Comments> comments;
 
     @OneToOne

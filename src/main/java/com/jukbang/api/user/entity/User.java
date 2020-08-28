@@ -51,7 +51,7 @@ public class User {
      */
     private String refreshToken;
 
-    @OneToMany(mappedBy = "User")
+    @OneToMany(mappedBy = "user")
     private List<Favorite> favorites;
 
 

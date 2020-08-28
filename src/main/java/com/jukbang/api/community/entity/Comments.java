@@ -30,4 +30,8 @@ public class Comments extends Time {
     @OneToOne
     @JoinColumn(name = "writer_id")
     private User writer;
+
+    @ManyToOne
+    @JoinColumn(name = "postId")
+    private Post post;
 }

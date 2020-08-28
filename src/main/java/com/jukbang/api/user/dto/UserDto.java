@@ -15,9 +15,9 @@ public class UserDto {
     private String userId;
     private int univId;
 
-    /**
+/*    *//**
      * class -> Entity
-     */
+     *//*
 
     public User toEntity() {
         User build = User.builder()
@@ -26,7 +26,7 @@ public class UserDto {
                 .univId(univId)
                 .build();
         return build;
-    }
+    }*/
 
     /**
      * Entity -> class

@@ -22,13 +22,13 @@ public class ReviewDto {
     private String title;
     private LocalDateTime modifiedDate;
 
-    /**
+/*    *//**
      * class -> Entity
-     */
+     *//*
 
     public Review toEntity() {
         Review build = Review.builder()
-                .id(id)
+                .reviewId(id)
                 .writer(writer)
                 .body(body)
                 .univId(univid)
@@ -37,7 +37,7 @@ public class ReviewDto {
                 .title(title)
                 .build();
         return build;
-    }
+    }*/
 
     /**
      * Entity -> class

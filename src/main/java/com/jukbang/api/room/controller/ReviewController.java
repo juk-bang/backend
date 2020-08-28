@@ -41,12 +41,12 @@ public class ReviewController {
      */
     @CrossOrigin(origins = "*")
     @PostMapping("/{roomId}")
-    public long createReview(
+    public void createReview(
             @PathVariable("univId") int univId,
             @PathVariable("roomId") int roomId,
             @RequestBody CreateReviewRequest createReviewRequest
     ) {
-        return ReviewService.SaveReview(univId, roomId, createReviewRequest);
+        ReviewService.SaveReview(univId, roomId, createReviewRequest);
     }
 
     /**
@@ -60,13 +60,13 @@ public class ReviewController {
      */
     @CrossOrigin(origins = "*")
     @PutMapping("/{roomId}/{reviewId}")
-    public long updateReview(
+    public void updateReview(
             @PathVariable("univId") int univId,
             @PathVariable("roomId") int roomId,
             @PathVariable("reviewId") long reviewId,
             @RequestBody UpdateReviewRequest updateReviewRequest
     ) {
-        return ReviewService.rewriteReview(univId, roomId, reviewId, updateReviewRequest);
+        ReviewService.rewriteReview(univId, roomId, reviewId, updateReviewRequest);
     }
 
     /**

@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,9 +16,9 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false)
-    private int roomid;
+    private int roomId;
     @Column(nullable = false)
-    private int imageid;
+    private int imageId;
     @Column(length = 30, nullable = false)
     private String filename;
 

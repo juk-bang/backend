@@ -23,4 +23,8 @@ public class Favorite {
      */
     @Column(nullable = false)
     private int roomid;
+
+    @ManyToOne
+    @JoinColumn(name = "accountId")
+    private User user;
 }

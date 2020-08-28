@@ -10,7 +10,6 @@ import lombok.*;
 public class ImageDto {
 
     private long id;
-    private int univid;
     private int roomid;
     private int imageid;
     private String filename;
@@ -22,9 +21,8 @@ public class ImageDto {
     public Image toEntity() {
         Image build = Image.builder()
                 .id(id)
-                .univid(univid)
-                .roomid(roomid)
-                .imageid(imageid)
+                .roomId(roomid)
+                .imageId(imageid)
                 .filename(filename)
                 .build();
         return build;
@@ -35,9 +33,8 @@ public class ImageDto {
      */
 
     @Builder
-    public ImageDto(long id, int univid, int roomid, int imageid, String filename) {
+    public ImageDto(long id,  int roomid, int imageid, String filename) {
         this.id = id;
-        this.univid = univid;
         this.roomid = roomid;
         this.imageid = imageid;
         this.filename = filename;

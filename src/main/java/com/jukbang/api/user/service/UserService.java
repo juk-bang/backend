@@ -28,7 +28,6 @@ public class UserService {
 
         for (User boardEntity : boardEntities) {
             UserDto boardDTO = UserDto.builder()
-                    .id(boardEntity.getId())
                     .userId(boardEntity.getUserId())
                     .univId(boardEntity.getUnivId())
                     .build();
@@ -45,7 +44,7 @@ public class UserService {
      */
     @Transactional
     public void rewriteUser(long id, UpdateUserRequest updateUserRequest) {
-        userRepository.save(
+/*        userRepository.save(
                 new User(
                         id,
                         updateUserRequest.getUserId(),
@@ -53,7 +52,7 @@ public class UserService {
                         updateUserRequest.getUnivid(),
                         null,
                         null
-                )); // 잘모르겠음
+                )); // 잘모르겠음*/
     }
 
     /**

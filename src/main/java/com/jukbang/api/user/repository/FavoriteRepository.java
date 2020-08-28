@@ -10,10 +10,4 @@ import java.util.Optional;
 @Repository
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 
-    List<Favorite> findAllByUserId(String userid);
-
-    Optional<Favorite> findByRoomid(int roomId);
-
-    List<Favorite> deleteByUnividAndRoomid(int univid, int roomid);
-
 }

@@ -23,7 +23,7 @@ public class ReviewService {
      */
     @Transactional
     public List<ReviewDto> getReviewList(int univId, int roomId) {
-        List<Review> boardEntities = reviewRepository.findAllByUnivIdAndRoomId(univId, roomId);
+/*        List<Review> boardEntities = reviewRepository.findAllByUnivIdAndRoomId(univId, roomId);
         List<ReviewDto> boardDtoList = new ArrayList<>();
 
         for (Review boardEntity : boardEntities) {
@@ -41,7 +41,8 @@ public class ReviewService {
             boardDtoList.add(boardDTO);
         }
 
-        return boardDtoList;
+        return boardDtoList;*/
+        return null;
     }
 
     /**
@@ -49,8 +50,8 @@ public class ReviewService {
      * 입력해야될 데이터 : writter (작성자), body(내용), title(제목), score(점수)
      */
     @Transactional
-    public long SaveReview(int univId, int roomId, CreateReviewRequest createReviewRequest) {
-
+    public void SaveReview(int univId, int roomId, CreateReviewRequest createReviewRequest) {
+/*
         return reviewRepository.save(
                 new Review(
                         createReviewRequest.getId(),
@@ -60,7 +61,7 @@ public class ReviewService {
                         roomId,
                         createReviewRequest.getScore(),
                         createReviewRequest.getTitle()
-                )).getId();
+                )).getId();*/
     }
 
 
@@ -69,8 +70,8 @@ public class ReviewService {
      * 댓글의 고유번호 (id) 에 접근하여 수정
      */
     @Transactional
-    public long rewriteReview(int univId, int roomId, long id, UpdateReviewRequest updateReviewRequest) {
-
+    public void rewriteReview(int univId, int roomId, long id, UpdateReviewRequest updateReviewRequest) {
+/*
         return reviewRepository.save(
                 new Review(
                         id,
@@ -80,7 +81,7 @@ public class ReviewService {
                         roomId,
                         updateReviewRequest.getScore(),
                         updateReviewRequest.getTitle()
-                )).getId();
+                )).getId();*/
     }
 
     /**

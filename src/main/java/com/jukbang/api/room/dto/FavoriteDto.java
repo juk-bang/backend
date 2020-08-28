@@ -16,9 +16,9 @@ public class FavoriteDto {
     private int univid;
     private int roomid;
 
-    /**
+/*    *//**
      * class -> Entity
-     */
+     *//*
 
     public Favorite toEntity() {
         Favorite build = Favorite.builder()
@@ -28,7 +28,7 @@ public class FavoriteDto {
                 .roomid(roomid)
                 .build();
         return build;
-    }
+    }*/
 
     /**
      * Entity -> class
