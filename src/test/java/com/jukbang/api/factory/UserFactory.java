@@ -28,6 +28,6 @@ public class UserFactory {
     @Transactional
     public Long generateUser(int i) {
         authService.signUp("TestUser" + i, "password", 1);
-        return userRepository.findByUserId("TestUser"+i).get().getId();
+        return userRepository.findByUserId("TestUser"+i).get().getAccountId();
     }
 }

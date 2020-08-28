@@ -11,14 +11,14 @@ import java.util.List;
 @NoArgsConstructor
 public class RoomlistWrapper {
     private List<RoomDto> room;
-    private RecommandFilterDto recommandFilter;
+/*    private RecommandFilterDto recommandFilter;*/
 
-
+/*
     @Builder
     public RoomlistWrapper(List<RoomDto> room, RecommandFilterDto recommandFilterDto) {
         this.room = room;
         this.recommandFilter = recommandFilterDto;
-    }
+    }*/
 
 
 }

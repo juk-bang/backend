@@ -26,7 +26,7 @@ public class ReportService {
     @Transactional
     public long createReport(int univId, int roomId, String userId, CreateReportRequest createReportRequest) {
 
-        return reportRepository.save(
+/*        return reportRepository.save(
                 new Report(
                         createReportRequest.getId(),
                         userId,
@@ -34,28 +34,27 @@ public class ReportService {
                         roomId,
                         createReportRequest.getBody(),
                         createReportRequest.getTitle()
-                )).getId();
+                )).getId();*/
+        return 0;
     }
 
     @Transactional
     public List<ReportListWrapper> reportList(int univId) {
-
+/*
         List<Report> reportEntities = reportRepository.findAllByUnivId(univId);
         List<ReportListWrapper> reportList1 = new ArrayList<>();
 
         for (Report reportEntity : reportEntities) {
             ReportListWrapper reoprtDTO = ReportListWrapper.builder()
-                    .id(reportEntity.getId())
                     .title(reportEntity.getTitle())
-                    .writer(reportEntity.getUserId())
                     .modifiedDate(reportEntity.getCreatedDate())
                     .roomId(reportEntity.getRoomId())
                     .build();
 
             reportList1.add(reoprtDTO);
         }
-        return reportList1;
-
+        return reportList1;*/
+        return null;
     }
 
     @Transactional
@@ -64,7 +63,6 @@ public class ReportService {
         Report reports = report.get();
 
         return ReportDetailWrapper.builder()
-                .writer(reports.getUserId())
                 .title(reports.getTitle())
                 .body(reports.getBody())
                 .modifiedDate(reports.getModifiedDate())

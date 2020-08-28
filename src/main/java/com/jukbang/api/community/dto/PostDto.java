@@ -1,6 +1,6 @@
-package com.jukbang.api.community.dto;
+package com.jukbang.api.Post.dto;
 
-import com.jukbang.api.community.entity.Community;
+import com.jukbang.api.community.entity.Post;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class CommunityDto {
+public class PostDto {
     private long id;
     private long previd;
     private long nextid;
@@ -22,8 +22,8 @@ public class CommunityDto {
     private int comments;
     private LocalDateTime modifiedDate;
 
-    public Community toEntity() {
-        Community build = Community.builder()
+/*    public Post toEntity() {
+        Post build = Post.builder()
                 .id(id)
                 .title(title)
                 .writer(writer)
@@ -42,8 +42,8 @@ public class CommunityDto {
         private int views;
         private int comments;
 
-        public Community toEntity() {
-            Community build = Community.builder()
+        public Post toEntity() {
+            Post build = Post.builder()
                     .id(id)
                     .title(title)
                     .writer(writer)
@@ -52,10 +52,10 @@ public class CommunityDto {
                     .build();
             return build;
         }
-    }
+    }*/
 
     @Builder
-    public CommunityDto(long id, long previd, long nextid, String title, String writer, String body, int univId, int views, int comments, LocalDateTime modifiedDate) {
+    public PostDto(long id, long previd, long nextid, String title, String writer, String body, int univId, int views, int comments, LocalDateTime modifiedDate) {
         this.id = id;
         this.previd = previd;
         this.nextid = nextid;

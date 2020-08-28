@@ -24,7 +24,7 @@ public class FavoriteService {
      */
     @Transactional
     public List<Room> getFavoriteList(String userid) {
-        List<Favorite> boardEntities = favoriteRepository.findAllByUserId(userid);
+/*        List<Favorite> boardEntities = favoriteRepository.findAllByUserId(userid);
         List<Room> roomList = new ArrayList<>();
         for (Favorite boardEntity : boardEntities) {
             Optional<Room> room = roomRepository.findById((long) boardEntity.getRoomid());
@@ -33,7 +33,8 @@ public class FavoriteService {
 
         }
 
-        return roomList;
+        return roomList;*/
+        return null;
     }
 
     /**
@@ -42,7 +43,7 @@ public class FavoriteService {
      */
     @Transactional
     public long SaveFavorite(int univid, int roomid, String userid) {
-        FavoriteDto favoriteDto = new FavoriteDto();
+/*        FavoriteDto favoriteDto = new FavoriteDto();
         favoriteDto.setUnivid(univid);
         favoriteDto.setRoomid(roomid);
         favoriteDto.setUserId(userid);
@@ -54,7 +55,8 @@ public class FavoriteService {
                 .univid(favoriteDto.getUnivid())
                 .build();
 
-        return favoriteRepository.save(favoriteDto.toEntity()).getId(); // 잘모르겠음
+        return favoriteRepository.save(favoriteDto.toEntity()).getId(); // 잘모르겠음*/
+        return 0;
     }
 
     /**
@@ -63,16 +65,14 @@ public class FavoriteService {
      */
     @Transactional
     public void DeleteFavorite(int univid, int roomid, String userid) {
-        Optional<Favorite> favoriteWrapper = favoriteRepository.findByRoomid(roomid);
+/*        Optional<Favorite> favoriteWrapper = favoriteRepository.findByRoomid(roomid);
         Favorite favorite = favoriteWrapper.get();
 
         FavoriteDto favoriteDTO = FavoriteDto.builder()
                 .id(favorite.getId())
-                .userId(favorite.getUserId())
-                .univid(favorite.getUnivid())
                 .roomid(favorite.getRoomid())
                 .build();
         favoriteRepository.save(favoriteDTO.toEntity()).getId();
-        favoriteRepository.deleteByUnividAndRoomid(univid, roomid);
+        favoriteRepository.deleteByUnividAndRoomid(univid, roomid);*/
     }
 }

@@ -1,11 +1,8 @@
 package com.jukbang.api.room.service;
 
-import com.jukbang.api.room.dto.*;
-import com.jukbang.api.room.entity.RecommandFilter;
+import com.jukbang.api.room.dto.RoomDetailWrapper;
+import com.jukbang.api.room.dto.RoomlistWrapper;
 import com.jukbang.api.room.entity.Room;
-import com.jukbang.api.room.entity.RoomDetail;
-import com.jukbang.api.room.repository.RecommandFilterRepository;
-import com.jukbang.api.room.repository.RoomDetailRepository;
 import com.jukbang.api.room.repository.RoomRepository;
 import com.jukbang.api.room.request.CreateRoomRequest;
 import com.jukbang.api.room.request.UpdateRoomRequest;
@@ -13,21 +10,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class RoomService {
 
-    private final RecommandFilterRepository recommandFilterRepository;
-    private final RoomDetailRepository roomDetailRepository;
     private final RoomRepository roomRepository;
 
     @Transactional
     public RoomlistWrapper getRoomlist(long Univid) {
-        RoomlistWrapper roomlistWrapper = new RoomlistWrapper();
+/*        RoomlistWrapper roomlistWrapper = new RoomlistWrapper();
         List<Room> RoomEntities = roomRepository.findAllByUnividAndPermission(Univid, 1);
         List<RoomDto> RoomDtoList = new ArrayList<>();
 
@@ -78,12 +71,13 @@ public class RoomService {
 
         roomlistWrapper.setRoom(RoomDtoList);
         roomlistWrapper.setRecommandFilter(recommandFilterDto);
-        return roomlistWrapper;
+        return roomlistWrapper;*/
+        return null;
     }
 
     @Transactional
     public List<Room> SellerRoomlist(String sellerId) {
-        List<Room> RoomEntities = new ArrayList<>();
+/*        List<Room> RoomEntities = new ArrayList<>();
         List<RoomDetail> RoomDetailEntities = roomDetailRepository.findAllBySellerId(sellerId);
         for (RoomDetail RoomDetailEntity : RoomDetailEntities) {
 
@@ -92,13 +86,13 @@ public class RoomService {
         }
 
 
-        return RoomEntities;
-
+        return RoomEntities;*/
+        return null;
     }
 
     @Transactional
     public RoomDetailWrapper getRoomDetail(long roomId) {
-
+/*
         Optional<Room> roomWrap = roomRepository.findById(roomId);
         Room room = roomWrap.get();
         Optional<RoomDetail> roomDetailWrap = roomDetailRepository.findById(roomId);
@@ -130,12 +124,13 @@ public class RoomService {
                 .busStation(roomDetail.isBusStation())
                 .subwayStation(roomDetail.isSubwayStation())
                 .build();
-        return roomDetailWrapper;
+        return roomDetailWrapper;*/
+        return null;
     }
 
     @Transactional
     public Long createRoom(String sellerId, CreateRoomRequest createRoomRequest) {
-        double grade, reversegrade;
+     /*   double grade, reversegrade;
         reversegrade = createRoomRequest.getRoomInformation().getPrice().getMonth() / 40.0 + createRoomRequest.getRoomInformation().getPrice().getAdminExpenses() / 5.0 + createRoomRequest.getRoomInformation().getPrice().getDeposit() / 700.0;
         if (!createRoomRequest.getExtraOption().isAirconditioner()) reversegrade += 0.3;
         if (!createRoomRequest.getExtraOption().isAutoDoor()) reversegrade += 0.3;
@@ -203,13 +198,14 @@ public class RoomService {
 
         recommandFilterRepository.save(filter).getId();
         roomRepository.save(roomDTO.toEntity()).getId();
-        return roomDetailRepository.save(roomDetailDto.toEntity()).getId();
+        return roomDetailRepository.save(roomDetailDto.toEntity()).getId();*/
+        return (long)0;
     }
 
 
     @Transactional
-    public Long updateRoom(String sellerId, long roomId, UpdateRoomRequest updateRoomRequest) {
-        double grade, reversegrade;
+    public void updateRoom(String sellerId, long roomId, UpdateRoomRequest updateRoomRequest) {
+/*        double grade, reversegrade;
 
         reversegrade = updateRoomRequest.getRoomInformation().getPrice().getMonth() / 40.0 + updateRoomRequest.getRoomInformation().getPrice().getAdminExpenses() / 5.0 + updateRoomRequest.getRoomInformation().getPrice().getDeposit() / 700.0;
         if (!updateRoomRequest.getExtraOption().isAirconditioner()) reversegrade += 0.3;
@@ -256,35 +252,36 @@ public class RoomService {
                 .description(updateRoomRequest.getDescription())
                 .build();
         roomRepository.save(roomDTO.toEntity());
-        return roomDetailRepository.save(roomDetailDto.toEntity()).getId();
+        return roomDetailRepository.save(roomDetailDto.toEntity()).getId();*/
     }
 
     @Transactional
     public List<Room> wantpermit(long Univid) {
+/*
         return roomRepository.findAllByUnividAndPermission(Univid, 0);
-
+*/
+        return null;
     }
 
     @Transactional
     public void permit(long Univid, long id) {
-        Optional<Room> room = roomRepository.findById(id);
+/*        Optional<Room> room = roomRepository.findById(id);
         Room target = room.get();
         target.setPermission(1);
-        roomRepository.save(target);
+        roomRepository.save(target);*/
     }
 
     @Transactional
     public void dontpermit(long Univid, long id) {
-        Optional<Room> room = roomRepository.findById(id);
+/*        Optional<Room> room = roomRepository.findById(id);
         Room target = room.get();
         target.setPermission(2);
-        roomRepository.save(target);
+        roomRepository.save(target);*/
     }
 
     @Transactional
     public void deleteRoom(Long roomId) {
         roomRepository.deleteById(roomId);
-        roomDetailRepository.deleteById(roomId);
     }
 
 

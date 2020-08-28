@@ -3,6 +3,7 @@ package com.jukbang.api.room;
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.room.dto.*;
 import com.jukbang.api.room.request.UpdateRoomRequest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -13,6 +14,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Disabled
 public class UpdateRoom extends BaseControllerTest {
 
     @Test

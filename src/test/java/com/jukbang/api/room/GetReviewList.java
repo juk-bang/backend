@@ -10,6 +10,7 @@ import com.jukbang.api.room.request.CreateReviewRequest;
 import com.jukbang.api.room.request.CreateRoomRequest;
 import com.jukbang.api.room.service.ReviewService;
 import com.jukbang.api.room.service.RoomService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@Disabled
 public class GetReviewList extends BaseControllerTest {
     @Autowired
     private ReviewService reviewService;

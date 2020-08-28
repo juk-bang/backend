@@ -1,6 +1,5 @@
 package com.jukbang.api.community.service;
 
-import com.jukbang.api.community.entity.Community;
 import com.jukbang.api.community.repository.CommunityRepository;
 import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.request.UpdatePostRequest;
@@ -10,9 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +19,7 @@ public class CommunityService {
 
     @Transactional
     public List<BoardlistDto> getCommunitylist() {
-        List<Community> boardEntities = communityRepository.findAll();
+/*        List<Community> boardEntities = communityRepository.findAll();
         List<BoardlistDto> boardDtoList = new ArrayList<>();
 
         for (Community boardEntity : boardEntities) {
@@ -39,12 +36,13 @@ public class CommunityService {
             boardDtoList.add(boardDTO);
         }
 
-        return boardDtoList;
+        return boardDtoList;*/
+        return null;
     }
 
     @Transactional
     public List<BoardlistDto> getMyPosts(String userid) {
-        List<Community> boardEntities = communityRepository.findAllByWriter(userid);
+/*        List<Community> boardEntities = communityRepository.findAllByWriter(userid);
         List<BoardlistDto> boardDtoList = new ArrayList<>();
 
         for (Community boardEntity : boardEntities) {
@@ -60,7 +58,8 @@ public class CommunityService {
 
             boardDtoList.add(boardDTO);
         }
-        return boardDtoList;
+        return boardDtoList;*/
+        return null;
     }
 
     @Transactional
@@ -68,7 +67,7 @@ public class CommunityService {
             int univId,
             CreatePostRequest createPostRequest
     ) {
-        return communityRepository.save(
+/*        return communityRepository.save(
                 new Community(
                         createPostRequest.getId(),
                         createPostRequest.getTitle(),
@@ -77,12 +76,13 @@ public class CommunityService {
                         univId,
                         0,
                         0
-                )).getId();
+                )).getId();*/
+        return null;
     }
 
     @Transactional
     public GetPostResponse getPost(int univId, Long Postid) {
-        List<BoardlistDto> list = getCommunitylist();
+/*        List<BoardlistDto> list = getCommunitylist();
         long priv = 0, next = 0, tmp = 0;
         for (int i = 0; i < list.size() - 1; i++) {
             if (list.get(0).getId() == Postid) {
@@ -118,12 +118,14 @@ public class CommunityService {
                 .comments(community.getComments())
                 .univid(community.getUnivId())
                 .views(community.getViews())
-                .build();
+                .build();*/
+        return null;
     }
 
     @Transactional
     public Long rewritePost(int univId, Long postId, UpdatePostRequest updatePostRequest) {
-        return communityRepository.save(
+        return null;
+/*        return communityRepository.save(
                 new Community(
                         postId,
                         updatePostRequest.getTitle(),
@@ -132,7 +134,7 @@ public class CommunityService {
                         univId,
                         0,
                         0
-                )).getId();
+                )).getId();*/
     }
 
     @Transactional

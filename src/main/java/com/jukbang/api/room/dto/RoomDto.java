@@ -22,9 +22,9 @@ public class RoomDto {
     private long univid;
     private int permission;
 
-    public Room toEntity() {
+/*    public Room toEntity() {
         Room build = Room.builder()
-                .id(id)
+                .roomId(id)
                 .structure(structure)
                 .month(month)
                 .adminExpenses(adminExpenses)
@@ -39,7 +39,7 @@ public class RoomDto {
                 .permission(permission)
                 .build();
         return build;
-    }
+    }*/
 
     @Builder
     public RoomDto(long id, int structure, double month, double adminExpenses, double deposit, double floor, double scale, double grade, double distance, double lat, double lng, long univid, int permission) {

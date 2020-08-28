@@ -24,7 +24,7 @@ public class CommentsDto {
      * class -> Entity
      */
 
-    public Comments toEntity() {
+/*    public Comments toEntity() {
         Comments build = Comments.builder()
                 .id(id)
                 .writer(writer)
@@ -33,7 +33,7 @@ public class CommentsDto {
                 .postId(postId)
                 .build();
         return build;
-    }
+    }*/
 
     /**
      * Entity -> class

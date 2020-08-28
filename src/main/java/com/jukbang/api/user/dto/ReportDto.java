@@ -21,9 +21,9 @@ public class ReportDto {
     private int roomId;
     private LocalDateTime creatDate;
 
-    /**
+/*    *//**
      * class -> Entity
-     */
+     *//*
 
     public Report toEntity() {
         Report build = Report.builder()
@@ -35,7 +35,7 @@ public class ReportDto {
                 .roomId(roomId)
                 .build();
         return build;
-    }
+    }*/
 
     /**
      * Entity -> class

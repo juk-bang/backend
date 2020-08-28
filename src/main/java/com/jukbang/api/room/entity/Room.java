@@ -1,60 +1,56 @@
 package com.jukbang.api.room.entity;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.jukbang.api.room.entity.embedded.*;
+import com.jukbang.api.user.entity.User;
+import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long roomId;
     @Column(nullable = false)
-    private int structure;
-    @Column(nullable = false)
-    private double month;
-    @Column(nullable = false)
-    private double adminExpenses;
-    @Column(nullable = false)
-    private double deposit;
-    @Column(nullable = false)
-    private double floor;
-    @Column(nullable = false)
-    private double scale;
-    @Column(nullable = false)
-    private double distance;
-    @Column(nullable = false)
-    private double lat;
-    @Column(nullable = false)
-    private double lng;
-    @Column(nullable = false)
-    private long univid;
+    private long univId;
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String description;
     @Column(nullable = false)
     private double grade;
+
+    @Column(nullable = false)
+    private int pictureCount;
     @Column(nullable = false)
     private int permission;
 
-    @Builder
-    public Room(long id, int structure, double month, double adminExpenses, double deposit, double floor, double scale, double distance, double lat, double lng, long univid, double grade, int permission) {
-        this.id = id;
-        this.structure = structure;
-        this.month = month;
-        this.adminExpenses = adminExpenses;
-        this.deposit = deposit;
-        this.floor = floor;
-        this.scale = scale;
-        this.distance = distance;
-        this.grade = grade;
-        this.lat = lat;
-        this.lng = lng;
-        this.univid = univid;
-        this.permission = permission;
-    }
+    @Embedded
+    @NotNull
+    private RoomInformation roomInformation;
+
+    @Embedded
+    @NotNull
+    private Price price;
+
+    @Embedded
+    @NotNull
+    private ExtraOption extraOption;
+
+    @Embedded
+    @NotNull
+    private Location location;
+
+    @Embedded
+    @NotNull
+    private Facilities facilities;
+
+    @OneToOne
+    @JoinColumn(name = "seller_id")
+    private User seller;
+
 }

@@ -39,11 +39,11 @@ public class ManagerController {
      */
     @CrossOrigin(origins = "*")
     @PostMapping
-    public Long createSellerRoom(
+    public void createSellerRoom(
             @PathVariable("sellerId") String sellerId,
             @RequestBody CreateRoomRequest createRoomRequest
     ) {
-        return roomService.createRoom(sellerId, createRoomRequest);
+        roomService.createRoom(sellerId, createRoomRequest);
     }
 
     /**
@@ -56,12 +56,12 @@ public class ManagerController {
      */
     @CrossOrigin(origins = "*")
     @PutMapping("/{roomId}")
-    public Long updateRoom(
+    public void updateRoom(
             @PathVariable("sellerId") String sellerId,
             @PathVariable("roomId") Long roomId,
             @RequestBody UpdateRoomRequest updateRoomRequest
     ) {
-        return roomService.updateRoom(sellerId, roomId, updateRoomRequest);
+        roomService.updateRoom(sellerId, roomId, updateRoomRequest);
     }
 
     /**
