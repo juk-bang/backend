@@ -26,10 +26,19 @@ spring:
 file:
   upload-dir: ./file/UPLOAD_FILES
 
-
-
 jwt:
   secretKey: "This Data Must Be Managed By Secret NOT HERE THIS IS JUST EXAMPLE"
+
+log:
+  systemName: JukBang
+  level: ERROR
+  slack:
+    enabled: true
+    webHookUrl: https://hooks.slack.com/services/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
+    channel: error-report-bot
+    userName: "[API]ErrorReportBot"
+  database:
+    enabled: true
 
 logging:
   level:

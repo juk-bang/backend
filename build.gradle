@@ -33,6 +33,11 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     compile "org.springframework.boot:spring-boot-configuration-processor"
 
+    //for Slack Logback
+    compile 'net.gpedro.integrations.slack:slack-webhook:1.4.0'
+    implementation 'org.apache.commons:commons-text:1.8'
+    compile 'eu.bitwalker:UserAgentUtils:1.21'
+
     //for JWt Auth
     implementation 'org.springframework.boot:spring-boot-starter-security'
     testImplementation 'org.springframework.security:spring-security-test'
