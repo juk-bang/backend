@@ -1,45 +1,28 @@
 package com.jukbang.api.room.dto;
 
 
-import lombok.*;
+import com.jukbang.api.room.entity.embedded.Location;
+import com.jukbang.api.room.entity.embedded.Option;
+import com.jukbang.api.room.entity.embedded.Price;
+import com.jukbang.api.room.entity.embedded.RoomInfo;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 public class RoomDetailDto {
-    long id;
-    int pictureCount;
-    String sellerId;
-    String address;
-    boolean elevator;
-    boolean park;
-    boolean cctv;
-    boolean autoDoor;
-    boolean washingMachine;
-    boolean gasrange;
-    boolean refrigerator;
-    boolean airconditioner;
-    boolean busStation;
-    boolean subwayStation;
-    String description;
-
-    @Builder
-    public RoomDetailDto(long id, int pictureCount, String sellerId, String address, boolean elevator, boolean park, boolean cctv, boolean autoDoor, boolean washingMachine, boolean gasrange, boolean refrigerator, boolean airconditioner, boolean busStation, boolean subwayStation, String description) {
-        this.id = id;
-        this.pictureCount = pictureCount;
-        this.sellerId = sellerId;
-        this.address = address;
-        this.elevator = elevator;
-        this.park = park;
-        this.cctv = cctv;
-        this.autoDoor = autoDoor;
-        this.washingMachine = washingMachine;
-        this.gasrange = gasrange;
-        this.refrigerator = refrigerator;
-        this.airconditioner = airconditioner;
-        this.busStation = busStation;
-        this.subwayStation = subwayStation;
-        this.description = description;
-    }
+    private long roomId;
+    private RoomInfo roomInfo;
+    private Price price;
+    private Option option;
+    private Location location;
+    private String description;
+    private long univId;
+    private double grade;
+    private double distance;
+    private int pictureCount;
 }

@@ -40,7 +40,7 @@ class SignUpTest extends BaseControllerTest {
     @Test
     @DisplayName("아이디 중복 조회하기(사용 불가능할 때)")
     void idCheckFailBecauseExists() throws Exception {
-        this.userFactory.signUpUser(1);
+        this.userFactory.signUpUser(1, UserRole.ROLE_STUDENT);
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/auth/checkid/{userId}", "TestUser1"))
                 .andExpect(status().isAccepted())

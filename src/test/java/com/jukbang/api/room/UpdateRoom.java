@@ -24,15 +24,7 @@ public class UpdateRoom extends BaseControllerTest {
 
         long roomId = roomFactory.generateRoom("sellerId");
 
-        UpdateRoomRequest updateRoomRequest = UpdateRoomRequest.builder()
-                .description("updated")
-                .univId(1)
-                .pictureCount(0)
-                .roomInformation(new RoomInformation("addr", 1, 2, 2, new Price(1, 1, 1)))
-                .extraOption(new ExtraOption(true, true, true, true, true, true, true, true))
-                .location(new Location(1, 1))
-                .facilities(new Facilities(true, true))
-                .build();
+        UpdateRoomRequest updateRoomRequest = roomFactory.generateUpdateRoomRequest();
 
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/manager/manageroom/{sellerId}/{roomId}", "sellerId", roomId)

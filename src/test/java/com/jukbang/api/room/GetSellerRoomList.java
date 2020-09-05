@@ -1,17 +1,10 @@
 package com.jukbang.api.room;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community.service.CommunityService;
-import com.jukbang.api.room.dto.ExtraOption;
-import com.jukbang.api.room.dto.Facilities;
-import com.jukbang.api.room.dto.Location;
-import com.jukbang.api.room.dto.RoomInformation;
-import com.jukbang.api.room.request.CreateRoomRequest;
-import com.jukbang.api.room.service.RoomService;
+import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.test.context.support.WithMockUser;
 
@@ -26,9 +19,11 @@ public class GetSellerRoomList extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("판매자 방 리스트 가져오기 (성공)")
     void getSellerRoomListSuccess() throws Exception{
-        roomFactory.generateRoom("seller");
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        roomFactory.generateRoom("TestUser" + 1);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/manager/manageroom/{sellerId}","seller"))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/landlord")
+        .header("Authorization", "Bearer "+accessToken))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("GetSellerRoomList"))

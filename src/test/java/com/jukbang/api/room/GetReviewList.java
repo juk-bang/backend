@@ -1,20 +1,12 @@
 package com.jukbang.api.room;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community.service.CommunityService;
-import com.jukbang.api.room.dto.ExtraOption;
-import com.jukbang.api.room.dto.Facilities;
-import com.jukbang.api.room.dto.Location;
-import com.jukbang.api.room.dto.RoomInformation;
 import com.jukbang.api.room.request.CreateReviewRequest;
-import com.jukbang.api.room.request.CreateRoomRequest;
 import com.jukbang.api.room.service.ReviewService;
-import com.jukbang.api.room.service.RoomService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.test.context.support.WithMockUser;
 
