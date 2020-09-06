@@ -18,7 +18,7 @@ public class DeleteRoom extends BaseControllerTest {
         String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
         Long roomId = roomFactory.generateRoom("TestUser" + 1);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/landlord/{roomId}", roomId)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/landlord/rooms/{roomId}", roomId)
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
                 .andDo(print())

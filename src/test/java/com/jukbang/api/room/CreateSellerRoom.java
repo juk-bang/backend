@@ -20,7 +20,7 @@ public class CreateSellerRoom extends BaseControllerTest {
         String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
         CreateRoomRequest createRoomRequest = roomFactory.generateCreateRoomRequest();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/landlord")
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/landlord/rooms")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", "Bearer " + accessToken)
                 .content(this.objectMapper.writeValueAsString(createRoomRequest)))

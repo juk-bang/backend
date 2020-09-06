@@ -239,6 +239,11 @@ operation::deleteMessage[snippets='http-request,response-body']
 
 operation::createSellerRoom[snippets='http-request,response-body']
 
+[[updateRoom]]
+===== 방 수정하기
+
+operation::updateRoom[snippets='http-request,response-body']
+
 [[deleteRoom]]
 ===== 판매자 방 삭제하기
 
@@ -258,11 +263,6 @@ operation::getRoomDetail[snippets='http-request,response-body']
 ===== 판매자 방 리스트 가져오기
 
 operation::getSellerRoomList[snippets='http-request,response-body']
-
-[[updateRoom]]
-===== 방 수정하기
-
-operation::updateRoom[snippets='http-request,response-body']
 
 [[Review]]
 ==== 리뷰 서비스

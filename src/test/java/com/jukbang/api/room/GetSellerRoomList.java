@@ -22,7 +22,7 @@ public class GetSellerRoomList extends BaseControllerTest {
         String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
         roomFactory.generateRoom("TestUser" + 1);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/landlord")
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/landlord/rooms")
         .header("Authorization", "Bearer "+accessToken))
                 .andExpect(status().isOk())
                 .andDo(print())
