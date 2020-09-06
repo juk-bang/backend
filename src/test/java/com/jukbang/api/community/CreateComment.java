@@ -3,7 +3,10 @@ package com.jukbang.api.community;
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.community.request.CreateCommentRequest;
 import com.jukbang.api.community.request.CreatePostRequest;
-import com.jukbang.api.community.service.CommunityService;
+import com.jukbang.api.community.service.CommentsService;
+import com.jukbang.api.community.service.PostService;
+import com.jukbang.api.factory.PostFactory;
+import com.jukbang.api.user.entity.User;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,33 +19,26 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class CreateComment extends BaseControllerTest {
 
     @Autowired
-    private CommunityService communityService;
+    private CommentsService commentsService;
+
+    @Autowired
 
     @Test
     @WithMockUser("TestUser1")
     @DisplayName("댓글 생성하기 (성공)")
     void CreateCommentSuccess() throws Exception {
 
-        CreatePostRequest createPostRequest = CreatePostRequest.builder()
-                .writer("TestUser1")
-                .title("게시글 제목")
-                .body("게시글 본문")
-                .id(1)
-                .build();
+        Long postId = postFactory.generatePost(1,"TestUser");
 
-        Long postId = communityService.SavePost(1,createPostRequest);
         CreateCommentRequest createCommentRequest = CreateCommentRequest.builder()
-                .id(1)
-                .writer("writer")
-                .body("body")
+                .writer(new User())
+                .body("TestCommnets")
                 .build();
 
-
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/comments/{univId}/{postId}", 1, postId)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/comments/{univId}/{postId}/comments", 1, postId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(createCommentRequest))
         )

@@ -1,12 +1,15 @@
 package com.jukbang.api.community.contorller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jukbang.api.community.dto.PostDto;
+import com.jukbang.api.community.entity.Post;
 import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.request.UpdatePostRequest;
 import com.jukbang.api.community.response.GetPostResponse;
-import com.jukbang.api.community.service.CommunityService;
+import com.jukbang.api.community.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,19 +18,19 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping(value = "/community/{univId}")
-public class CommunityController {
+public class PostController {
 
-    private final CommunityService communityService;
+    private final PostService postService;
 
     /**
      * 대학별 전체 게시글 리스트 GET
      * 불러오기
      *
-     * @return boardList
+     * @return postDtoList
      */
     @GetMapping
     public List getPostList() {
-        return communityService.getCommunitylist();
+        return postService.getPostList();
     }
 
 
@@ -35,19 +38,19 @@ public class CommunityController {
      * 각 게시글 GET
      * 불러오기
      *
-     * @param univId
      * @param postId
      * @return new GetPostResponse()
      */
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/{postId}")
-    public GetPostResponse getPost(
-            @PathVariable("univId") int univId,
+    public PostDto getPost(
             @PathVariable("postId") Long postId
     ) {
-        return communityService.getPost(univId, postId);
+
+        return postService.getPost(postId);
     }
 
+    // createPostRequest 할때
 
     /**
      * 게시글 CREATE
@@ -62,8 +65,9 @@ public class CommunityController {
             @PathVariable("univId") int univId,
             @RequestBody CreatePostRequest createPostRequest
     ) {
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        return communityService.SavePost(univId, createPostRequest);
+        return postService.savePost(univId,userId, createPostRequest);
 
     }
 
@@ -71,7 +75,6 @@ public class CommunityController {
      * 게시글 UPDATE
      * 수정하기
      *
-     * @param univId
      * @param postId
      * @param updatePostRequest
      * @return (Long) id
@@ -79,26 +82,25 @@ public class CommunityController {
      */
     @PutMapping("/{postId}")
     public Long updatePost(
-            @PathVariable("univId") int univId,
             @PathVariable("postId") Long postId,
             @RequestBody UpdatePostRequest updatePostRequest
     ) {
-        return communityService.rewritePost(univId, postId, updatePostRequest);
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return postService.rewritePost(postId, userId,updatePostRequest);
     }
 
     /**
      * 게시글 DELETE
      *
-     * @param univId
      * @param postId
      * @return (String) success
      */
     @DeleteMapping("/{postId}")
     public String deletePost(
-            @PathVariable("univId") int univId,
             @PathVariable("postId") Long postId
     ) {
-        communityService.deletePost(postId);
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+        postService.deletePost(postId, userId);
         return "success";
     }
 }

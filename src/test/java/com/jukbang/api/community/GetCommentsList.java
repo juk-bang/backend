@@ -4,7 +4,8 @@ import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.community.request.CreateCommentRequest;
 import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.service.CommentsService;
-import com.jukbang.api.community.service.CommunityService;
+import com.jukbang.api.community.service.PostService;
+import com.jukbang.api.user.entity.User;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,28 +23,22 @@ public class GetCommentsList extends BaseControllerTest {
     private CommentsService commentsService;
 
     @Autowired
-    private CommunityService communityService;
+    private PostService postService;
 
     @Test
     @DisplayName("게시글 별 전체 댓글 리스트 불러오기(성공)")
     void GetCommentsListSuccess() throws Exception {
-        CreatePostRequest createPostRequest = CreatePostRequest.builder()
-                .writer("TestUser1")
-                .title("게시글 제목")
-                .body("게시글 본문")
-                .id(1)
-                .build();
 
-        Long postId = communityService.SavePost(1,createPostRequest);
+        Long postId = postFactory.generatePost(1,"TestUser");
+
         CreateCommentRequest createCommentRequest = CreateCommentRequest.builder()
-                .id(1)
-                .writer("writer1")
-                .body("body body")
+                .writer(new User())
+                .body("TestBody")
                 .build();
 
-        commentsService.SaveComment(1, Math.toIntExact(postId), createCommentRequest);
+        commentsService.saveComment(postId,"TestUser", createCommentRequest);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/comments/{univId}/{postId}", 1,postId))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{univId}/{postId}/comments", 1,postId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("GetCommentsList"))

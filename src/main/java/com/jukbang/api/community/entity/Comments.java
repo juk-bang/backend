@@ -18,7 +18,7 @@ public class Comments extends Time {
      *  각 댓글의 고유번호 (중복 불가)
      */
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long commentId;
+    private long commentsId;
 
     /**
      * 100자 이내의 댓글 입력
@@ -34,4 +34,14 @@ public class Comments extends Time {
     @ManyToOne
     @JoinColumn(name = "postId")
     private Post post;
+
+    public Comments(String body, User writer){
+        this.body=body;
+        this.writer = writer;
+    }
+
+    public void updateComments(String body){
+        this.body = body;
+    }
+
 }

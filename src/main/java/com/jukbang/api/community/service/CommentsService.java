@@ -1,128 +1,146 @@
 package com.jukbang.api.community.service;
 
 import com.jukbang.api.community.dto.CommentsDto;
+import com.jukbang.api.community.entity.Comments;
+import com.jukbang.api.community.entity.Post;
+import com.jukbang.api.community.exception.CommentsNotFoundException;
+import com.jukbang.api.community.exception.PostNotFoundException;
 import com.jukbang.api.community.repository.CommentsRepository;
-import com.jukbang.api.community.repository.CommunityRepository;
+import com.jukbang.api.community.repository.PostRepository;
 import com.jukbang.api.community.request.CreateCommentRequest;
 import com.jukbang.api.community.request.UpdateCommentRequest;
+import com.jukbang.api.user.exception.UserNotFoundException;
+import com.jukbang.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CommentsService {
 
     private final CommentsRepository commentsRepository;
-    private final CommunityRepository communityRepository; // 댓글수 추가용
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
+
 
     /**
-     * 댓글 리스트 (data) to List (Object)
+     * 댓글 목록 불러오기 기능
      *
-     * @param univId
      * @param postId
-     * @return (List) boardDtoList
+     *
+     * @return List<CommentsDto>
      */
     @Transactional
-    public List<CommentsDto> getCommentsList(int univId, int postId) {
-/*        List<Comments> boardEntities = commentsRepository.findAllByUnivIdAndPostId(univId, postId);
-        List<CommentsDto> boardDtoList = new ArrayList<>();
+    public List<CommentsDto> getCommentsList(Long postId) {
+        List<Comments> commentsEntities = commentsRepository.findAllByPostId(postId);
 
-        for (Comments boardEntity : boardEntities) {
-            CommentsDto boardDTO = CommentsDto.builder()
-                    .id(boardEntity.getId())
-                    .postId(boardEntity.getPostId())
-                    .writer(boardEntity.getWriter())
-                    .modifiedDate(boardEntity.getModifiedDate())
-                    .body(boardEntity.getBody())
-                    .univId(boardEntity.getUnivId())
+        List<CommentsDto> commentsDtoList = new ArrayList<>();
+
+        for (Comments commentsEntity : commentsEntities) {
+            CommentsDto commentsDTO = CommentsDto.builder()
+                    .commentsId(commentsEntity.getCommentsId())
+                    .writer(commentsEntity.getWriter().getUserId())
+                    .updatedDate(commentsEntity.getModifiedDate())
+                    .body(commentsEntity.getBody())
                     .build();
 
-            boardDtoList.add(boardDTO);
+            commentsDtoList.add(commentsDTO);
         }
 
-        return boardDtoList;*/
-        return null;
+        return commentsDtoList;
     }
 
     /**
-     * 댓글 달기 기능 (저장)
-     * 입력해야될 데이터 : writter (작성자), body(내용)
-     * @return
+     * 댓글 쓰기 기능 (저장하기)
+     *
+     * @param postId
+     * @param createCommentRequest
+     *
+     * @return (long) commentsId
      */
     @Transactional
-    public long SaveComment(int univId, int postId, CreateCommentRequest createCommentRequest) {
-/*
-        Optional<Community> communityWrapper = communityRepository.findById((long) postId);
-        Community community = communityWrapper.get();
+    public long saveComment(Long postId,
+                            String userId,
+                            CreateCommentRequest createCommentRequest ) {
 
-        CommunityDto communityDTO = CommunityDto.builder()
-                .id(community.getId())
-                .title(community.getTitle())
-                .body(community.getBody())
-                .writer(community.getWriter())
-                .modifiedDate(community.getCreatedDate())
-                .comments(community.getComments() + 1)
-                .univId(community.getUnivId())
-                .views(community.getViews())
-                .build();
-        communityRepository.save(communityDTO.toEntity());
+        // 존재하는 Id 인지 확인
+        userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
+
+        // 존재하는 게시글 인지 확인
+        Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
+
+        // 게시글 댓글 수  +1
+        post.setComments(post.getComments()+1);
+
+
 
         return commentsRepository.save(
                 new Comments(
-                        createCommentRequest.getId(),
-                        createCommentRequest.getWriter(),
                         createCommentRequest.getBody(),
-                        univId,
-                        postId
-                )).getId(); // 잘모르겠음*/
-        return 0;
+                        createCommentRequest.getWriter()
+                )).getCommentsId();
     }
 
 
+
     /**
-     * 수정 하기
-     * 댓글의 고유번호 (id) 에 접근하여 수정
-     * @return
+     * 댓글 수정하기 기능
+     *
+     * @param postId
+     * @param commentsId
+     * @param updateCommentRequest
+     *
+     * @return (long) commentsId
      */
     @Transactional
-    public long updateComment(int univId, int postId, long id, UpdateCommentRequest updateCommentRequest) {
-/*        return commentsRepository.save(
-                new Comments(
-                        id,
-                        updateCommentRequest.getWriter(),
-                        updateCommentRequest.getBody(),
-                        univId,
-                        postId
-                )).getId();*/
-        return id;
+    public long updateComment(Long postId, Long commentsId,String userId,UpdateCommentRequest updateCommentRequest) {
+
+
+        // 존재하는 Id 인지 확인
+        userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
+
+        // 존재하는 게시글 인지 확인
+        Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
+
+
+        Comments commets = commentsRepository.findByPostIdAndCommentsId(postId,commentsId).orElseThrow(CommentsNotFoundException::new);
+        commets.updateComments(updateCommentRequest.getBody());
+
+        return commets.getCommentsId();
     }
 
+
+
+
     /**
-     * 삭제하기
-     * 댓글의 고유번호 (id) 에 접근하여 삭제
+     * 댓글 삭제하기 기능
+     *
+     * @param postId
+     * @param commentsId
      */
     @Transactional
-    public void deleteComment(long id, long postId) {
-/*
-        Optional<Community> communityWrapper = communityRepository.findById((long) postId);
-        Community community = communityWrapper.get();
+    public void deleteComment(long postId, long commentsId, String userId) {
 
-        CommunityDto communityDTO = CommunityDto.builder()
-                .id(community.getId())
-                .title(community.getTitle())
-                .body(community.getBody())
-                .writer(community.getWriter())
-                .modifiedDate(community.getCreatedDate())
-                .comments(community.getComments() - 1)
-                .univId(community.getUnivId())
-                .views(community.getViews())
-                .build();
-        communityRepository.save(communityDTO.toEntity()).getId();
-        commentsRepository.deleteById(id)*/
-        ;
+        // 존재하는 Id 인지 확인
+        userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
+
+
+        // 존재하는 게시글 인지 확인
+        Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
+
+        // 게시글 댓글 수  -1
+        post.setComments(post.getComments()-1);
+
+
+
+        Comments commets = commentsRepository.findByPostIdAndCommentsId(postId,commentsId).orElseThrow(CommentsNotFoundException::new);
+
+        commentsRepository.deleteById(commentsId);
     }
 }
 

@@ -2,7 +2,7 @@ package com.jukbang.api.community;
 
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.community.request.CreatePostRequest;
-import com.jukbang.api.community.service.CommunityService;
+import com.jukbang.api.community.service.PostService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,19 +17,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GetPost extends BaseControllerTest {
 
     @Autowired
-    private CommunityService communityService;
+    private PostService postService;
 
     @Test
     @DisplayName("각 게시글 불러오기(성공)")
     void GetPostListSuccess() throws Exception {
-        CreatePostRequest createPostRequest = CreatePostRequest.builder()
-                .id(1)
-                .title("post1")
-                .writer("writer1")
-                .body("body body")
-                .build();
 
-        Long postId = communityService.SavePost(1,createPostRequest);
+        Long postId = postFactory.generatePost(1,"TestUser");
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{univId}/{postId}",1,postId))
                 .andExpect(status().isOk())
