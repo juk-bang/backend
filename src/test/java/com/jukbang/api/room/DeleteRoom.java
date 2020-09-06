@@ -10,6 +10,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@DisplayName("집주인 방 삭제하기")
 public class DeleteRoom extends BaseControllerTest {
 
     @Test
@@ -24,6 +25,5 @@ public class DeleteRoom extends BaseControllerTest {
                 .andDo(print())
                 .andDo(document("DeleteRoom"))
         ;
-
     }
 }

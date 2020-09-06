@@ -11,6 +11,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@DisplayName("방 상세정보 조회")
 public class GetRoomDetail extends BaseControllerTest {
 
     @Test

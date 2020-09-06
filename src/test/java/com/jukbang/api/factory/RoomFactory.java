@@ -23,8 +23,8 @@ public class RoomFactory {
         return CreateRoomRequest.builder()
                 .description("설명")
                 .option(new Option(true, true, true, true, true, true, true, true))
-                .location(new Location("Test Location",123, 412))
-                .roomInfo(new RoomInfo("주소", 1, 1, 1))
+                .location(new Location("서울 동작구 사당로 36-1 서정캐슬 3층",37.494863, 126.958453))
+                .roomInfo(new RoomInfo("투썸 플레이스 3층", 1, 1, 1))
                 .price(new Price(1, 1, 1))
                 .univId(1)
                 .build();
@@ -34,8 +34,8 @@ public class RoomFactory {
         return UpdateRoomRequest.builder()
                 .description("설명")
                 .option(new Option(true, true, true, true, true, true, true, true))
-                .location(new Location("Test Location",123, 412))
-                .roomInfo(new RoomInfo("주소", 1, 1, 1))
+                .location(new Location("서울특별시 동작구 상도동 504",37.494601, 126.957527))
+                .roomInfo(new RoomInfo("상쾌한 방", 1, 1, 1))
                 .price(new Price(1, 1, 1))
                 .univId(1)
                 .build();

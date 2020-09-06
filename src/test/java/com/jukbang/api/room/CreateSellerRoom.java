@@ -12,10 +12,11 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@DisplayName("집주인 방 올리기")
 public class CreateSellerRoom extends BaseControllerTest {
 
     @Test
-    @DisplayName("판매자 방 생성하기 (성공)")
+    @DisplayName("집주인 방 생성하기 (성공)")
     void createSellerRoomSuccess() throws Exception {
         String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
         CreateRoomRequest createRoomRequest = roomFactory.generateCreateRoomRequest();
@@ -28,7 +29,5 @@ public class CreateSellerRoom extends BaseControllerTest {
                 .andDo(print())
                 .andDo(document("CreateSellerRoom"))
         ;
-
-
     }
 }

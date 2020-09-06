@@ -17,8 +17,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
+/**
+ * 방 서비스
+ *
+ * @author always0ne
+ * @version 1.0
+ */
 @Service
 @RequiredArgsConstructor
 public class RoomService {
@@ -26,23 +31,58 @@ public class RoomService {
     private final RoomRepository roomRepository;
     private final UserRepository userRepository;
 
+    /**
+     * 방 리스트를 필터링 하여 조회
+     * 쿼리문을 직접 작성하여 univId 를 제외하고 Nullable하다.
+     *
+     * @param univId        대학교 ID
+     * @param layout        방 구조
+     * @param floor         층
+     * @param scale         방 넓이
+     * @param monthlyLease  월세
+     * @param adminExpenses 관리비
+     * @param deposit       보증금
+     * @param grade         평점
+     * @param distance      학교와의 거리
+     * @param pageable      페이징 정보
+     * @return 방 리스트
+     */
     @Transactional
-    public Page<RoomsDto> getRooms(long univId/*, long layout, long monthlyLease, long adminExpenses, long deposit, long scale, long grade, long distance, long floor*/, Pageable pageable) {
-        // 필터 미구현
-        System.out.println("run");
-        return this.roomRepository.findAllByUnivId(univId,pageable);
+    public Page<RoomsDto> getRooms(long univId, Integer layout, Double floor, Double scale, Double monthlyLease, Double adminExpenses,
+                                   Double deposit, Double grade, Double distance, Pageable pageable) {
+        return this.roomRepository.findAllByUnivIdWithFilter(univId, layout, floor, scale, monthlyLease, adminExpenses, deposit, grade, distance, pageable);
     }
 
+    /**
+     * 집주인이 올린 매물들 리스트 조회
+     *
+     * @param sellerId 집주인 ID
+     * @param pageable 페이징 정보
+     * @return 집주인이 올린 매물들
+     */
     @Transactional
     public Page<LandlordDto> getSellerRooms(String sellerId, Pageable pageable) {
-        return roomRepository.findAllBySeller_UserId(sellerId,pageable);
+        return roomRepository.findAllBySellerId(sellerId, pageable);
     }
 
+    /**
+     * 방 상세조회
+     *
+     * @param roomId 방 ID
+     * @return 집주인이 올린 매물들
+     */
     @Transactional
     public GetRoomDetailResponse getRoomDetail(long roomId) {
         return new GetRoomDetailResponse(roomRepository.findById(roomId).orElseThrow(RoomNotFoundException::new));
     }
 
+    /**
+     * 방 등록하기
+     *
+     * @param sellerId          집주인 ID
+     * @param createRoomRequest
+     * @return 집주인이 올린 매물들
+     */
     @Transactional
     public Long registerRoom(String sellerId, CreateRoomRequest createRoomRequest) {
         return roomRepository.save(
@@ -52,11 +92,17 @@ public class RoomService {
                         createRoomRequest.getOption(),
                         createRoomRequest.getLocation(),
                         createRoomRequest.getDescription(),
-                        userRepository.findByUserId(sellerId).orElseThrow(()->new UserNotFoundException(sellerId))
+                        userRepository.findByUserId(sellerId).orElseThrow(() -> new UserNotFoundException(sellerId))
                 )).getRoomId();
     }
 
-
+    /**
+     * 방 정보 수정하기
+     *
+     * @param sellerId          집주인 ID
+     * @param roomId            방ID
+     * @param updateRoomRequest
+     */
     @Transactional
     public void updateRoom(String sellerId, long roomId, UpdateRoomRequest updateRoomRequest) {
         Room room = roomRepository.findById(roomId).orElseThrow(() -> new UserNotFoundException(sellerId));
@@ -72,6 +118,12 @@ public class RoomService {
         );
     }
 
+    /**
+     * 방 삭제하기
+     *
+     * @param sellerId 집주인 ID
+     * @param roomId   방ID
+     */
     @Transactional
     public void deleteRoom(String sellerId, Long roomId) {
         if (roomRepository.existsByRoomIdAndSeller_UserId(roomId, sellerId))
@@ -79,30 +131,4 @@ public class RoomService {
         else
             throw new NotYourRoomException();
     }
-
-    @Transactional
-    public List<Room> wantpermit(long Univid) {
-/*
-        return roomRepository.findAllByUnividAndPermission(Univid, 0);
-*/
-        return null;
-    }
-
-    @Transactional
-    public void permit(long Univid, long id) {
-/*        Optional<Room> room = roomRepository.findById(id);
-        Room target = room.get();
-        target.setPermission(1);
-        roomRepository.save(target);*/
-    }
-
-    @Transactional
-    public void dontpermit(long Univid, long id) {
-/*        Optional<Room> room = roomRepository.findById(id);
-        Room target = room.get();
-        target.setPermission(2);
-        roomRepository.save(target);*/
-    }
-
-
 }

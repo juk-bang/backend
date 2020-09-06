@@ -51,10 +51,8 @@ public class User {
      * Refresh Token
      */
     private String refreshToken;
-
     @OneToMany(mappedBy = "user")
     private List<Favorite> favorites;
-
 
     /**
      * Refresh Token 갱신

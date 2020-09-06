@@ -1,10 +1,8 @@
 package com.jukbang.api.room;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.room.dto.*;
 import com.jukbang.api.room.request.UpdateRoomRequest;
 import com.jukbang.api.user.UserRole;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -15,6 +13,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@DisplayName("집주인 방 수정하기")
 public class UpdateRoom extends BaseControllerTest {
 
     @Test
@@ -26,10 +25,9 @@ public class UpdateRoom extends BaseControllerTest {
 
         UpdateRoomRequest updateRoomRequest = roomFactory.generateUpdateRoomRequest();
 
-
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/landlord/rooms/{roomId}", roomId)
                 .contentType(MediaType.APPLICATION_JSON)
-                .header("Authorization", "Bearer "+accessToken)
+                .header("Authorization", "Bearer " + accessToken)
                 .content(this.objectMapper.writeValueAsString(updateRoomRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())

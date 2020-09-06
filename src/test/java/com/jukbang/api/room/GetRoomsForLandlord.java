@@ -12,12 +12,12 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
-public class GetSellerRoomList extends BaseControllerTest {
+@DisplayName("집주인 방 리스트 가져오기")
+public class GetRoomsForLandlord extends BaseControllerTest {
 
     @Test
     @WithMockUser("TestUser1")
-    @DisplayName("판매자 방 리스트 가져오기 (성공)")
+    @DisplayName("집주인 방 리스트 가져오기 (성공)")
     void getSellerRoomListSuccess() throws Exception{
         String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
         roomFactory.generateRoom("TestUser" + 1);

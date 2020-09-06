@@ -14,10 +14,7 @@ import javax.persistence.Embedded;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Price {
-    @Column(name = "monthly_price")
-    double monthlyPrice;
-    @Column(name = "admin_expenses")
+    double monthlyLease;
     double adminExpenses;
-    @Column(name = "deposit")
     double deposit;
 }
