@@ -1,6 +1,7 @@
 package com.jukbang.api.user.profile;
 
 import com.jukbang.api.common.BaseControllerTest;
+import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.request.UpdateUserRequest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +21,7 @@ public class updateUserTest extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("유저정보 수정하기(성공)")
     void updateUserSuccess() throws Exception {
-        userFactory.signUpUser(1);
+        userFactory.signUpUser(1, UserRole.ROLE_STUDENT);
         UpdateUserRequest updateUserRequest = UpdateUserRequest.builder()
                 .id(1)
                 .univid(1)

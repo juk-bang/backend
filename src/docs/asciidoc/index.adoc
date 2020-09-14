@@ -235,12 +235,17 @@ operation::deleteMessage[snippets='http-request,response-body']
 ==== 방 서비스
 
 [[createRoom]]
-===== 판매자 방 게시하기
+===== 집주인 방 게시하기
 
 operation::createSellerRoom[snippets='http-request,response-body']
 
+[[updateRoom]]
+===== 방 수정하기
+
+operation::updateRoom[snippets='http-request,response-body']
+
 [[deleteRoom]]
-===== 판매자 방 삭제하기
+===== 집주인 방 삭제하기
 
 operation::deleteRoom[snippets='http-request,response-body']
 
@@ -255,14 +260,9 @@ operation::getRoomList[snippets='http-request,response-body']
 operation::getRoomDetail[snippets='http-request,response-body']
 
 [[getSellerRoomList]]
-===== 판매자 방 리스트 가져오기
+===== 집주인 방 리스트 가져오기
 
 operation::getSellerRoomList[snippets='http-request,response-body']
-
-[[updateRoom]]
-===== 방 수정하기
-
-operation::updateRoom[snippets='http-request,response-body']
 
 [[Review]]
 ==== 리뷰 서비스

@@ -1,10 +1,13 @@
-package com.jukbang.api.room;
+package com.jukbang.api.room.review;
 
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.room.request.CreateReviewRequest;
+import com.jukbang.api.room.request.UpdateReviewRequest;
+import com.jukbang.api.room.service.ReviewService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -14,31 +17,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Disabled
-public class CreateReview extends BaseControllerTest {
+public class UpdateReview extends BaseControllerTest {
+    @Autowired
+    private ReviewService reviewService;
 
     @Test
     @WithMockUser("TestUser1")
-    @DisplayName("방 리뷰 생성하기 (성공)")
-    void createReviewSuccess() throws Exception {
-
-        long roomId = roomFactory.generateRoom("SellerId");
+    @DisplayName("리뷰 수정하기(성공)")
+    void updateReviewSuccess() throws Exception {
+        Long roomId = roomFactory.generateRoom("seller");
 
         CreateReviewRequest createReviewRequest = CreateReviewRequest.builder()
                 .id(1)
                 .writer("writer")
                 .body("good")
-                .title("제목")
-                .roomid((int) roomId)
-                .univid(1)
                 .score(10)
+                .title("title")
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/review/{univId}/{roomId}", 1, roomId)
+        Long reviewId = reviewService.SaveReview(1, Math.toIntExact(roomId), createReviewRequest);
+
+        UpdateReviewRequest updateReviewRequest = UpdateReviewRequest.builder()
+                .body("good good")
+                .build();
+
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/review/{univId}/{roomId}/{reviewId}", 1, roomId, reviewId)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(createReviewRequest)))
+                .content(this.objectMapper.writeValueAsString(updateReviewRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("CreateReview"))
+                .andDo(document("UpdateReview"))
         ;
     }
 }

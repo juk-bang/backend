@@ -19,8 +19,8 @@ public class UserFactory {
     private UserRepository userRepository;
 
     @Transactional
-    public SignInResponse signUpUser(int i) {
-        return authService.signUp(generateSignUpRequest(i, UserRole.ROLE_STUDENT));
+    public SignInResponse signUpUser(int i, UserRole role) {
+        return authService.signUp(generateSignUpRequest(i, role));
     }
 
     @Transactional

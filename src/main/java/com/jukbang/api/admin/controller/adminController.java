@@ -1,7 +1,7 @@
 package com.jukbang.api.admin.controller;
 
+import com.jukbang.api.admin.service.AdminService;
 import com.jukbang.api.room.entity.Room;
-import com.jukbang.api.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/admin/permissionroom/{univId}")
 public class adminController {
 
-    private final RoomService roomService;
+    private final AdminService adminService;
 
     /**
      * 대학별 방 전체 List GET
@@ -25,7 +25,7 @@ public class adminController {
     public List<Room> getRoomList(
             @PathVariable("univId") long univId
     ) {
-        return roomService.wantpermit(univId);
+        return adminService.wantpermit(univId);
     }
 
     /**
@@ -39,7 +39,7 @@ public class adminController {
             @PathVariable("univId") long univId,
             @PathVariable("roomId") long roomId
     ) {
-        roomService.permit(univId, roomId);
+        adminService.permit(univId, roomId);
     }
 
     /**
@@ -53,6 +53,6 @@ public class adminController {
             @PathVariable("univId") long univId,
             @PathVariable("roomId") long roomId
     ) {
-        roomService.dontpermit(univId, roomId);
+        adminService.dontpermit(univId, roomId);
     }
 }

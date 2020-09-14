@@ -1,9 +1,9 @@
 package com.jukbang.api.room.request;
 
-import com.jukbang.api.room.dto.ExtraOption;
-import com.jukbang.api.room.dto.Facilities;
-import com.jukbang.api.room.dto.Location;
-import com.jukbang.api.room.dto.RoomInformation;
+import com.jukbang.api.room.entity.embedded.Location;
+import com.jukbang.api.room.entity.embedded.Option;
+import com.jukbang.api.room.entity.embedded.Price;
+import com.jukbang.api.room.entity.embedded.RoomInfo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,11 +16,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 
 public class UpdateRoomRequest {
-    private long univId;
-    private int pictureCount;
-    private RoomInformation roomInformation;
-    private ExtraOption extraOption;
-    private String description;
-    private Location location;
-    private Facilities facilities;
+    long univId;
+    RoomInfo roomInfo;
+    Price price;
+    Option option;
+    Location location;
+    String description;
 }

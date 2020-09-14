@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExtraOption {
+public class Option {
     @Column(nullable = false)
     private boolean elevator;
     @Column(nullable = false)
