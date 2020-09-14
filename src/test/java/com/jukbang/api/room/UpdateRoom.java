@@ -1,9 +1,8 @@
 package com.jukbang.api.room;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.room.dto.*;
 import com.jukbang.api.room.request.UpdateRoomRequest;
-import org.junit.jupiter.api.Disabled;
+import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -14,33 +13,25 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
+@DisplayName("집주인 방 수정하기")
 public class UpdateRoom extends BaseControllerTest {
 
     @Test
     @WithMockUser("TestUser1")
     @DisplayName("방 수정하기 (성공)")
     void updateRoomSuccess() throws Exception {
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        Long roomId = roomFactory.generateRoom("TestUser" + 1);
 
-        long roomId = roomFactory.generateRoom("sellerId");
+        UpdateRoomRequest updateRoomRequest = roomFactory.generateUpdateRoomRequest();
 
-        UpdateRoomRequest updateRoomRequest = UpdateRoomRequest.builder()
-                .description("updated")
-                .univId(1)
-                .pictureCount(0)
-                .roomInformation(new RoomInformation("addr", 1, 2, 2, new Price(1, 1, 1)))
-                .extraOption(new ExtraOption(true, true, true, true, true, true, true, true))
-                .location(new Location(1, 1))
-                .facilities(new Facilities(true, true))
-                .build();
-
-
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/manager/manageroom/{sellerId}/{roomId}", "sellerId", roomId)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/landlord/rooms/{roomId}", roomId)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Bearer " + accessToken)
                 .content(this.objectMapper.writeValueAsString(updateRoomRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("UpdateRoom"))
+                .andDo(document("updateRoom"))
         ;
     }
 }

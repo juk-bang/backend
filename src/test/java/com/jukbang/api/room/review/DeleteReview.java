@@ -1,4 +1,4 @@
-package com.jukbang.api.room;
+package com.jukbang.api.room.review;
 
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.room.request.CreateReviewRequest;

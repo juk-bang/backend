@@ -572,12 +572,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#Room">방 서비스</a>
 <ul class="sectlevel4">
-<li><a href="#createRoom">판매자 방 게시하기</a></li>
-<li><a href="#deleteRoom">판매자 방 삭제하기</a></li>
+<li><a href="#createRoom">집주인 방 게시하기</a></li>
+<li><a href="#updateRoom">방 수정하기</a></li>
+<li><a href="#deleteRoom">집주인 방 삭제하기</a></li>
 <li><a href="#getRoomList">방 리스트 가져오기</a></li>
 <li><a href="#getRoomDetail">방 상세정보 가져오기</a></li>
-<li><a href="#getSellerRoomList">판매자 방 리스트 가져오기</a></li>
-<li><a href="#updateRoom">방 수정하기</a></li>
+<li><a href="#getSellerRoomList">집주인 방 리스트 가져오기</a></li>
 </ul>
 </li>
 <li><a href="#Review">리뷰 서비스</a>
@@ -725,7 +725,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-28T22:41:58.9607245",
+  "timestamp" : "2020-09-06T19:56:37.794577",
   "status" : 202,
   "error" : "0001",
   "message" : "ID: TestUser1 이미 사용중인 아이디입니다."
@@ -741,7 +741,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-28T22:41:41.6023111",
+  "timestamp" : "2020-09-06T19:56:35.9712653",
   "status" : 403,
   "error" : "0002",
   "message" : "ID: TestUser1 회원가입이 되어있지 않거나 잠긴 계정입니다."
@@ -757,7 +757,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-28T22:41:54.7547467",
+  "timestamp" : "2020-09-06T19:56:34.5213246",
   "status" : 403,
   "error" : "0003",
   "message" : "유효하지 않은 토큰입니다."
@@ -773,7 +773,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-28T22:41:54.8594648",
+  "timestamp" : "2020-09-06T19:56:34.6175777",
   "status" : 403,
   "error" : "0004",
   "message" : "손상된 토큰입니다."
@@ -789,7 +789,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-28T22:41:50.4347589",
+  "timestamp" : "2020-09-06T19:56:33.082395",
   "status" : 403,
   "error" : "0005",
   "message" : "잘못된 인증입니다."
@@ -805,7 +805,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "timestamp" : "2020-08-28T22:41:50.5185315",
+  "timestamp" : "2020-09-06T19:56:33.1143097",
   "status" : 403,
   "error" : "0006",
   "message" : "만료된 토큰입니다."
@@ -850,8 +850,8 @@ Host: jukbang.com
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk4NjIyMTAxLCJleHAiOjE1OTg2MjI3MDF9.fomUULyzzo1kmeVmSRliTJktcSFUTi9VAFQHSMLla8c",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk4NjIyMTAxLCJleHAiOjE1OTkyMjY5MDF9.TTsFi2sK8uzYTsr-kA1LELD7SrFB94YBZcg_nneDF4Q"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk5Mzg5Nzk1LCJleHAiOjE1OTkzOTAzOTV9.Cr6qpruQBAdTirFtZnC6TOG6Yl5SPPtXAlFjJgeLnAQ",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk5Mzg5Nzk1LCJleHAiOjE1OTk5OTQ1OTV9.d-Ygjq9VZVH6SFBW_AXspfGfbuWdMclo1D8uECbw1rM"
 }</code></pre>
 </div>
 </div>
@@ -885,8 +885,8 @@ Host: jukbang.com
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk4NjIyMTE4LCJleHAiOjE1OTg2MjI3MTh9.tIn8b9AvCxt7N2XrgXY8mVDzhtstvfSObBUQFBRQwlw",
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk4NjIyMTE4LCJleHAiOjE1OTkyMjY5MTh9.N0DxyK5Oi7EeTk4duPtDRu68vrX-D_6cKK2lMGN_rZ0"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk5Mzg5Nzk3LCJleHAiOjE1OTkzOTAzOTd9.jYHeJki_ELf-TiHI3iLFhvhQ9NcI3D_pikc3elhcq6w",
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk5Mzg5Nzk3LCJleHAiOjE1OTk5OTQ1OTd9.tlcVjHeaXYD85bxCmjbfTnIxrYTRqSciUe09w6G3sQU"
 }</code></pre>
 </div>
 </div>
@@ -924,7 +924,7 @@ Content-Length: 196
 Host: jukbang.com
 
 {
-  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk4NjIyMTE0LCJleHAiOjE1OTkyMjY5MTR9.6DMhHoIWEcPdI8LDLaygYX1lhEECTD1agR5BjRXaRXQ"
+  "refreshToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk5Mzg5Nzk0LCJleHAiOjE1OTk5OTQ1OTR9._2G4Q6OzoYXjszsL4XR-sKrB-tDdNw5e7MqdWPJueqo"
 }</code></pre>
 </div>
 </div>
@@ -934,7 +934,7 @@ Host: jukbang.com
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code>{
-  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk4NjIyMTE0LCJleHAiOjE1OTg2MjI3MTR9.EqzLFrQrty-A3zu4ILW1uJGh8ysyuzATQd26_O1Ii30"
+  "accessToken" : "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX1NUVURFTlQiXSwiaWF0IjoxNTk5Mzg5Nzk0LCJleHAiOjE1OTkzOTAzOTR9.YJS7D3QhCkMKNBldyCyZPo71hrJiEVk0Mx-lmukMND8"
 }</code></pre>
 </div>
 </div>
@@ -947,19 +947,14 @@ Host: jukbang.com
 <h4 id="suouldPermitRooms"><a class="link" href="#suouldPermitRooms">승인받아야 할 방 리스트 조회</a></h4>
 <div class="sect4">
 <h5 id="suouldPermitRooms_http_request"><a class="link" href="#suouldPermitRooms_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /admin/permissionroom/1 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::shouldPermitRooms</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="suouldPermitRooms_response_body"><a class="link" href="#suouldPermitRooms_response_body">Example response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::shouldPermitRooms</p>
 </div>
 </div>
 </div>
@@ -967,19 +962,14 @@ Host: jukbang.com</code></pre>
 <h4 id="permitRoom"><a class="link" href="#permitRoom">방 승인하기</a></h4>
 <div class="sect4">
 <h5 id="permitRoom_http_request"><a class="link" href="#permitRoom_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /admin/permissionroom/1/0 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::permitRoom</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="permitRoom_response_body"><a class="link" href="#permitRoom_response_body">Example response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::permitRoom</p>
 </div>
 </div>
 </div>
@@ -987,19 +977,14 @@ Host: jukbang.com</code></pre>
 <h4 id="rejectRoom"><a class="link" href="#rejectRoom">방 거절하기</a></h4>
 <div class="sect4">
 <h5 id="rejectRoom_http_request"><a class="link" href="#rejectRoom_http_request">HTTP request</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /admin/permissionroom/1/0 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::rejectRoom</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="rejectRoom_response_body"><a class="link" href="#rejectRoom_response_body">Example response</a></h5>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::rejectRoom</p>
 </div>
 </div>
 </div>
@@ -1012,19 +997,14 @@ Host: jukbang.com</code></pre>
 <h5 id="getPostList"><a class="link" href="#getPostList">게시글 목록 조회하기</a></h5>
 <div class="sect5">
 <h6 id="getPostList_http_request"><a class="link" href="#getPostList_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /community/1 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::getPostList</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="getPostList_response_body"><a class="link" href="#getPostList_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::getPostList</p>
 </div>
 </div>
 </div>
@@ -1032,19 +1012,14 @@ Host: jukbang.com</code></pre>
 <h5 id="getPost"><a class="link" href="#getPost">게시글 조회하기</a></h5>
 <div class="sect5">
 <h6 id="getPost_http_request"><a class="link" href="#getPost_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /community/1/ HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::getPost</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="getPost_response_body"><a class="link" href="#getPost_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::getPost</p>
 </div>
 </div>
 </div>
@@ -1052,34 +1027,14 @@ Host: jukbang.com</code></pre>
 <h5 id="createPost"><a class="link" href="#createPost">게시글 생성하기</a></h5>
 <div class="sect5">
 <h6 id="createPost_http_request"><a class="link" href="#createPost_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /community/1 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Content-Length: 200
-Host: jukbang.com
-
-{
-  "id" : 1,
-  "previd" : 0,
-  "nextid" : 0,
-  "title" : "post1",
-  "writer" : "writer1",
-  "body" : "body body",
-  "univid" : 0,
-  "views" : 0,
-  "comments" : 0,
-  "modifiedDate" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::createPost</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="createPost_response_body"><a class="link" href="#createPost_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::createPost</p>
 </div>
 </div>
 </div>
@@ -1087,34 +1042,14 @@ Host: jukbang.com
 <h5 id="updatePost"><a class="link" href="#updatePost">게시글 수정하기</a></h5>
 <div class="sect5">
 <h6 id="updatePost_http_request"><a class="link" href="#updatePost_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /community/1/9 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Content-Length: 199
-Host: jukbang.com
-
-{
-  "id" : 1,
-  "previd" : 0,
-  "nextid" : 0,
-  "title" : "post2",
-  "writer" : "writer1",
-  "body" : "body * 2",
-  "univid" : 1,
-  "views" : 0,
-  "comments" : 0,
-  "modifiedDate" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::updatePost</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="updatePost_response_body"><a class="link" href="#updatePost_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>9</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::updatePost</p>
 </div>
 </div>
 </div>
@@ -1122,19 +1057,14 @@ Host: jukbang.com
 <h5 id="deletePost"><a class="link" href="#deletePost">게시글 삭제하기</a></h5>
 <div class="sect5">
 <h6 id="deletePost_http_request"><a class="link" href="#deletePost_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /community/1/4 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::deletePost</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="deletePost_response_body"><a class="link" href="#deletePost_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>success</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::deletePost</p>
 </div>
 </div>
 </div>
@@ -1145,30 +1075,14 @@ Host: jukbang.com</code></pre>
 <h5 id="createComment"><a class="link" href="#createComment">댓글 생성하기</a></h5>
 <div class="sect5">
 <h6 id="createComment_http_request"><a class="link" href="#createComment_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /community/comments/1/1 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Content-Length: 120
-Host: jukbang.com
-
-{
-  "id" : 1,
-  "writer" : "writer",
-  "body" : "body",
-  "univid" : 0,
-  "postid" : 0,
-  "modifiedDate" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::createComment</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="createComment_response_body"><a class="link" href="#createComment_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>1</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::createComment</p>
 </div>
 </div>
 </div>
@@ -1176,26 +1090,14 @@ Host: jukbang.com
 <h5 id="getComment"><a class="link" href="#getComment">댓글 조회하기</a></h5>
 <div class="sect5">
 <h6 id="getComment_http_request"><a class="link" href="#getComment_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /community/comments/1/5 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::getCommentsList</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="getComment_response_body"><a class="link" href="#getComment_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>[ {
-  "id" : 3,
-  "writer" : "writer1",
-  "body" : "body body",
-  "univId" : 1,
-  "postId" : 5,
-  "modifiedDate" : "2020-08-28T01:19:12.3215807"
-} ]</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::getCommentsList</p>
 </div>
 </div>
 </div>
@@ -1203,30 +1105,14 @@ Host: jukbang.com</code></pre>
 <h5 id="updateComment"><a class="link" href="#updateComment">댓글 수정하기</a></h5>
 <div class="sect5">
 <h6 id="updateComment_http_request"><a class="link" href="#updateComment_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /community/comments/1/8/4 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Content-Length: 126
-Host: jukbang.com
-
-{
-  "id" : 1,
-  "writer" : "writer2",
-  "body" : "body body",
-  "univid" : 0,
-  "postid" : 0,
-  "modifiedDate" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::updateComment</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="updateComment_response_body"><a class="link" href="#updateComment_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>4</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::updateComment</p>
 </div>
 </div>
 </div>
@@ -1234,19 +1120,14 @@ Host: jukbang.com
 <h5 id="deleteComment"><a class="link" href="#deleteComment">댓글 삭제하기</a></h5>
 <div class="sect5">
 <h6 id="deleteComment_http_request"><a class="link" href="#deleteComment_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /community/comments/1/3/2 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::deleteComment</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="deleteComment_response_body"><a class="link" href="#deleteComment_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>success</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::deleteComment</p>
 </div>
 </div>
 </div>
@@ -1275,31 +1156,14 @@ Host: jukbang.com</code></pre>
 <h5 id="sendMessage"><a class="link" href="#sendMessage">메시지 보내기</a></h5>
 <div class="sect5">
 <h6 id="sendMessage_http_request"><a class="link" href="#sendMessage_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /message/userId/1 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Content-Length: 150
-Host: jukbang.com
-
-{
-  "id" : 1,
-  "sender" : "sender",
-  "receiver" : "receiver",
-  "body" : "body",
-  "chatRoom" : 1,
-  "isRead" : 1,
-  "modifiedDate" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::sendMessage</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="sendMessage_response_body"><a class="link" href="#sendMessage_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>3</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::sendMessage</p>
 </div>
 </div>
 </div>
@@ -1307,19 +1171,14 @@ Host: jukbang.com
 <h5 id="getMessageList"><a class="link" href="#getMessageList">메시지 불러오기</a></h5>
 <div class="sect5">
 <h6 id="getMessageList_http_request"><a class="link" href="#getMessageList_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /message/userId/3 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::getMessageList</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="getMessageList_response_body"><a class="link" href="#getMessageList_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>[ ]</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::getMessageList</p>
 </div>
 </div>
 </div>
@@ -1345,31 +1204,31 @@ Host: jukbang.com</code></pre>
 <div class="sect3">
 <h4 id="Room"><a class="link" href="#Room">방 서비스</a></h4>
 <div class="sect4">
-<h5 id="createRoom"><a class="link" href="#createRoom">판매자 방 게시하기</a></h5>
+<h5 id="createRoom"><a class="link" href="#createRoom">집주인 방 게시하기</a></h5>
 <div class="sect5">
 <h6 id="createRoom_http_request"><a class="link" href="#createRoom_http_request">HTTP request</a></h6>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /manager/manageroom/seller1 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /landlord/rooms HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 652
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX0xBTkRMT1JEIl0sImlhdCI6MTU5OTM4OTc4MywiZXhwIjoxNTk5MzkwMzgzfQ.DfMcpizNPXqPJb9yXfpV3BARACtuFsTVB9ZDqg8J-_E
+Content-Length: 637
 Host: jukbang.com
 
 {
   "univId" : 1,
-  "pictureCount" : 0,
-  "roomInformation" : {
-    "address" : "addr",
-    "structure" : 1,
-    "scale" : 2.0,
-    "floor" : 2.0,
-    "price" : {
-      "month" : 1.0,
-      "adminExpenses" : 1.0,
-      "deposit" : 1.0
-    }
+  "roomInfo" : {
+    "roomName" : "투썸 플레이스 3층",
+    "scale" : 1.0,
+    "floor" : 1.0,
+    "layout" : 1
   },
-  "extraOption" : {
+  "price" : {
+    "monthlyLease" : 1.0,
+    "adminExpenses" : 1.0,
+    "deposit" : 1.0
+  },
+  "option" : {
     "elevator" : true,
     "park" : true,
     "cctv" : true,
@@ -1379,15 +1238,12 @@ Host: jukbang.com
     "refrigerator" : true,
     "airconditioner" : true
   },
-  "description" : "good",
   "location" : {
-    "lat" : 1.0,
-    "lng" : 1.0
+    "address" : "서울 동작구 사당로 36-1 서정캐슬 3층",
+    "lat" : 37.494863,
+    "lng" : 126.958453
   },
-  "facilities" : {
-    "busStation" : true,
-    "subwayStation" : true
-  }
+  "description" : "설명"
 }</code></pre>
 </div>
 </div>
@@ -1402,111 +1258,31 @@ Host: jukbang.com
 </div>
 </div>
 <div class="sect4">
-<h5 id="deleteRoom"><a class="link" href="#deleteRoom">판매자 방 삭제하기</a></h5>
-<div class="sect5">
-<h6 id="deleteRoom_http_request"><a class="link" href="#deleteRoom_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /manager/manageroom/seller/4 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
-</div>
-</div>
-<div class="sect5">
-<h6 id="deleteRoom_response_body"><a class="link" href="#deleteRoom_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>success</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="getRoomList"><a class="link" href="#getRoomList">방 리스트 가져오기</a></h5>
-<div class="sect5">
-<h6 id="getRoomList_http_request"><a class="link" href="#getRoomList_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /roomlist/1 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
-</div>
-</div>
-<div class="sect5">
-<h6 id="getRoomList_response_body"><a class="link" href="#getRoomList_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="getRoomDetail"><a class="link" href="#getRoomDetail">방 상세정보 가져오기</a></h5>
-<div class="sect5">
-<h6 id="getRoomDetail_http_request"><a class="link" href="#getRoomDetail_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /roomdetail/1/0 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
-</div>
-</div>
-<div class="sect5">
-<h6 id="getRoomDetail_response_body"><a class="link" href="#getRoomDetail_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="getSellerRoomList"><a class="link" href="#getSellerRoomList">판매자 방 리스트 가져오기</a></h5>
-<div class="sect5">
-<h6 id="getSellerRoomList_http_request"><a class="link" href="#getSellerRoomList_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /manager/manageroom/seller HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
-</div>
-</div>
-<div class="sect5">
-<h6 id="getSellerRoomList_response_body"><a class="link" href="#getSellerRoomList_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
 <h5 id="updateRoom"><a class="link" href="#updateRoom">방 수정하기</a></h5>
 <div class="sect5">
 <h6 id="updateRoom_http_request"><a class="link" href="#updateRoom_http_request">HTTP request</a></h6>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /manager/manageroom/sellerId/0 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /landlord/rooms/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 655
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX0xBTkRMT1JEIl0sImlhdCI6MTU5OTM4OTc3OCwiZXhwIjoxNTk5MzkwMzc4fQ.L3rfGNZPDbWx2wnR2ygBL411MurlDz0Y2eaJlefSCdw
+Content-Length: 616
 Host: jukbang.com
 
 {
   "univId" : 1,
-  "pictureCount" : 0,
-  "roomInformation" : {
-    "address" : "addr",
-    "structure" : 1,
-    "scale" : 2.0,
-    "floor" : 2.0,
-    "price" : {
-      "month" : 1.0,
-      "adminExpenses" : 1.0,
-      "deposit" : 1.0
-    }
+  "roomInfo" : {
+    "roomName" : "상쾌한 방",
+    "scale" : 1.0,
+    "floor" : 1.0,
+    "layout" : 1
   },
-  "extraOption" : {
+  "price" : {
+    "monthlyLease" : 1.0,
+    "adminExpenses" : 1.0,
+    "deposit" : 1.0
+  },
+  "option" : {
     "elevator" : true,
     "park" : true,
     "cctv" : true,
@@ -1516,15 +1292,12 @@ Host: jukbang.com
     "refrigerator" : true,
     "airconditioner" : true
   },
-  "description" : "updated",
   "location" : {
-    "lat" : 1.0,
-    "lng" : 1.0
+    "address" : "서울특별시 동작구 상도동 504",
+    "lat" : 37.494601,
+    "lng" : 126.957527
   },
-  "facilities" : {
-    "busStation" : true,
-    "subwayStation" : true
-  }
+  "description" : "설명"
 }</code></pre>
 </div>
 </div>
@@ -1538,6 +1311,177 @@ Host: jukbang.com
 </div>
 </div>
 </div>
+<div class="sect4">
+<h5 id="deleteRoom"><a class="link" href="#deleteRoom">집주인 방 삭제하기</a></h5>
+<div class="sect5">
+<h6 id="deleteRoom_http_request"><a class="link" href="#deleteRoom_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /landlord/rooms/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX0xBTkRMT1JEIl0sImlhdCI6MTU5OTM4OTc4NSwiZXhwIjoxNTk5MzkwMzg1fQ.3POWvrs4E729wg8LN3p-VVHUEQl5KfIhWvBvGus-GvM
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="deleteRoom_response_body"><a class="link" href="#deleteRoom_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="getRoomList"><a class="link" href="#getRoomList">방 리스트 가져오기</a></h5>
+<div class="sect5">
+<h6 id="getRoomList_http_request"><a class="link" href="#getRoomList_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /rooms?univId=1 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="getRoomList_response_body"><a class="link" href="#getRoomList_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "_embedded" : {
+    "rooms" : [ {
+      "roomId" : 1,
+      "roomInfo" : {
+        "roomName" : "투썸 플레이스 3층",
+        "scale" : 1.0,
+        "floor" : 1.0,
+        "layout" : 1
+      },
+      "price" : {
+        "monthlyLease" : 1.0,
+        "adminExpenses" : 1.0,
+        "deposit" : 1.0
+      },
+      "location" : {
+        "address" : "서울 동작구 사당로 36-1 서정캐슬 3층",
+        "lat" : 37.494863,
+        "lng" : 126.958453
+      },
+      "grade" : 0.0,
+      "distance" : 184.90566659513362
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "https://jukbang.com/rooms?page=0&amp;size=20"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 1,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="getRoomDetail"><a class="link" href="#getRoomDetail">방 상세정보 가져오기</a></h5>
+<div class="sect5">
+<h6 id="getRoomDetail_http_request"><a class="link" href="#getRoomDetail_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /rooms/1 HTTP/1.1
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="getRoomDetail_response_body"><a class="link" href="#getRoomDetail_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "roomId" : 1,
+  "roomInfo" : {
+    "roomName" : "투썸 플레이스 3층",
+    "scale" : 1.0,
+    "floor" : 1.0,
+    "layout" : 1
+  },
+  "price" : {
+    "monthlyLease" : 1.0,
+    "adminExpenses" : 1.0,
+    "deposit" : 1.0
+  },
+  "option" : {
+    "elevator" : true,
+    "park" : true,
+    "cctv" : true,
+    "autoDoor" : true,
+    "washingMachine" : true,
+    "gasrange" : true,
+    "refrigerator" : true,
+    "airconditioner" : true
+  },
+  "location" : {
+    "address" : "서울 동작구 사당로 36-1 서정캐슬 3층",
+    "lat" : 37.494863,
+    "lng" : 126.958453
+  },
+  "description" : "설명",
+  "univId" : 1,
+  "grade" : 0.0,
+  "distance" : 184.90566659513362,
+  "pictureCount" : 0,
+  "sellerId" : "TestUser1"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="getSellerRoomList"><a class="link" href="#getSellerRoomList">집주인 방 리스트 가져오기</a></h5>
+<div class="sect5">
+<h6 id="getSellerRoomList_http_request"><a class="link" href="#getSellerRoomList_http_request">HTTP request</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /landlord/rooms HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUZXN0VXNlcjEiLCJyb2xlcyI6WyJST0xFX0xBTkRMT1JEIl0sImlhdCI6MTU5OTM4OTc5MSwiZXhwIjoxNTk5MzkwMzkxfQ._tTakVLbg7UUGjuLeNJ6ck5TPRWS6n8ChILLizeo6nw
+Host: jukbang.com</code></pre>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="getSellerRoomList_response_body"><a class="link" href="#getSellerRoomList_response_body">Example response</a></h6>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code>{
+  "_embedded" : {
+    "rooms" : [ {
+      "roomId" : 1,
+      "address" : "서울 동작구 사당로 36-1 서정캐슬 3층",
+      "roomName" : "투썸 플레이스 3층",
+      "modifiedDate" : "2020-09-06T19:56:31.724839"
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "https://jukbang.com/landlord/rooms?page=0&amp;size=20"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 1,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="Review"><a class="link" href="#Review">리뷰 서비스</a></h4>
@@ -1545,32 +1489,14 @@ Host: jukbang.com
 <h5 id="createReview"><a class="link" href="#createReview">리뷰 작성하기</a></h5>
 <div class="sect5">
 <h6 id="createReview_http_request"><a class="link" href="#createReview_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /review/1/0 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Content-Length: 160
-Host: jukbang.com
-
-{
-  "id" : 1,
-  "writer" : "writer",
-  "body" : "good",
-  "univid" : 1,
-  "roomid" : 0,
-  "score" : 10,
-  "title" : "제목",
-  "modifiedDate" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::createReview</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="createReview_response_body"><a class="link" href="#createReview_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::createReview</p>
 </div>
 </div>
 </div>
@@ -1578,19 +1504,14 @@ Host: jukbang.com
 <h5 id="deleteReview"><a class="link" href="#deleteReview">리뷰 삭제하기</a></h5>
 <div class="sect5">
 <h6 id="deleteReview_http_request"><a class="link" href="#deleteReview_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /review/1/3/2 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::deleteReview</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="deleteReview_response_body"><a class="link" href="#deleteReview_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>success</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::deleteReview</p>
 </div>
 </div>
 </div>
@@ -1598,19 +1519,14 @@ Host: jukbang.com</code></pre>
 <h5 id="getReviewList"><a class="link" href="#getReviewList">리뷰 리스트 가져오기</a></h5>
 <div class="sect5">
 <h6 id="getReviewList_http_request"><a class="link" href="#getReviewList_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /review/1/1 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::getReviewList</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="getReviewList_response_body"><a class="link" href="#getReviewList_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::getReviewList</p>
 </div>
 </div>
 </div>
@@ -1618,32 +1534,14 @@ Host: jukbang.com</code></pre>
 <h5 id="updateReview"><a class="link" href="#updateReview">리뷰 수정하기</a></h5>
 <div class="sect5">
 <h6 id="updateReview_http_request"><a class="link" href="#updateReview_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /review/1/0/0 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Content-Length: 156
-Host: jukbang.com
-
-{
-  "id" : 0,
-  "writer" : null,
-  "body" : "good good",
-  "univid" : 0,
-  "roomid" : 0,
-  "score" : 0,
-  "title" : null,
-  "modifiedDate" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::updateReview</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="updateReview_response_body"><a class="link" href="#updateReview_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::updateReview</p>
 </div>
 </div>
 </div>
@@ -1657,19 +1555,14 @@ Host: jukbang.com
 <h5 id="getFavoriteList"><a class="link" href="#getFavoriteList">사용자의 찜 목록 가져오기</a></h5>
 <div class="sect5">
 <h6 id="getFavoriteList_http_request"><a class="link" href="#getFavoriteList_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /userinfo/favorites/TestUser1 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::getFavoriteList</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="getFavoriteList_response_body"><a class="link" href="#getFavoriteList_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::getFavoriteList</p>
 </div>
 </div>
 </div>
@@ -1677,19 +1570,14 @@ Host: jukbang.com</code></pre>
 <h5 id="crateFavorite"><a class="link" href="#crateFavorite">방 찜하기</a></h5>
 <div class="sect5">
 <h6 id="crateFavorite_http_request"><a class="link" href="#crateFavorite_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /userinfo/favorites/1/0/TestUser1 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::createFavorite</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="crateFavorite_response_body"><a class="link" href="#crateFavorite_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>0</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::createFavorite</p>
 </div>
 </div>
 </div>
@@ -1697,19 +1585,14 @@ Host: jukbang.com</code></pre>
 <h5 id="deleteFavorite"><a class="link" href="#deleteFavorite">찜 취소하기</a></h5>
 <div class="sect5">
 <h6 id="deleteFavorite_http_request"><a class="link" href="#deleteFavorite_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /userinfo/favorites/1/0/TestUser1 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::deleteFavorite</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="deleteFavorite_response_body"><a class="link" href="#deleteFavorite_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>success</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::deleteFavorite</p>
 </div>
 </div>
 </div>
@@ -1720,31 +1603,14 @@ Host: jukbang.com</code></pre>
 <h5 id="createReport"><a class="link" href="#createReport">신고하기</a></h5>
 <div class="sect5">
 <h6 id="createReport_http_request"><a class="link" href="#createReport_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /report/1/0/TestUser1 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Content-Length: 163
-Host: jukbang.com
-
-{
-  "id" : 1,
-  "userid" : "TestUser1",
-  "body" : "응 너 신고",
-  "title" : "신고합니다.",
-  "univid" : 1,
-  "roomid" : 1,
-  "creatDate" : null
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::createReport</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="createReport_response_body"><a class="link" href="#createReport_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>0</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::createReport</p>
 </div>
 </div>
 </div>
@@ -1752,19 +1618,14 @@ Host: jukbang.com
 <h5 id="getReports"><a class="link" href="#getReports">신고 리스트 조회하기</a></h5>
 <div class="sect5">
 <h6 id="getReports_http_request"><a class="link" href="#getReports_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /admin/report/1 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::getReports</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="getReports_response_body"><a class="link" href="#getReports_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::getReports</p>
 </div>
 </div>
 </div>
@@ -1772,24 +1633,14 @@ Host: jukbang.com</code></pre>
 <h5 id="getReport"><a class="link" href="#getReport">신고 조회하기</a></h5>
 <div class="sect5">
 <h6 id="getReport_http_request"><a class="link" href="#getReport_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /admin/report/1/6/4 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::getReport</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="getReport_response_body"><a class="link" href="#getReport_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>{
-  "writer" : "TestUser1",
-  "title" : "신고합니다.",
-  "body" : "응 너 신고",
-  "modifiedDate" : "2020-08-28T01:19:27.40048"
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::getReport</p>
 </div>
 </div>
 </div>
@@ -1797,19 +1648,14 @@ Host: jukbang.com</code></pre>
 <h5 id="deleteReport"><a class="link" href="#deleteReport">신고 삭제하기</a></h5>
 <div class="sect5">
 <h6 id="deleteReport_http_request"><a class="link" href="#deleteReport_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /admin/report/1/5/2 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::deleteReport</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="deleteReport_response_body"><a class="link" href="#deleteReport_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::deleteReport</p>
 </div>
 </div>
 </div>
@@ -1820,23 +1666,14 @@ Host: jukbang.com</code></pre>
 <h5 id="getUser"><a class="link" href="#getUser">유저 정보 조회하기</a></h5>
 <div class="sect5">
 <h6 id="getUser_http_request"><a class="link" href="#getUser_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /userinfo/TestUser1 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::getUser</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="getUser_response_body"><a class="link" href="#getUser_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>[ {
-  "id" : 0,
-  "userId" : "TestUser1",
-  "univId" : 1
-} ]</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::getUser</p>
 </div>
 </div>
 </div>
@@ -1844,27 +1681,14 @@ Host: jukbang.com</code></pre>
 <h5 id="updateUser"><a class="link" href="#updateUser">유저 정보 수정하기</a></h5>
 <div class="sect5">
 <h6 id="updateUser_http_request"><a class="link" href="#updateUser_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /userinfo/1 HTTP/1.1
-Content-Type: application/json;charset=UTF-8
-Content-Length: 60
-Host: jukbang.com
-
-{
-  "id" : 1,
-  "userId" : "testuser2",
-  "univid" : 1
-}</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::updateUser</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="updateUser_response_body"><a class="link" href="#updateUser_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>success</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::updateUser</p>
 </div>
 </div>
 </div>
@@ -1872,19 +1696,14 @@ Host: jukbang.com
 <h5 id="deleteUser"><a class="link" href="#deleteUser">유저 삭제하기</a></h5>
 <div class="sect5">
 <h6 id="deleteUser_http_request"><a class="link" href="#deleteUser_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /userinfo/5 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::deleteUser</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="deleteUser_response_body"><a class="link" href="#deleteUser_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code>success</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::deleteUser</p>
 </div>
 </div>
 </div>
@@ -1892,19 +1711,14 @@ Host: jukbang.com</code></pre>
 <h5 id="getMyPosts"><a class="link" href="#getMyPosts">내가 쓴 게시글들 보기</a></h5>
 <div class="sect5">
 <h6 id="getMyPosts_http_request"><a class="link" href="#getMyPosts_http_request">HTTP request</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /userinfo/posts/TestUser1 HTTP/1.1
-Host: jukbang.com</code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet http-request not found for operation::getMyPosts</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="getMyPosts_response_body"><a class="link" href="#getMyPosts_response_body">Example response</a></h6>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code></code></pre>
-</div>
+<div class="paragraph">
+<p>Snippet response-body not found for operation::getMyPosts</p>
 </div>
 </div>
 </div>
@@ -1915,7 +1729,7 @@ Host: jukbang.com</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-28 22:49:57 +0900
+Last updated 2020-09-06 19:13:11 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/github.min.css">

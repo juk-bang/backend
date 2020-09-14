@@ -12,8 +12,10 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Location {
+    @Column(length = 100, nullable = false)
+    private String address;
     @Column(nullable = false)
-    private boolean busStation;
+    private double lat;
     @Column(nullable = false)
-    private boolean subwayStation;
+    private double lng;
 }

@@ -1,6 +1,7 @@
 package com.jukbang.api.user.favorite;
 
 import com.jukbang.api.common.BaseControllerTest;
+import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.service.FavoriteService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +22,7 @@ public class getFavoriteList extends BaseControllerTest {
     @Test
     @DisplayName("내 찜 목록 조회하기(성공)")
     void getFavoriteListSuccess() throws Exception {
-        userFactory.signUpUser(1);
+        userFactory.signUpUser(1, UserRole.ROLE_STUDENT);
         Long roomId = roomFactory.generateRoom("Seller1");
         favoriteService.SaveFavorite(1, Math.toIntExact(roomId),"TestUser1");
         mockMvc.perform(RestDocumentationRequestBuilders.get("/userinfo/favorites/{userId}", "TestUser1"))

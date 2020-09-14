@@ -1,6 +1,7 @@
 package com.jukbang.api.user.favorite;
 
 import com.jukbang.api.common.BaseControllerTest;
+import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.service.FavoriteService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +25,7 @@ public class deleteFavoriteTest extends BaseControllerTest {
     @DisplayName("찜 취소하기(성공)")
     void deleteFavoriteSuccess() throws Exception {
         Long roomId = roomFactory.generateRoom("Seller1");
-        userFactory.signUpUser(1);
+        userFactory.signUpUser(1, UserRole.ROLE_STUDENT);
         favoriteService.SaveFavorite(1, Math.toIntExact(roomId),"TestUser1");
         mockMvc.perform(RestDocumentationRequestBuilders.delete("/userinfo/favorites/{univId}/{roomId}/{userId}", 1, roomId, "TestUser1"))
                 .andDo(print())
