@@ -1,6 +1,7 @@
 package com.jukbang.api.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jukbang.api.factory.PostFactory;
 import com.jukbang.api.factory.ReportFactory;
 import com.jukbang.api.factory.RoomFactory;
 import com.jukbang.api.factory.UserFactory;
@@ -37,4 +38,7 @@ public class BaseControllerTest {
 
     @Autowired
     protected ReportFactory reportFactory;
+
+    @Autowired
+    protected PostFactory postFactory;
 }

@@ -92,7 +92,7 @@ public class RoomService {
                         createRoomRequest.getOption(),
                         createRoomRequest.getLocation(),
                         createRoomRequest.getDescription(),
-                        userRepository.findByUserId(sellerId).orElseThrow(() -> new UserNotFoundException(sellerId))
+                        userRepository.findByUserId(sellerId).orElseThrow(UserNotFoundException::new)
                 )).getRoomId();
     }
 
@@ -105,7 +105,7 @@ public class RoomService {
      */
     @Transactional
     public void updateRoom(String sellerId, long roomId, UpdateRoomRequest updateRoomRequest) {
-        Room room = roomRepository.findById(roomId).orElseThrow(() -> new UserNotFoundException(sellerId));
+        Room room = roomRepository.findById(roomId).orElseThrow(UserNotFoundException::new);
         if (!room.getSeller().getUserId().equals(sellerId))
             throw new NotYourRoomException();
         room.updateRoom(
