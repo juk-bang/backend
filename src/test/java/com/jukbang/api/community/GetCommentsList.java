@@ -28,15 +28,13 @@ public class GetCommentsList extends BaseControllerTest {
     @Test
     @DisplayName("게시글 별 전체 댓글 리스트 불러오기(성공)")
     void GetCommentsListSuccess() throws Exception {
+        userFactory.generateUser(1);
 
-        Long postId = postFactory.generatePost(1,"TestUser");
+        Long postId = postFactory.generatePost(1,"TestUser1");
 
-        CreateCommentRequest createCommentRequest = CreateCommentRequest.builder()
-                .writer(new User())
-                .body("TestBody")
-                .build();
+        Long commentsId1 = commentFactory.generateComment(postId,"TestUser1");
+        Long commentsId2 = commentFactory.generateComment(postId,"TestUser1");
 
-        commentsService.saveComment(postId,"TestUser", createCommentRequest);
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{univId}/{postId}/comments", 1,postId))
                 .andExpect(status().isOk())

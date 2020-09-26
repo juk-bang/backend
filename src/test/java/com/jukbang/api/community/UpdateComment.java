@@ -18,7 +18,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @Disabled
 public class UpdateComment extends BaseControllerTest {
 
@@ -31,21 +30,20 @@ public class UpdateComment extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("댓글 수정하기 (성공)")
     void UpdateCommentSuccess() throws Exception {
+        userFactory.generateUser(1);
 
-        Long postId = postFactory.generatePost(1,"TestUser");
 
-        CreateCommentRequest createCommentRequest = CreateCommentRequest.builder()
-                .writer(new User())
-                .body("TestBody")
-                .build();
+        Long postId = postFactory.generatePost(1,"TestUser1");
 
-        Long commentId= commentsService.saveComment( postId,"TestUser",createCommentRequest);
+        Long commentId = commentFactory.generateComment(postId,"TestUser1");
 
         UpdateCommentRequest updateCommentRequest = UpdateCommentRequest.builder()
                 .body("TestBody_2")
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/community/{univId}/{postId}/comments/{commentsId}",1,postId,commentId)
+        commentsService.updateComment(postId,commentId,"TestUser1",updateCommentRequest);
+
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/community/{univId}/{postId}/comments/{commentId}",1,postId,1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest))
         )

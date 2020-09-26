@@ -1,5 +1,6 @@
 package com.jukbang.api.factory;
 
+import com.jukbang.api.community.CreatePost;
 import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.service.PostService;
 import com.jukbang.api.user.entity.User;
@@ -16,9 +17,8 @@ public class PostFactory {
         return postService.savePost(univId, userId, generateCreatePostRequest());
     }
 
-    public CreatePostRequest generateCreatePostRequest() {
+    public CreatePostRequest generateCreatePostRequest(){
         return CreatePostRequest.builder()
-                .writer(new User())
                 .title("TestTitle")
                 .body("TestBody")
                 .build();

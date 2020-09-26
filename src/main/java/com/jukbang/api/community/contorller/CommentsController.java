@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-@RequestMapping("/community/{univId}")
+@RequestMapping("/community/{univId}/{postId}/comments")
 public class CommentsController {
 
     private final CommentsService commentsService;
@@ -25,7 +25,7 @@ public class CommentsController {
      * @param postId
      * @return
      */
-    @GetMapping("/{postId}/comments")
+    @GetMapping("")
     public List getCommentsList(
             @PathVariable("postId") Long postId
     ) {
@@ -40,7 +40,7 @@ public class CommentsController {
      * @param createCommentRequest
      * @return (long) id
      */
-    @PostMapping("/{postId}/comments")
+    @PostMapping("")
     public long createComment(
             @PathVariable("postId") Long postId,
             @RequestBody CreateCommentRequest createCommentRequest
@@ -61,7 +61,7 @@ public class CommentsController {
      * @return (long) id
      * @throws JsonProcessingException
      */
-    @PutMapping("/{postId}/comments/{commentsId}")
+    @PutMapping("/{commentId}")
     public long updateComment(
             @PathVariable("postId") long postId,
             @PathVariable("commentsId") long commentsId,
@@ -79,7 +79,7 @@ public class CommentsController {
      * @param postId
      * @return (String) success
      */
-    @DeleteMapping("{postId}/comments/{commentsId}")
+    @DeleteMapping("/{commentId}")
     public String deleteComment(
             @PathVariable("postId") long postId,
             @PathVariable("commetsId") long commentsId

@@ -13,7 +13,6 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class GetPost extends BaseControllerTest {
 
     @Autowired
@@ -22,6 +21,7 @@ public class GetPost extends BaseControllerTest {
     @Test
     @DisplayName("각 게시글 불러오기(성공)")
     void GetPostListSuccess() throws Exception {
+        userFactory.generateUser(1);
 
         Long postId = postFactory.generatePost(1,"TestUser");
 

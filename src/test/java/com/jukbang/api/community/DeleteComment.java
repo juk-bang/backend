@@ -17,7 +17,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @Disabled
 public class DeleteComment extends BaseControllerTest {
 
@@ -28,24 +27,22 @@ public class DeleteComment extends BaseControllerTest {
     private PostService postService;
 
     @Test
-    @WithMockUser("TestUser1")
     @DisplayName("게시글 삭제하기 (성공)")
     void DeleteCommentSuccess() throws Exception {
 
+        userFactory.generateUser(1);
 
-        Long postId = postFactory.generatePost(1,"TestUser");
+        Long postId = postFactory.generatePost(1,"TestUser1");
 
-        CreateCommentRequest createCommentRequest = CreateCommentRequest.builder()
-                .writer(new User())
-                .body("body")
-                .build();
+        Long commentId = commentFactory.generateComment(postId,"TestUser1");
 
-        Long commentId = commentsService.saveComment(postId,"TestUser",createCommentRequest);
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/community/{univId}/{postId}/comments/{commentId}",
+                1,postId,1))
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/community/{univId}/{postId}/comments/{commentsId}",1,postId,commentId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("DeleteComment"))
         ;
     }
 }
+

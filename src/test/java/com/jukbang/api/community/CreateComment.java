@@ -24,21 +24,19 @@ public class CreateComment extends BaseControllerTest {
     @Autowired
     private CommentsService commentsService;
 
-    @Autowired
-
     @Test
-    @WithMockUser("TestUser1")
     @DisplayName("댓글 생성하기 (성공)")
     void CreateCommentSuccess() throws Exception {
 
-        Long postId = postFactory.generatePost(1,"TestUser");
+        userFactory.generateUser(1);
+
+        Long postId = postFactory.generatePost(1,"TestUser1");
 
         CreateCommentRequest createCommentRequest = CreateCommentRequest.builder()
-                .writer(new User())
-                .body("TestCommnets")
+                .body("TestComments")
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/comments/{univId}/{postId}/comments", 1, postId)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/{univId}/{postId}/comments", 1, postId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(createCommentRequest))
         )

@@ -118,8 +118,7 @@ public class PostService {
         Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
 
 
-        post.setViews(post.getViews() + 1);
-        postRepository.save(post);
+        post.addViews(post.getViews() + 1);
 
         PostDto postDto = PostDto.builder()
                 .title(post.getTitle())
@@ -152,11 +151,6 @@ public class PostService {
         // 존재하는 Id 인지 확인
         userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
 
-        // 존재하는 게시글 인지 확인
-        postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
-
-
-
         Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
         post.updatePost(updatePostRequest.getTitle(), updatePostRequest.getBody());
 
@@ -178,7 +172,6 @@ public class PostService {
 
         // 존재하는 게시글 인지 확인
         postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
-
 
         postRepository.deleteById(postId);
     }

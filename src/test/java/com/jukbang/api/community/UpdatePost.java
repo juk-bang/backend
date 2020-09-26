@@ -16,7 +16,6 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class UpdatePost  extends BaseControllerTest {
     @Autowired
     private PostService postService;
@@ -25,6 +24,7 @@ public class UpdatePost  extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("게시글 수정하기 (성공)")
     void UpdatePostSuccess() throws Exception{
+        userFactory.generateUser(1);
 
         Long postId = postFactory.generatePost(1,"TestUser");
 
@@ -32,6 +32,7 @@ public class UpdatePost  extends BaseControllerTest {
                 .title("TestTitle_2")
                 .body("TestBody_2")
                 .build();
+
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/community/{univId}/{postId}",1,postId)
                 .contentType(MediaType.APPLICATION_JSON)

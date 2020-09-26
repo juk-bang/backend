@@ -1,3 +1,4 @@
+/*
 package com.jukbang.api.user.profile;
 
 import com.jukbang.api.common.BaseControllerTest;
@@ -38,3 +39,4 @@ public class getMyPostsTest extends BaseControllerTest {
         ;
     }
 }
+*/

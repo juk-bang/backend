@@ -9,6 +9,7 @@ import com.jukbang.api.community.repository.CommentsRepository;
 import com.jukbang.api.community.repository.PostRepository;
 import com.jukbang.api.community.request.CreateCommentRequest;
 import com.jukbang.api.community.request.UpdateCommentRequest;
+import com.jukbang.api.user.entity.User;
 import com.jukbang.api.user.exception.UserNotFoundException;
 import com.jukbang.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -68,21 +69,16 @@ public class CommentsService {
                             String userId,
                             CreateCommentRequest createCommentRequest ) {
 
-        // 존재하는 Id 인지 확인
-        userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
-
         // 존재하는 게시글 인지 확인
         Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
 
         // 게시글 댓글 수  +1
-        post.setComments(post.getComments()+1);
-
-
+        post.addComments(post.getComments()+1);
 
         return commentsRepository.save(
                 new Comments(
                         createCommentRequest.getBody(),
-                        createCommentRequest.getWriter()
+                        userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new)
                 )).getCommentsId();
     }
 
@@ -98,7 +94,8 @@ public class CommentsService {
      * @return (long) commentsId
      */
     @Transactional
-    public long updateComment(Long postId, Long commentsId,String userId,UpdateCommentRequest updateCommentRequest) {
+    public long updateComment(Long postId,
+                              Long commentsId,String userId,UpdateCommentRequest updateCommentRequest) {
 
 
         // 존재하는 Id 인지 확인
@@ -107,11 +104,12 @@ public class CommentsService {
         // 존재하는 게시글 인지 확인
         Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
 
+        // 존재하는 댓글 인지 확인
+        Comments comments = commentsRepository.findByPostIdAndCommentsId(postId,commentsId).orElseThrow(CommentsNotFoundException::new);
 
-        Comments commets = commentsRepository.findByPostIdAndCommentsId(postId,commentsId).orElseThrow(CommentsNotFoundException::new);
-        commets.updateComments(updateCommentRequest.getBody());
+        comments.updateComments(updateCommentRequest.getBody());
 
-        return commets.getCommentsId();
+        return comments.getCommentsId();
     }
 
 
@@ -124,21 +122,19 @@ public class CommentsService {
      * @param commentsId
      */
     @Transactional
-    public void deleteComment(long postId, long commentsId, String userId) {
+    public void deleteComment(Long postId, Long commentsId, String userId) {
 
         // 존재하는 Id 인지 확인
         userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new);
 
-
         // 존재하는 게시글 인지 확인
         Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
 
+        // 존재하는 게시글 댓글 인지 확인
+        commentsRepository.findByPostIdAndCommentsId(postId,commentsId).orElseThrow(CommentsNotFoundException::new);
+
         // 게시글 댓글 수  -1
-        post.setComments(post.getComments()-1);
-
-
-
-        Comments commets = commentsRepository.findByPostIdAndCommentsId(postId,commentsId).orElseThrow(CommentsNotFoundException::new);
+        post.deleteComments(post.getComments()-1);
 
         commentsRepository.deleteById(commentsId);
     }

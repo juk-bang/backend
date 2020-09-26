@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreatePostRequest {
-    private User writer;
     private String title;
     private String body;
 }

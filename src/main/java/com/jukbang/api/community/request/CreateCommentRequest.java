@@ -13,6 +13,5 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateCommentRequest {
-    private User writer;
     private String body;
 }

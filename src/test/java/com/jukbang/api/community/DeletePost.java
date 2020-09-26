@@ -15,24 +15,17 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class DeletePost extends BaseControllerTest {
 
     @Autowired
     private PostService postService;
 
     @Test
-    @WithMockUser("TestUser1")
     @DisplayName("게시글 삭제하기 (성공)")
     void DeletePostSuccess() throws Exception{
+        userFactory.generateUser(1);
 
-        CreatePostRequest createPostRequest = CreatePostRequest.builder()
-                .writer(new User())
-                .title("TestTitle")
-                .body("TestBody")
-                .build();
-
-        Long postId= postService.savePost(1,"TestUser",createPostRequest);
+        Long postId= postFactory.generatePost(1,"TestUser1");
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/community/{univId}/{postid}",1,postId))
                 .andExpect(status().isOk())
