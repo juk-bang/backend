@@ -6,6 +6,7 @@ import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.service.CommentsService;
 import com.jukbang.api.community.service.PostService;
 import com.jukbang.api.factory.PostFactory;
+import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.entity.User;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -21,14 +22,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class CreateComment extends BaseControllerTest {
 
-    @Autowired
-    private CommentsService commentsService;
-
     @Test
     @DisplayName("댓글 생성하기 (성공)")
     void CreateCommentSuccess() throws Exception {
 
-        userFactory.generateUser(1);
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
 
         Long postId = postFactory.generatePost(1,"TestUser1");
 
@@ -38,6 +36,7 @@ public class CreateComment extends BaseControllerTest {
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/{univId}/{postId}/comments", 1, postId)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Bearer " + accessToken)
                 .content(this.objectMapper.writeValueAsString(createCommentRequest))
         )
 

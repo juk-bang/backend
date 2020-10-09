@@ -33,8 +33,6 @@ public class Post extends Time {
     @Column(nullable = false)
     private int comments;
 
-    @OneToMany(mappedBy = "post")
-    private List<Comments> commentsList;
 
     @OneToOne
     @JoinColumn(name = "writer_id")

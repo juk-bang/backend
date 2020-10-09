@@ -5,6 +5,7 @@ import com.jukbang.api.community.request.CreateCommentRequest;
 import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.service.CommentsService;
 import com.jukbang.api.community.service.PostService;
+import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.entity.User;
 import com.jukbang.api.user.service.UserService;
 import org.junit.jupiter.api.Disabled;
@@ -20,24 +21,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class DeleteComment extends BaseControllerTest {
 
-    @Autowired
-    private CommentsService commentsService;
-
-    @Autowired
-    private PostService postService;
-
     @Test
     @DisplayName("게시글 삭제하기 (성공)")
     void DeleteCommentSuccess() throws Exception {
 
-        userFactory.generateUser(1);
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
 
         Long postId = postFactory.generatePost(1,"TestUser1");
 
-        Long commentId = commentFactory.generateComment(postId,"TestUser1");
+        commentFactory.generateComment(postId,"TestUser1");
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/community/{univId}/{postId}/comments/{commentId}",
-                1,postId,1))
+                1,postId,1)
+                .header("Authorization", "Bearer " + accessToken))
 
                 .andExpect(status().isOk())
                 .andDo(print())

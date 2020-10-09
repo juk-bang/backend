@@ -10,5 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface CommentsRepository extends JpaRepository<Comments, Long> {
-    Optional<Comments> findByPostAndCommentsId(Post post, Long commentsId);
+    List<Comments> findAllByPost(Post post);
+
+    Optional<Comments> findByCommentsId(Long commentsId);
 }

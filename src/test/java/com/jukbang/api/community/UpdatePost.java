@@ -4,6 +4,7 @@ import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.request.UpdatePostRequest;
 import com.jukbang.api.community.service.PostService;
+import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,13 +18,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 public class UpdatePost  extends BaseControllerTest {
-    @Autowired
-    private PostService postService;
 
     @Test
     @DisplayName("게시글 수정하기 (성공)")
     void UpdatePostSuccess() throws Exception{
-        userFactory.generateUser(1);
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
 
         Long postId = postFactory.generatePost(1,"TestUser1");
 
@@ -35,6 +34,7 @@ public class UpdatePost  extends BaseControllerTest {
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/community/{univId}/{postId}",1,postId)
                 .contentType(MediaType.APPLICATION_JSON)
+                .header("Authorization", "Bearer " + accessToken)
                 .content(this.objectMapper.writeValueAsString(updatePostRequest))
         )
                 .andExpect(status().isOk())

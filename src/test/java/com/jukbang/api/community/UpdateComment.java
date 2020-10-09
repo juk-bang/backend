@@ -6,6 +6,7 @@ import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.request.UpdateCommentRequest;
 import com.jukbang.api.community.service.CommentsService;
 import com.jukbang.api.community.service.PostService;
+import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.entity.User;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -23,13 +24,11 @@ public class UpdateComment extends BaseControllerTest {
 
     @Autowired
     private CommentsService commentsService;
-    @Autowired
-    private PostService postService;
 
     @Test
     @DisplayName("댓글 수정하기 (성공)")
     void UpdateCommentSuccess() throws Exception {
-        userFactory.generateUser(1);
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
 
 
         Long postId = postFactory.generatePost(1,"TestUser1");
@@ -44,7 +43,9 @@ public class UpdateComment extends BaseControllerTest {
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.put("/community/{univId}/{postId}/comments/{commentId}",1,postId,1)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(updateCommentRequest))
+                .header("Authorization", "Bearer " + accessToken)
+                .content(this.objectMapper.writeValueAsString(updateCommentRequest)
+                )
         )
                 .andExpect(status().isOk())
                 .andDo(print())

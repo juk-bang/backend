@@ -4,6 +4,7 @@ import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.service.PostService;
 import com.jukbang.api.factory.PostFactory;
+import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.entity.User;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -31,13 +32,14 @@ public class CreatePost extends BaseControllerTest {
                 .body("TestBody")
                 .build();
 
-        userFactory.generateUser(1);
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
 
         postService.savePost(1,"TestUser1",createPostRequest);
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/{univId}",1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(createPostRequest))
+                .header("Authorization", "Bearer " + accessToken)
         )
 
                 .andExpect(status().isOk())
