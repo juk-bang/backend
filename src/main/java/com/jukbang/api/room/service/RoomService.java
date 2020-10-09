@@ -105,7 +105,7 @@ public class RoomService {
      */
     @Transactional
     public void updateRoom(String sellerId, long roomId, UpdateRoomRequest updateRoomRequest) {
-        Room room = roomRepository.findById(roomId).orElseThrow(UserNotFoundException::new);
+        Room room = roomRepository.findById(roomId).orElseThrow(RoomNotFoundException::new);
         if (!room.getSeller().getUserId().equals(sellerId))
             throw new NotYourRoomException();
         room.updateRoom(

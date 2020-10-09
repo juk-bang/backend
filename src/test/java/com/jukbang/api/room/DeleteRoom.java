@@ -26,4 +26,19 @@ public class DeleteRoom extends BaseControllerTest {
                 .andDo(document("DeleteRoom"))
         ;
     }
+
+    @Test
+    @DisplayName("방 삭제하기 내 방이 아닐 때(실패)")
+    void DeleteRoomFailBecauseNotMyRoom() throws Exception {
+        userFactory.signUpUser(1, UserRole.ROLE_LANDLORD);
+        String accessToken = userFactory.signUpUser(2, UserRole.ROLE_LANDLORD).getAccessToken();
+        Long roomId = roomFactory.generateRoom("TestUser" + 1);
+
+        this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/landlord/rooms/{roomId}", roomId)
+                .header("Authorization", "Bearer " + accessToken))
+                .andExpect(status().isForbidden())
+                .andDo(print())
+                .andDo(document("1002"))
+        ;
+    }
 }

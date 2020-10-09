@@ -17,7 +17,7 @@ public class GetRoomDetail extends BaseControllerTest {
     @Test
     @WithMockUser("TestUser1")
     @DisplayName("방 세부사항 가져오기 (성공)")
-    void getRoomListSuccess() throws Exception {
+    void getRoomSuccess() throws Exception {
         userFactory.signUpUser(1, UserRole.ROLE_LANDLORD);
         Long roomId = roomFactory.generateRoom("TestUser" + 1);
 
@@ -25,6 +25,20 @@ public class GetRoomDetail extends BaseControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("GetRoomDetail"))
+        ;
+    }
+
+    @Test
+    @WithMockUser("TestUser1")
+    @DisplayName("방 세부사항 가져오기 (성공)")
+    void getRoomFailBecauseNotFound() throws Exception {
+        userFactory.signUpUser(1, UserRole.ROLE_LANDLORD);
+        Long roomId = roomFactory.generateRoom("TestUser" + 1);
+
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/rooms/{roomId}", roomId+1))
+                .andExpect(status().isNotFound())
+                .andDo(print())
+                .andDo(document("1001"))
         ;
     }
 }
