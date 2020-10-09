@@ -13,10 +13,10 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Comments extends Time {
-    @Id
     /**
      *  각 댓글의 고유번호 (중복 불가)
      */
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commentsId;
 
@@ -35,9 +35,10 @@ public class Comments extends Time {
     @JoinColumn(name = "postId")
     private Post post;
 
-    public Comments(String body, User writer){
+    public Comments(String body, User writer,Post post){
         this.body=body;
         this.writer = writer;
+        this.post=post;
     }
 
     public void updateComments(String body){

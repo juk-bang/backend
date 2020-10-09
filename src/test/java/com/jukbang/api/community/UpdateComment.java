@@ -18,7 +18,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-@Disabled
+
 public class UpdateComment extends BaseControllerTest {
 
     @Autowired
@@ -27,7 +27,6 @@ public class UpdateComment extends BaseControllerTest {
     private PostService postService;
 
     @Test
-    @WithMockUser("TestUser1")
     @DisplayName("댓글 수정하기 (성공)")
     void UpdateCommentSuccess() throws Exception {
         userFactory.generateUser(1);

@@ -17,7 +17,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-@Disabled
+
 public class DeleteComment extends BaseControllerTest {
 
     @Autowired

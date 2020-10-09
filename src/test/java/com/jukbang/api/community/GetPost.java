@@ -23,7 +23,7 @@ public class GetPost extends BaseControllerTest {
     void GetPostListSuccess() throws Exception {
         userFactory.generateUser(1);
 
-        Long postId = postFactory.generatePost(1,"TestUser");
+        Long postId = postFactory.generatePost(1,"TestUser1");
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{univId}/{postId}",1,postId))
                 .andExpect(status().isOk())

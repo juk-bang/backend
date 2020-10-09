@@ -21,12 +21,11 @@ public class UpdatePost  extends BaseControllerTest {
     private PostService postService;
 
     @Test
-    @WithMockUser("TestUser1")
     @DisplayName("게시글 수정하기 (성공)")
     void UpdatePostSuccess() throws Exception{
         userFactory.generateUser(1);
 
-        Long postId = postFactory.generatePost(1,"TestUser");
+        Long postId = postFactory.generatePost(1,"TestUser1");
 
         UpdatePostRequest updatePostRequest = UpdatePostRequest.builder()
                 .title("TestTitle_2")

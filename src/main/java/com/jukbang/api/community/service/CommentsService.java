@@ -38,7 +38,9 @@ public class CommentsService {
      */
     @Transactional
     public List<CommentsDto> getCommentsList(Long postId) {
-        List<Comments> commentsEntities = commentsRepository.findAllByPostId(postId);
+        Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
+
+        List<Comments> commentsEntities = post.getCommentsList();
 
         List<CommentsDto> commentsDtoList = new ArrayList<>();
 
@@ -78,7 +80,8 @@ public class CommentsService {
         return commentsRepository.save(
                 new Comments(
                         createCommentRequest.getBody(),
-                        userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new)
+                        userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new),
+                        post
                 )).getCommentsId();
     }
 
@@ -105,7 +108,7 @@ public class CommentsService {
         Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
 
         // 존재하는 댓글 인지 확인
-        Comments comments = commentsRepository.findByPostIdAndCommentsId(postId,commentsId).orElseThrow(CommentsNotFoundException::new);
+        Comments comments = commentsRepository.findByPostAndCommentsId(post,commentsId).orElseThrow(CommentsNotFoundException::new);
 
         comments.updateComments(updateCommentRequest.getBody());
 
@@ -131,7 +134,7 @@ public class CommentsService {
         Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
 
         // 존재하는 게시글 댓글 인지 확인
-        commentsRepository.findByPostIdAndCommentsId(postId,commentsId).orElseThrow(CommentsNotFoundException::new);
+        commentsRepository.findByPostAndCommentsId(post,commentsId).orElseThrow(CommentsNotFoundException::new);
 
         // 게시글 댓글 수  -1
         post.deleteComments(post.getComments()-1);

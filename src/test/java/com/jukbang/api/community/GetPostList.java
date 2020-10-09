@@ -22,9 +22,10 @@ public class GetPostList extends BaseControllerTest {
     @DisplayName("전체게시글 리스트 불러오기(성공)")
     void GetPostListSuccess() throws Exception {
         userFactory.generateUser(1);
+        userFactory.generateUser(2);
 
-        postFactory.generatePost(1,"TestUser_1");
-        postFactory.generatePost(1,"TestUser_2");
+        postFactory.generatePost(1,"TestUser1");
+        postFactory.generatePost(1,"TestUser2");
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{univId}",1))
                 .andExpect(status().isOk())
