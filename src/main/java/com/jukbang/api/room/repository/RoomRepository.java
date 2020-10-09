@@ -80,5 +80,5 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     @Query(value = "SELECT new com.jukbang.api.room.dto.LandlordDto(room.roomId, room.location.address, room.roomInfo.roomName, room.modifiedDate)" +
             "FROM Room room WHERE room.seller.userId = :sellerId",
             countQuery = "SELECT count(roomId) FROM Room WHERE seller.userId = :sellerId")
-    Page<LandlordDto> findAllBySellerId(String sellerId, Pageable pageable);
+    Page<LandlordDto> findAllBySellerId(@Param("sellerId")String sellerId, Pageable pageable);
 }
