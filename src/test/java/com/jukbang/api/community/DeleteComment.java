@@ -29,10 +29,10 @@ public class DeleteComment extends BaseControllerTest {
 
         Long postId = postFactory.generatePost(1,"TestUser1");
 
-        commentFactory.generateComment(postId,"TestUser1");
+        Long commentId = commentFactory.generateComment(postId,"TestUser1");
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/community/{univId}/{postId}/comments/{commentId}",
-                1,postId,2)
+                1,postId,commentId)
                 .header("Authorization", "Bearer " + accessToken))
 
                 .andExpect(status().isOk())
