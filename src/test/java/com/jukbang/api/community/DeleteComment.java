@@ -25,14 +25,14 @@ public class DeleteComment extends BaseControllerTest {
     @DisplayName("게시글 삭제하기 (성공)")
     void DeleteCommentSuccess() throws Exception {
 
-        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
 
         Long postId = postFactory.generatePost(1,"TestUser1");
 
         commentFactory.generateComment(postId,"TestUser1");
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.delete("/community/{univId}/{postId}/comments/{commentId}",
-                1,postId,1)
+                1,postId,2)
                 .header("Authorization", "Bearer " + accessToken))
 
                 .andExpect(status().isOk())

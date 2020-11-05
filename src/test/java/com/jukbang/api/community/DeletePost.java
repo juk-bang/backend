@@ -22,7 +22,7 @@ public class DeletePost extends BaseControllerTest {
     @Test
     @DisplayName("게시글 삭제하기 (성공)")
     void DeletePostSuccess() throws Exception{
-        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
 
         Long postId= postFactory.generatePost(1,"TestUser1");
 

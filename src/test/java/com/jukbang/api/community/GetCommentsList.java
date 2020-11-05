@@ -22,7 +22,7 @@ public class GetCommentsList extends BaseControllerTest {
     @Test
     @DisplayName("게시글 별 전체 댓글 리스트 불러오기(성공)")
     void GetCommentsListSuccess() throws Exception {
-        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
 
         Long postId = postFactory.generatePost(1,"TestUser1");
         System.out.println("****************************** create post success **********************************");

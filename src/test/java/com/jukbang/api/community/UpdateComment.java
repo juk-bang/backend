@@ -28,7 +28,7 @@ public class UpdateComment extends BaseControllerTest {
     @Test
     @DisplayName("댓글 수정하기 (성공)")
     void UpdateCommentSuccess() throws Exception {
-        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
 
 
         Long postId = postFactory.generatePost(1,"TestUser1");
@@ -41,7 +41,7 @@ public class UpdateComment extends BaseControllerTest {
 
         commentsService.updateComment(postId,commentId,"TestUser1",updateCommentRequest);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/community/{univId}/{postId}/comments/{commentId}",1,postId,1)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.put("/community/{univId}/{postId}/comments/{commentId}",1,postId,commentId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .header("Authorization", "Bearer " + accessToken)
                 .content(this.objectMapper.writeValueAsString(updateCommentRequest)

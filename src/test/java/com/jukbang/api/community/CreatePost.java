@@ -32,7 +32,7 @@ public class CreatePost extends BaseControllerTest {
                 .body("TestBody")
                 .build();
 
-        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
 
         postService.savePost(1,"TestUser1",createPostRequest);
 

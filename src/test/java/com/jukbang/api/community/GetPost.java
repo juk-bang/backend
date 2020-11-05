@@ -20,7 +20,7 @@ public class GetPost extends BaseControllerTest {
     @Test
     @DisplayName("각 게시글 불러오기(성공)")
     void GetPostListSuccess() throws Exception {
-        userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
 
         Long postId = postFactory.generatePost(1,"TestUser1");
 

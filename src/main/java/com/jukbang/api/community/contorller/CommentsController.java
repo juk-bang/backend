@@ -64,7 +64,7 @@ public class CommentsController {
     @PutMapping("/{commentId}")
     public long updateComment(
             @PathVariable("postId") long postId,
-            @PathVariable("commentsId") long commentsId,
+            @PathVariable("commentId") long commentsId,
             @RequestBody UpdateCommentRequest updateCommentRequest
     ) {
 
@@ -82,7 +82,7 @@ public class CommentsController {
     @DeleteMapping("/{commentId}")
     public String deleteComment(
             @PathVariable("postId") long postId,
-            @PathVariable("commetsId") long commentsId
+            @PathVariable("commentId") long commentsId
     ) {
 
         String userId = SecurityContextHolder.getContext().getAuthentication().getName();

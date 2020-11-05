@@ -19,8 +19,8 @@ public class GetPostList extends BaseControllerTest {
     @Test
     @DisplayName("전체게시글 리스트 불러오기(성공)")
     void GetPostListSuccess() throws Exception {
-        userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
-        userFactory.signUpUser(2, UserRole.ROLE_LANDLORD).getAccessToken();
+        userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        userFactory.signUpUser(2, UserRole.ROLE_STUDENT).getAccessToken();
 
         postFactory.generatePost(1,"TestUser1");
         postFactory.generatePost(1,"TestUser2");

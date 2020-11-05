@@ -22,7 +22,7 @@ public class UpdatePost  extends BaseControllerTest {
     @Test
     @DisplayName("게시글 수정하기 (성공)")
     void UpdatePostSuccess() throws Exception{
-        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
 
         Long postId = postFactory.generatePost(1,"TestUser1");
 

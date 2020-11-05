@@ -26,7 +26,7 @@ public class CreateComment extends BaseControllerTest {
     @DisplayName("댓글 생성하기 (성공)")
     void CreateCommentSuccess() throws Exception {
 
-        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
 
         Long postId = postFactory.generatePost(1,"TestUser1");
 
