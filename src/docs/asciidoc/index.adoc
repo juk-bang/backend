@@ -353,3 +353,22 @@ operation::deleteUser[snippets='http-request,response-body']
 ===== 내가 쓴 게시글들 보기
 
 operation::getMyPosts[snippets='http-request,response-body']
+
+[[File]]
+==== 파일 서비스
+
+[[getThumbnailImage]]
+===== 썸네일 이미지 받기
+
+operation::getThumbnailImage[snippets='http-request']
+
+[[uploadThumbnailImage]]
+===== 썸네일 이미지 수정하기
+
+operation::uploadThumbnailImage[snippets='curl-request']
+
+
+[[deleteThumbnailImage]]
+===== 썸네일 이미지 삭제하기
+
+operation::deleteThumbnailImage[snippets='http-request']
