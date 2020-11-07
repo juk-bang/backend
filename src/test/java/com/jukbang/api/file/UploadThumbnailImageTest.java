@@ -23,7 +23,7 @@ class UploadThumbnailImageTest extends BaseControllerTest {
   @WithMockUser("TestUser1")
   @DisplayName("썸네일 이미지 업로드(성공)")
   void uploadThumbnailImageSuccess() throws Exception {
-    String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+    String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
     Long roomId = roomFactory.generateRoom("TestUser1");
 
     File targetFile = new File("./files/thumbnailImg/test.jpg");
@@ -50,7 +50,7 @@ class UploadThumbnailImageTest extends BaseControllerTest {
   @WithMockUser("TestUser1")
   @DisplayName("썸네일 이미지 업로드(실패)잘못된 이름")
   void uploadThumbnailImageFailBecauseBadName() throws Exception {
-    String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+    String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
     Long roomId = roomFactory.generateRoom("TestUser1");
 
     File targetFile = new File("./files/test..jpg");
@@ -71,7 +71,7 @@ class UploadThumbnailImageTest extends BaseControllerTest {
   @WithMockUser("TestUser1")
   @DisplayName("썸네일 이미지 업로드(실패)내 방이 아님")
   void uploadThumbnailImageFailBecauseNotMine() throws Exception {
-    String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+    String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
 
     File targetFile = new File("./files/thumbnailImg/test.jpg");
     MockMultipartFile image = new MockMultipartFile(
