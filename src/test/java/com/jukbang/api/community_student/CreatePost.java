@@ -1,45 +1,48 @@
-package com.jukbang.api.community;
+package com.jukbang.api.community_student;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community.request.CreatePostRequest;
-import com.jukbang.api.community.service.CommunityService;
-import org.junit.jupiter.api.Disabled;
+import com.jukbang.api.community_student.request.CreatePostRequest;
+import com.jukbang.api.community_student.service.PostService;
+import com.jukbang.api.user.UserRole;
+import com.jukbang.api.community_student.CommunityRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.security.test.context.support.WithMockUser;
+
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class CreatePost extends BaseControllerTest {
 
     @Autowired
-    private CommunityService communityService;
+    private PostService postService;
 
     @Test
-    @WithMockUser("TestUser1")
-    @DisplayName("게시글 생성하기 (성공)")
+    @DisplayName("커뮤니티(학생)_게시글 생성하기 (성공)")
     void CreatePostSuccess() throws Exception {
+
         CreatePostRequest createPostRequest = CreatePostRequest.builder()
-                .id(1)
-                .title("post1")
-                .writer("writer1")
-                .body("body body")
+                .title("TestTitle")
+                .body("TestBody")
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/{univId}",1)
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+
+        postService.savePost(1,"TestUser1", CommunityRole.student,createPostRequest);
+
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/{role}/{univId}","student",1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(createPostRequest))
+                .header("Authorization", "Bearer " + accessToken)
         )
 
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("createPost"))
+                //.andDo(document("Community(student)_createPost"))
         ;
     }
 }

@@ -1,11 +1,12 @@
-package com.jukbang.api.community.contorller;
+package com.jukbang.api.community_student.contorller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jukbang.api.community.dto.CommentsDto;
-import com.jukbang.api.community.request.CreateCommentRequest;
-import com.jukbang.api.community.request.UpdateCommentRequest;
-import com.jukbang.api.community.service.CommentsService;
+import com.jukbang.api.community_student.dto.CommentsDto;
+import com.jukbang.api.community_student.request.CreateCommentRequest;
+import com.jukbang.api.community_student.request.UpdateCommentRequest;
+import com.jukbang.api.community_student.service.CommentsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-@RequestMapping("/community/comments/{univId}")
+@RequestMapping("/community/{role}/{univId}/{postId}/comments")
 public class CommentsController {
 
     private final CommentsService commentsService;
@@ -21,70 +22,72 @@ public class CommentsController {
     /**
      * 게시글 별 전체 댓글 리스트 GET
      *
-     * @param univId
      * @param postId
      * @return
      */
-    @GetMapping("/{postId}")
+    @GetMapping("")
     public List getCommentsList(
-            @PathVariable("univId") int univId,
-            @PathVariable("postId") int postId
+            @PathVariable("postId") Long postId
     ) {
-        List<CommentsDto> commentsList = commentsService.getCommentsList(univId, postId);
+        List<CommentsDto> commentsList = commentsService.getCommentsList(postId);
         return commentsList;
     }
 
     /**
      * 댓글 CREATE
      *
-     * @param univId
      * @param postId
      * @param createCommentRequest
      * @return (long) id
      */
-    @PostMapping("/{postId}")
+    @PostMapping("")
     public long createComment(
-            @PathVariable("univId") int univId,
-            @PathVariable("postId") int postId,
+            @PathVariable("postId") Long postId,
             @RequestBody CreateCommentRequest createCommentRequest
     ) {
-        return commentsService.SaveComment(univId, postId, createCommentRequest);
+
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        return commentsService.saveComment(postId,userId, createCommentRequest);
 
     }
 
     /**
      * 댓글 UPDATE
      *
-     * @param univId
      * @param postId
-     * @param id
+     * @param commentsId
      * @param updateCommentRequest
      * @return (long) id
      * @throws JsonProcessingException
      */
-    @PutMapping("/{postId}/{id}")
+    @PutMapping("/{commentId}")
     public long updateComment(
-            @PathVariable("univId") int univId,
-            @PathVariable("postId") int postId,
-            @PathVariable("id") long id,
+            @PathVariable("postId") long postId,
+            @PathVariable("commentId") long commentsId,
             @RequestBody UpdateCommentRequest updateCommentRequest
     ) {
-        return commentsService.updateComment(univId, postId, id, updateCommentRequest);
+
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        return commentsService.updateComment(postId,commentsId,userId, updateCommentRequest);
     }
 
     /**
      * 댓글 DELETE
      *
-     * @param id
      * @param postId
      * @return (String) success
      */
-    @DeleteMapping("{postId}/{id}")
+    @DeleteMapping("/{commentId}")
     public String deleteComment(
-            @PathVariable("id") long id,
-            @PathVariable("postId") long postId
+            @PathVariable("postId") long postId,
+            @PathVariable("commentId") long commentsId
     ) {
-        commentsService.deleteComment(id, postId);
+
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        commentsService.deleteComment( postId, commentsId, userId);
         return "success";
     }
 }

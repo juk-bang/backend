@@ -1,4 +1,4 @@
-package com.jukbang.api.community.response;
+package com.jukbang.api.community_student.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

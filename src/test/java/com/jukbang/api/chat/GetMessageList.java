@@ -1,10 +1,8 @@
 package com.jukbang.api.chat;
 
-import com.jukbang.api.chat.entity.Message;
 import com.jukbang.api.chat.request.CreateChatRoomRequest;
 import com.jukbang.api.chat.service.MessageService;
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community.service.CommunityService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

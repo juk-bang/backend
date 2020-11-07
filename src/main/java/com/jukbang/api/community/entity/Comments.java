@@ -1,4 +1,4 @@
-package com.jukbang.api.community.entity;
+package com.jukbang.api.community_student.entity;
 
 import com.jukbang.api.common.entity.Time;
 import com.jukbang.api.user.entity.User;
@@ -13,12 +13,12 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Comments extends Time {
-    @Id
     /**
      *  각 댓글의 고유번호 (중복 불가)
      */
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long commentId;
+    private long commentsId;
 
     /**
      * 100자 이내의 댓글 입력
@@ -34,4 +34,15 @@ public class Comments extends Time {
     @ManyToOne
     @JoinColumn(name = "postId")
     private Post post;
+
+    public Comments(String body, User writer,Post post){
+        this.body=body;
+        this.writer = writer;
+        this.post=post;
+    }
+
+    public void updateComments(String body){
+        this.body = body;
+    }
+
 }

@@ -1,9 +1,9 @@
+/*
 package com.jukbang.api.user.profile;
 
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.community.request.CreatePostRequest;
-import com.jukbang.api.community.service.CommunityService;
-import com.jukbang.api.user.service.ReportService;
+import com.jukbang.api.community.service.PostService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class getMyPostsTest extends BaseControllerTest {
 
     @Autowired
-    private CommunityService communityService;
+    private PostService postService;
 
     @Test
     @WithMockUser("TestUser1")
@@ -27,11 +27,11 @@ public class getMyPostsTest extends BaseControllerTest {
     void getMyPostsSuccess() throws Exception {
         CreatePostRequest createPostRequest = CreatePostRequest.builder()
                 .body("게시글 본문")
-                .id(1)
                 .title("게시글 제목")
                 .writer("TestUser1")
                 .build();
-        communityService.SavePost(1,createPostRequest);
+
+        postService.savePost(1,createPostRequest);
         mockMvc.perform(RestDocumentationRequestBuilders.get("/userinfo/posts/{userId}", "TestUser1"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -39,3 +39,4 @@ public class getMyPostsTest extends BaseControllerTest {
         ;
     }
 }
+*/

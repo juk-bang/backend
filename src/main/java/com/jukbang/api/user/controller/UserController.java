@@ -1,8 +1,6 @@
 package com.jukbang.api.user.controller;
 
-import com.jukbang.api.community.service.CommunityService;
-import com.jukbang.api.room.dto.BoardlistDto;
-import com.jukbang.api.user.request.CreateUserRequest;
+import com.jukbang.api.community_student.service.PostService;
 import com.jukbang.api.user.request.UpdateUserRequest;
 import com.jukbang.api.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +15,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final CommunityService communityService;
+    private final PostService postService;
 
     /**
      * 회원정보 조회 GET
@@ -62,16 +60,16 @@ public class UserController {
         return "success";
     }
 
-    /**
+/*    *//**
      * 내가 쓴 게시글 목록
      *
      * @param userId
      * @return (List) getMyPosts
-     */
+     *//*
     @GetMapping("/posts/{userId}")
     public List<BoardlistDto> myPosts(
             @PathVariable("userId") String userId
     ) {
-        return communityService.getMyPosts(userId);
-    }
+        return postService.getMyPosts(userId);
+    }*/
 }

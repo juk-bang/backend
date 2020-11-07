@@ -92,7 +92,7 @@ public class RoomService {
                         createRoomRequest.getOption(),
                         createRoomRequest.getLocation(),
                         createRoomRequest.getDescription(),
-                        userRepository.findByUserId(sellerId).orElseThrow(() -> new UserNotFoundException(sellerId))
+                        userRepository.findByUserId(sellerId).orElseThrow(UserNotFoundException::new)
                 )).getRoomId();
     }
 

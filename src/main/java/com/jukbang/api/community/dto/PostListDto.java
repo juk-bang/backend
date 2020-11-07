@@ -1,31 +1,30 @@
 package com.jukbang.api.community_student.dto;
 
 import com.jukbang.api.user.entity.User;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
 @Getter
-@Setter
-@ToString
 @NoArgsConstructor
-
-public class PostDto {
-    private String writer;
+public class PostListDto {
+    private long postId;
     private String title;
-    private String body;
+    private String writer;
     private int views;
+    private int comments;
     private LocalDateTime updatedDate;
 
+
     @Builder
-    public PostDto(String title, User writer, String body, int views, LocalDateTime updatedDate) {
+    public PostListDto(long postId, String title, User writer, int views,int comments, LocalDateTime updatedDate) {
+        this.postId = postId;
         this.title = title;
         this.writer = writer.getUserId();
-        this.body = body;
         this.views = views;
+        this.comments = comments;
         this.updatedDate = updatedDate;
     }
-
-
 }
