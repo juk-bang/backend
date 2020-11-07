@@ -1,6 +1,7 @@
 package com.jukbang.api.user.favorite;
 
 import com.jukbang.api.common.BaseControllerTest;
+import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,15 +12,19 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class createFavoriteTest extends BaseControllerTest {
 
     @Test
     @WithMockUser("TestUser1")
     @DisplayName("방 찜하기(성공)")
     void createFavoriteSuccess() throws Exception {
-        Long roomId = roomFactory.generateRoom("Seller1");
-        mockMvc.perform(RestDocumentationRequestBuilders.post("/userinfo/favorites/{univId}/{roomId}/{userId}", 1, roomId, "TestUser1"))
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        userFactory.signUpUser(99,UserRole.ROLE_LANDLORD);
+        Long roomId = roomFactory.generateRoom("TestUser99");
+
+        mockMvc.perform(RestDocumentationRequestBuilders.post("/user/favorites/{roomId}", roomId)
+            .header("Authorization", "Bearer " + accessToken)
+        )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("createFavorite"))

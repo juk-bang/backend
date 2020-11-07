@@ -14,7 +14,6 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class deleteFavoriteTest extends BaseControllerTest {
 
     @Autowired
@@ -24,10 +23,13 @@ public class deleteFavoriteTest extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("찜 취소하기(성공)")
     void deleteFavoriteSuccess() throws Exception {
-        Long roomId = roomFactory.generateRoom("Seller1");
-        userFactory.signUpUser(1, UserRole.ROLE_STUDENT);
-        favoriteService.SaveFavorite(1, Math.toIntExact(roomId),"TestUser1");
-        mockMvc.perform(RestDocumentationRequestBuilders.delete("/userinfo/favorites/{univId}/{roomId}/{userId}", 1, roomId, "TestUser1"))
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        userFactory.signUpUser(99,UserRole.ROLE_LANDLORD);
+        Long roomId = roomFactory.generateRoom("TestUser99");
+        favoriteService.SaveFavorite(roomId,"TestUser1");
+        mockMvc.perform(RestDocumentationRequestBuilders.delete("/user/favorites/{roomId}", roomId)
+            .header("Authorization", "Bearer " + accessToken)
+        )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("deleteFavorite"))

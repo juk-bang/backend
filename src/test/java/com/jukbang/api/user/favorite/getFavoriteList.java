@@ -13,7 +13,6 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class getFavoriteList extends BaseControllerTest {
 
     @Autowired
@@ -22,10 +21,13 @@ public class getFavoriteList extends BaseControllerTest {
     @Test
     @DisplayName("내 찜 목록 조회하기(성공)")
     void getFavoriteListSuccess() throws Exception {
-        userFactory.signUpUser(1, UserRole.ROLE_STUDENT);
-        Long roomId = roomFactory.generateRoom("Seller1");
-        favoriteService.SaveFavorite(1, Math.toIntExact(roomId),"TestUser1");
-        mockMvc.perform(RestDocumentationRequestBuilders.get("/userinfo/favorites/{userId}", "TestUser1"))
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        userFactory.signUpUser(99,UserRole.ROLE_LANDLORD);
+        Long roomId = roomFactory.generateRoom("TestUser99");
+        favoriteService.SaveFavorite(roomId,"TestUser1");
+        mockMvc.perform(RestDocumentationRequestBuilders.get("/user/favorites")
+            .header("Authorization", "Bearer " + accessToken)
+        )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("getFavoriteList"))

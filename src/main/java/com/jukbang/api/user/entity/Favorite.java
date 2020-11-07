@@ -1,5 +1,6 @@
 package com.jukbang.api.user.entity;
 
+import com.jukbang.api.room.entity.Room;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,12 +20,18 @@ public class Favorite {
     private long id;
 
     /**
-     * 해당 회원의 찜 postid
+     * 해당 회원의 찜한 방
      */
-    @Column(nullable = false)
-    private int roomid;
+    @ManyToOne
+    @JoinColumn(name = "roomId")
+    private Room room;
 
     @ManyToOne
     @JoinColumn(name = "accountId")
     private User user;
+
+    public Favorite(Room room, User user){
+        this.room =room;
+        this.user = user;
+    }
 }
