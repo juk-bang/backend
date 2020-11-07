@@ -1,17 +1,17 @@
-package com.jukbang.api.community_student.service;
+package com.jukbang.api.community.service;
 
-import com.jukbang.api.community_student.CommunityRole;
-import com.jukbang.api.community_student.dto.PostListDto;
-import com.jukbang.api.community_student.entity.Post;
-import com.jukbang.api.community_student.exception.PostNotFoundException;
-import com.jukbang.api.community_student.repository.PostRepository;
-import com.jukbang.api.community_student.request.CreatePostRequest;
-import com.jukbang.api.community_student.request.UpdatePostRequest;
+import com.jukbang.api.community.CommunityRole;
+import com.jukbang.api.community.dto.PostListDto;
+import com.jukbang.api.community.entity.Post;
+import com.jukbang.api.community.exception.PostNotFoundException;
+import com.jukbang.api.community.repository.PostRepository;
+import com.jukbang.api.community.request.CreatePostRequest;
+import com.jukbang.api.community.request.UpdatePostRequest;
 import com.jukbang.api.user.exception.UserNotFoundException;
 import com.jukbang.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.jukbang.api.community_student.dto.PostDto;
+import com.jukbang.api.community.dto.PostDto;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;

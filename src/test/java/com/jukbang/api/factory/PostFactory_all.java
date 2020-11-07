@@ -1,8 +1,8 @@
 package com.jukbang.api.factory;
 
-import com.jukbang.api.community_student.CommunityRole;
-import com.jukbang.api.community_student.request.CreatePostRequest;
-import com.jukbang.api.community_student.service.PostService;
+import com.jukbang.api.community.CommunityRole;
+import com.jukbang.api.community.request.CreatePostRequest;
+import com.jukbang.api.community.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

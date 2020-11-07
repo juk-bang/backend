@@ -1,4 +1,4 @@
-package com.jukbang.api.community_student;
+package com.jukbang.api.community;
 
 public enum CommunityRole {
     student,all;

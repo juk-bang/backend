@@ -1,7 +1,6 @@
 package com.jukbang.api.user.entity;
 
 import com.jukbang.api.common.entity.Time;
-import com.jukbang.api.room.entity.Room;
 import lombok.*;
 
 import javax.persistence.*;

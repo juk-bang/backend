@@ -1,4 +1,4 @@
-package com.jukbang.api.community_student.dto;
+package com.jukbang.api.community.dto;
 
 import com.jukbang.api.user.entity.User;
 import lombok.Builder;

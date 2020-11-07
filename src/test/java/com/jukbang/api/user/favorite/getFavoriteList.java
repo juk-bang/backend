@@ -3,7 +3,6 @@ package com.jukbang.api.user.favorite;
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.service.FavoriteService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

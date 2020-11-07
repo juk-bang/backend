@@ -1,4 +1,4 @@
-package com.jukbang.api.security.request;
+package com.jukbang.security.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

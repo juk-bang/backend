@@ -4,7 +4,6 @@ import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.room.request.CreateReviewRequest;
 import com.jukbang.api.room.service.ReviewService;
 import com.jukbang.api.user.UserRole;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
-package com.jukbang.api.security;
+package com.jukbang.security;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.security.request.SignInRequest;
+import com.jukbang.security.request.SignInRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;

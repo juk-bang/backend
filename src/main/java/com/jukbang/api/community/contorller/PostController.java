@@ -1,11 +1,11 @@
-package com.jukbang.api.community_student.contorller;
+package com.jukbang.api.community.contorller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jukbang.api.community_student.CommunityRole;
-import com.jukbang.api.community_student.dto.PostDto;
-import com.jukbang.api.community_student.request.CreatePostRequest;
-import com.jukbang.api.community_student.request.UpdatePostRequest;
-import com.jukbang.api.community_student.service.PostService;
+import com.jukbang.api.community.CommunityRole;
+import com.jukbang.api.community.dto.PostDto;
+import com.jukbang.api.community.request.CreatePostRequest;
+import com.jukbang.api.community.request.UpdatePostRequest;
+import com.jukbang.api.community.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;

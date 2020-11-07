@@ -1,11 +1,11 @@
-package com.jukbang.api.security.controller;
+package com.jukbang.security.controller;
 
-import com.jukbang.api.security.request.RefreshRequest;
-import com.jukbang.api.security.request.SignInRequest;
-import com.jukbang.api.security.request.SignUpRequest;
-import com.jukbang.api.security.response.RefreshResponse;
-import com.jukbang.api.security.response.SignInResponse;
-import com.jukbang.api.security.service.AuthService;
+import com.jukbang.security.request.RefreshRequest;
+import com.jukbang.security.request.SignInRequest;
+import com.jukbang.security.request.SignUpRequest;
+import com.jukbang.security.response.RefreshResponse;
+import com.jukbang.security.response.SignInResponse;
+import com.jukbang.security.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpStatus;

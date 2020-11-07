@@ -1,13 +1,13 @@
-package com.jukbang.api.security.service;
+package com.jukbang.security.service;
 
 import com.jukbang.api.model.User;
 import com.jukbang.api.repository.UserRepository;
-import com.jukbang.api.security.JwtTokenProvider;
-import com.jukbang.api.security.exception.CantSignInException;
-import com.jukbang.api.security.exception.IdAlreadyExistsException;
-import com.jukbang.api.security.request.RefreshRequest;
-import com.jukbang.api.security.response.RefreshResponse;
-import com.jukbang.api.security.response.SignInResponse;
+import com.jukbang.security.JwtTokenProvider;
+import com.jukbang.security.exception.CantSignInException;
+import com.jukbang.security.exception.IdAlreadyExistsException;
+import com.jukbang.security.request.RefreshRequest;
+import com.jukbang.security.response.RefreshResponse;
+import com.jukbang.security.response.SignInResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

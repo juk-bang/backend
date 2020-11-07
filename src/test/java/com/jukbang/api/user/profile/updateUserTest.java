@@ -8,7 +8,6 @@ import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.repository.UserRepository;
 import com.jukbang.api.user.request.UpdateUserRequest;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

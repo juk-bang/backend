@@ -1,6 +1,6 @@
 package com.jukbang.api.user.controller;
 
-import com.jukbang.api.community_student.service.PostService;
+import com.jukbang.api.community.service.PostService;
 import com.jukbang.api.user.request.UpdateUserRequest;
 import com.jukbang.api.user.service.UserService;
 import lombok.RequiredArgsConstructor;

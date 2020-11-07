@@ -1,7 +1,7 @@
-package com.jukbang.api.community_student.entity;
+package com.jukbang.api.community.entity;
 
 import com.jukbang.api.common.entity.Time;
-import com.jukbang.api.community_student.CommunityRole;
+import com.jukbang.api.community.CommunityRole;
 import com.jukbang.api.user.entity.User;
 import lombok.*;
 

@@ -1,10 +1,10 @@
 package com.jukbang.api.community_student;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community_student.request.CreatePostRequest;
-import com.jukbang.api.community_student.service.PostService;
+import com.jukbang.api.community.request.CreatePostRequest;
+import com.jukbang.api.community.service.PostService;
 import com.jukbang.api.user.UserRole;
-import com.jukbang.api.community_student.CommunityRole;
+import com.jukbang.api.community.CommunityRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

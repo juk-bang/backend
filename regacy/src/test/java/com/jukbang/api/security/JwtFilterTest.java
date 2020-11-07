@@ -1,4 +1,4 @@
-package com.jukbang.api.security;
+package com.jukbang.security;
 
 import com.jukbang.api.common.BaseControllerTest;
 import org.junit.jupiter.api.DisplayName;

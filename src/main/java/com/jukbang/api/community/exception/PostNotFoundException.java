@@ -1,4 +1,4 @@
-package com.jukbang.api.community_student.exception;
+package com.jukbang.api.community.exception;
 
 /**
  * 존재하지 않는 postId

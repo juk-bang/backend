@@ -1,9 +1,9 @@
 package com.jukbang.api.community_all;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community_student.CommunityRole;
-import com.jukbang.api.community_student.request.CreatePostRequest;
-import com.jukbang.api.community_student.service.PostService;
+import com.jukbang.api.community.CommunityRole;
+import com.jukbang.api.community.request.CreatePostRequest;
+import com.jukbang.api.community.service.PostService;
 import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

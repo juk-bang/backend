@@ -1,7 +1,7 @@
-package com.jukbang.api.community_student.repository;
+package com.jukbang.api.community.repository;
 
-import com.jukbang.api.community_student.CommunityRole;
-import com.jukbang.api.community_student.entity.Post;
+import com.jukbang.api.community.CommunityRole;
+import com.jukbang.api.community.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

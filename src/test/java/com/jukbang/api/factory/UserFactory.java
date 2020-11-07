@@ -1,8 +1,8 @@
 package com.jukbang.api.factory;
 
-import com.jukbang.api.security.request.SignUpRequest;
-import com.jukbang.api.security.response.SignInResponse;
-import com.jukbang.api.security.service.AuthService;
+import com.jukbang.security.request.SignUpRequest;
+import com.jukbang.security.response.SignInResponse;
+import com.jukbang.security.service.AuthService;
 import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,10 +1,10 @@
-package com.jukbang.api.community_student.contorller;
+package com.jukbang.api.community.contorller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jukbang.api.community_student.dto.CommentsDto;
-import com.jukbang.api.community_student.request.CreateCommentRequest;
-import com.jukbang.api.community_student.request.UpdateCommentRequest;
-import com.jukbang.api.community_student.service.CommentsService;
+import com.jukbang.api.community.dto.CommentsDto;
+import com.jukbang.api.community.request.CreateCommentRequest;
+import com.jukbang.api.community.request.UpdateCommentRequest;
+import com.jukbang.api.community.service.CommentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;

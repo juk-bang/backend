@@ -1,8 +1,6 @@
 package com.jukbang.api.user.controller;
 
 import com.jukbang.api.common.response.ErrorResponse;
-import com.jukbang.api.room.exception.NotYourRoomException;
-import com.jukbang.api.room.exception.RoomNotFoundException;
 import com.jukbang.api.user.exception.UserNotFoundException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

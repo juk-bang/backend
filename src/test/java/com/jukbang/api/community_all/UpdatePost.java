@@ -1,7 +1,7 @@
 package com.jukbang.api.community_all;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community_student.request.UpdatePostRequest;
+import com.jukbang.api.community.request.UpdatePostRequest;
 import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

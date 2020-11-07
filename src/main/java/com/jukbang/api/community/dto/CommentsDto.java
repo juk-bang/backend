@@ -1,4 +1,4 @@
-package com.jukbang.api.community_student.dto;
+package com.jukbang.api.community.dto;
 
 
 import lombok.*;

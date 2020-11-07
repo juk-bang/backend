@@ -1,8 +1,8 @@
 package com.jukbang.api.community_all;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community_student.request.UpdateCommentRequest;
-import com.jukbang.api.community_student.service.CommentsService;
+import com.jukbang.api.community.request.UpdateCommentRequest;
+import com.jukbang.api.community.service.CommentsService;
 import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

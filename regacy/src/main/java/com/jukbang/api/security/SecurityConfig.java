@@ -1,4 +1,4 @@
-package com.jukbang.api.security;
+package com.jukbang.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

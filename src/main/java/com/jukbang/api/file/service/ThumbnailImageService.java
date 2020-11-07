@@ -1,6 +1,6 @@
 package com.jukbang.api.file.service;
 
-import com.jukbang.api.configs.FileConfig;
+import com.jukbang.configs.FileConfig;
 import com.jukbang.api.file.data.ThumbnailImage;
 import com.jukbang.api.file.data.ThumbnailImageRepository;
 import com.jukbang.api.file.exception.CantCreateFileDirectoryException;
@@ -10,7 +10,6 @@ import com.jukbang.api.room.repository.RoomRepository;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;

@@ -1,14 +1,14 @@
-package com.jukbang.api.community_student.service;
+package com.jukbang.api.community.service;
 
-import com.jukbang.api.community_student.dto.CommentsDto;
-import com.jukbang.api.community_student.entity.Comments;
-import com.jukbang.api.community_student.entity.Post;
-import com.jukbang.api.community_student.exception.CommentsNotFoundException;
-import com.jukbang.api.community_student.exception.PostNotFoundException;
-import com.jukbang.api.community_student.repository.CommentsRepository;
-import com.jukbang.api.community_student.repository.PostRepository;
-import com.jukbang.api.community_student.request.CreateCommentRequest;
-import com.jukbang.api.community_student.request.UpdateCommentRequest;
+import com.jukbang.api.community.dto.CommentsDto;
+import com.jukbang.api.community.entity.Comments;
+import com.jukbang.api.community.entity.Post;
+import com.jukbang.api.community.exception.CommentsNotFoundException;
+import com.jukbang.api.community.exception.PostNotFoundException;
+import com.jukbang.api.community.repository.CommentsRepository;
+import com.jukbang.api.community.repository.PostRepository;
+import com.jukbang.api.community.request.CreateCommentRequest;
+import com.jukbang.api.community.request.UpdateCommentRequest;
 import com.jukbang.api.user.exception.UserNotFoundException;
 import com.jukbang.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

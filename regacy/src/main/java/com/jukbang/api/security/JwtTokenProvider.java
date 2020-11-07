@@ -1,4 +1,4 @@
-package com.jukbang.api.security;
+package com.jukbang.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

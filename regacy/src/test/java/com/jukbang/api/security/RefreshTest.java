@@ -1,8 +1,8 @@
-package com.jukbang.api.security;
+package com.jukbang.security;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.security.request.RefreshRequest;
-import com.jukbang.api.security.response.SignInResponse;
+import com.jukbang.security.request.RefreshRequest;
+import com.jukbang.security.response.SignInResponse;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
