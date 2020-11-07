@@ -1,6 +1,5 @@
 package com.jukbang.api.user.service;
 
-import com.jukbang.api.room.entity.Room;
 import com.jukbang.api.room.exception.RoomNotFoundException;
 import com.jukbang.api.room.repository.RoomRepository;
 import com.jukbang.api.user.dto.FavoriteRoomsDto;
@@ -26,18 +25,7 @@ public class FavoriteService {
    */
   @Transactional
   public List<FavoriteRoomsDto> getFavoriteList(String userId) {
-/*        List<Favorite> boardEntities = favoriteRepository.findAllByUserId(userId);
-        List<Room> roomList = new ArrayList<>();
-        for (Favorite boardEntity : boardEntities) {
-            Optional<Room> room = roomRepository.findById((long) boardEntity.getRoomid());
-            Room target = room.get();
-            roomList.add(target);
-
-        }
-
-        return roomList;*/
-  return  favoriteRepository.findAllByUser_UserId(userId);
-
+    return favoriteRepository.findAllByUser_UserId(userId);
   }
 
   /**

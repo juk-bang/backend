@@ -27,9 +27,9 @@ public class FavoriteController {
    */
   @GetMapping
   public List getFavoriteList() {
-      String visitorId = SecurityContextHolder.getContext().getAuthentication().getName();
+      String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-      return favoriteService.getFavoriteList(visitorId);
+      return favoriteService.getFavoriteList(requestUserId);
   }
 
   /**
@@ -42,9 +42,9 @@ public class FavoriteController {
   public long createFavorite(
       @PathVariable("roomId") long roomId
   ) {
-    String visitorId = SecurityContextHolder.getContext().getAuthentication().getName();
+    String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-    return favoriteService.SaveFavorite(roomId, visitorId);
+    return favoriteService.SaveFavorite(roomId, requestUserId);
   }
 
   /**
@@ -57,8 +57,8 @@ public class FavoriteController {
   public void deleteFavorite(
       @PathVariable("roomId") long roomId
   ) {
-      String visitorId = SecurityContextHolder.getContext().getAuthentication().getName();
+      String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-      favoriteService.DeleteFavorite(roomId, visitorId);
+      favoriteService.DeleteFavorite(roomId, requestUserId);
   }
 }

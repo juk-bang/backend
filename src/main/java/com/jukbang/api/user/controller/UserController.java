@@ -45,9 +45,9 @@ public class UserController {
             @PathVariable("id") long id,
             @RequestBody UpdateUserRequest updateUserRequest
     ) {
-        String visitorId = SecurityContextHolder.getContext().getAuthentication().getName();
+        String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        userService.rewriteUser(id,visitorId, updateUserRequest);
+        userService.rewriteUser(id,requestUserId, updateUserRequest);
         return "success";
     }
 

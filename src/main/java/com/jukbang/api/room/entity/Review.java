@@ -2,9 +2,18 @@ package com.jukbang.api.room.entity;
 
 import com.jukbang.api.common.entity.Time;
 import com.jukbang.api.user.entity.User;
-import lombok.*;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
@@ -13,45 +22,45 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Review extends Time {
-    @Id
-    /**
-     *  각 리뷰의 고유번호 (중복 불가)
-     */
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long reviewId;
+  /**
+   * 각 리뷰의 고유번호 (중복 불가)
+   */
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    /**
-     * 리뷰의 title이름
-     */
-    @Column(length = 30, nullable = false)
-    private String title;
+  /**
+   * 100자 이내의 리뷰 입력
+   */
+  @Column(length = 100, nullable = false)
+  private String message;
+
+  /**
+   * 리뷰 평점
+   */
+  @Column(nullable = false)
+  private double grade;
+
+  /**
+   * 방 정보 번호
+   */
+  @Column(nullable = false)
+  private long roomId;
 
 
-    /**
-     * 100자 이내의 리뷰 입력
-     */
-    @Column(length = 100, nullable = false)
-    private String body;
+  @OneToOne
+  @JoinColumn(name = "writer_id")
+  private User writer;
 
-    /**
-     * 대학 번호
-     */
-    @Column(nullable = false)
-    private int univId;
+  public Review(String message, double grade, long roomId, User writer) {
+    this.message = message;
+    this.grade = grade;
+    this.roomId = roomId;
+    this.writer = writer;
+  }
 
-    /**
-     * 방 정보 번호
-     */
-    @Column(nullable = false)
-    private int roomId;
-
-    /**
-     * 리뷰 평점
-     */
-    @Column(nullable = false)
-    private int score;
-
-    @OneToOne
-    @JoinColumn(name = "writer_id")
-    private User writer;
+  public void updateReview(double grade, String message) {
+    this.grade= grade;
+    this.message = message;
+  }
 }

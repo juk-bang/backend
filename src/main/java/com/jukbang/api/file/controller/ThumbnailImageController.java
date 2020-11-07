@@ -36,8 +36,8 @@ public class ThumbnailImageController {
       @PathVariable long imageId,
       @RequestParam("image") MultipartFile image
   ) {
-    String visitorId = SecurityContextHolder.getContext().getAuthentication().getName();
-    thumbnailImageService.storeThumbnailImage(visitorId, roomId, imageId, image);
+    String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
+    thumbnailImageService.storeThumbnailImage(requestUserId, roomId, imageId, image);
   }
 
   @GetMapping

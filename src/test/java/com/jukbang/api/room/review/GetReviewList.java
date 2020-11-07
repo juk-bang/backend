@@ -3,6 +3,7 @@ package com.jukbang.api.room.review;
 import com.jukbang.api.common.BaseControllerTest;
 import com.jukbang.api.room.request.CreateReviewRequest;
 import com.jukbang.api.room.service.ReviewService;
+import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,6 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class GetReviewList extends BaseControllerTest {
     @Autowired
     private ReviewService reviewService;
@@ -23,20 +23,16 @@ public class GetReviewList extends BaseControllerTest {
     @WithMockUser("TestUser1")
     @DisplayName("리뷰 리스트 불러오기 (성공)")
     void getReviewListSuccess() throws Exception{
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        userFactory.signUpUser(99, UserRole.ROLE_LANDLORD);
+        Long roomId = roomFactory.generateRoom("TestUser99");
 
-        roomFactory.generateRoom("sellerId");
+        CreateReviewRequest createReviewRequest = new CreateReviewRequest("test", 10);
+        Long reviewId = reviewService.SaveReview(roomId, "TestUser1", createReviewRequest);
 
-        CreateReviewRequest createReviewRequest = CreateReviewRequest.builder()
-                .id(1)
-                .writer("writer")
-                .body("good")
-                .score(10)
-                .title("제목")
-                .build();
-
-        reviewService.SaveReview(1,1,createReviewRequest);
-
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/review/{univId}/{roomId}", 1, 1))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/review/{roomId}", roomId)
+            .header("Authorization", "Bearer " + accessToken)
+        )
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("GetReviewList"))
