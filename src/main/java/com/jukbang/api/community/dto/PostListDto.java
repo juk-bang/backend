@@ -1,4 +1,4 @@
-package com.jukbang.api.community.dto;
+package com.jukbang.api.community_student.dto;
 
 import com.jukbang.api.user.entity.User;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class PostListDto {
     private long postId;
     private String title;
-    private User writer;
+    private String writer;
     private int views;
     private int comments;
     private LocalDateTime updatedDate;
@@ -22,7 +22,7 @@ public class PostListDto {
     public PostListDto(long postId, String title, User writer, int views,int comments, LocalDateTime updatedDate) {
         this.postId = postId;
         this.title = title;
-        this.writer = writer;
+        this.writer = writer.getUserId();
         this.views = views;
         this.comments = comments;
         this.updatedDate = updatedDate;

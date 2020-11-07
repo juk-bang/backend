@@ -1,18 +1,15 @@
-package com.jukbang.api.community;
+package com.jukbang.api.community_all;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community.request.CreatePostRequest;
-import com.jukbang.api.community.service.PostService;
-import com.jukbang.api.factory.PostFactory;
+import com.jukbang.api.community_student.CommunityRole;
+import com.jukbang.api.community_student.request.CreatePostRequest;
+import com.jukbang.api.community_student.service.PostService;
 import com.jukbang.api.user.UserRole;
-import com.jukbang.api.user.entity.User;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.security.test.context.support.WithMockUser;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -24,7 +21,7 @@ public class CreatePost extends BaseControllerTest {
     private PostService postService;
 
     @Test
-    @DisplayName("게시글 생성하기 (성공)")
+    @DisplayName("커뮤니티(전체)_게시글 생성하기 (성공)")
     void CreatePostSuccess() throws Exception {
 
         CreatePostRequest createPostRequest = CreatePostRequest.builder()
@@ -32,11 +29,11 @@ public class CreatePost extends BaseControllerTest {
                 .body("TestBody")
                 .build();
 
-        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
 
-        postService.savePost(1,"TestUser1",createPostRequest);
+        postService.savePost(1,"TestUser1", CommunityRole.student,createPostRequest);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/{univId}",1)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/{role}/{univId}","all",1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(this.objectMapper.writeValueAsString(createPostRequest))
                 .header("Authorization", "Bearer " + accessToken)

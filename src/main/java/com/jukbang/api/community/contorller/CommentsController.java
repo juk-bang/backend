@@ -1,10 +1,10 @@
-package com.jukbang.api.community.contorller;
+package com.jukbang.api.community_student.contorller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jukbang.api.community.dto.CommentsDto;
-import com.jukbang.api.community.request.CreateCommentRequest;
-import com.jukbang.api.community.request.UpdateCommentRequest;
-import com.jukbang.api.community.service.CommentsService;
+import com.jukbang.api.community_student.dto.CommentsDto;
+import com.jukbang.api.community_student.request.CreateCommentRequest;
+import com.jukbang.api.community_student.request.UpdateCommentRequest;
+import com.jukbang.api.community_student.service.CommentsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-@RequestMapping("/community/{univId}/{postId}/comments")
+@RequestMapping("/community/{role}/{univId}/{postId}/comments")
 public class CommentsController {
 
     private final CommentsService commentsService;

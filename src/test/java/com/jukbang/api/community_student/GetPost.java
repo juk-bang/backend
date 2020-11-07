@@ -1,13 +1,9 @@
-package com.jukbang.api.community;
+package com.jukbang.api.community_student;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community.request.CreatePostRequest;
-import com.jukbang.api.community.service.PostService;
 import com.jukbang.api.user.UserRole;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -18,13 +14,13 @@ public class GetPost extends BaseControllerTest {
 
 
     @Test
-    @DisplayName("각 게시글 불러오기(성공)")
+    @DisplayName("커뮤니티(학생)_각 게시글 불러오기(성공)")
     void GetPostListSuccess() throws Exception {
         userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
 
-        Long postId = postFactory.generatePost(1,"TestUser1");
+        Long postId = postFactoryStudent.generatePost(1,"TestUser1");
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{univId}/{postId}",1,postId))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{role}/{univId}/{postId}","student",1,postId))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("GetPost"))

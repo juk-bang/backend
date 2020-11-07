@@ -1,14 +1,9 @@
-package com.jukbang.api.community.request;
+package com.jukbang.api.community_student.request;
 
-import com.jukbang.api.community.entity.Comments;
-import com.jukbang.api.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Builder

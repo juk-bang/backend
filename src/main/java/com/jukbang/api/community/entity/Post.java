@@ -1,11 +1,11 @@
-package com.jukbang.api.community.entity;
+package com.jukbang.api.community_student.entity;
 
 import com.jukbang.api.common.entity.Time;
+import com.jukbang.api.community_student.CommunityRole;
 import com.jukbang.api.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Builder
@@ -33,19 +33,21 @@ public class Post extends Time {
     @Column(nullable = false)
     private int comments;
 
+    @Column (nullable = false)
+    private CommunityRole role;
 
     @OneToOne
     @JoinColumn(name = "writer_id")
     private User writer;
 
-    public Post(String title, String body, User writer, int univId){
+    public Post(String title, String body, User writer, int univId, CommunityRole role){
         this.title = title;
         this.body = body;
         this.writer = writer;
         this.univId = univId;
         this.views=0;
         this.comments=0;
-
+        this.role = role;
     }
 
     public void updatePost(String title, String body){

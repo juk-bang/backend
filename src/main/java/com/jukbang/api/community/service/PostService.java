@@ -1,23 +1,21 @@
-package com.jukbang.api.community.service;
+package com.jukbang.api.community_student.service;
 
-import com.jukbang.api.community.dto.PostListDto;
-import com.jukbang.api.community.entity.Post;
-import com.jukbang.api.community.exception.PostNotFoundException;
-import com.jukbang.api.community.repository.PostRepository;
-import com.jukbang.api.community.request.CreatePostRequest;
-import com.jukbang.api.community.request.UpdatePostRequest;
-import com.jukbang.api.community.response.GetPostResponse;
-import com.jukbang.api.room.dto.BoardlistDto;
+import com.jukbang.api.community_student.CommunityRole;
+import com.jukbang.api.community_student.dto.PostListDto;
+import com.jukbang.api.community_student.entity.Post;
+import com.jukbang.api.community_student.exception.PostNotFoundException;
+import com.jukbang.api.community_student.repository.PostRepository;
+import com.jukbang.api.community_student.request.CreatePostRequest;
+import com.jukbang.api.community_student.request.UpdatePostRequest;
 import com.jukbang.api.user.exception.UserNotFoundException;
 import com.jukbang.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.jukbang.api.community.dto.PostDto;
+import com.jukbang.api.community_student.dto.PostDto;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,8 +30,8 @@ public class PostService {
      * @return List<PostListDto>
      */
     @Transactional
-    public List<PostListDto> getPostList() {
-        List<Post> postEntities = postRepository.findAll();
+    public List<PostListDto> getPostList(CommunityRole role) {
+        List<Post> postEntities = postRepository.findAllByRole(role);
 
         List<PostListDto> postListDto_List= new ArrayList<>();
 
@@ -92,6 +90,7 @@ public class PostService {
     public Long savePost(
             int univId,
             String userId,
+            CommunityRole role,
             CreatePostRequest createPostRequest
     ) {
         return postRepository.save(
@@ -99,7 +98,8 @@ public class PostService {
                         createPostRequest.getTitle(),
                         createPostRequest.getBody(),
                         userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new),
-                        univId
+                        univId,
+                        role
                 )
         ).getPostId();
 

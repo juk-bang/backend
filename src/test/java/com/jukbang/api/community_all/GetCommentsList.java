@@ -1,16 +1,9 @@
-package com.jukbang.api.community;
+package com.jukbang.api.community_all;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.community.request.CreateCommentRequest;
-import com.jukbang.api.community.request.CreatePostRequest;
-import com.jukbang.api.community.service.CommentsService;
-import com.jukbang.api.community.service.PostService;
 import com.jukbang.api.user.UserRole;
-import com.jukbang.api.user.entity.User;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
@@ -20,15 +13,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class GetCommentsList extends BaseControllerTest {
     @Test
-    @DisplayName("게시글 별 전체 댓글 리스트 불러오기(성공)")
+    @DisplayName("커뮤니티(전체)_게시글 별 전체 댓글 리스트 불러오기(성공)")
     void GetCommentsListSuccess() throws Exception {
-        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+        userFactory.signUpUser(2, UserRole.ROLE_STUDENT).getAccessToken();
 
-        Long postId = postFactory.generatePost(1,"TestUser1");
+        Long postId = postFactoryAll.generatePost(1,"TestUser1");
         System.out.println("****************************** create post success **********************************");
         System.out.println("POST : " + postId);
 
-        Long comment1 = commentFactory.generateComment(postId,"TestUser1");
+        Long comment1 = commentFactory.generateComment(postId,"TestUser2");
         System.out.println("****************************** create comment 1 success **********************************");
         System.out.println("POST : " + postId +"  COMMENT : " + comment1);
 
@@ -37,7 +31,7 @@ public class GetCommentsList extends BaseControllerTest {
         System.out.println("POST : " + postId);
         System.out.println("POST : " + postId +"  COMMENT : " + comment2);
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{univId}/{postId}/comments", 1,postId)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{role}/{univId}/{postId}/comments", "all",1,postId)
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
                 .andDo(print())

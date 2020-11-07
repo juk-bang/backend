@@ -37,7 +37,10 @@ public class BaseControllerTest {
     protected ReportFactory reportFactory;
 
     @Autowired
-    protected PostFactory postFactory;
+    protected  PostFactory_all postFactoryAll;
+
+    @Autowired
+    protected PostFactory_student postFactoryStudent;
 
     @Autowired
     protected CommentFactory commentFactory;

@@ -1,20 +1,19 @@
 package com.jukbang.api.factory;
 
-import com.jukbang.api.community.CreatePost;
-import com.jukbang.api.community.request.CreatePostRequest;
-import com.jukbang.api.community.service.PostService;
-import com.jukbang.api.user.entity.User;
+import com.jukbang.api.community_student.CommunityRole;
+import com.jukbang.api.community_student.request.CreatePostRequest;
+import com.jukbang.api.community_student.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PostFactory {
+public class PostFactory_all {
 
     @Autowired
     protected PostService postService;
 
     public Long generatePost(int univId, String userId) {
-        return postService.savePost(univId, userId, generateCreatePostRequest());
+        return postService.savePost(univId, userId, CommunityRole.all, generateCreatePostRequest());
     }
 
     public CreatePostRequest generateCreatePostRequest(){

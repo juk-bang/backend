@@ -1,7 +1,6 @@
-package com.jukbang.api.community.dto;
+package com.jukbang.api.community_student.dto;
 
 
-import com.jukbang.api.community.entity.Comments;
 import lombok.*;
 
 import java.time.LocalDateTime;

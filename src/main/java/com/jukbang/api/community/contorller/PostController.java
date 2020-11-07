@@ -1,12 +1,11 @@
-package com.jukbang.api.community.contorller;
+package com.jukbang.api.community_student.contorller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.jukbang.api.community.dto.PostDto;
-import com.jukbang.api.community.entity.Post;
-import com.jukbang.api.community.request.CreatePostRequest;
-import com.jukbang.api.community.request.UpdatePostRequest;
-import com.jukbang.api.community.response.GetPostResponse;
-import com.jukbang.api.community.service.PostService;
+import com.jukbang.api.community_student.CommunityRole;
+import com.jukbang.api.community_student.dto.PostDto;
+import com.jukbang.api.community_student.request.CreatePostRequest;
+import com.jukbang.api.community_student.request.UpdatePostRequest;
+import com.jukbang.api.community_student.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,20 +16,23 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-@RequestMapping(value = "/community/{univId}")
+@RequestMapping(value = "/community/{role}/{univId}")
 public class PostController {
 
     private final PostService postService;
 
     /**
-     * 대학별 전체 게시글 리스트 GET
+     * 대학별 학생 게시글 리스트 GET
      * 불러오기
      *
      * @return postDtoList
      */
-    @GetMapping
-    public List getPostList() {
-        return postService.getPostList();
+    @GetMapping("")
+    public List getPostList(
+            @PathVariable("role") CommunityRole role
+    ) {
+
+        return postService.getPostList(role);
     }
 
 
@@ -62,12 +64,13 @@ public class PostController {
      */
     @PostMapping("")
     public Long createPost(
+            @PathVariable("role") CommunityRole role,
             @PathVariable("univId") int univId,
             @RequestBody CreatePostRequest createPostRequest
     ) {
         String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        return postService.savePost(univId,userId, createPostRequest);
+        return postService.savePost(univId,userId,role, createPostRequest);
 
     }
 
