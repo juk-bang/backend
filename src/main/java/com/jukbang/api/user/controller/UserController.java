@@ -6,6 +6,7 @@ import com.jukbang.api.user.request.CreateUserRequest;
 import com.jukbang.api.user.request.UpdateUserRequest;
 import com.jukbang.api.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,7 +45,9 @@ public class UserController {
             @PathVariable("id") long id,
             @RequestBody UpdateUserRequest updateUserRequest
     ) {
-        userService.rewriteUser(id, updateUserRequest);
+        String visitorId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        userService.rewriteUser(id,visitorId, updateUserRequest);
         return "success";
     }
 
