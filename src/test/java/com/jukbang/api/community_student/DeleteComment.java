@@ -27,7 +27,7 @@ public class DeleteComment extends BaseControllerTest {
 
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("DeleteComment"))
+                //.andDo(document("Community(student)_DeleteComment"))
         ;
     }
 }

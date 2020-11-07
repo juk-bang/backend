@@ -19,17 +19,10 @@ public class GetCommentsList extends BaseControllerTest {
         userFactory.signUpUser(2, UserRole.ROLE_STUDENT).getAccessToken();
 
         Long postId = postFactoryAll.generatePost(1,"TestUser1");
-        System.out.println("****************************** create post success **********************************");
-        System.out.println("POST : " + postId);
 
         Long comment1 = commentFactory.generateComment(postId,"TestUser2");
-        System.out.println("****************************** create comment 1 success **********************************");
-        System.out.println("POST : " + postId +"  COMMENT : " + comment1);
 
         Long comment2 = commentFactory.generateComment(postId,"TestUser1");
-        System.out.println("****************************** create comment 2 success **********************************");
-        System.out.println("POST : " + postId);
-        System.out.println("POST : " + postId +"  COMMENT : " + comment2);
 
         this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{role}/{univId}/{postId}/comments", "all",1,postId)
                 .header("Authorization", "Bearer " + accessToken))

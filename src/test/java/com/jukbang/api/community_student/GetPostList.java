@@ -15,16 +15,17 @@ public class GetPostList extends BaseControllerTest {
     @Test
     @DisplayName("커뮤니티(학생)_전체게시글 리스트 불러오기(성공)")
     void GetPostListSuccess() throws Exception {
-        userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
-        userFactory.signUpUser(2, UserRole.ROLE_STUDENT).getAccessToken();
+        String accessToken1 = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        String accessToken2 = userFactory.signUpUser(2, UserRole.ROLE_STUDENT).getAccessToken();
 
         postFactoryStudent.generatePost(1,"TestUser1");
         postFactoryStudent.generatePost(1,"TestUser2");
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{role}/{univId}","student",1))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{role}/{univId}","student",1)
+                .header("Authorization", "Bearer " + accessToken1))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("GetPostList"))
+                //.andDo(document("Community(student)_GetPostList"))
                 ;
 
 

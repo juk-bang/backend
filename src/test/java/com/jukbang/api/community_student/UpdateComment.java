@@ -43,7 +43,7 @@ public class UpdateComment extends BaseControllerTest {
         )
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("UpdateComment"))
+                //.andDo(document("Community(student)_UpdateComment"))
         ;
 
     }

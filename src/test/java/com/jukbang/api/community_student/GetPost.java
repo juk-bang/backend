@@ -16,14 +16,15 @@ public class GetPost extends BaseControllerTest {
     @Test
     @DisplayName("커뮤니티(학생)_각 게시글 불러오기(성공)")
     void GetPostListSuccess() throws Exception {
-        userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
 
         Long postId = postFactoryStudent.generatePost(1,"TestUser1");
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{role}/{univId}/{postId}","student",1,postId))
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/community/{role}/{univId}/{postId}","student",1,postId)
+                .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("GetPost"))
+                //.andDo(document("Community(student)_GetPost"))
         ;
     }
 

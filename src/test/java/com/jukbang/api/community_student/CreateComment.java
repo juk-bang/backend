@@ -34,7 +34,7 @@ public class CreateComment extends BaseControllerTest {
 
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("CreateComment"))
+                //.andDo(document("Community(student)_CreateComment"))
         ;
     }
 

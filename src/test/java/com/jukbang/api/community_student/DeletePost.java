@@ -24,7 +24,7 @@ public class DeletePost extends BaseControllerTest {
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("DeletePost"))
+                //.andDo(document("Community(student)_DeletePost"))
         ;
     }
 

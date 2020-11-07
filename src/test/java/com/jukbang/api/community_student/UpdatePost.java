@@ -34,7 +34,7 @@ public class UpdatePost  extends BaseControllerTest {
         )
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("UpdatePost"))
+                //.andDo(document("Community(student)_UpdatePost"))
         ;
     }
 

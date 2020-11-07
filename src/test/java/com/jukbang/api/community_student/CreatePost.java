@@ -42,7 +42,7 @@ public class CreatePost extends BaseControllerTest {
 
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("createPost"))
+                //.andDo(document("Community(student)_createPost"))
         ;
     }
 }
