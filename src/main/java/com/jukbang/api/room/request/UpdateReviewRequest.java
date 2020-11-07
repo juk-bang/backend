@@ -13,12 +13,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateReviewRequest {
-    private long id;
-    private String writer;
-    private String body;
-    private int univid;
-    private int roomid;
-    private int score;
-    private String title;
-    private LocalDateTime modifiedDate;
+    private String message;
+    private double grade;
 }

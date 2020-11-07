@@ -15,4 +15,7 @@ public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException() {
         super("존재하지 않거나 잠긴 계정입니다.");
     }
+    public UserNotFoundException() {
+        super("존재하지 않거나 잠긴 계정입니다.");
+    }
 }

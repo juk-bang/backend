@@ -1,9 +1,12 @@
 package com.jukbang.api.user.profile;
 
 import com.jukbang.api.common.BaseControllerTest;
+import com.jukbang.api.user.UserRole;
+import com.jukbang.api.user.repository.UserRepository;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.security.test.context.support.WithMockUser;
 
@@ -11,16 +14,21 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@Disabled
 public class deleteUserTest extends BaseControllerTest {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     @WithMockUser("TestUser1")
-    @DisplayName("유저 삭제하기하기(성공)")
+    @DisplayName("유저 삭제하기(성공)")
     void deleteUserSuccess() throws Exception {
-        Long id = userFactory.generateUser(1);
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        Long id = userRepository.findByUserId("TestUser1").get().getAccountId();
 
-        mockMvc.perform(RestDocumentationRequestBuilders.delete("/userinfo/{id}", id))
+        mockMvc.perform(RestDocumentationRequestBuilders.delete("/userinfo/{id}", id)
+            .header("Authorization", "Bearer " + accessToken)
+        )
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("deleteUser"))
