@@ -16,6 +16,7 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
   @Query(value = "SELECT new com.jukbang.api.user.dto.FavoriteRoomsDto(room.roomId, " +
       "room.roomInfo.roomName, room.roomInfo.scale,room.roomInfo.floor, room.roomInfo.layout ," +
       "room.price.monthlyLease, room.price.adminExpenses,room.price.deposit," +
+      "room.location.address, room.location.lat, room.location.lng," +
       "room.grade , room.distance)" +
       "FROM Favorite WHERE user.userId=:userId")
   List<FavoriteRoomsDto> findAllByUser_UserId(@Param("userId")String userId);

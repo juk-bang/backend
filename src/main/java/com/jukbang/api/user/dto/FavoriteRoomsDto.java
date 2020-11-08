@@ -1,5 +1,6 @@
 package com.jukbang.api.user.dto;
 
+import com.jukbang.api.room.entity.embedded.Location;
 import com.jukbang.api.room.entity.embedded.Price;
 import com.jukbang.api.room.entity.embedded.RoomInfo;
 import lombok.Getter;
@@ -21,6 +22,10 @@ public class FavoriteRoomsDto {
    */
   private final Price price;
   /**
+   * 방 위치정보
+   */
+  private final Location location;
+  /**
    * 방 점수
    */
   private final Double grade;
@@ -32,10 +37,12 @@ public class FavoriteRoomsDto {
   public FavoriteRoomsDto(Long roomId,
                           String roomName, Double scale, Double floor, Integer layout,
                           Double monthlyLease, Double adminExpenses, Double deposit,
+                          String address, Double lat, Double lng,
                           Double grade, Double distance) {
     this.roomId = roomId;
     this.roomInfo = new RoomInfo(roomName, scale, floor, layout);
     this.price = new Price(monthlyLease, adminExpenses, deposit);
+    this.location = new Location(address, lat, lng);
     this.grade = grade;
     this.distance = distance;
   }
