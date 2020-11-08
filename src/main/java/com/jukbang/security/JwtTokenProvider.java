@@ -41,9 +41,10 @@ public class JwtTokenProvider {
      */
     private Key key;
     /**
-     * AccessToken 유효시간(10분)
-     */
-    private final long accessTokenValidMilSecond = 1000L * 60 * 10;
+     * AccessToken 유효시간(10분) <- 테스트 진행기간동안은 일주일로 변경
+     *//*
+    private final long accessTokenValidMilSecond = 1000L * 60 * 10;*/
+    private final long accessTokenValidMilSecond = 1000L * 60 * 60 * 24 * 7;
     /**
      * RefreshToken 유효시간(일주일)
      */
