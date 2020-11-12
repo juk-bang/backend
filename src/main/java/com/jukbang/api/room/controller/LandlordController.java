@@ -3,6 +3,8 @@ package com.jukbang.api.room.controller;
 import com.jukbang.api.room.dto.LandlordDto;
 import com.jukbang.api.room.request.CreateRoomRequest;
 import com.jukbang.api.room.request.UpdateRoomRequest;
+import com.jukbang.api.room.response.CreateRoomResponse;
+import com.jukbang.api.room.response.GetRoomDetailResponse;
 import com.jukbang.api.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -45,11 +47,11 @@ public class LandlordController {
      * @param createRoomRequest 방 생성 데이터
      */
     @PostMapping
-    public void registerRoom(
+    public CreateRoomResponse registerRoom(
             @RequestBody CreateRoomRequest createRoomRequest
     ) {
         String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
-        roomService.registerRoom(requestUserId, createRoomRequest);
+        return new CreateRoomResponse(roomService.registerRoom(requestUserId, createRoomRequest));
     }
 
     /**
