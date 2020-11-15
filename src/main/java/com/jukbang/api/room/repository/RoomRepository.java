@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 /**
  * 방 정보 조회를 위한 레포지터리(Query를 직접 짯음)
  *
@@ -83,4 +85,10 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     Page<LandlordDto> findAllBySellerId(@Param("sellerId")String sellerId, Pageable pageable);
 
     Boolean existsByRoomIdAndSeller_UserId(long roomId, String userId);
+
+    /**
+     *  daehwan 이 추가한 부분
+     *  roomid 로만 방 유무여부 조회
+     */
+    Optional<Room> findByRoomId(long roomId);
 }
