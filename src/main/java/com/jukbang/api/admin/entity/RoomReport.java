@@ -20,7 +20,7 @@ public class RoomReport {
     private long roomReportId;
 
     @Column(nullable = false)
-    private long roomid;
+    private long roomId;
 
     @Column(nullable = false)
     private int type;
@@ -29,7 +29,7 @@ public class RoomReport {
     private String detail;
 
     public RoomReport( long roomId, int type, String detail){
-        this.roomid = roomId;
+        this.roomId = roomId;
         this.type = type;
         this.detail = detail;
     }
