@@ -1,6 +1,8 @@
 package com.jukbang.api.admin.controller;
 
 
+import com.jukbang.api.admin.dto.PostReportDto;
+import com.jukbang.api.admin.dto.PostReportListDto;
 import com.jukbang.api.admin.dto.RoomReportDto;
 import com.jukbang.api.admin.dto.RoomReportListDto;
 import com.jukbang.api.admin.service.ReportService;
@@ -27,6 +29,14 @@ public class ReportController {
         return reportService.getRoomReportList();
     }
 
+
+
+    /**
+     *  방 관련 신고 게시글 상세불러오기 (type , detail 제공)
+     * @param roomId
+     * @param roomReportId
+     * @return
+     */
     @GetMapping("/rooms/{roomId}/{roomReportId}")
     public RoomReportDto getRoomReport(
             @PathVariable("roomId") long roomId,
@@ -34,5 +44,22 @@ public class ReportController {
     ){
         return reportService.getRoomReport(roomId,roomReportId);
     }
+
+    @GetMapping("/community/{role}")
+    public List<PostReportListDto> getPostReportList(
+            @PathVariable("role") CommunityRole role
+    ) {
+        return reportService.getPostReportList(role);
+    }
+
+    @GetMapping("/community/{role}/{postId}/{postReportId}")
+    public PostReportDto getPostRepost(
+            @PathVariable("role") CommunityRole role,
+            @PathVariable("postId") Long postId,
+            @PathVariable("postReportId") long postReportId
+    ){
+        return reportService.getPostReport(role,postId,postReportId);
+    }
+
 
 }

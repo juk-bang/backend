@@ -1,10 +1,14 @@
 package com.jukbang.api.admin.service;
 
 
+import com.jukbang.api.admin.dto.PostReportDto;
+import com.jukbang.api.admin.dto.PostReportListDto;
 import com.jukbang.api.admin.dto.RoomReportDto;
 import com.jukbang.api.admin.dto.RoomReportListDto;
+import com.jukbang.api.admin.entity.PostReport;
 import com.jukbang.api.admin.entity.RoomReport;
 import com.jukbang.api.admin.exception.ReportNotFoundException;
+import com.jukbang.api.admin.repository.PostReportRepository;
 import com.jukbang.api.admin.repository.RoomReportRepository;
 import com.jukbang.api.community.CommunityRole;
 import com.jukbang.api.community.dto.PostListDto;
@@ -23,6 +27,7 @@ import java.util.List;
 public class ReportService {
 
     private final RoomReportRepository roomReportRepository;
+    private final PostReportRepository postReportRepository;
 
     /**
      * 방_리폿 목록 불러오기 기능
@@ -58,6 +63,40 @@ public class ReportService {
                 .build();
 
         return roomReportDto;
+    }
+
+    @Transactional
+    public List<PostReportListDto> getPostReportList (CommunityRole role){
+        List<PostReport> reportEntities = postReportRepository.findAllByRole(role);
+
+        List<PostReportListDto> postReportListDto_List= new ArrayList<>();
+
+        for (PostReport reportEntity : reportEntities) {
+            PostReportListDto postReportListDTO = PostReportListDto.builder()
+                    .role(reportEntity.getRole())
+                    .reportPostId(reportEntity.getPostReportId())
+                    .type(reportEntity.getType())
+                    .build();
+
+            postReportListDto_List.add(postReportListDTO);
+        }
+
+        return postReportListDto_List;
+    }
+
+    @Transactional
+    public PostReportDto getPostReport(CommunityRole role, Long postId,Long postReportId){
+        PostReport postReport = postReportRepository.findByRoleAndPostReportId(role,postReportId).orElseThrow(ReportNotFoundException::new);
+
+        PostReportDto postReportDto = PostReportDto.builder()
+                .role(role)
+                .postId(postId)
+                .reportPostId(postReportId)
+                .detail(postReport.getDetail())
+                .type(postReport.getType())
+                .build();
+
+        return postReportDto;
     }
 
 

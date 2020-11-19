@@ -1,8 +1,9 @@
 package com.jukbang.api.admin.report;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.room.request.RoomReportRequest;
-import com.jukbang.api.room.service.RoomReportService;
+import com.jukbang.api.community.CommunityRole;
+import com.jukbang.api.community.request.PostReportRequest;
+import com.jukbang.api.community.service.PostReportService;
 import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,36 +14,31 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class GetRoomReport extends BaseControllerTest {
-
+public class GetPostReport extends BaseControllerTest {
     @Autowired
-    RoomReportService roomReportService ;
+    PostReportService postReportService;
 
     @Test
-    @DisplayName("신고한 방 가져오기 (성공)")
-    void getRoomSuccess() throws Exception {
-
+    @DisplayName("신고한 게시글 불러오기 (성공)")
+    void getPostSuccess() throws Exception{
         String accessToken = userFactory.signUpUser(1, UserRole.ROLE_ADMIN).getAccessToken();
         userFactory.signUpUser(2, UserRole.ROLE_LANDLORD);
         userFactory.signUpUser(3, UserRole.ROLE_STUDENT);
 
-        Long roomId = roomFactory.generateRoom("TestUser2");
-
-        RoomReportRequest roomReportRequest = RoomReportRequest.builder()
-                .detail("상당히 불쾌합니다.")
+        Long postId =postFactoryAll.generatePost(1,"TestUser1");
+        PostReportRequest postReportRequest = PostReportRequest.builder()
+                .detail("음란해요")
                 .type(1)
                 .build();
+        Long postReportId = postReportService.reportPost(postId,1, CommunityRole.all,postReportRequest);
 
-        Long roomReportId = roomReportService.reportRoom(roomId,roomReportRequest);
-
-
-        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/admin/report/rooms/{roomId}/{roomReportId}", roomId,roomReportId)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/admin/report/community/{role}/{postId}/{postReportId}","all",postId,postReportId)
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("GetRoomReport"))
+                .andDo(document("GetPostReport"))
         ;
+
     }
 
 }
-
