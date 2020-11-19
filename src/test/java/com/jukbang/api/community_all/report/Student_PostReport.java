@@ -1,8 +1,8 @@
-package com.jukbang.api.room.report;
+package com.jukbang.api.community_all.report;
 
 import com.jukbang.api.common.BaseControllerTest;
-import com.jukbang.api.room.request.RoomReportRequest;
-import com.jukbang.api.room.service.RoomReportService;
+import com.jukbang.api.community.request.PostReportRequest;
+import com.jukbang.api.community.service.PostReportService;
 import com.jukbang.api.user.UserRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,33 +14,33 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ReportRoom extends BaseControllerTest {
-
+public class Student_PostReport extends BaseControllerTest {
     @Autowired
-    private RoomReportService roomReportService;
+    private PostReportService postReportService;
 
     @Test
-    @DisplayName("방신고하기 (성공)")
-    void reportRoomSuccess() throws Exception {
-        userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
+    @DisplayName("학생커뮤니티_방신고하기 (성공)")
+    void reportPostSuccess() throws Exception {
+        userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
         String accessToken = userFactory.signUpUser(2, UserRole.ROLE_STUDENT).getAccessToken();
 
-        Long roomId = roomFactory.generateRoom("TestUser1");
+        Long postId = postFactoryStudent.generatePost(1,"TestUser1");
 
-        RoomReportRequest roomReportRequest = RoomReportRequest.builder()
+        PostReportRequest postReportRequest = PostReportRequest.builder()
                 .type(1)
                 .detail("맘에 안들고 신경질이 납니다.")
                 .build();
 
-        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/rooms/{roomid}/report",roomId)
+        this.mockMvc.perform(RestDocumentationRequestBuilders.post("/community/{role}/{univId}/{postId}/report","student",1,postId)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(this.objectMapper.writeValueAsString(roomReportRequest))
+                .content(this.objectMapper.writeValueAsString(postReportRequest))
                 .header("Authorization", "Bearer " + accessToken)
         )
 
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("reportRoom"))
+                .andDo(document("reportPost_STUDENT"))
         ;
     }
 }
+
