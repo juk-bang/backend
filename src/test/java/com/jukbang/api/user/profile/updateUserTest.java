@@ -17,17 +17,13 @@ import org.springframework.security.test.context.support.WithMockUser;
 
 public class updateUserTest extends BaseControllerTest {
 
-  @Autowired
-  private UserRepository userRepository;
-
   @Test
   @WithMockUser("TestUser1")
   @DisplayName("유저정보 수정하기(성공)")
   void updateUserSuccess() throws Exception {
     String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
     UpdateUserRequest updateUserRequest = new UpdateUserRequest("newPassword");
-    Long id = userRepository.findByUserId("TestUser1").get().getAccountId();
-    mockMvc.perform(RestDocumentationRequestBuilders.put("/userinfo/{id}", id)
+    mockMvc.perform(RestDocumentationRequestBuilders.put("/userinfo")
         .contentType(MediaType.APPLICATION_JSON)
         .header("Authorization", "Bearer " + accessToken)
         .content(this.objectMapper.writeValueAsString(updateUserRequest)))
