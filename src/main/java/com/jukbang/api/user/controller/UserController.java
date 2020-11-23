@@ -34,32 +34,29 @@ public class UserController {
     /**
      * 유저 정보 수정 UPDATE
      *
-     * @param id
      * @param updateUserRequest
      * @return (String) success
      */
-    @PutMapping("/{id}")
+    @PutMapping
     public String updateUser(
-            @PathVariable("id") long id,
             @RequestBody UpdateUserRequest updateUserRequest
     ) {
         String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        userService.rewriteUser(id,requestUserId, updateUserRequest);
+        userService.rewriteUser(requestUserId, updateUserRequest);
         return "success";
     }
 
     /**
      * 유저 삭제 DELETE
      *
-     * @param id
      * @return (String) success
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     public String deleteUser(
-            @PathVariable("id") long id
     ) {
-        userService.deleteUser(id);
+        String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
+        userService.deleteUser(requestUserId);
         return "success";
     }
 
