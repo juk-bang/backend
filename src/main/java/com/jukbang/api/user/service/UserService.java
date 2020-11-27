@@ -45,8 +45,8 @@ public class UserService {
    * 회원의 고유번호 (id) 에 접근하여 수정
    */
   @Transactional
-  public void rewriteUser(long id,String userId, UpdateUserRequest updateUserRequest) {
-    userRepository.findByAccountIdAndUserId(id,userId).orElseThrow(UserNotFoundException::new)
+  public void rewriteUser(String userId, UpdateUserRequest updateUserRequest) {
+    userRepository.findByUserId(userId).orElseThrow(UserNotFoundException::new)
         .updatePassword(passwordEncoder.encode(updateUserRequest.getPassword()));
   }
 
@@ -55,7 +55,7 @@ public class UserService {
    * 회원의 고유번호 (id) 에 접근하여 삭제
    */
   @Transactional
-  public void deleteUser(long id) {
-    userRepository.deleteById(id);
+  public void deleteUser(String id) {
+    userRepository.deleteByUserId(id);
   }
 }

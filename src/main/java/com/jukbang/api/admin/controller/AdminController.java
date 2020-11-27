@@ -10,22 +10,20 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
-@RequestMapping("/admin/permissionroom/{univId}")
-public class adminController {
+@RequestMapping("/admin/permission/")
+public class AdminController {
 
     private final AdminService adminService;
 
     /**
      * 대학별 방 전체 List GET
      *
-     * @param univId 대학가 지역 ID
      * @return (List) roomList
      */
-    @GetMapping
+    @GetMapping("/rooms")
     public List<Room> getRoomList(
-            @PathVariable("univId") long univId
     ) {
-        return adminService.wantpermit(univId);
+        return adminService.wantPermit();
     }
 
     /**
@@ -34,7 +32,7 @@ public class adminController {
      * @param univId 대학가 지역 ID
      * @param roomId 승인할 방 번호
      */
-    @PostMapping("/{roomId}")
+    @PostMapping("/{univId}/{roomId}")
     public void permit(
             @PathVariable("univId") long univId,
             @PathVariable("roomId") long roomId
@@ -48,11 +46,11 @@ public class adminController {
      * @param univId 대학가 지역 ID
      * @param roomId 승인할 방 번호
      */
-    @DeleteMapping("/{roomId}")
+    @DeleteMapping("/{univId}/{roomId}")
     public void roomIdtPermit(
             @PathVariable("univId") long univId,
             @PathVariable("roomId") long roomId
     ) {
-        adminService.dontpermit(univId, roomId);
+        adminService.reject(univId, roomId);
     }
 }

@@ -15,17 +15,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class deleteUserTest extends BaseControllerTest {
 
-    @Autowired
-    private UserRepository userRepository;
-
     @Test
     @WithMockUser("TestUser1")
     @DisplayName("유저 삭제하기(성공)")
     void deleteUserSuccess() throws Exception {
         String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
-        Long id = userRepository.findByUserId("TestUser1").get().getAccountId();
 
-        mockMvc.perform(RestDocumentationRequestBuilders.delete("/userinfo/{id}", id)
+        mockMvc.perform(RestDocumentationRequestBuilders.delete("/userinfo")
             .header("Authorization", "Bearer " + accessToken)
         )
                 .andDo(print())

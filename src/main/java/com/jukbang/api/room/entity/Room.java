@@ -88,7 +88,14 @@ public class Room extends Time {
         setDistance(location.getLat(), location.getLng(), 37.496281, 126.957358); // SSU 기준
         setGrade();
     }
-    
+
+    public void permitRoom(){
+        this.permission = 1;
+    }
+    public void rejectRoom(){
+        this.permission = 2;
+    }
+
     private void setGrade(){
         this.grade = 0; // 아직 점수 정책 안나옴
     }
@@ -98,7 +105,6 @@ public class Room extends Time {
 
         this.distance =  rad2deg(Math.acos(dist)) * 60 * 1.1515 * 1609.344;
     }
-
     private static double deg2rad(double deg) {
         return (deg * Math.PI / 180.0);
     }

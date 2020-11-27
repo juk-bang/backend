@@ -1,7 +1,9 @@
 package com.jukbang.api.admin.service;
 
 import com.jukbang.api.room.entity.Room;
+import com.jukbang.api.room.exception.RoomNotFoundException;
 import com.jukbang.api.room.repository.RoomRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,26 +17,17 @@ public class AdminService {
     private final RoomRepository roomRepository;
 
     @Transactional
-    public List<Room> wantpermit(long Univid) {
-/*
-        return roomRepository.findAllByUnividAndPermission(Univid, 0);
-*/
-        return null;
+    public List<Room> wantPermit() {
+        return roomRepository.findAllByPermission(0);
     }
 
     @Transactional
-    public void permit(long Univid, long id) {
-/*        Optional<Room> room = roomRepository.findById(id);
-        Room target = room.get();
-        target.setPermission(1);
-        roomRepository.save(target);*/
+    public void permit(long univId, long id) {
+        roomRepository.findById(id).orElseThrow(RoomNotFoundException::new).permitRoom();
     }
 
     @Transactional
-    public void dontpermit(long Univid, long id) {
-/*        Optional<Room> room = roomRepository.findById(id);
-        Room target = room.get();
-        target.setPermission(2);
-        roomRepository.save(target);*/
+    public void reject(long univId, long id) {
+        roomRepository.findById(id).orElseThrow(RoomNotFoundException::new).rejectRoom();
     }
 }

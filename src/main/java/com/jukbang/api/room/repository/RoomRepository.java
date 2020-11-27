@@ -3,6 +3,7 @@ package com.jukbang.api.room.repository;
 import com.jukbang.api.room.dto.LandlordDto;
 import com.jukbang.api.room.dto.RoomsDto;
 import com.jukbang.api.room.entity.Room;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -57,7 +58,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             " and (:adminExpenses is null or room0.price.adminExpenses = :adminExpenses)" +
             " and (:deposit is null or room0.price.deposit = :deposit)" +
             " and (:grade is null or room0.grade = :grade)" +
-            " and (:distance is null or room0.distance = :distance)"
+            " and (:distance is null or room0.distance = :distance)" +
+            " and room0.permission = 1"
     )
     Page<RoomsDto> findAllByUnivIdWithFilter(
             @Param("univId") Long univId,
@@ -91,4 +93,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
      *  roomid 로만 방 유무여부 조회
      */
     Optional<Room> findByRoomId(long roomId);
+  
+  
+    List<Room> findAllByPermission(int permission);
 }
