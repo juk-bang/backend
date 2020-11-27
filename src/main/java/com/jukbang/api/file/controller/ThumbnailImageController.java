@@ -66,6 +66,8 @@ public class ThumbnailImageController {
       @PathVariable long roomId,
       @PathVariable long imageId
   ){
-    thumbnailImageService.deleteThumbnailImage(roomId,imageId);
+    String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
+
+    thumbnailImageService.deleteThumbnailImage(roomId,imageId,requestUserId);
   }
 }

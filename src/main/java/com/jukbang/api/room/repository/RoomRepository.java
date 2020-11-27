@@ -86,7 +86,7 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
             countQuery = "SELECT count(roomId) FROM Room WHERE seller.userId = :sellerId")
     Page<LandlordDto> findAllBySellerId(@Param("sellerId")String sellerId, Pageable pageable);
 
-    Boolean existsByRoomIdAndSeller_UserId(long roomId, String userId);
+    Optional<Room> findByRoomIdAndSeller_UserId(long roomId, String userId);
 
     /**
      *  daehwan 이 추가한 부분
