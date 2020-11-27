@@ -1,6 +1,7 @@
 package com.jukbang.api.admin.entity;
 
 
+import com.jukbang.api.common.entity.Time;
 import com.jukbang.api.community.CommunityRole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table
-public class PostReport {
+public class PostReport extends Time {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

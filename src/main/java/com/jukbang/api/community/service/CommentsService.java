@@ -73,7 +73,7 @@ public class CommentsService {
         Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
 
         // 게시글 댓글 수  +1
-        post.addComments(post.getComments()+1);
+        post.addComments();
 
 
         return commentsRepository.save(
@@ -136,7 +136,7 @@ public class CommentsService {
         commentsRepository.findByCommentsId(commentsId).orElseThrow(CommentsNotFoundException::new);
 
         // 게시글 댓글 수  -1
-        post.deleteComments(post.getComments()-1);
+        post.deleteComments();
 
         commentsRepository.deleteById(commentsId);
     }

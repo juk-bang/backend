@@ -13,7 +13,11 @@ import com.jukbang.api.admin.repository.RoomReportRepository;
 import com.jukbang.api.community.CommunityRole;
 import com.jukbang.api.community.dto.PostListDto;
 import com.jukbang.api.community.entity.Post;
+import com.jukbang.api.community.exception.PostNotFoundException;
+import com.jukbang.api.community.repository.PostRepository;
+import com.jukbang.api.room.entity.Room;
 import com.jukbang.api.room.exception.RoomNotFoundException;
+import com.jukbang.api.room.repository.RoomRepository;
 import com.jukbang.api.room.request.RoomReportRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +32,8 @@ public class ReportService {
 
     private final RoomReportRepository roomReportRepository;
     private final PostReportRepository postReportRepository;
-
+    private final RoomRepository roomRepository;
+    private final PostRepository postRepository;
     /**
      * 방_리폿 목록 불러오기 기능
      *
@@ -44,6 +49,7 @@ public class ReportService {
             RoomReportListDto roomReportListDTO = RoomReportListDto.builder()
                     .reportRoomId(reportEntity.getRoomReportId())
                     .type(reportEntity.getType())
+                    .updatedDate(reportEntity.getModifiedDate())
                     .build();
 
             roomReportListDto_List.add(roomReportListDTO);
@@ -60,6 +66,7 @@ public class ReportService {
                 .detail(roomReport.getDetail())
                 .type(roomReport.getType())
                 .reportRoomId(roomId)
+                .updatedDate(roomReport.getModifiedDate())
                 .build();
 
         return roomReportDto;
@@ -76,6 +83,7 @@ public class ReportService {
                     .role(reportEntity.getRole())
                     .reportPostId(reportEntity.getPostReportId())
                     .type(reportEntity.getType())
+                    .updatedDate(reportEntity.getModifiedDate())
                     .build();
 
             postReportListDto_List.add(postReportListDTO);
@@ -94,10 +102,23 @@ public class ReportService {
                 .reportPostId(postReportId)
                 .detail(postReport.getDetail())
                 .type(postReport.getType())
+                .updatedDate(postReport.getModifiedDate())
                 .build();
 
         return postReportDto;
     }
 
+    @Transactional
+    public void deleteReportRoom(Long roomid, Long reportid){
+        Room room = roomRepository.findByRoomId(roomid).orElseThrow(RoomNotFoundException::new);
 
+        roomReportRepository.deleteById(reportid);
+    }
+
+    @Transactional
+    public void deleteReportPost(Long postid, Long reportid){
+        postRepository.findByPostId(postid).orElseThrow(PostNotFoundException::new);
+
+        postReportRepository.deleteById(reportid);
+    }
 }

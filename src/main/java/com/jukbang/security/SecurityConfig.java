@@ -46,8 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/landlord/**").hasRole("LANDLORD")
                 .antMatchers("/community/student/**").hasRole("STUDENT")
                 .antMatchers("/community/all/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"/rooms/{roomid}/report").hasRole("STUDENT") // 11.15 추가
-                .antMatchers(HttpMethod.GET,"/admin/report/rooms").hasRole("ADMIN") // 11.16 추가
                 .antMatchers(HttpMethod.POST, "/rooms/*/images/*").hasRole("LANDLORD")
                 .antMatchers(HttpMethod.DELETE, "/rooms/*/images/*").hasRole("LANDLORD")
                 .antMatchers(HttpMethod.GET, "/**").permitAll()

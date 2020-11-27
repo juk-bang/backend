@@ -118,7 +118,7 @@ public class PostService {
         Post post = postRepository.findByPostId(postId).orElseThrow(PostNotFoundException::new);
 
 
-        post.addViews(post.getViews() + 1);
+        post.addViews();
 
         PostDto postDto = PostDto.builder()
                 .title(post.getTitle())

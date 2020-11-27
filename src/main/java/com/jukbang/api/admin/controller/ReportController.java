@@ -32,7 +32,7 @@ public class ReportController {
 
 
     /**
-     *  방 관련 신고 게시글 상세불러오기 (type , detail 제공)
+     *  방 관련 신고 상세불러오기 (type , detail 제공)
      * @param roomId
      * @param roomReportId
      * @return
@@ -45,6 +45,11 @@ public class ReportController {
         return reportService.getRoomReport(roomId,roomReportId);
     }
 
+    /**
+     *  커뮤니티 게시글 관련 신고 리스트 불러오기
+     * @param role
+     * @return
+     */
     @GetMapping("/community/{role}")
     public List<PostReportListDto> getPostReportList(
             @PathVariable("role") CommunityRole role
@@ -52,6 +57,13 @@ public class ReportController {
         return reportService.getPostReportList(role);
     }
 
+    /**
+     *  커뮤니티 게시글 관련 신고 상세 불러오기
+     * @param role
+     * @param postId
+     * @param postReportId
+     * @return
+     */
     @GetMapping("/community/{role}/{postId}/{postReportId}")
     public PostReportDto getPostRepost(
             @PathVariable("role") CommunityRole role,
@@ -61,5 +73,35 @@ public class ReportController {
         return reportService.getPostReport(role,postId,postReportId);
     }
 
+
+    /**
+     *  방 신고 삭제
+     * @param roomid
+     * @param reportid
+     */
+    @DeleteMapping("/rooms/{roomid}/{reportid}")
+    public String deleteReportRoom(
+            @PathVariable("roomid") Long roomid,
+            @PathVariable("reportid") Long reportid
+    ){
+
+         reportService.deleteReportRoom(roomid,reportid);
+        return "success";
+    }
+
+    /**
+     *  게시글 신고 삭제
+     * @param postid
+     * @param reportid
+     */
+    @DeleteMapping("/community/{postid}/{reportid}")
+    public String deleteReportPost(
+            @PathVariable("postid") Long postid,
+            @PathVariable("reportid") Long reportid
+    ){
+
+        reportService.deleteReportPost(postid,reportid);
+        return "success";
+    }
 
 }

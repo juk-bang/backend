@@ -151,11 +151,6 @@ operation::rejectRoom[snippets='http-request,response-body']
 [[GetReports]]
 ==== 신고 리스트 관리 및 조회
 
-[[getReports]]
-===== 신고 리스트 조회하기
-
-operation::getReports[snippets='http-request,response-body']
-
 [[getPostReport]]
 ===== 게시글 신고 리스트 조회하기
 
@@ -165,6 +160,11 @@ operation::getPostReportList[snippets='http-request,response-body']
 ===== 게시글 신고 조회하기
 
 operation::getPostReport[snippets='http-request,response-body']
+
+[[deletePostReport]]
+===== 게시글 신고 삭제하기
+
+operation::deletePostReport[snippets='http-request,response-body']
 
 [[getPostReportList]]
 ===== 방 신고 리스트 조회하기
@@ -177,10 +177,13 @@ operation::getRoomReportList [snippets='http-request,response-body']
 operation::getRoomReport[snippets='http-request,response-body']
 
 
-[[deleteReport]]
-===== 신고 삭제하기
+[[deleteRoomReport]]
+===== 방 신고 삭제하기
 
-operation::deleteReport[snippets='http-request,response-body']
+operation::deleteRoomReport[snippets='http-request,response-body']
+
+
+
 
 [[Community]]
 === 커뮤니티 API

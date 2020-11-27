@@ -1,5 +1,6 @@
 package com.jukbang.api.admin.entity;
 
+import com.jukbang.api.common.entity.Time;
 import com.jukbang.api.room.entity.Room;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table
-public class RoomReport {
+public class RoomReport extends Time {
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private long roomReportId;
