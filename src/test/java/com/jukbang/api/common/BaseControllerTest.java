@@ -33,8 +33,6 @@ public class BaseControllerTest {
     @Autowired
     protected RoomFactory roomFactory;
 
-    @Autowired
-    protected ReportFactory reportFactory;
 
     @Autowired
     protected  PostFactory_all postFactoryAll;

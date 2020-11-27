@@ -55,11 +55,11 @@ public class Post extends Time {
         this.body= body;
     }
 
-    public void addViews(int views){
-        this.views = views+1;
+    public void addViews(){
+        this.views++;
     }
 
-    public void addComments(int comments) { this.comments = comments + 1; }
+    public void addComments() { this.comments ++; }
 
-    public void deleteComments(int comments) { this.comments = comments-1;}
+    public void deleteComments() { this.comments --;}
 }
