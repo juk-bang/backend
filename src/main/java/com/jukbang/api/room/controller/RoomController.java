@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,9 +48,10 @@ public class RoomController {
       @RequestParam(value = "grade", required = false) String grade,
       @RequestParam(value = "distance", required = false) String distance
   ) {
+    String requestUserId = SecurityContextHolder.getContext().getAuthentication().getName();
     return assembler.toModel(
         roomService.getRooms(univId, layout, floor, scale, monthlyLease,
-            adminExpenses, deposit, grade, distance, pageable)
+            adminExpenses, deposit, grade, distance,requestUserId, pageable)
     );
   }
 

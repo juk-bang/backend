@@ -49,7 +49,9 @@ public class RoomService {
   @Transactional
   public Page<RoomsDto> getRooms(long univId, Integer layout, Double floor, String scale,
                                  String monthlyLease, String adminExpenses, String deposit,
-                                 String grade, String distance, Pageable pageable) {
+                                 String grade, String distance, String requestUserId,
+                                 Pageable pageable) {
+
 
     Double[] scales = parseRange(scale);
     Double[] monthlyLeases = parseRange(monthlyLease);
@@ -57,6 +59,11 @@ public class RoomService {
     Double[] deposits = parseRange(deposit);
     Double[] grades = parseRange(grade);
     Double[] distances = parseRange(distance);
+    if (!requestUserId.equals("anonymous")) {
+      userRepository.findByUserId(requestUserId).orElseThrow(UserNotFoundException::new).getFilter()
+          .updateFilter(layout, floor, scales, monthlyLeases, adminExpense, deposits, grades,
+              distances);
+    }
     return this.roomRepository
         .findAllByUnivIdWithFilter(univId, layout, floor, scales[0], scales[1], monthlyLeases[0],
             monthlyLeases[1], adminExpense[0], adminExpense[1], deposits[0], deposits[1], grades[0],
@@ -147,12 +154,11 @@ public class RoomService {
 
   private Double[] parseRange(String ranges) {
     Double[] doubleRange = new Double[2];
-    if(ranges != null) {
+    if (ranges != null) {
       String[] range = ranges.split("-");
       doubleRange[0] = Double.parseDouble(range[0]);
       doubleRange[1] = Double.parseDouble(range[1]);
-    }
-    else{
+    } else {
       doubleRange[0] = null;
       doubleRange[1] = null;
     }

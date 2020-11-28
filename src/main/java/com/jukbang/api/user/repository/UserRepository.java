@@ -1,6 +1,7 @@
 package com.jukbang.api.user.repository;
 
 import com.jukbang.api.user.entity.User;
+import com.jukbang.api.user.entity.embedded.Filter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
