@@ -268,9 +268,14 @@ operation::deleteRoom[snippets='http-request,response-body']
 operation::getRoomList[snippets='http-request,response-body']
 
 [[getMyFilter]]
-===== 방 리스트 가져오기
+===== 내 필터 가져오기
 
 operation::getMyFilter[snippets='http-request,response-body']
+
+[[getRecommendFilter]]
+===== 추천 필터 가져오기
+
+operation::getRecommendFilter[snippets='http-request,response-body']
 
 [[getRoomDetail]]
 ===== 방 상세정보 가져오기

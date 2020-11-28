@@ -3,9 +3,11 @@ package com.jukbang.api.room.service;
 import com.jukbang.api.room.dto.LandlordDto;
 import com.jukbang.api.room.dto.RoomsDto;
 import com.jukbang.api.room.entity.Room;
+import com.jukbang.api.room.entity.UnivFilter;
 import com.jukbang.api.room.exception.NotYourRoomException;
 import com.jukbang.api.room.exception.RoomNotFoundException;
 import com.jukbang.api.room.repository.RoomRepository;
+import com.jukbang.api.room.repository.UnivFilterRepository;
 import com.jukbang.api.room.request.CreateRoomRequest;
 import com.jukbang.api.room.request.UpdateRoomRequest;
 import com.jukbang.api.room.response.GetRoomDetailResponse;
@@ -29,6 +31,7 @@ public class RoomService {
 
   private final RoomRepository roomRepository;
   private final UserRepository userRepository;
+  private final UnivFilterRepository univFilterRepository;
 
   /**
    * 방 리스트를 필터링 하여 조회
@@ -64,6 +67,9 @@ public class RoomService {
           .updateFilter(layout, floor, scales, monthlyLeases, adminExpense, deposits, grades,
               distances);
     }
+    UnivFilter filter = univFilterRepository.findById(univId).orElse(new UnivFilter());
+    filter.updateFilter(scales, monthlyLeases, adminExpense, deposits, grades, distances);
+    univFilterRepository.save(filter);
     return this.roomRepository
         .findAllByUnivIdWithFilter(univId, layout, floor, scales[0], scales[1], monthlyLeases[0],
             monthlyLeases[1], adminExpense[0], adminExpense[1], deposits[0], deposits[1], grades[0],
