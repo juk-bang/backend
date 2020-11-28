@@ -1,6 +1,7 @@
 package com.jukbang.api.community.service;
 
 import com.jukbang.api.community.CommunityRole;
+import com.jukbang.api.community.dto.MyPostListDto;
 import com.jukbang.api.community.dto.PostListDto;
 import com.jukbang.api.community.entity.Post;
 import com.jukbang.api.community.exception.PostNotFoundException;
@@ -57,24 +58,21 @@ public class PostService {
     2. 게시글 상세정보 형식으로 할지?
     */
     @Transactional
-    public List<PostListDto> getMyPosts(String userid) {
-        User writer = userRepository.findByUserId(userid).orElseThrow(UserNotFoundException::new);
+    public List<MyPostListDto> getMyPosts(String userid) {
+        List<Post> postEntities = postRepository.findAllByWriter_UserId(userid);
 
-        List<Post> postEntities = postRepository.findAllByWriter(writer);
-
-        List<PostListDto> postDtoList = new ArrayList<>();
+        List<MyPostListDto> postDtoList = new ArrayList<>();
 
         for (Post postEntity : postEntities) {
-            PostListDto postListDto = PostListDto.builder()
+            MyPostListDto mypostListDto = MyPostListDto.builder()
                     .postId(postEntity.getPostId())
                     .title(postEntity.getTitle())
                     .views(postEntity.getViews())
                     .comments(postEntity.getComments())
                     .updatedDate(postEntity.getModifiedDate())
-                    .writer(writer)
                     .build();
 
-            postDtoList.add(postListDto);
+            postDtoList.add(mypostListDto);
         }
         return postDtoList;
     }

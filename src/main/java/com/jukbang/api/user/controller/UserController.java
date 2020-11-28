@@ -1,5 +1,6 @@
 package com.jukbang.api.user.controller;
 
+import com.jukbang.api.community.dto.MyPostListDto;
 import com.jukbang.api.community.dto.PostListDto;
 import com.jukbang.api.community.service.PostService;
 import com.jukbang.api.user.request.UpdateUserRequest;
@@ -68,7 +69,7 @@ public class UserController {
      * @return (List) getMyPosts
      */
     @GetMapping("/posts/{userId}")
-    public List<PostListDto> myPosts(
+    public List<MyPostListDto> myPosts(
             @PathVariable("userId") String userId
     ) {
         return postService.getMyPosts(userId);
