@@ -1,6 +1,7 @@
 package com.jukbang.api.user.entity;
 
 import com.jukbang.api.user.UserRole;
+import com.jukbang.api.user.entity.embedded.Filter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -53,6 +54,9 @@ public class User {
     private String refreshToken;
     @OneToMany(mappedBy = "user")
     private List<Favorite> favorites;
+
+    @Embedded
+    private Filter filter;
 
     /**
      * Refresh Token 갱신

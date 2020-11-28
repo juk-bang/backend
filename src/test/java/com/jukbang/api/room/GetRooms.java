@@ -37,4 +37,29 @@ public class GetRooms extends BaseControllerTest {
                 .andDo(document("GetRoomList"))
         ;
     }
+
+    @Test
+    @WithMockUser("TestUser1")
+    @DisplayName("필터링된 방 리스트 가져오기 (성공)")
+    void getRoomFilteredListSuccess() throws Exception {
+        userFactory.signUpUser(1, UserRole.ROLE_LANDLORD);
+        userFactory.signUpUser(2, UserRole.ROLE_LANDLORD);
+        Long roomId1 = roomFactory.generateRoom("TestUser" + 1,1000.0,50.0);
+        Long roomId2 = roomFactory.generateRoom("TestUser" + 2,1000.0,30.0);
+        Long roomId3 = roomFactory.generateRoom("TestUser" + 2,2000.0,40.0);
+
+
+        roomRepository.findById(roomId1).get().permitRoom();
+        roomRepository.findById(roomId2).get().permitRoom();
+        roomRepository.findById(roomId3).get().permitRoom();
+
+        this.mockMvc.perform(RestDocumentationRequestBuilders.get("/rooms")
+            .param("univId", String.valueOf(1))
+            .param("monthlyLease", "30-50")
+            .param("deposit", "0-1500"))
+            .andExpect(status().isOk())
+            .andDo(print())
+            .andDo(document("GetRoomList"))
+        ;
+    }
 }

@@ -1,5 +1,6 @@
 package com.jukbang.security.service;
 
+import com.jukbang.api.user.entity.embedded.Filter;
 import com.jukbang.security.JwtTokenProvider;
 import com.jukbang.security.exception.CantSignInException;
 import com.jukbang.security.exception.IdAlreadyExistsException;
@@ -68,6 +69,7 @@ public class AuthService {
                 .roles(Collections.singletonList(signUpRequest.getRole()))
                 .refreshToken(jwtTokenProvider.createRefreshToken(signUpRequest.getId(), Collections.singletonList(signUpRequest.getRole())))
                 .univId(signUpRequest.getUnivId())
+                .filter(new Filter())
                 .build());
 
         return SignInResponse.builder()
