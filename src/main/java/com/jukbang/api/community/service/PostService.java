@@ -7,6 +7,7 @@ import com.jukbang.api.community.exception.PostNotFoundException;
 import com.jukbang.api.community.repository.PostRepository;
 import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.request.UpdatePostRequest;
+import com.jukbang.api.user.entity.User;
 import com.jukbang.api.user.exception.UserNotFoundException;
 import com.jukbang.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -54,28 +55,30 @@ public class PostService {
     커뮤니티 내 내 게시글 불러오기 기능 => 프런트 ppt 에 없음
     1. 게시글 리스트 형식으로 할지?
     2. 게시글 상세정보 형식으로 할지?
+    */
     @Transactional
-    public List<BoardlistDto> getMyPosts(String userid) {
-        List<Post> postEntities = postRepository.findAllByWriter(userid);
-        List<PostDto> boardDtoList = new ArrayList<>();
+    public List<PostListDto> getMyPosts(String userid) {
+        User writer = userRepository.findByUserId(userid).orElseThrow(UserNotFoundException::new);
 
-        for (Post boardEntity : boardEntities) {
-            BoardlistDto boardDTO = BoardlistDto.builder()
-                    .id(boardEntity.getId())
-                    .title(boardEntity.getTitle())
-                    .writer(boardEntity.getWriter())
-                    .modifiedDate(boardEntity.getCreatedDate())
-                    .comments(boardEntity.getComments())
-                    .univid(boardEntity.getUnivId())
-                    .views(boardEntity.getViews())
+        List<Post> postEntities = postRepository.findAllByWriter(writer);
+
+        List<PostListDto> postDtoList = new ArrayList<>();
+
+        for (Post postEntity : postEntities) {
+            PostListDto postListDto = PostListDto.builder()
+                    .postId(postEntity.getPostId())
+                    .title(postEntity.getTitle())
+                    .views(postEntity.getViews())
+                    .comments(postEntity.getComments())
+                    .updatedDate(postEntity.getModifiedDate())
+                    .writer(writer)
                     .build();
 
-            boardDtoList.add(boardDTO);
+            postDtoList.add(postListDto);
         }
-        return boardDtoList;
-        return null;
+        return postDtoList;
     }
-*/
+
 
     /**
      *  게시글 작성하기 기능
