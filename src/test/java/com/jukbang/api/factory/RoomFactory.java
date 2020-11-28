@@ -19,6 +19,17 @@ public class RoomFactory {
         return roomService.registerRoom(sellerId, generateCreateRoomRequest());
     }
 
+    public Long generateRoom(String sellerId, Double deposit, Double monthlyLease) {
+        return roomService.registerRoom(sellerId, CreateRoomRequest.builder()
+            .description("설명")
+            .option(new Option(true, true, true, true, true, true, true, true))
+            .location(new Location("서울 동작구 사당로 36-1 서정캐슬 3층",37.494863, 126.958453))
+            .roomInfo(new RoomInfo("투썸 플레이스 3층", 1, 1, 1))
+            .price(new Price(monthlyLease, 1, deposit))
+            .univId(1)
+            .build());
+    }
+
     public CreateRoomRequest generateCreateRoomRequest() {
         return CreateRoomRequest.builder()
                 .description("설명")

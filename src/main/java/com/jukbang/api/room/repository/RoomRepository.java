@@ -45,33 +45,39 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
      * @return 방 리스트
      */
     @Query(value = "SELECT new com.jukbang.api.room.dto.RoomsDto(room0.roomId, " +
-            "room0.roomInfo.roomName, room0.roomInfo.scale,room0.roomInfo.floor, room0.roomInfo.layout ," +
-            "room0.price.monthlyLease, room0.price.adminExpenses,room0.price.deposit," +
-            "room0.location.address, room0.location.lat, room0.location.lng," +
-            "room0.grade , " +
-            "room0.distance)" +
-            " FROM Room room0 WHERE room0.univId = :univId" +
-            " and (:layout is null or room0.roomInfo.layout = :layout)" +
-            " and (:floor is null or room0.roomInfo.floor = :floor)" +
-            " and (:scale is null or room0.roomInfo.scale = :scale)" +
-            " and (:monthlyLease is null or room0.price.monthlyLease = :monthlyLease)" +
-            " and (:adminExpenses is null or room0.price.adminExpenses = :adminExpenses)" +
-            " and (:deposit is null or room0.price.deposit = :deposit)" +
-            " and (:grade is null or room0.grade = :grade)" +
-            " and (:distance is null or room0.distance = :distance)" +
-            " and room0.permission = 1"
+        "room0.roomInfo.roomName, room0.roomInfo.scale,room0.roomInfo.floor, room0.roomInfo.layout ," +
+        "room0.price.monthlyLease, room0.price.adminExpenses,room0.price.deposit," +
+        "room0.location.address, room0.location.lat, room0.location.lng," +
+        "room0.grade , " +
+        "room0.distance)" +
+        " FROM Room room0 WHERE room0.univId = :univId" +
+        " and (:layout is null or room0.roomInfo.layout = :layout)" +
+        " and (:floor is null or room0.roomInfo.floor = :floor)" +
+        " and (:scaleL is null or :scaleH is null or room0.roomInfo.scale between :scaleL and :scaleH)" +
+        " and (:monthlyLeaseL is null or :monthlyLeaseH is null or room0.price.monthlyLease between :monthlyLeaseL and :monthlyLeaseH)" +
+        " and (:adminExpensesL is null or :adminExpensesH is null or room0.price.adminExpenses between :adminExpensesL and :adminExpensesH)" +
+        " and (:depositL is null or :depositH is null or room0.price.deposit between :depositL and :depositH)" +
+        " and (:gradeL is null or :gradeH is null or room0.grade between :gradeL and :gradeH)" +
+        " and (:distanceL is null or :distanceH is null or room0.distance between :distanceL and :distanceH)" +
+        " and room0.permission = 1"
     )
     Page<RoomsDto> findAllByUnivIdWithFilter(
-            @Param("univId") Long univId,
-            @Param("layout") Integer layout,
-            @Param("floor") Double floor,
-            @Param("scale") Double scale,
-            @Param("monthlyLease") Double monthlyLease,
-            @Param("adminExpenses") Double adminExpenses,
-            @Param("deposit") Double deposit,
-            @Param("grade") Double grade,
-            @Param("distance") Double distance,
-            Pageable pageable
+        @Param("univId") Long univId,
+        @Param("layout") Integer layout,
+        @Param("floor") Double floor,
+        @Param("scaleL") Double scaleL,
+        @Param("scaleH") Double scaleH,
+        @Param("monthlyLeaseL") Double monthlyLeaseL,
+        @Param("monthlyLeaseH") Double monthlyLeaseH,
+        @Param("adminExpensesL") Double adminExpensesL,
+        @Param("adminExpensesH") Double adminExpensesH,
+        @Param("depositL") Double depositL,
+        @Param("depositH") Double depositH,
+        @Param("gradeL") Double gradeL,
+        @Param("gradeH") Double gradeH,
+        @Param("distanceL") Double distanceL,
+        @Param("distanceH") Double distanceH,
+        Pageable pageable
     );
 
     /**
@@ -82,8 +88,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
      * @return 집주인이 올린 매물들
      */
     @Query(value = "SELECT new com.jukbang.api.room.dto.LandlordDto(room.roomId, room.location.address, room.roomInfo.roomName, room.modifiedDate)" +
-            "FROM Room room WHERE room.seller.userId = :sellerId",
-            countQuery = "SELECT count(roomId) FROM Room WHERE seller.userId = :sellerId")
+        "FROM Room room WHERE room.seller.userId = :sellerId",
+        countQuery = "SELECT count(roomId) FROM Room WHERE seller.userId = :sellerId")
     Page<LandlordDto> findAllBySellerId(@Param("sellerId")String sellerId, Pageable pageable);
 
     Optional<Room> findByRoomIdAndSeller_UserId(long roomId, String userId);
@@ -93,7 +99,6 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
      *  roomid 로만 방 유무여부 조회
      */
     Optional<Room> findByRoomId(long roomId);
-  
-  
+
     List<Room> findAllByPermission(int permission);
 }
