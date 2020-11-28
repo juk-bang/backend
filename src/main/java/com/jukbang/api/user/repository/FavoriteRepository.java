@@ -22,4 +22,6 @@ public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
   List<FavoriteRoomsDto> findAllByUser_UserId(@Param("userId")String userId);
 
   Optional<Favorite> findByUser_UserIdAndRoom_RoomId(String userId, long roomId);
+
+  boolean existsByUser_UserIdAndRoom_RoomId(String userId, long roomId);
 }
