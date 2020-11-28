@@ -26,8 +26,8 @@ class DeleteThumbnailImageTest extends BaseControllerTest {
   ThumbnailImageRepository thumbnailImageRepository;
 
   @Test
-  @DisplayName("썸네일 이미지 삭제(성공)")
-  void deleteThumbnailImageSuccess() throws Exception {
+  @DisplayName("썸네일 이미지 받기(성공)")
+  void getThumbnailImageSuccess() throws Exception {
     String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
     Long roomId = roomFactory.generateRoom("TestUser1");
     File targetFile = new File("./files/thumbnailImg/test.jpg");
@@ -46,12 +46,11 @@ class DeleteThumbnailImageTest extends BaseControllerTest {
   }
 
   @Test
-  @DisplayName("썸네일 이미지 삭제(이미지가 없을 때)")
-  void deleteThumbnailImageFailBecauseNotFound() throws Exception {
+  @DisplayName("썸네일 이미지 받기(이미지가 없을 때)")
+  void getThumbnailImageFailBecauseNotFound() throws Exception {
     String accessToken = userFactory.signUpUser(1, UserRole.ROLE_LANDLORD).getAccessToken();
-    Long roomId = roomFactory.generateRoom("TestUser1");
 
-    this.mockMvc.perform(delete("/rooms/{roomId}/images/{imageId}", roomId, 1)
+    this.mockMvc.perform(delete("/rooms/{roomId}/images/{imageId}", 1, 1)
         .header("Authorization", "Bearer " + accessToken)
     )
         .andExpect(status().isNotFound())

@@ -1,6 +1,5 @@
 package com.jukbang.api.file.service;
 
-import com.jukbang.api.room.exception.RoomNotFoundException;
 import com.jukbang.configs.FileConfig;
 import com.jukbang.api.file.data.ThumbnailImage;
 import com.jukbang.api.file.data.ThumbnailImageRepository;
@@ -11,7 +10,6 @@ import com.jukbang.api.room.repository.RoomRepository;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -42,9 +40,10 @@ public class ThumbnailImageService {
     }
   }
 
-  @Transactional
   public void storeThumbnailImage(String userId, long roomId, long imageId, MultipartFile file) {
-    roomRepository.findByRoomIdAndSeller_UserId(roomId, userId).orElseThrow(NotYourRoomException::new).increasePictureCount();
+      if (!roomRepository.existsByRoomIdAndSeller_UserId(roomId, userId)) {
+          throw new NotYourRoomException();
+      }
     String fileId = roomId + "-" + imageId;
     String fileName = fileService.storeFile(file, this.thumbnailImageLocation, fileId);
 
@@ -61,10 +60,7 @@ public class ThumbnailImageService {
     return fileService.loadFile(Paths.get(image.getFilePath()));
   }
 
-  @Transactional
-  public void deleteThumbnailImage(long roomId, long imageId, String userId) {
-    roomRepository.findByRoomIdAndSeller_UserId(roomId, userId).orElseThrow(NotYourRoomException::new).decreasePictureCount();
-
+  public void deleteThumbnailImage(long roomId, long imageId) {
     ThumbnailImage image = this.thumbnailImageRepository.findByFileId(roomId + "-" + imageId)
         .orElseThrow(() -> new FileDownloadException(roomId+"-"+imageId));
     fileService.deleteFile(image.getFilePath());

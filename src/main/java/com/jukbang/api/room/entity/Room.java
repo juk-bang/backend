@@ -112,15 +112,4 @@ public class Room extends Time {
     private static double rad2deg(double rad) {
         return (rad * 180 / Math.PI);
     }
-
-    public void addReviewsGrade(double grade, double reviews) {
-        this.grade = ((this.grade * reviews + grade)/(reviews+1));
-    }
-
-    public void increasePictureCount(){
-        this.pictureCount++;
-    }
-    public void decreasePictureCount(){
-        this.pictureCount--;
-    }
 }

@@ -12,6 +12,4 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Optional<Review> findByIdAndWriter_UserId(long reviewId, String userId);
 
     List<Review> findAllByRoomId(long roomId);
-
-    long countByRoomId(long roomId);
 }

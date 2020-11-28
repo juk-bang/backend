@@ -2,11 +2,8 @@ package com.jukbang.api.room.service;
 
 import com.jukbang.api.room.dto.ReviewDto;
 import com.jukbang.api.room.entity.Review;
-import com.jukbang.api.room.entity.Room;
 import com.jukbang.api.room.exception.ReviewNotFoundException;
-import com.jukbang.api.room.exception.RoomNotFoundException;
 import com.jukbang.api.room.repository.ReviewRepository;
-import com.jukbang.api.room.repository.RoomRepository;
 import com.jukbang.api.room.request.CreateReviewRequest;
 import com.jukbang.api.room.request.UpdateReviewRequest;
 import com.jukbang.api.user.exception.UserNotFoundException;
@@ -21,7 +18,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ReviewService {
   private final ReviewRepository reviewRepository;
-  private final RoomRepository roomRepository;
   private final UserRepository userRepository;
 
 
@@ -33,7 +29,7 @@ public class ReviewService {
     List<Review> reviews = reviewRepository.findAllByRoomId(roomId);
     List<ReviewDto> reviewDtoList = new ArrayList<>();
 
-    for (Review review : reviews) {
+    for (Review review: reviews) {
       reviewDtoList.add(new ReviewDto(review));
     }
 
@@ -46,8 +42,6 @@ public class ReviewService {
    */
   @Transactional
   public Long SaveReview(long roomId, String userId, CreateReviewRequest createReviewRequest) {
-    Room room = roomRepository.findByRoomId(roomId).orElseThrow(RoomNotFoundException::new);
-    room.addReviewsGrade(createReviewRequest.getGrade(), reviewRepository.countByRoomId(roomId));
     return reviewRepository.save(
         new Review(
             createReviewRequest.getMessage(),
