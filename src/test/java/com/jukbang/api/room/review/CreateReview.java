@@ -2,6 +2,7 @@ package com.jukbang.api.room.review;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.jukbang.api.common.BaseControllerTest;
@@ -33,5 +34,10 @@ public class CreateReview extends BaseControllerTest {
         .andDo(print())
         .andDo(document("CreateReview"))
     ;
+    this.mockMvc.perform(
+        RestDocumentationRequestBuilders.get("/rooms/{roomId}", roomId, 1))
+        .andExpect(jsonPath("grade").value(10))
+        .andExpect(status().isOk())
+        .andDo(print());
   }
 }
