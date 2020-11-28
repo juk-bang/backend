@@ -1,6 +1,7 @@
 package com.jukbang.api.user.controller;
 
 import com.jukbang.api.common.response.ErrorResponse;
+import com.jukbang.api.user.exception.FavoriteAlreadyExistsException;
 import com.jukbang.api.user.exception.UserNotFoundException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -31,5 +32,17 @@ public class UserExceptionHandler {
     @ResponseBody
     public ErrorResponse handleIdExists(UserNotFoundException exception) {
         return new ErrorResponse(HttpStatus.BAD_REQUEST, "2001", exception.getMessage());
+    }
+    /**
+     * 이미 찜한 방인 경우
+     *
+     * @param exception 이미 찜한 방 에러
+     * @return BAD_REQUEST
+     */
+    @ExceptionHandler(FavoriteAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleAlreadyExists(FavoriteAlreadyExistsException exception) {
+        return new ErrorResponse(HttpStatus.BAD_REQUEST, "2002", exception.getMessage());
     }
 }

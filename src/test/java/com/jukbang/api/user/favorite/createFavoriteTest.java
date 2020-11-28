@@ -28,5 +28,29 @@ public class createFavoriteTest extends BaseControllerTest {
                 .andExpect(status().isOk())
                 .andDo(document("createFavorite"))
         ;
+
+    }
+
+    @Test
+    @WithMockUser("TestUser1")
+    @DisplayName("방 찜하기(실패)- 중복")
+    void createFavoriteFailBecauseDuplicate() throws Exception {
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        userFactory.signUpUser(99,UserRole.ROLE_LANDLORD);
+        Long roomId = roomFactory.generateRoom("TestUser99");
+
+        mockMvc.perform(RestDocumentationRequestBuilders.post("/user/favorites/{roomId}", roomId)
+            .header("Authorization", "Bearer " + accessToken)
+        )
+            .andDo(print())
+            .andExpect(status().isOk())
+        ;
+        mockMvc.perform(RestDocumentationRequestBuilders.post("/user/favorites/{roomId}", roomId)
+            .header("Authorization", "Bearer " + accessToken)
+        )
+            .andDo(print())
+            .andExpect(status().isBadRequest())
+            .andDo(document("2002"))
+        ;
     }
 }
