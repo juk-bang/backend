@@ -1,12 +1,14 @@
 package com.jukbang.api.community.service;
 
 import com.jukbang.api.community.CommunityRole;
+import com.jukbang.api.community.dto.MyPostListDto;
 import com.jukbang.api.community.dto.PostListDto;
 import com.jukbang.api.community.entity.Post;
 import com.jukbang.api.community.exception.PostNotFoundException;
 import com.jukbang.api.community.repository.PostRepository;
 import com.jukbang.api.community.request.CreatePostRequest;
 import com.jukbang.api.community.request.UpdatePostRequest;
+import com.jukbang.api.user.entity.User;
 import com.jukbang.api.user.exception.UserNotFoundException;
 import com.jukbang.api.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -54,28 +56,27 @@ public class PostService {
     커뮤니티 내 내 게시글 불러오기 기능 => 프런트 ppt 에 없음
     1. 게시글 리스트 형식으로 할지?
     2. 게시글 상세정보 형식으로 할지?
+    */
     @Transactional
-    public List<BoardlistDto> getMyPosts(String userid) {
-        List<Post> postEntities = postRepository.findAllByWriter(userid);
-        List<PostDto> boardDtoList = new ArrayList<>();
+    public List<MyPostListDto> getMyPosts(String userid) {
+        List<Post> postEntities = postRepository.findAllByWriter_UserId(userid);
 
-        for (Post boardEntity : boardEntities) {
-            BoardlistDto boardDTO = BoardlistDto.builder()
-                    .id(boardEntity.getId())
-                    .title(boardEntity.getTitle())
-                    .writer(boardEntity.getWriter())
-                    .modifiedDate(boardEntity.getCreatedDate())
-                    .comments(boardEntity.getComments())
-                    .univid(boardEntity.getUnivId())
-                    .views(boardEntity.getViews())
+        List<MyPostListDto> postDtoList = new ArrayList<>();
+
+        for (Post postEntity : postEntities) {
+            MyPostListDto mypostListDto = MyPostListDto.builder()
+                    .postId(postEntity.getPostId())
+                    .title(postEntity.getTitle())
+                    .views(postEntity.getViews())
+                    .comments(postEntity.getComments())
+                    .updatedDate(postEntity.getModifiedDate())
                     .build();
 
-            boardDtoList.add(boardDTO);
+            postDtoList.add(mypostListDto);
         }
-        return boardDtoList;
-        return null;
+        return postDtoList;
     }
-*/
+
 
     /**
      *  게시글 작성하기 기능
