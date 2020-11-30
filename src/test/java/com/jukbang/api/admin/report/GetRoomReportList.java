@@ -46,7 +46,7 @@ public class GetRoomReportList extends BaseControllerTest {
                 .header("Authorization", "Bearer " + accessToken))
                 .andExpect(status().isOk())
                 .andDo(print())
-                .andDo(document("GetRoomReportList"))
+                .andDo(document("getRoomReportList"))
         ;
     }
 
