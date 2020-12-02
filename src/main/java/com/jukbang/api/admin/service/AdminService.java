@@ -1,9 +1,10 @@
 package com.jukbang.api.admin.service;
 
+import com.jukbang.api.admin.dto.PermitListDto;
 import com.jukbang.api.room.entity.Room;
 import com.jukbang.api.room.exception.RoomNotFoundException;
 import com.jukbang.api.room.repository.RoomRepository;
-import java.util.Optional;
+import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +18,13 @@ public class AdminService {
     private final RoomRepository roomRepository;
 
     @Transactional
-    public List<Room> wantPermit() {
-        return roomRepository.findAllByPermission(0);
+    public List<PermitListDto> wantPermit() {
+        List<Room> rooms =  roomRepository.findAllByPermission(0);
+        List<PermitListDto> permitListDtos = new ArrayList<PermitListDto>();
+        for(Room room: rooms){
+            permitListDtos.add(new PermitListDto(room.getUnivId(),room.getRoomId(),room.getRoomInfo().getRoomName()));
+        }
+        return permitListDtos;
     }
 
     @Transactional

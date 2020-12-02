@@ -1,7 +1,8 @@
 package com.jukbang.api.admin.controller;
 
+import com.jukbang.api.admin.dto.PermitListDto;
+import com.jukbang.api.admin.response.PermissionRoomsResponse;
 import com.jukbang.api.admin.service.AdminService;
-import com.jukbang.api.room.entity.Room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +22,9 @@ public class AdminController {
      * @return (List) roomList
      */
     @GetMapping("/rooms")
-    public List<Room> getRoomList(
+    public PermissionRoomsResponse getRoomList(
     ) {
-        return adminService.wantPermit();
+        return new PermissionRoomsResponse(adminService.wantPermit());
     }
 
     /**
