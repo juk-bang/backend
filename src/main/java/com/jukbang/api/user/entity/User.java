@@ -52,7 +52,7 @@ public class User {
      * Refresh Token
      */
     private String refreshToken;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Favorite> favorites;
 
     @Embedded
