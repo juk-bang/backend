@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-
 public class PostReportDto {
     private CommunityRole role;
     private long postId;
