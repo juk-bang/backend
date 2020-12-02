@@ -69,6 +69,7 @@ public class PostService {
                     .title(postEntity.getTitle())
                     .views(postEntity.getViews())
                     .comments(postEntity.getComments())
+                    .role(postEntity.getRole())
                     .updatedDate(postEntity.getModifiedDate())
                     .build();
 

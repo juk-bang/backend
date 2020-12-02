@@ -1,6 +1,7 @@
 package com.jukbang.api.community.dto;
 
 
+import com.jukbang.api.community.CommunityRole;
 import com.jukbang.api.user.entity.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,14 +17,16 @@ public class MyPostListDto {
     private int views;
     private int comments;
     private LocalDateTime updatedDate;
+    private CommunityRole role;
 
 
     @Builder
-    public MyPostListDto(long postId, String title, int views, int comments, LocalDateTime updatedDate) {
+    public MyPostListDto(long postId, String title, int views, int comments,CommunityRole role, LocalDateTime updatedDate) {
         this.postId = postId;
         this.title = title;
         this.views = views;
         this.comments = comments;
+        this.role = role;
         this.updatedDate = updatedDate;
     }
 }
