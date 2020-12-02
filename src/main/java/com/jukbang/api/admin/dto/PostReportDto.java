@@ -13,15 +13,17 @@ import java.time.LocalDateTime;
 public class PostReportDto {
     private CommunityRole role;
     private long postId;
+    private long univId;
     private long reportPostId;
     private String detail;
     private int type;
     private LocalDateTime updatedDate;
 
     @Builder
-    public PostReportDto(CommunityRole role,long postId,long reportPostId, String detail, int type, LocalDateTime updatedDate){
+    public PostReportDto(CommunityRole role,long postId,long univId,long reportPostId, String detail, int type, LocalDateTime updatedDate){
         this.role = role;
         this.postId = postId;
+        this.univId = univId;
         this.reportPostId = reportPostId;
         this.detail = detail;
         this.type= type;

@@ -10,12 +10,14 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class RoomReportListDto {
     private long reportRoomId;
+    private long roomId;
     private int type;
     private LocalDateTime updatedDate;
 
     @Builder
-    RoomReportListDto(long reportRoomId, String detail, int type, LocalDateTime updatedDate){
+    RoomReportListDto(long reportRoomId, long roomId, int type, LocalDateTime updatedDate){
         this.reportRoomId = reportRoomId;
+        this.roomId = roomId;
         this.type = type;
         this.updatedDate = updatedDate;
     }

@@ -11,13 +11,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PostReportListDto {
     private CommunityRole role;
+    private long postId;
     private long reportPostId;
     private int type;
     private LocalDateTime updatedDate;
 
     @Builder
-    PostReportListDto(CommunityRole role,long reportPostId, int type, LocalDateTime updatedDate){
+    PostReportListDto(CommunityRole role,long postId,long reportPostId, int type, LocalDateTime updatedDate){
         this.role = role;
+        this.postId = postId;
         this.reportPostId = reportPostId;
         this.type = type;
         this.updatedDate = updatedDate;

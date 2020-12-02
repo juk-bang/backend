@@ -48,6 +48,7 @@ public class ReportService {
         for (RoomReport reportEntity : reportEntities) {
             RoomReportListDto roomReportListDTO = RoomReportListDto.builder()
                     .reportRoomId(reportEntity.getRoomReportId())
+                    .roomId(reportEntity.getRoomId())
                     .type(reportEntity.getType())
                     .updatedDate(reportEntity.getModifiedDate())
                     .build();
@@ -81,6 +82,7 @@ public class ReportService {
         for (PostReport reportEntity : reportEntities) {
             PostReportListDto postReportListDTO = PostReportListDto.builder()
                     .role(reportEntity.getRole())
+                    .postId(reportEntity.getPostId())
                     .reportPostId(reportEntity.getPostReportId())
                     .type(reportEntity.getType())
                     .updatedDate(reportEntity.getModifiedDate())
@@ -99,6 +101,7 @@ public class ReportService {
         PostReportDto postReportDto = PostReportDto.builder()
                 .role(role)
                 .postId(postId)
+                .univId(postReport.getUnivId())
                 .reportPostId(postReportId)
                 .detail(postReport.getDetail())
                 .type(postReport.getType())
