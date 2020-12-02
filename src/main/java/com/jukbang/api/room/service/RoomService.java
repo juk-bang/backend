@@ -62,7 +62,7 @@ public class RoomService {
     Double[] deposits = parseRange(deposit);
     Double[] grades = parseRange(grade);
     Double[] distances = parseRange(distance);
-    if (!requestUserId.equals("anonymous")) {
+    if (!requestUserId.equals("anonymousUser")) {
       userRepository.findByUserId(requestUserId).orElseThrow(UserNotFoundException::new).getFilter()
           .updateFilter(layout, floor, scales, monthlyLeases, adminExpense, deposits, grades,
               distances);
