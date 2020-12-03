@@ -2,6 +2,7 @@ package com.jukbang.api.user.entity;
 
 import com.jukbang.api.user.UserRole;
 import com.jukbang.api.user.entity.embedded.Filter;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Getter
 @Builder
@@ -52,8 +55,9 @@ public class User {
      * Refresh Token
      */
     private String refreshToken;
+
     @OneToMany(fetch = FetchType.EAGER)
-    private List<Favorite> favorites;
+    private Set<Favorite> favorites;
 
     @Embedded
     private Filter filter;
