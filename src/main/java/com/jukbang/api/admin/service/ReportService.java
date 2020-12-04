@@ -15,10 +15,12 @@ import com.jukbang.api.community.dto.PostListDto;
 import com.jukbang.api.community.entity.Post;
 import com.jukbang.api.community.exception.PostNotFoundException;
 import com.jukbang.api.community.repository.PostRepository;
+import com.jukbang.api.community.service.PostService;
 import com.jukbang.api.room.entity.Room;
 import com.jukbang.api.room.exception.RoomNotFoundException;
 import com.jukbang.api.room.repository.RoomRepository;
 import com.jukbang.api.room.request.RoomReportRequest;
+import com.jukbang.api.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,8 @@ public class ReportService {
     private final PostReportRepository postReportRepository;
     private final RoomRepository roomRepository;
     private final PostRepository postRepository;
+    private final RoomService roomService;
+    private final PostService postService;
     /**
      * 방_리폿 목록 불러오기 기능
      *
@@ -83,6 +87,7 @@ public class ReportService {
             PostReportListDto postReportListDTO = PostReportListDto.builder()
                     .role(reportEntity.getRole())
                     .postId(reportEntity.getPostId())
+                    .univId(reportEntity.getUnivId())
                     .reportPostId(reportEntity.getPostReportId())
                     .type(reportEntity.getType())
                     .updatedDate(reportEntity.getModifiedDate())
@@ -112,16 +117,26 @@ public class ReportService {
     }
 
     @Transactional
-    public void deleteReportRoom(Long roomid, Long reportid){
-        Room room = roomRepository.findByRoomId(roomid).orElseThrow(RoomNotFoundException::new);
-
+    public void deleteReportRoom(Long reportid){
         roomReportRepository.deleteById(reportid);
     }
 
     @Transactional
-    public void deleteReportPost(Long postid, Long reportid){
-        postRepository.findByPostId(postid).orElseThrow(PostNotFoundException::new);
-
+    public void deleteReportPost(Long reportid){
         postReportRepository.deleteById(reportid);
+    }
+
+    @Transactional
+    public void deleteRoom(Long roomid, Long reportid){
+        Room room = roomRepository.findByRoomId(roomid).orElseThrow(RoomNotFoundException::new);
+        roomReportRepository.deleteById(reportid);
+        roomRepository.deleteById(roomid);
+    }
+
+    @Transactional
+    public void deletePost(Long postid, Long reportid){
+        postRepository.findByPostId(postid).orElseThrow(PostNotFoundException::new);
+        postReportRepository.deleteById(reportid);
+        postRepository.deleteById(postid);
     }
 }
