@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/auth/*").permitAll()
                 .antMatchers("/landlord/**").hasRole("LANDLORD")
-                .antMatchers("/community/student/**").hasRole("STUDENT")
+                .antMatchers("/community/student/**").hasAnyRole("STUDENT","ADMIN")
                 .antMatchers("/community/all/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST,"/rooms/{roomid}/report").hasRole("STUDENT") // 11.15 추가
