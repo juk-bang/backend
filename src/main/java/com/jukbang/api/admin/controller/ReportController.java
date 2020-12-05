@@ -7,6 +7,8 @@ import com.jukbang.api.admin.dto.RoomReportDto;
 import com.jukbang.api.admin.dto.RoomReportListDto;
 import com.jukbang.api.admin.service.ReportService;
 import com.jukbang.api.community.CommunityRole;
+import com.jukbang.api.community.service.PostService;
+import com.jukbang.api.room.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,8 @@ import java.util.List;
 public class ReportController {
 
     private final ReportService reportService;
+    private final RoomService roomService;
+    private final PostService postService;
 
     /**
      * 방 관련 신고 리스트 (type 만 제공)
@@ -80,14 +84,28 @@ public class ReportController {
      * @param reportid
      */
     @DeleteMapping("/rooms/{roomid}/{reportid}")
-    public String deleteReportRoom(
+    public String deleteRoom(
             @PathVariable("roomid") Long roomid,
             @PathVariable("reportid") Long reportid
     ){
-
-         reportService.deleteReportRoom(roomid,reportid);
+        reportService.deleteRoom(roomid,reportid);
         return "success";
     }
+
+
+    /**
+     *  방 신고 , 방 잔류
+     * @param reportid
+     */
+    @DeleteMapping("/rooms/{reportid}")
+    public String deleteReportRoom(
+            @PathVariable("reportid") Long reportid
+    ){
+
+        reportService.deleteReportRoom(reportid);
+        return "success";
+    }
+
 
     /**
      *  게시글 신고 삭제
@@ -95,13 +113,25 @@ public class ReportController {
      * @param reportid
      */
     @DeleteMapping("/community/{postid}/{reportid}")
-    public String deleteReportPost(
+    public String deletePost(
             @PathVariable("postid") Long postid,
             @PathVariable("reportid") Long reportid
     ){
 
-        reportService.deleteReportPost(postid,reportid);
+        reportService.deletePost(postid,reportid);
         return "success";
     }
 
+    /**
+     *  게시글 신고 , 게시글 잔류
+     * @param reportid
+     */
+    @DeleteMapping("/community/{reportid}")
+    public String deleteReportPost(
+            @PathVariable("reportid") Long reportid
+    ){
+
+        reportService.deleteReportPost(reportid);
+        return "success";
+    }
 }
