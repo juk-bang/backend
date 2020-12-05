@@ -16,7 +16,7 @@ public class DeletePost extends BaseControllerTest {
     @Test
     @DisplayName("커뮤니티(학생)_게시글 삭제하기 (성공)")
     void DeletePostSuccess() throws Exception{
-        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_STUDENT).getAccessToken();
+        String accessToken = userFactory.signUpUser(1, UserRole.ROLE_ADMIN).getAccessToken();
 
         Long postId= postFactoryStudent.generatePost(1,"TestUser1");
 
